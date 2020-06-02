@@ -13,65 +13,15 @@
 <!-- HEAD ------------------------------------------------------------------------------------ -->
 <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
 <div class="topnav" id="topNav">
-	<a href="main.jsp" class="w3-red active">트-위터 </a>
-
-	<%
-		Object memberNo__ = session.getAttribute("memberNo");
-
-		System.out.println("memberNo__=" + memberNo__);
-
-		int memberNo_ = -1;
-
-		if (memberNo__ == null) {
-			System.out.println("로그인 없음");
-			memberNo__ = "-1";
-		} else {
-			memberNo_ = (int) memberNo__;
-			System.out.println("로그인 있음==" + memberNo_ + "번 유저");
-		}
-
-		System.out.println("memberNo_=" + memberNo_);
-
-		int memberNo = memberNo_;
-
-
-
-		if (memberNo < 0) {
-	%>
-	<div class="sw-container-400">
-		<input type="text" id="id" placeholder="input id" class="w3-input"
-			style="height: 25px;">
-	</div>
-	<div class="sw-container-400">
-		<input type="text" id="pw" placeholder="input pw" class="w3-input"
-			style="height: 25px;">
-	</div>
-	<div class="w3-row w3-center" style="padding: 12px; margin: 0px;">
-		<!-- ----------------------------------------------------------------------------- -->
-		<input type="button" class="w3-tag w3-center" id="loginBtn" value="로그인"
-			onclick="loginBtn()" style="width: 100px;">
-		<!-- ----------------------------------------------------------------------------- -->
-		<input type="button" class="w3-tag w3-center" id="joinBtn" value="회원가입"
-			onclick="joinBtn()" style="width: 100px;">
-		<!-- ----------------------------------------------------------------------------- -->
-
-		<form action="loginPro.jsp" method="post" name="loginForm">
-			<input type="hidden" name="id" id="idid"> <input type="hidden"
-				name="pw" id="pwpw">
-		</form>
-	</div>
-	<%
-		} else {
-	%>
-	<a> <strong><%=memberNo%></strong>님 환영합니다.
+	<a href="main.jsp" class="w3-baemint active">배민 </a>
+	<!-- -------------------------------------------------------------------------- -->
+	<a> <strong>aaaa</strong>님 환영합니다.
 	</a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="memberInfo.jsp">마이페이지</a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="logout.jsp">로그아웃</a>
-	<%
-		}
-	%>
+	<!-- -------------------------------------------------------------------------- -->
 	<a href="javascript:void(0);" class="icon" onclick="responsiveMenuPopUp()">
 		<i class="fa fa-bars"></i>
 	</a>

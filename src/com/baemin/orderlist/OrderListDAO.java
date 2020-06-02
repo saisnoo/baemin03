@@ -8,7 +8,6 @@ public class OrderListDAO {
 
     // DB변수
     Connection con = null;
-    Statement stmt = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     Context cont = null;
