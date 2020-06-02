@@ -37,8 +37,6 @@
 			x.className = "topnav";
 		}
 	}
-
-
 </script>
 
 
