@@ -13,7 +13,7 @@
 <!-- HEAD ------------------------------------------------------------------------------------ -->
 <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
 <div class="topnav" id="topNav">
-	<a href="main.jsp" class="w3-baemint active">배민 </a>
+	<a href="main.jsp" class="w3-baemint active">배달의 인종 </a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a> <strong>aaaa</strong>님 환영합니다.
 	</a>
@@ -38,19 +38,7 @@
 		}
 	}
 
-	function loginBtn() {
-		var id = document.getElementById("id").value;
-		var pw = document.getElementById("pw").value;
-		alert(id + "+++" + pw);
-		document.getElementById("idid").value = id;
-		document.getElementById("pwpw").value = pw;
-		var form = document.loginForm;
-		form.submit();
-	}
 
-	function joinBtn() {
-		location.href = "joinForm.jsp";
-	}
 </script>
 
 

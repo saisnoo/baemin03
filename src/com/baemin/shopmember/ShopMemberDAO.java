@@ -1,17 +1,15 @@
-package com.baemin.member;
+package com.baemin.shopmember;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javax.naming.*;
+import javax.sql.*;
+import java.sql.*;
 import java.text.SimpleDateFormat;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
-public class MemberDAO {
+public class ShopMemberDAO {
 
     // DB변수
     Connection con = null;
+    Statement stmt = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     Context cont = null;
@@ -21,20 +19,20 @@ public class MemberDAO {
     SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
     SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
-    // getDTO_start-----------------------------------------------------------------------------
-    public MemberDTO getDTO(int no) throws Exception {
+    // getShopMemberDTO_start-----------------------------------------------------------------------------
+    public ShopMemberDTO getShopMemberDTO(int no) throws Exception {
         // 출력객체
-        MemberDTO dto = new MemberDTO();
-        System.out.println("---MemberDAO getDTO");
-
+        ShopMemberDTO dto = new ShopMemberDTO();
+        System.out.println("---MemberDAO getShopMemberDTO");
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where no = ?";
+            String sql = "select * from member m LEFT JOIN div_shop s on (m.no = s.no) where m.no = ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
+            // 5. 실행
             rs = pstmt.executeQuery();
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
@@ -47,30 +45,37 @@ public class MemberDAO {
                     dto.setPw(rs.getString("pw"));
                     dto.setRegdate(dateFormat3.format(rs.getDate("regdate")));
                     dto.setTel(rs.getString("tel"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setShopCategory(rs.getString("shopcategory"));
+                    dto.setShopEx(rs.getString("shopex"));
+                    dto.setShopLocal(rs.getString("shoplocal"));
+                    dto.setShopName(rs.getString("shopname"));
+                    dto.setShopNo(rs.getInt("shopno"));
                     System.out.println(dto.toString());
                 }
             }
+
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" getDTO() 예외  ");
+            throw new Exception(" getShopMemberDTO() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
         return dto;
-    } // getDTO_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+    } // getShopMemberDTO_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private MemberDAO() {
+    private ShopMemberDAO() {
     }
 
     private static class SingleTone {
-        public static final MemberDAO INSTANCE = new MemberDAO();
+        public static final ShopMemberDAO INSTANCE = new ShopMemberDAO();
     }
 
-    public static MemberDAO getInstance() {
+    public static ShopMemberDAO getInstance() {
         return SingleTone.INSTANCE;
     }
 
