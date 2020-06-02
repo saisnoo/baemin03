@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+
+<body>
+
+	<!-- HEAD ------------------------------------------------------------------------------------ -->
+	<!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
+	<header class="topnav w3-card" id="topNav">
+		<a class="w3-red">트위터 </a>
+		<div>
+			<input type="text" name="id" id="id" placeholder="input id" class="w3-input">
+		</div>
+		<div>
+			<input type="text" name="pw" id="pw" placeholder="input pw" class="w3-input">
+		</div>
+		<div class="w3-row">
+			<!-- ----------------------------------------------------------------------------- -->
+			<input type="button" class="w3-tag" id="loginBtn" value="로그인"
+				style="width: 100px;">
+			<!-- ----------------------------------------------------------------------------- -->
+			<input type="button" class="w3-tag" id="joinBtn" value="회원가입"
+				style="width: 100px;">
+			<!-- ----------------------------------------------------------------------------- -->
+		</div>
+		<a href="javascript:void(0);" class="icon" onclick="responsiveMenuPopUp()">
+			<i class="fa fa-bars"></i>
+		</a>
+	</header>
+
+	<script>
+		
+	
+	
+	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+		function responsiveMenuPopUp() {
+			var x = document.getElementById("topNav");
+			if (x.className === "topnav") {
+				x.className += " responsive";
+			} else {
+				x.className = "topnav";
+			}
+		}
+		
+		
+		
+	</script>
+</body>
+
+</html>

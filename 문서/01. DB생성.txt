@@ -1,0 +1,72 @@
+drop database  baemindb;
+
+create database baemindb;
+
+use baemindb;
+
+create table member
+(
+  no int(5) primary key auto_increment,
+  id varchar(20) not null unique,
+  pw varchar(20) not null,
+  name varchar(30) not null,
+  tel varchar(20) not null,
+  addr varchar(50) not null,
+  regDate date,
+  grade int(2)
+);
+
+
+create table div_shop
+(
+  no int(4) primary key,
+  shopName varchar(30) not null,
+  shopCategory int(4) not null,
+  shopEx varchar(30),
+  shopLocal varchar(30) not null,
+  shopTel varchar(20) not null
+);
+
+create table menu
+(
+  menuNo int(4) primary key auto_increment,
+  menuName varchar(30) not null,
+  menuEx varchar(100),
+  menuPc int(7) not null
+);
+
+
+
+create table orderlist (		
+no int(4) primary key auto_increment,		
+name varchar(20) ,		
+orderdate date ,		
+ischecked int(4) ,
+orderlist varchar(60) 
+);		
+
+
+
+create table notice
+(
+  no int(4) primary key auto_increment,
+  title varchar(60) not null,
+  content text,
+  startDate date,
+  endDate date
+);
+
+
+
+
+
+
+
+desc member;
+desc div_shop;
+desc menu;
+desc orderlist;
+desc notice;
+desc review;
+;
+

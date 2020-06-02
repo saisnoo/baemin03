@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*"%>
+<%@ page import = "java.sql.*"%>
+
+ 
+<%
+request.setCharacterEncoding("UTF-8");
+System.out.println("------ Main.jsp --- ");
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title> Main.jsp  </title>
+ 
+<style>
+ * { margin: 0px;   padding: 0px;  } 
+ 
+</style>
+<script>
+// 스크립트
+  
+</script>
+</head>
+<body>
+<!-- 내용 -->
+<!-- 배달 주문 처리하는 메인 페이지-->
+<h2> Main.jsp </h2><br>
+<%
+ //NewOrderList.jsp 를 로드하여 주문 목록 표시한다
+%>
+ 
+  
+
+
+
+
+ 
+  
+ 
+<!-- 모든페이지 공통 -->
+<!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
+<!-- 매장 main페이지는 별도의 상단바 필요할지도....????? -->
+<jsp:include page="../sw_css/topnav.jsp" %> 
+ 
+</body>
+</html>
