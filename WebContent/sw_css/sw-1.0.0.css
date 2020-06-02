@@ -3,6 +3,11 @@ body {
   padding: 0px;
 }
 
+.w3-baemint {
+  background-color: #45c1bf;
+  color: white;
+}
+
 .sw-center {
   width: 100%;
   /* topnav 높이만큼 마진탑 */

@@ -13,9 +13,17 @@
 
     <style>
         body {
-            background: #45c1bf;
             text-align: center;
             font-family: Arial;
+        }
+
+        h1 {
+            transition: 1s;
+            color: #f1f1f1;
+        }
+
+        button {
+            font-weight: 500;
         }
 
         /* Style the tab */
@@ -34,7 +42,7 @@
 
         /* Style the buttons inside the tab */
         .tab button {
-            background-color: inherit;
+            background-color: #555;
             float: left;
             border: none;
             outline: none;
@@ -42,26 +50,14 @@
             padding: 14px 16px;
             transition: 0.3s;
             font-size: 17px;
+            color: #f1f1f1;
         }
 
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-            border: 5px solid black;
-            transition: 0.5s;
-        }
 
         /* Style the tab content */
         .tabcontent {
             display: none;
             padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-top: none;
         }
     </style>
 </head>
@@ -73,41 +69,44 @@
 
         <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
         <div class="sw-container-400">
-            <div class="w3-container">
-                <!-- 3 main content start here!!!----------------------------------------------------------- -->
-                <!-- 2 main content start here!!!----------------------------------------------------------- -->
+            <div class="w3-section w3-container w3-card-4 w3-baemint">
                 <!-- 1 main content start here!!!----------------------------------------------------------- -->
 
-                <h1>배달의 인종</h1>
+                <h1 class="w3-section">배달의 인종</h1>
+
                 <div class="tab">
-                    <button class="tablinks" onclick="openCity(event, 'tab1')">사용자</button>
-                    <button class="tablinks" onclick="openCity(event, 'tab2')">가맹점</button>
+                    <button id="btn1" class="tablinks" onclick="clientFormOpen()">사용자</button>
+                    <button id="btn2" class="tablinks" onclick="shopFormOpen()">가맹점</button>
                 </div>
 
                 <div id="tab1" class="tabcontent">
                     <form action="./member/LoginClientPro.jsp" method="POST" name="LoginFormClient">
+                        <br>
                         <label>아이디</label>
                         <input type="text" class="w3-input" name="id" id="id">
+                        <br>
                         <label>비밀번호</label>
                         <input type="password" class="w3-input" name="pw" id="pw">
                         <br>
-                        <div class="grid">
-                            <button class="w3-button w3-white" type="submit">로그인</button>
-                            <button class="w3-button w3-white" type="button">회원가입</button>
+                        <div class="grid w3-section">
+                            <button class="w3-button w3-baemint w3-border" type="submit">로그인</button>
+                            <button class="w3-button w3-baemint w3-border" type="button">회원가입</button>
                         </div>
                     </form>
                 </div>
 
                 <div id="tab2" class="tabcontent">
                     <form action="./member/LoginShopPro.jsp" method="POST" name="LoginFormShop">
+                        <br>
                         <label>아이디</label>
                         <input type="text" class="w3-input" name="id" id="id">
+                        <br>
                         <label>비밀번호</label>
                         <input type="password" class="w3-input" name="pw" id="pw">
                         <br>
-                        <div class="grid">
-                            <button class="w3-button w3-white" type="submit">사장님 로그인</button>
-                            <button class="w3-button w3-white" type="button">가맹점 가입</button>
+                        <div class="grid w3-section">
+                            <button class="w3-button w3-baemint w3-border" type="submit">사장님 로그인</button>
+                            <button class="w3-button w3-baemint w3-border" type="button">가맹점 가입</button>
                         </div>
                     </form>
                 </div>
@@ -118,18 +117,31 @@
     </div>
 
     <script>
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
+        window.onload = function () {
+            clientFormOpen();
+        }
+
+        var tabPage1 = document.getElementById("tab1");
+        var tabPage2 = document.getElementById("tab2");
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+
+        function clientFormOpen() {
+            tabPage1.style.display = "block";
+            tabPage2.style.display = "none";
+            btn1.style.border = "3px solid white";
+            btn2.style.border = "3px solid black";
+            btn1.style.background = "#45c1bf";
+            btn2.style.background = "#555";
+        }
+
+        function shopFormOpen() {
+            tabPage1.style.display = "none";
+            tabPage2.style.display = "block";
+            btn1.style.border = "3px solid black";
+            btn2.style.border = "3px solid white";
+            btn1.style.background = "#555";
+            btn2.style.background = "#45c1bf";
         }
     </script>
 </body>
