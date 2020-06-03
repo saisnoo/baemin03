@@ -14,3 +14,13 @@ public class OrderListDTO {
     private int isChecked;
     private String orderlist;
 }
+
+// create table orderlist (
+// no int(4) primary key auto_increment,
+// shopNo int(4),
+// name varchar(20),
+// nameNo int(4),
+// orderDate datetime,
+// isChecked int(4) default 0,
+// orderList varchar(60)
+// );
