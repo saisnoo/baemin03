@@ -8,6 +8,14 @@
 	System.out.println("------topnav.jsp");
 %>
 
+<%
+	String memberNo = (String) session.getAttribute("memberNo");
+
+if(memberNo ==null || memberNo.length()<1){
+	response.sendRedirect("../Index.html");
+}
+%>
+
 
 
 <!-- HEAD ------------------------------------------------------------------------------------ -->
@@ -24,8 +32,8 @@
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="logout.jsp">로그아웃</a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a href="javascript:void(0);" class="icon" onclick="responsiveMenuPopUp()">
-		<i class="fa fa-bars"></i>
+	<a href="javascript:void(0);" class="icon"
+		onclick="responsiveMenuPopUp()"> <i class="fa fa-bars"></i>
 	</a>
 </div>
 

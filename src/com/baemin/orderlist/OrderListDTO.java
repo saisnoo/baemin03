@@ -11,11 +11,12 @@ public class OrderListDTO {
     private int shopNo;// 주문 가게 이름
     private String name; // 주문자 이름
     private int nameNo; // 주문자 번호
-    private String orderdate; // now
+    private Date orderDate; // now
     private int status;
-    private String orderlist;
+    private String orderList;
     private Date estimatedTime;
     private Date completeTime;
+    private String whyCancel;
 }
 
 // create table orderlist (
@@ -26,6 +27,7 @@ public class OrderListDTO {
 // orderDate datetime,
 // status int(4) default 0,
 // orderList varchar(60) ,
-// estimatedTime date,
-// completeTime date
+// estimatedTime datetime
+// completeTime datetime.
+// whyCancel text
 // );

@@ -43,17 +43,21 @@ menuEx varchar(100),
 menuPrice int(7) not null
 );
 
+
 create table orderlist (		
 no int(4) primary key auto_increment,
 shopNo int(4),		
 name varchar(20),
 nameNo int(4),		
 orderDate datetime,
-isChecked int(4) default 0,
+status int(4) default 0,
 orderList varchar(60) ,
 estimatedTime datetime,
-completeTime datetime
+completeTime datetime,
+whyCancel text
 );		
+
+
 
 	
 
@@ -78,7 +82,6 @@ reviewRank int(2) default 0,
 reviewDate datetime
 );
 
-show tables;
 
 
 desc member;
@@ -87,5 +90,7 @@ desc menu;
 desc orderlist;
 desc notice;
 desc review;
-;
 
+
+show tables;
+;
