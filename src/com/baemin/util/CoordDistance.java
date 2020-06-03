@@ -5,12 +5,18 @@ public class CoordDistance {
     public static final int BaeDalLimit = 2;
 
     public static double getDistance(double x1, double y1, double x2, double y2) {
-        double r = 6371.0;
-        double dLat = deg2rad(y1 - y2);
-        double dLon = deg2rad(x1 - x2);
 
-        double a = Math.sin(dLat / 2) * Math.sin(dLon / 2)
-                + Math.cos(deg2rad(y1)) * Math.cos(deg2rad(y2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double lat1 = Math.min(x1, y1);
+        double lng1 = Math.max(x1, y1);
+        double lat2 = Math.min(x2, y2);
+        double lng2 = Math.max(x2, y2);
+
+        double r = 6371.0;
+        double dLat = deg2rad(lat2 - lat1);
+        double dLon = deg2rad(lng2 - lng1);
+
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double d = r * c;// Km단위
@@ -35,5 +41,24 @@ public class CoordDistance {
     // var d = R * c; // Distance in km
     // return d;
     // }
+
+    public static void main(String[] args) {
+
+        double x1 = 126.477632596019;
+        double y1 = 37.4562891099177;
+        double x2 = 128.951560549331;
+        double y2 = 37.7709516183773;
+
+        double distance = CoordDistance.getDistance(y1, x1, y2, x2);
+        double distance2 = CoordDistance.getDistance(x1, y1, y2, x2);
+
+        System.out.println("distance\t" + distance);
+        System.out.println("distance2\t" + distance2);
+
+        // distance 220.69381274592408
+        // distance2 220.69381274592408
+        // javascipt 계산결과 = 220.69381274592408
+
+    }
 
 }
