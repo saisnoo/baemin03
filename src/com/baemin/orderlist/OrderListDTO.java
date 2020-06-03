@@ -13,10 +13,12 @@ public class OrderListDTO {
     private int nameNo; // 주문자 번호
     private Date orderDate; // now
     private int status;
-    private String orderList;
+    private String orderList; // 메뉴, 수량
     private Date estimatedTime;
     private Date completeTime;
     private String whyCancel;
+    private String addr;
+    private String addr2;
 }
 
 // create table orderlist (
@@ -29,5 +31,7 @@ public class OrderListDTO {
 // orderList varchar(60) ,
 // estimatedTime datetime
 // completeTime datetime.
-// whyCancel text
+// whyCancel text,
+// addr varchar(60),
+// addr2 varchar(60)
 // );

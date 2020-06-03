@@ -10,7 +10,8 @@ public class ShopDTO {
     private String shopName; //
     private String shopCategory; // 가게 분류
     private String shopEx;// 가게 설명
-    private String shopLocal; // 가게 주소
+    private String shopAddr; // 가게 주소
+    private String shopAddr2; // 가게 주소
     private String shopTel;
     private double shopX;
     private double shopY;
@@ -22,8 +23,9 @@ public class ShopDTO {
 // shopName varchar(30) not null,
 // shopCategory int(4) not null,
 // shopEx varchar(30),
-// shopLocal varchar(30) not null,
+// shopAddr varchar(60) not null,
+// shopAddr2 varchar(60),
 // shopTel varchar(20) not null,
-// memberX double(48) not null,
-// memberY double(48) not null,
-// )
+// memberX double ,
+// memberY double
+// );

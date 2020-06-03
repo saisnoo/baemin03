@@ -30,9 +30,8 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "SQL_SOMETHING";
-            // "select no, title, writer, to_char(writedate, 'yyyy.mm.dd') writedate,"
-            // + " hit from board where no = ? order by no desc";
+            String sql = "select * from orderlist where no = ? ";
+            // "select * from member m LEFT JOIN div_shop s on (m.no = s.no) where m.no =
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -41,16 +40,20 @@ public class OrderListDAO {
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
                 while (rs.next()) {
-                    dto.setCompleteTime(rs.getDate("completeTime"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setNo(rs.getInt("no"));
                     dto.setOrderDate(rs.getDate("orderdate"));
-                    dto.setOrderList(rs.getString("orderlist"));
-                    dto.setShopNo(rs.getInt("shopNo"));
                     dto.setStatus(rs.getInt("status"));
+                    dto.setOrderList(rs.getString("orderlist"));
+                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setWhyCancel(rs.getString("whyCancel"));
+                    dto.setAddr(rs.getString("addr"));
+                    dto.setAddr2(rs.getString("addr2"));
                 }
+                System.out.println(dto.toString());
             }
         } catch (Exception e) {
             e.getStackTrace();
@@ -66,7 +69,6 @@ public class OrderListDAO {
         // 출력객체
         List<OrderListDTO> list = new ArrayList<>();
         System.out.println("---OrderListDAO getListByNameNO");
-
         try {
             // 1+2
             con = getConnection();
@@ -81,15 +83,18 @@ public class OrderListDAO {
             if (rs != null) {
                 while (rs.next()) {
                     OrderListDTO dto = new OrderListDTO();
-                    dto.setCompleteTime(rs.getDate("completeTime"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setNo(rs.getInt("no"));
                     dto.setOrderDate(rs.getDate("orderdate"));
-                    dto.setOrderList(rs.getString("orderlist"));
-                    dto.setShopNo(rs.getInt("shopNo"));
                     dto.setStatus(rs.getInt("status"));
+                    dto.setOrderList(rs.getString("orderlist"));
+                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setWhyCancel(rs.getString("whyCancel"));
+                    dto.setAddr(rs.getString("addr"));
+                    dto.setAddr2(rs.getString("addr2"));
                     list.add(dto);
                 }
             }
@@ -111,7 +116,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from orderlist where shopno = ? order by orderdate desc";
+            String sql = "select * from orderlist where shopno=? AND (status=1 OR status=2 ) order by orderdate desc";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -121,15 +126,18 @@ public class OrderListDAO {
             if (rs != null) {
                 while (rs.next()) {
                     OrderListDTO dto = new OrderListDTO();
-                    dto.setCompleteTime(rs.getDate("completeTime"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setNo(rs.getInt("no"));
                     dto.setOrderDate(rs.getDate("orderdate"));
-                    dto.setOrderList(rs.getString("orderlist"));
-                    dto.setShopNo(rs.getInt("shopNo"));
                     dto.setStatus(rs.getInt("status"));
+                    dto.setOrderList(rs.getString("orderlist"));
+                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setWhyCancel(rs.getString("whyCancel"));
+                    dto.setAddr(rs.getString("addr"));
+                    dto.setAddr2(rs.getString("addr2"));
                     list.add(dto);
                 }
             }
@@ -141,6 +149,117 @@ public class OrderListDAO {
         } // finally end
         return list;
     } // getListOfCurrent_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // getListOfGoing_start-----------------------------------------------------------------------------
+    public List<OrderListDTO> getListOfGoing(int shopNo) throws Exception {
+        // 출력객체
+        List<OrderListDTO> list = new ArrayList<>();
+        System.out.println("---OrderListDAO getListOfGoing");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select * from orderlist where shopno=? AND status=3 order by orderdate desc";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    OrderListDTO dto = new OrderListDTO();
+                    dto.setNo(rs.getInt("no"));
+                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setName(rs.getString("name"));
+                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setStatus(rs.getInt("status"));
+                    dto.setOrderList(rs.getString("orderlist"));
+                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setWhyCancel(rs.getString("whyCancel"));
+                    dto.setAddr(rs.getString("addr"));
+                    dto.setAddr2(rs.getString("addr2"));
+                    list.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getListOfGoing() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return list;
+    } // getListOfGoing_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // getListFinishToday_start-----------------------------------------------------------------------------
+    public List<OrderListDTO> getListFinishToday(int shopNo) throws Exception {
+        // 출력객체
+        List<OrderListDTO> list = new ArrayList<>();
+        System.out.println("---OrderListDAO getListFinishToday");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "SELECT * FROM orderlist WHERE DATE_FORMAT(orderdate, '%Y-%m-%d') = CURDATE()";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    OrderListDTO dto = new OrderListDTO();
+                    dto.setNo(rs.getInt("no"));
+                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setName(rs.getString("name"));
+                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setStatus(rs.getInt("status"));
+                    dto.setOrderList(rs.getString("orderlist"));
+                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
+                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setWhyCancel(rs.getString("whyCancel"));
+                    dto.setAddr(rs.getString("addr"));
+                    dto.setAddr2(rs.getString("addr2"));
+                    list.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getListOfGoing() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return list;
+    } // getListFinishToday_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // closeShop_start-----------------------------------------------------------------------------
+    public int closeShop(int shopNo) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO closeShop");
+
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "update orderlist status = -1 WHERE status=1 or status=2";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" closeShop() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // closeShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////

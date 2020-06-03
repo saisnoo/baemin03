@@ -4,7 +4,6 @@ create database baemindb;
 
 use baemindb;
 
-
 create table member
 (
 no int(5) primary key auto_increment,
@@ -12,11 +11,12 @@ id varchar(20) not null unique,
 pw varchar(20) not null,
 name varchar(30) not null,
 tel varchar(20) not null,
-addr varchar(50) not null,
+addr varchar(60) not null,
+addr2 varchar(60) not null,
 regDate date,
 grade int(2),
-memberX double not null,
-memberY double not null
+memberX double,
+memberY double
 );
 
 
@@ -26,10 +26,11 @@ no int(4) primary key,
 shopName varchar(30) not null,
 shopCategory int(4) not null,
 shopEx varchar(30),
-shopLocal varchar(30) not null,
+shopAddr varchar(60) not null,
+shopAddr2 varchar(60),
 shopTel varchar(20) not null,
-memberX double not null,
-memberY double not null
+shopX double ,
+shopY double 
 );
 
 
@@ -44,19 +45,20 @@ menuPrice int(7) not null
 );
 
 
-create table orderlist (		
+create table orderlist (
 no int(4) primary key auto_increment,
-shopNo int(4),		
+shopNo int(4),
 name varchar(20),
-nameNo int(4),		
+nameNo int(4),
 orderDate datetime,
 status int(4) default 0,
 orderList varchar(60) ,
 estimatedTime datetime,
 completeTime datetime,
-whyCancel text
-);		
-
+whyCancel text,
+addr varchar(60),
+addr2 varchar(60)
+);
 
 
 	
