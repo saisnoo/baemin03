@@ -146,12 +146,10 @@ public class ReviewDAO {
     private ReviewDAO() {
     }
 
-    private static class SingleTone {
-        public static final ReviewDAO INSTANCE = new ReviewDAO();
-    }
+    private static ReviewDAO dao = new ReviewDAO();
 
     public static ReviewDAO getInstance() {
-        return SingleTone.INSTANCE;
+        return dao;
     }
 
     // 커넥션 풀

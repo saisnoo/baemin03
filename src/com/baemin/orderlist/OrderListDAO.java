@@ -23,15 +23,16 @@ public class OrderListDAO {
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
+    // 기본생성자 private 처리
     private OrderListDAO() {
     }
 
-    private static class SingleTone {
-        public static final OrderListDAO INSTANCE = new OrderListDAO();
-    }
+    // 싱글톤 인스턴스
+    private static OrderListDAO dao = new OrderListDAO();
 
+    // public get인스턴스
     public static OrderListDAO getInstance() {
-        return SingleTone.INSTANCE;
+        return dao;
     }
 
     // 커넥션 풀

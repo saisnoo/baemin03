@@ -15,6 +15,8 @@ public class MemberDTO {
     private String addr; // juso
     private String regdate; // now()
     private int grade; // 일반 2사업자 3관리자
+    private double memberX;
+    private double memberY;
 }
 
 // create table member
@@ -26,5 +28,7 @@ public class MemberDTO {
 // tel varchar(20) not null,
 // addr varchar(50) not null,
 // regDate date,
-// grade int(2)
+// grade int(2),
+// memberX double(48) not null,
+// memberY double(48) not null,
 // )

@@ -63,15 +63,16 @@ public class MemberDAO {
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
+    // 기본생성자 private 처리
     private MemberDAO() {
     }
 
-    private static class SingleTone {
-        public static final MemberDAO INSTANCE = new MemberDAO();
-    }
+    // 싱글톤 인스턴스
+    private static MemberDAO dao = new MemberDAO();
 
+    // public get인스턴스
     public static MemberDAO getInstance() {
-        return SingleTone.INSTANCE;
+        return dao;
     }
 
     // 커넥션 풀

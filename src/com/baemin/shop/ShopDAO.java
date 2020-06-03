@@ -17,15 +17,16 @@ public class ShopDAO {
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
 
+    // 기본생성자 private 처리
     private ShopDAO() {
     }
 
-    private static class SingleTone {
-        public static final ShopDAO INSTANCE = new ShopDAO();
-    }
+    // 싱글톤 인스턴스
+    private static ShopDAO dao = new ShopDAO();
 
+    // public get인스턴스
     public static ShopDAO getInstance() {
-        return SingleTone.INSTANCE;
+        return dao;
     }
 
     // 커넥션 풀

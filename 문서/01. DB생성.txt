@@ -4,66 +4,80 @@ create database baemindb;
 
 use baemindb;
 
+
 create table member
 (
-  no int(5) primary key auto_increment,
-  id varchar(20) not null unique,
-  pw varchar(20) not null,
-  name varchar(30) not null,
-  tel varchar(20) not null,
-  addr varchar(50) not null,
-  regDate date,
-  grade int(2)
+no int(5) primary key auto_increment,
+id varchar(20) not null unique,
+pw varchar(20) not null,
+name varchar(30) not null,
+tel varchar(20) not null,
+addr varchar(50) not null,
+regDate date,
+grade int(2),
+memberX double not null,
+memberY double not null
 );
 
 
-create table div_shop
+create table shop
 (
-  no int(4) primary key,
-  shopName varchar(30) not null,
-  shopCategory int(4) not null,
-  shopEx varchar(30),
-  shopLocal varchar(30) not null,
-  shopTel varchar(20) not null
+no int(4) primary key,
+shopName varchar(30) not null,
+shopCategory int(4) not null,
+shopEx varchar(30),
+shopLocal varchar(30) not null,
+shopTel varchar(20) not null,
+memberX double not null,
+memberY double not null
 );
+
 
 create table menu
 (
-  menuNo int(4) primary key auto_increment,
-  menuName varchar(30) not null,
-  menuEx varchar(100),
-  menuPc int(7) not null
+menuNo int(4) primary key auto_increment,
+menuShopNo int(4) not null,
+menuName varchar(30) not null,
+menuCategory varchar(30) not null,
+menuEx varchar(100),
+menuPrice int(7) not null
 );
 
-
-
 create table orderlist (		
-no int(4) primary key auto_increment,		
-name varchar(20) ,		
-orderdate date ,		
-ischecked int(4) ,
-orderlist varchar(60) 
+no int(4) primary key auto_increment,
+shopNo int(4),		
+name varchar(20),
+nameNo int(4),		
+orderDate datetime,
+isChecked int(4) default 0,
+orderList varchar(60) 
 );		
-
-
 
 create table notice
 (
-  no int(4) primary key auto_increment,
-  title varchar(60) not null,
-  content text,
-  startDate date,
-  endDate date
+no int(4) primary key auto_increment,
+title varchar(60) not null,
+content text,
+startDate date,
+endDate date
 );
 
 
+create table review
+(
+reviewNo int(4) primary key auto_increment,
+reviewShopNo int(4) not null,
+reviewOrderNo int(4) not null,
+reviewerNo  int(4) not null,
+reviewContent text,
+reviewRank int(2) default 0,
+reviewDate datetime
+);
 
-
-
-
+show tables;
 
 desc member;
-desc div_shop;
+desc shop;
 desc menu;
 desc orderlist;
 desc notice;
