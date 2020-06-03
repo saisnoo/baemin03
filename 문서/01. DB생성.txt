@@ -76,6 +76,7 @@ reviewDate datetime
 
 show tables;
 
+
 desc member;
 desc shop;
 desc menu;
