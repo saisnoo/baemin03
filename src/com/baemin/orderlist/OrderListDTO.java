@@ -1,5 +1,6 @@
 package com.baemin.orderlist;
 
+import java.util.Date;
 import lombok.*;
 
 @Getter
@@ -11,8 +12,10 @@ public class OrderListDTO {
     private String name; // 주문자 이름
     private int nameNo; // 주문자 번호
     private String orderdate; // now
-    private int isChecked;
+    private int status;
     private String orderlist;
+    private Date estimatedTime;
+    private Date completeTime;
 }
 
 // create table orderlist (
@@ -21,6 +24,8 @@ public class OrderListDTO {
 // name varchar(20),
 // nameNo int(4),
 // orderDate datetime,
-// isChecked int(4) default 0,
-// orderList varchar(60)
+// status int(4) default 0,
+// orderList varchar(60) ,
+// estimatedTime date,
+// completeTime date
 // );

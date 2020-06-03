@@ -50,8 +50,12 @@ name varchar(20),
 nameNo int(4),		
 orderDate datetime,
 isChecked int(4) default 0,
-orderList varchar(60) 
+orderList varchar(60) ,
+estimatedTime datetime,
+completeTime datetime
 );		
+
+	
 
 create table notice
 (
