@@ -15,6 +15,9 @@ public class ShopDTO {
     private String shopTel;
     private double shopX;
     private double shopY;
+
+    // NOT IN TABLE
+    private double reviewRank;
 }
 
 // create table shop

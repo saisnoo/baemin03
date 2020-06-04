@@ -20,7 +20,7 @@ if(memberNo ==null || memberNo.length()<1){
 
 <!-- HEAD ------------------------------------------------------------------------------------ -->
 <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
-<div class="topnav" id="topNav">
+<div class="topnav w3-card4" id="topNav">
 	<a href="main.jsp" class="w3-baemint active">배달의 인종 </a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a> <strong>aaaa</strong>님 환영합니다.
@@ -41,11 +41,17 @@ if(memberNo ==null || memberNo.length()<1){
 	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 	function responsiveMenuPopUp() {
 		var x = document.getElementById("topNav");
-		if (x.className === "topnav") {
+		if (x.className === "topnav w3-card4") {
 			x.className += " responsive";
 		} else {
-			x.className = "topnav";
+			x.className = "topnav w3-card4";
 		}
+	}
+
+	window.onresize= function(){
+		var x = document.getElementById("topNav");
+			x.className = "topnav w3-card4";
+
 	}
 </script>
 

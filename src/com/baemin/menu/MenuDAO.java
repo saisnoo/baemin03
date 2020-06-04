@@ -4,7 +4,6 @@ import javax.naming.*;
 import javax.sql.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 public class MenuDAO {
@@ -17,7 +16,7 @@ public class MenuDAO {
     DataSource ds = null;
 
     // getMenuByNo_start-----------------------------------------------------------------------------
-    public MenuDTO getMenuByNo(int no) throws Exception {
+    public MenuDTO getMenuByNo(int menuNo) throws Exception {
         // 출력객체
         MenuDTO dto = new MenuDTO();
         System.out.println("---MenuDAO getMenuByNo");
@@ -29,7 +28,7 @@ public class MenuDAO {
             String sql = "select * from menu where menuNo = ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, no);
+            pstmt.setInt(1, menuNo);
             // 5. 실행
             rs = pstmt.executeQuery();
             // 6. 표시 --- select 때만 표시
@@ -53,7 +52,7 @@ public class MenuDAO {
     } // getMenuByNo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListByShop_start-----------------------------------------------------------------------------
-    public List<MenuDTO> getListByShop(int no) throws Exception {
+    public List<MenuDTO> getListByShop(int menuShopNo) throws Exception {
         // 출력객체
         List<MenuDTO> list = new ArrayList<>();
         System.out.println("---MenuDAO getListByShop");
@@ -61,10 +60,10 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where menuShopNo = ? GROUP BY menuCategory order by menuName desc";
+            String sql = "select * from member where menuShopNo = ? order by menuName desc, menuCategory desc ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, no);
+            pstmt.setInt(1, menuShopNo);
             // 5. 실행
             rs = pstmt.executeQuery();
             // 6. 표시 --- select 때만 표시

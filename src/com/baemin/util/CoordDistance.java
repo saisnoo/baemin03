@@ -2,7 +2,7 @@ package com.baemin.util;
 
 public class CoordDistance {
 
-    public static final int BaeDalLimit = 2;
+    public static final double BaeDalLimit = 2.0;
 
     public static double getDistance(double x1, double y1, double x2, double y2) {
 

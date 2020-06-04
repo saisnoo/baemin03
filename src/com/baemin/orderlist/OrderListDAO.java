@@ -194,6 +194,10 @@ public class OrderListDAO {
     } // getListOfGoing_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListFinishToday_start-----------------------------------------------------------------------------
+    public List<OrderListDTO> getListDone(int shopNo) throws Exception {
+        return getListFinishToday(shopNo);
+    }
+
     public List<OrderListDTO> getListFinishToday(int shopNo) throws Exception {
         // 출력객체
         List<OrderListDTO> list = new ArrayList<>();
@@ -246,7 +250,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update orderlist status = -1 WHERE status=1 or status=2";
+            String sql = "update orderlist set status = -1 , whyCancel = '영업종료' WHERE status=1 or status=2";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -260,6 +264,130 @@ public class OrderListDAO {
         } // finally end
         return result;
     } // closeShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // countNewOrder_start-----------------------------------------------------------------------------
+    public int countNewOrder(int shopNo) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO countNewOrder");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select count(*) from orderlist where shopNo = ? AND status = 1";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            result = pstmt.executeUpdate();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" countNewOrder() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // countNewOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // countCurrentOrder_start-----------------------------------------------------------------------------
+    public int countCurrentOrder(int shopNo) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO countCurrentOrder");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select count(*) from orderlist where shopNo = ? AND (status = 1 OR status = 2)";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            result = pstmt.executeUpdate();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" countNewOrder() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // countCurrentOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // countGoingOrder_start-----------------------------------------------------------------------------
+    public int countGoingOrder(int shopNo) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO countGoingOrder");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select count(*) from orderlist where shopNo = ? AND status = 3";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            result = pstmt.executeUpdate();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" countNewOrder() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // countGoingOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // countDoneOrder_start-----------------------------------------------------------------------------
+    public int countDoneOrder(int shopNo) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO countDoneOrder");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select count(*) from orderlist where (shopNo = ? AND status = 3 AND DATE_FORMAT(orderdate, '%Y-%m-%d') = CURDATE())";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            result = pstmt.executeUpdate();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" countNewOrder() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // countDoneOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
