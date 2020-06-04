@@ -31,7 +31,7 @@ shopAddr2 varchar(60),
 shopTel varchar(20) not null,
 shopX double ,
 shopY double ,
-status int(4) default 0
+shopStatus int(4) default 0
 );
 
 
@@ -41,8 +41,9 @@ menuNo int(4) primary key auto_increment,
 menuShopNo int(4) not null,
 menuName varchar(30) not null,
 menuCategory varchar(30) not null,
-menuEx varchar(100),
-menuPrice int(7) not null
+menuEx text,
+menuPrice int(7) not null,
+menuStatus int(4) default 0
 );
 
 
@@ -53,7 +54,7 @@ name varchar(20),
 nameNo int(4),
 orderDate datetime,
 status int(4) default 0,
-orderList varchar(60) ,
+orderList text  ,
 estimatedTime datetime,
 completeTime datetime,
 whyCancel text,

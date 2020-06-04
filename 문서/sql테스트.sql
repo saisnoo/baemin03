@@ -6,59 +6,59 @@ create table dept
     dname varchar2(12) not null
 );
 
--- p.26 1Àå select µ¥ÀÌÅÍ Á¶È¸
+-- p.26 1ìž¥ select ë°ì´í„° ì¡°íšŒ
 DROP TABLE emp;
 
 CREATE TABLE emp
 (
     empno NUMBER(4) PRIMARY KEY,
-    -- »ç¿ø¹øÈ£
+    -- ì‚¬ì›ë²ˆí˜¸
     ename VARCHAR(20) NOT NULL,
-    -- »ç¿ø¸í
+    -- ì‚¬ì›ëª…
     job VARCHAR(20) NOT NULL,
-    -- Á÷ÇÔ.(¿ªÇÒ)
+    -- ì§í•¨.(ì—­í• )
     mgr NUMBER(4) REFERENCES emp(empno) ON DELETE SET NULL ,
-    -- ¹Ù·Î À§ »ó»ç, »ó»ç°¡ ¾ø´Â µ¥ÀÌÅÍ - »çÀå
+    -- ë°”ë¡œ ìœ„ ìƒì‚¬, ìƒì‚¬ê°€ ì—†ëŠ” ë°ì´í„° - ì‚¬ìž¥
     hiredate DATE DEFAULT SYSDATE NOT NULL,
-    -- ÀÔ»çÀÏ
+    -- ìž…ì‚¬ì¼
     sal NUMBER NOT NULL,
-    -- ¿ù±Þ
+    -- ì›”ê¸‰
     comm NUMBER,
-    -- ¼ö´ç
+    -- ìˆ˜ë‹¹
     deptno NUMBER(4) REFERENCES dept(dcode)
                      ON DELETE SET NULL
-    -- ºÎ¼­¹øÈ£
+    -- ë¶€ì„œë²ˆí˜¸
 );
 
---dept ºÎ¼¼ µ¥ÀÌÅÍ
+--dept ë¶€ì„¸ ë°ì´í„°
 insert into dept
 values
-    (10, '±âÈ¹ºÎ');
+    (10, 'ê¸°íšë¶€');
 insert into dept
 values
-    (20, 'Àü»êºÎ');
+    (20, 'ì „ì‚°ë¶€');
 insert into dept
 values
-    (30, 'È¸°èºÎ');
+    (30, 'íšŒê³„ë¶€');
 insert into dept
 values
-    (40, '¿µ¾÷ºÎ');
+    (40, 'ì˜ì—…ë¶€');
 commit;
 
---Á¤·Ä¾øÀÌ °¡Á®¿À±â
+--ì •ë ¬ì—†ì´ ê°€ì ¸ì˜¤ê¸°
 select *
 from dept;
--- Á¤·ÄÇÏ¿© ºÒ·¯¿À±â >> Á¤·ÄÀº DB¿¡¼­ ±Ý±â»çÇ×
+-- ì •ë ¬í•˜ì—¬ ë¶ˆëŸ¬ì˜¤ê¸° >> ì •ë ¬ì€ DBì—ì„œ ê¸ˆê¸°ì‚¬í•­
 select *
 from dept
 order by dcode;
--- pri key ÀÎµ¦½º·Î Á¤·ÄÇÏ¿©
+-- pri key ì¸ë±ìŠ¤ë¡œ ì •ë ¬í•˜ì—¬
 select *
 from dept
 where dcode >0;
 
 
--- »ùÇÃµ¥ÀÌÅÍ ÀÔ·Â P.26
+-- ìƒ˜í”Œë°ì´í„° ìž…ë ¥ P.26
 INSERT INTO emp
 VALUES
     (7839, 'KING', 'PRESIDENT', NULL, '1981-11-17', 5000, NULL, 10);

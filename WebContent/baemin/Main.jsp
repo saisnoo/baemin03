@@ -63,27 +63,28 @@
 	<div class="sw-center">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-		<div class="sw-container-400">
-			<div class="w3-container">
-				<!--  main content start here!!!----------------------------------------------------------- -->
+	 <div class="sw-container-400">
+            <div class="w3-container w3-section">
+                <!--  main content start here!!!----------------------------------------------------------- -->
+                <select id="juso" class="w3-input w3-border w3-round-large">
+                    <option value="0">서울 구로중앙테스트테스트테스트45-14</option>
+                    <option value="1">+ 주소변경</option>
+                </select>
+            </div>
+        </div>
 
-				<select id="juso" class="w3-input">
-					<option value="0">서울 구로중앙테스트테스트테스트45-14</option>
-					<option value="1">+ 주소변경</option>
-				</select>
+     <!--  광고 슬라이드 start here!!!----------------------------------------------------------- -->
+        <div class="sw-container-700 w3-section">
+            <div style="width: 100%; background: cyan;" class="w3-center w3-border">
+                <img src="../source//ad_sample.jpg" alt="" width="100%">
+            </div>
+        </div>
+        <!-- main content end----------------------------------------------------------------------- -->
 
-			</div>
-		</div>
-		<div class="sw-container-700">
 
-			<!--  광고 슬라이드 start here!!!----------------------------------------------------------- -->
-			<div style="width: 100%; background: cyan;"
-				class="w3-center w3-border">
-				<img src="../source//ad_sample.jpg" alt="" width="100%">
-			</div>
-			<!-- main content end----------------------------------------------------------------------- -->
 
-			<!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
+        <!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
+        <div class="sw-container-700 w3-section">
 			<div class="w3-container w3-red">
 				<!--  main content start here!!!----------------------------------------------------------- -->
 				<div class="w3-row">

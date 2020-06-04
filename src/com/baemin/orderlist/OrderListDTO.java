@@ -26,18 +26,3 @@ public class OrderListDTO {
     private Hashtable<Integer, Integer> hashtable;
 
 }
-
-// create table orderlist (
-// no int(4) primary key auto_increment,
-// shopNo int(4),
-// name varchar(20),
-// nameNo int(4),
-// orderDate datetime,
-// status int(4) default 0,
-// orderList varchar(60) ,
-// estimatedTime datetime
-// completeTime datetime.
-// whyCancel text,
-// addr varchar(60),
-// addr2 varchar(60)
-// );

@@ -20,17 +20,3 @@ public class ShopDTO {
     // NOT IN TABLE
     private double reviewRank;
 }
-
-// create table shop
-// (
-// shopNo int(4) primary key,
-// shopName varchar(30) not null,
-// shopCategory int(4) not null,
-// shopEx varchar(30),
-// shopAddr varchar(60) not null,
-// shopAddr2 varchar(60),
-// shopTel varchar(20) not null,
-// memberX double ,
-// memberY double,
-// status int(4) default 0
-// );

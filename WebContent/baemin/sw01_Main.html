@@ -33,24 +33,28 @@
     <div class="sw-center">
         <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
         <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-        <div class="sw-container-700">
-            <div class="w3-container w3-blue">
+        <div class="sw-container-400">
+            <div class="w3-container w3-section">
                 <!--  main content start here!!!----------------------------------------------------------- -->
-                <div class="sw-container-400 w3-yellow">
-                    <div class="w3-row w3-section w3-center">
-                        <strong>서울 구로중앙테스트테스트테스트45-14</strong>
-                        <div class="w3-right"><i class="fa fa-toggle-down" style="font-size:30px;color:red"></i></div>
-                    </div>
-                </div>
+                <select id="juso" class="w3-input w3-border w3-round-large">
+                    <option value="0">서울 구로중앙테스트테스트테스트45-14</option>
+                    <option value="1">+ 주소변경</option>
+                </select>
             </div>
+        </div>
 
-            <!--  광고 슬라이드 start here!!!----------------------------------------------------------- -->
+        <!--  광고 슬라이드 start here!!!----------------------------------------------------------- -->
+        <div class="sw-container-700 w3-section">
             <div style="width: 100%; background: cyan;" class="w3-center w3-border">
                 <img src="../source//ad_sample.jpg" alt="" width="100%">
             </div>
-            <!-- main content end----------------------------------------------------------------------- -->
+        </div>
+        <!-- main content end----------------------------------------------------------------------- -->
 
-            <!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
+
+
+        <!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
+        <div class="sw-container-700 w3-section">
             <div class="w3-container w3-red">
                 <!--  main content start here!!!----------------------------------------------------------- -->
                 <div class="w3-row">
@@ -109,7 +113,7 @@
 
     <!-- HEAD ------------------------------------------------------------------------------------ -->
     <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
-    <div class="topnav w3-card4" id="topNav">
+    <div class="topnav w3-card-4" id="topNav">
         <a href="#" class="w3-baemint active">배달의 인종 </a>
         <!-- -------------------------------------------------------------------------- -->
         <a> <strong>aaaa</strong>님 환영합니다.
@@ -117,7 +121,7 @@
         <!-- -------------------------------------------------------------------------- -->
         <a href="#">마이페이지</a>
         <!-- -------------------------------------------------------------------------- -->
-        <a href="https://ceo.baemin.com/guide/detail/G73002">배민가이드</a>
+        <a href="https://ceo.baemin.com/guide/detail/G73002">내 주문</a>
         <!-- -------------------------------------------------------------------------- -->
         <a href="#">로그아웃</a>
         <!-- -------------------------------------------------------------------------- -->
@@ -129,16 +133,16 @@
         /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
         function responsiveMenuPopUp() {
             var x = document.getElementById("topNav");
-            if (x.className === "topnav w3-card4") {
+            if (x.className === "topnav w3-card-4") {
                 x.className += " responsive";
             } else {
-                x.className = "topnav w3-card4";
+                x.className = "topnav w3-card-4";
             }
         }
 
         window.onresize = function () {
             var x = document.getElementById("topNav");
-            x.className = "topnav w3-card4";
+            x.className = "topnav w3-card-4";
         }
     </script>
 
