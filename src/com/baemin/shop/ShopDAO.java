@@ -17,6 +17,35 @@ public class ShopDAO {
     Context cont = null;
     DataSource ds = null;
 
+    // getCatogoryList_start-----------------------------------------------------------------------------
+    public List<String> getCatogoryList() throws Exception {
+        // 출력객체
+        List<String> list = new ArrayList<>();
+        System.out.println("---ShopDAO getCatogoryList");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select shopCategory from shop GROUP BY shopCategory";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    list.add(rs.getString("shopCategory"));
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getCatogoryList() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return list;
+    } // getCatogoryList_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getListByCategory_start-----------------------------------------------------------------------------
     public List<ShopDTO> getListByCategory(String catogory, double memberX, double memberY) throws Exception {
         // 출력객체
@@ -73,6 +102,64 @@ public class ShopDAO {
         return list;
     } // getListByCategory_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
+    // joinShop_start-----------------------------------------------------------------------------
+    public int joinShop(ShopDTO dto) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---ShopDAO joinShop");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "insert into board(shopName, shopCategory, shopEx, shopAddr, shopAddr2, shopTel,shopX , shopY) "
+                    + "values( ?, ?, ?, ?, ?, ?, ?, ? )";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, dto.getShopName());
+            pstmt.setString(2, dto.getShopCategory());
+            pstmt.setString(3, dto.getShopEx());
+            pstmt.setString(4, dto.getShopAddr());
+            pstmt.setString(5, dto.getShopAddr2());
+            pstmt.setString(6, dto.getShopTel());
+            pstmt.setDouble(7, dto.getShopX());
+            pstmt.setDouble(8, dto.getShopY());
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" joinShop() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // joinShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // updateShop_start-----------------------------------------------------------------------------
+    public int updateShop(ShopDTO dto) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---ShopDAO updateShop");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "update shop set shopEx = ? , shopTel = ? where shopNo = ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, dto.getShopEx());
+            pstmt.setString(2, dto.getShopTel());
+            pstmt.setInt(3, dto.getShopNo());
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" updateShop() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // updateShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,13 +202,6 @@ public class ShopDAO {
     } // close () end
 
     public static void main(String[] args) {
-
-        String a1 = "shopNo, shopName, shopCategory, shopX, shopY, reviewRank ";
-        String a2 = "shopNo, shopName, shopCategory, shopX, shopY, avg(reviewRank) reviewRank ";
-        String sql = "(select " + a1 + " from shop LEFT JOIN review on shop.shopNo = reviewShopNo )";
-        sql = "select " + a2 + " from " + sql + " where shopCategory = ?  group by shopNo order by shopNo ";
-
-        System.out.println(sql);
 
     }
 }
