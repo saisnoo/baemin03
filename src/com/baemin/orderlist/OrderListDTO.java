@@ -1,6 +1,8 @@
 package com.baemin.orderlist;
 
 import java.util.Date;
+import java.util.Hashtable;
+
 import lombok.*;
 
 @Getter
@@ -19,6 +21,10 @@ public class OrderListDTO {
     private String whyCancel;
     private String addr;
     private String addr2;
+
+    // NOT IN DB
+    private Hashtable<Integer, Integer> hashtable;
+
 }
 
 // create table orderlist (

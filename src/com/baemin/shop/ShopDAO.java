@@ -28,16 +28,16 @@ public class ShopDAO {
             // 3. sql
             String a1 = "shopNo, shopName, shopCategory, shopX, shopY, reviewRank ";
             String a2 = "shopNo, shopName, shopCategory, shopX, shopY, avg(reviewRank) reviewRank ";
-            String sql = "(select " + a1 + " from shop LEFT JOIN review on shop.shopNo = reviewShopNo)";
+            String sql = "(select " + a1 + " from shop LEFT JOIN review on shop.shopNo = reviewShopNo) CNT";
             sql = "select " + a2 + " from " + sql + " where shopCategory = ? GROUP BY shopNo ORDER BY reviewRank DESC ";
 
             // select shopNo, shopName, shopCategory, shopX, shopY,
             // avg(reviewRank) reviewRank
             // FROM
             // (select shopNo, shopName, shopCategory, shopX, shopY, reviewRank
-            // FROM shop LEFT JOIN review on shop.shopNo = reviewShopNo )
+            // FROM shop LEFT JOIN review on shop.shopNo = reviewShopNo ) CNT
             // WHERE
-            // shopCategory = ? GROUP BY shopNo ORDER BY reviewRank DESC;
+            // shopCategory = 'aa' GROUP BY shopNo ORDER BY reviewRank DESC;
 
             System.out.println(sql);
             // 4. 실행객체
