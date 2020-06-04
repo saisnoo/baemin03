@@ -65,6 +65,10 @@
             <!-- 3 main content start here!!!----------------------------------------------------------- -->
 
             <script>
+                window.onload = function () {
+                    btn1click();
+                }
+
                 var btn1 = document.getElementById("btn1");
                 var btn2 = document.getElementById("btn2");
                 var btn3 = document.getElementById("btn3");
@@ -76,6 +80,7 @@
                     btn1.className = "w3-button w3-block w3-white";
                     btn2.className += " w3-gray";
                     btn3.className += " w3-gray";
+                    // TODO :  ajax load
                 }
 
                 function btn2click() {
@@ -85,6 +90,7 @@
                     btn1.className += " w3-gray";
                     btn2.className = "w3-button w3-block w3-white";
                     btn3.className += " w3-gray";
+                    // TODO :  ajax load
                 }
 
                 function btn3click() {
@@ -94,6 +100,7 @@
                     btn1.className += " w3-gray";
                     btn2.className += " w3-gray";
                     btn3.className = "w3-button w3-block w3-white";
+                    // TODO :  ajax load
                 }
             </script>
 
@@ -109,13 +116,13 @@
                         <!-- ................................... -->
                         <button type="button" id="btn3" onclick="btn3click()" class="w3-button w3-block w3-white">리뷰</button></div>
                 </div>
-                <div id="tab1" class="w3-row w3-red">
+                <div id="tab1" class="w3-row w3-red" style="display: none;">
                     tab1
                 </div>
-                <div id="tab2" class="w3-row w3-blue">
+                <div id="tab2" class="w3-row w3-blue" style="display: none;">
                     tab2
                 </div>
-                <div id="tab3" class="w3-row w3-yellow">
+                <div id="tab3" class="w3-row w3-yellow" style="display: none;">
                     tab3
                 </div>
             </div>
