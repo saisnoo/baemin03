@@ -22,7 +22,7 @@ memberY double
 
 create table shop
 (
-no int(4) primary key,
+shopNo int(4) primary key,
 shopName varchar(30) not null,
 shopCategory int(4) not null,
 shopEx varchar(30),
