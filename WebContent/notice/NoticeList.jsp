@@ -1,11 +1,16 @@
+<%@page import="com.baemin.notice.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "java.sql.*"%>
  
 <%
-request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("utf-8");
 System.out.println("------ Notice.jsp --- ");
+
+NoticeDAO dao=NoticeDAO.getInstance();
+List<NoticeDTO> list = dao.getList();
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,9 +31,23 @@ System.out.println("------ Notice.jsp --- ");
 <style>
  * { margin: 0px;   padding: 0px;  } 
  
+  .contentLine:HOVER {
+  background-color: #eeeeee;
+  cursor: pointer;
+ }
+
+ 
 </style>
 <script>
 // 스크립트
+  $(function(){
+	  $(".contentLine").click(function(){
+		 var no=$(this).find(".noticeNo").text().trim();
+		 //console.log(no);
+		 location.href="NoticeView.jsp?no="+no;		  
+	  });  
+  });
+
   
 </script>
 </head>
@@ -36,14 +55,8 @@ System.out.println("------ Notice.jsp --- ");
 <!-- 내용 -->
 <h2> Notice.jsp </h2><br>
 <%
- 
+
 %>
-
-
-
-
-
-
 
   
 <!-- responsive template by SW ----------------------------------------------------------- -->
@@ -56,28 +69,38 @@ System.out.println("------ Notice.jsp --- ");
 <div class="sw-center">
 <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-<div class="sw-container-400">
+<div class="sw-container-1000">
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
-<table border="1" width="800px" align="center">
-  
+<table class="w3-table w3-bordered">
+
   <tr>
-    <th>글번호</th>
-    <th>글제목</th>
-    <th>작성일</th>
-    <th>종료일</th>
+    <th width="15%">공지번호</th>
+    <th width="55%">공지글제목</th>
+    <th width="15%">공지시작일</th>
+    <th width="15%">공지종료일</th>
   </tr>
   
-  
+    <%
+    for(int i=0; i<list.size(); i++){
+    	%>
+      <tr class="contentLine" onclick="click(this)">
+    	<td class="noticeNo"><%=list.get(i).getNo() %></td>
+    	<td><%=list.get(i).getTitle() %></td>
+    	<td><%=list.get(i).getStartDate() %></td>
+    	<td><%=list.get(i).getEndDate() %></td>   	
+      </tr>
+    	<%    	
+    }       
+    %>  
   
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td colspan="5">
+      <button class="w3-button w3-blue" onclick="location='NoticeInputForm.jsp'">글쓰기</button>                       
+    </td>
   </tr>
-  
+
 </table>
 
 
