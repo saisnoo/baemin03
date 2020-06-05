@@ -60,9 +60,25 @@ System.out.println("------ Notice.jsp --- ");
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
-
-
-여기에 본 페이지를 작성하시오
+<table border="1" width="800px" align="center">
+  
+  <tr>
+    <th>글번호</th>
+    <th>글제목</th>
+    <th>작성일</th>
+    <th>종료일</th>
+  </tr>
+  
+  
+  
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  
+</table>
 
 
 <!-- main content end----------------------------------------------------------------------- -->

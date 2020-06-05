@@ -15,20 +15,8 @@ public class ShopDTO {
     private String shopTel;
     private double shopX;
     private double shopY;
+    private int shopStatus; // 0 영업종료 1영업중
 
     // NOT IN TABLE
     private double reviewRank;
 }
-
-// create table shop
-// (
-// no int(4) primary key,
-// shopName varchar(30) not null,
-// shopCategory int(4) not null,
-// shopEx varchar(30),
-// shopAddr varchar(60) not null,
-// shopAddr2 varchar(60),
-// shopTel varchar(20) not null,
-// memberX double ,
-// memberY double
-// );

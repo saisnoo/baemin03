@@ -45,7 +45,7 @@ public class MemberDAO {
                     dto.setName(rs.getString("name"));
                     dto.setNo(rs.getInt("no"));
                     dto.setPw(rs.getString("pw"));
-                    dto.setRegdate(dateFormat3.format(rs.getDate("regdate")));
+                    dto.setRegDate(dateFormat3.format(rs.getDate("regdate")));
                     dto.setTel(rs.getString("tel"));
                     System.out.println(dto.toString());
                 }

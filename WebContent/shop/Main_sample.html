@@ -71,12 +71,12 @@
                 </div>
                 <div class="w3-row w3-gray">
                     <div class="w3-quarter tablink2">
-                        <button onclick="openTab2(event, 'tabtab1')" id="defaultOpen2" class="w3-button w3-block w3-baemint w3-border">
+                        <button onclick="openTab2(event, 'tabtab1')" id="zzzzzzzzzz" class="w3-button w3-block w3-baemint w3-border">
                             <h4>주문접수</h4>
                         </button>
                     </div>
                     <div class="w3-quarter tablink2">
-                        <button onclick="openTab2(event, 'tabtab2')" class="w3-button w3-block w3-black w3-border">
+                        <button onclick="openTab2(event, 'tabtab2')" id="defaultOpen2" class="w3-button w3-block w3-black w3-border">
                             <h4>매장관리</h4>
                         </button>
                     </div>
@@ -414,7 +414,40 @@
 
                 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
                 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                <div id="tabtab2" class="w3-cyan tabcontent2">aaa</div>
+                <div id="tabtab2" class="w3-cyan tabcontent2">
+
+                    <div class="w3-border">
+                        <form action="aaaa" method="POST" name="menuInputForm">
+                            <input type="text" name="aa" id="aa" placeholder="manuName">
+                            <input type="text" name="aa" id="aa" placeholder="menuCate">
+                            <input type="text" name="aa" id="aa" placeholder="menuEx">
+                            <input type="text" name="aa" id="aa" placeholder="Price">
+                            <button type="button">새우탕</button>
+                        </form>
+                    </div>
+
+                    <select name="menu" id="menu">
+                        <option value="1">메뉴1번</option>
+                        <option value="2">메뉴2번</option>
+                        <option value="3">메뉴3번</option>
+                        <option value="4">메뉴4번</option>
+                        <option value="5">메뉴5번</option>
+                    </select>
+
+
+
+
+
+
+                    <div class="w3-card w3-border w3-right">
+                        <div><strong> 메뉴이름 </strong> </div>
+                        <p>설명설명설명설명</p>
+                        <p>5천원</p>
+                    </div>
+
+
+
+                </div>
 
                 <script>
                     function openTab(evt, tabName) {
@@ -464,45 +497,45 @@
                 </script>
 
                 <!-- main content end----------------------------------------------------------------------- -->
+                </>
             </div>
         </div>
-    </div>
 
-    <!-- HEAD ------------------------------------------------------------------------------------ -->
-    <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
-    <div class="topnav w3-card-4" id="topNav">
-        <a href="#" class="w3-baemint active">배달의 인종 </a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a> <strong>(주)경영반점</strong> </a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="#">내 정보</a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="#">주문내역</a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="#">로그아웃</a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="javascript:void(0);" class="icon" onclick="responsiveMenuPopUp()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </div>
+        <!-- HEAD ------------------------------------------------------------------------------------ -->
+        <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
+        <div class="topnav w3-card-4" id="topNav">
+            <a href="#" class="w3-baemint active">배달의 인종 </a>
+            <!-- -------------------------------------------------------------------------- -->
+            <a> <strong>(주)경영반점</strong> </a>
+            <!-- -------------------------------------------------------------------------- -->
+            <a href="#">내 정보</a>
+            <!-- -------------------------------------------------------------------------- -->
+            <a href="#">주문내역</a>
+            <!-- -------------------------------------------------------------------------- -->
+            <a href="#">로그아웃</a>
+            <!-- -------------------------------------------------------------------------- -->
+            <a href="javascript:void(0);" class="icon" onclick="responsiveMenuPopUp()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
 
-    <script>
-        window.onresize = responsiveMenuClose;
-        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-        function responsiveMenuPopUp() {
-            var x = document.getElementById("topNav");
-            if (x.className === "topnav w3-card-4") {
-                x.className += " responsive";
-            } else {
+        <script>
+            window.onresize = responsiveMenuClose;
+            /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+            function responsiveMenuPopUp() {
+                var x = document.getElementById("topNav");
+                if (x.className === "topnav w3-card-4") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav w3-card-4";
+                }
+            }
+
+            function responsiveMenuClose() {
+                var x = document.getElementById("topNav");
                 x.className = "topnav w3-card-4";
             }
-        }
-
-        function responsiveMenuClose() {
-            var x = document.getElementById("topNav");
-            x.className = "topnav w3-card-4";
-        }
-    </script>
+        </script>
 </body>
 
 </html>

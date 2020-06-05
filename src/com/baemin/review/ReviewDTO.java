@@ -18,18 +18,3 @@ public class ReviewDTO {
     private String reviewDate; // 등록일
 
 }
-
-// create table review
-// (
-// reviewNo int(4) primary key auto_increment,
-// reviewShopNo int(4) not null,
-// reviewOrderNo int(4) not null,
-// reviewerNo int(4) not null,
-// reviewContent text,
-// reviewRank int(2) default 0,
-// reviewDate datetime
-// )
-
-// 매장 + 별점에 따라
-// 고객에 따라
-// 매장에 따라 최신10개
