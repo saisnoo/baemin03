@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <!--모달창 script 시작-->
+  <script>
+    function modalOn() {
+      document.getElementById("#detail").style.display = 'block'
+    }
+    function modalOff() {
+      document.getElementById("#detail").style.display = 'none'
+    }
+  </script>
+  <!--모달창 script 끝-->
+
+
+</head>
+
+<body>
+  <table>
+<tr>
+
+  <th>
+    주문일시
+  </th>
+  <th>
+    매장명
+  </th>
+  <th>
+    결제금액
+  </th>
+</tr>
+
+    <!--for문 돌려서 리스트 뽑아오기 [for문 시작]-->
+    <tr onclick="go2modal(this)">
+      <td>2020-06-05/</td>
+      <td>BHC치킨 구로점/</td>
+      <td>25000원</td>
+        <!-- form의 action부분은 아직 정해지지 않앗음 (6/5일자 기준) 임시로 씀 -->
+        <td>
+         <input type="hidden" name="shopno" value="3">
+          <input type="button" value="가게보기" onclick="location='ShopPage.jsp'">
+          <!--onclick 부분 ShopPage.jsp는 임의로 집어넣은 상황-->
+          <input type="submit" value="리뷰쓰기">
+        </td>
+    </tr>
+    <!--for문 끝-->
+
+    <script>
+function go2modal(e){
+
+  var a1= e.children[3].children[0].value;
+  console.log(a1);
+ // $(#aa).load = "content.jsp?shpno=?";
+ document.getElementById("aa").innerText = a1;
+  document.getElementById("detail").style.display="block";
+}
+
+function detail1close(){
+  document.getElementById("#aa").innerHTML="";
+  document.getElementById("detail").style.display="none";
+}
+
+    </script>
+
+
+    <!-- 모달 detail1 시작 -->
+    <div id="detail" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
+          <form method="post" action="UpdateClientPro.jsp">
+            <p>asdasda</p>
+            <div id="aa"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- 모달 detail1 end -->
+
+
+  </body>
+  
+</table>
+</html>
+
+<!--
+시간(주문당시 년월일만)
+매장명
+가격
+
+가게보기 리뷰쓰기
+
+해당 목록 클릭시 모달로 상세보기(주문내역 상세보기)
+-->

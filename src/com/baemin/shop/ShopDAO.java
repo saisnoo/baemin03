@@ -17,6 +17,43 @@ public class ShopDAO {
     Context cont = null;
     DataSource ds = null;
 
+    // getShopInfo_start-----------------------------------------------------------------------------
+    public ShopDTO getShopInfo(int shopNo) throws Exception {
+        // 출력객체
+        ShopDTO dto = new ShopDTO();
+        System.out.println("---ShopDAO getShopInfo");
+        try {
+            // 1+2
+            // con=ds.getConnection();
+            // 3. sql
+            String sql = "select * from shop where shopNo = ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    dto.setShopAddr(rs.getString("shopAddr"));
+                    dto.setShopAddr2(rs.getString("shopAddr2"));
+                    dto.setShopCategory(rs.getString("shopCategory"));
+                    dto.setShopName(rs.getString("shopName"));
+                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setShopEx(rs.getString("shopEx"));
+                    dto.setShopStatus(rs.getInt("shopStatus"));
+                    dto.setShopTel(rs.getString("shopTel"));
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getShopInfo() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return dto;
+    } // getShopInfo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getCatogoryList_start-----------------------------------------------------------------------------
     public List<String> getCatogoryList() throws Exception {
         // 출력객체
@@ -101,6 +138,40 @@ public class ShopDAO {
         } // finally end
         return list;
     } // getListByCategory_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // getListAll_start-----------------------------------------------------------------------------
+    public List<ShopDTO> getListAll() throws Exception {
+        // 출력객체
+        List<ShopDTO> list = new ArrayList<>();
+        System.out.println("---ShopDAO getListAll");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select * from shop order by shopName";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    ShopDTO dto = new ShopDTO();
+                    dto.setShopAddr(rs.getString("shopAddr"));
+                    dto.setShopAddr2(rs.getString("shopAddr2"));
+                    dto.setShopCategory(rs.getString("shopCategory"));
+                    dto.setShopName(rs.getString("shopName"));
+                    dto.setShopNo(rs.getInt("shopNo"));
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getListAll() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return list;
+    } // getListAll_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // joinShop_start-----------------------------------------------------------------------------
     public int joinShop(ShopDTO dto) throws Exception {
