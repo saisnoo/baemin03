@@ -39,7 +39,7 @@ public class MemberDAO {
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
                 while (rs.next()) {
-                    dto.setGrade(rs.getInt("grade"));
+                	dto.setGrade(rs.getInt("grade"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setId(rs.getString("id"));
                     dto.setName(rs.getString("name"));
