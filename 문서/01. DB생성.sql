@@ -22,15 +22,16 @@ memberY double
 
 create table shop
 (
-no int(4) primary key,
+shopNo int(4) primary key  auto_increment,
 shopName varchar(30) not null,
-shopCategory int(4) not null,
-shopEx varchar(30),
+shopCategory text not null,
+shopEx text,
 shopAddr varchar(60) not null,
 shopAddr2 varchar(60),
 shopTel varchar(20) not null,
 shopX double ,
-shopY double 
+shopY double ,
+shopStatus int(4) default 0
 );
 
 
@@ -40,8 +41,9 @@ menuNo int(4) primary key auto_increment,
 menuShopNo int(4) not null,
 menuName varchar(30) not null,
 menuCategory varchar(30) not null,
-menuEx varchar(100),
-menuPrice int(7) not null
+menuEx text,
+menuPrice int(7) not null,
+menuStatus int(4) default 0
 );
 
 
@@ -52,7 +54,7 @@ name varchar(20),
 nameNo int(4),
 orderDate datetime,
 status int(4) default 0,
-orderList varchar(60) ,
+orderList text  ,
 estimatedTime datetime,
 completeTime datetime,
 whyCancel text,
