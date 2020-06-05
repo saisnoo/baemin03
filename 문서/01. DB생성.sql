@@ -25,7 +25,7 @@ create table shop
 shopNo int(4) primary key  auto_increment,
 shopName varchar(30) not null,
 shopCategory text not null,
-shopEx varchar(30),
+shopEx text,
 shopAddr varchar(60) not null,
 shopAddr2 varchar(60),
 shopTel varchar(20) not null,
