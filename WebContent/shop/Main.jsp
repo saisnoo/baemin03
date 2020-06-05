@@ -26,6 +26,13 @@
 <!-- CDN OFFLINE- sw_topNav.css -->
 <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
 
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
 /* Style the tab */
 .tab {
@@ -62,6 +69,22 @@
 </style>
 <script>
 	// 스크립트
+	function jumunBtn(e) {
+		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(a1);
+		document.getElementById("jumunSiganNo").value = a1;
+		document.getElementById("jumunReady").style.display = "block";
+	}
+	function cancelBtn() {
+		document.getElementById("jumunCancel").style.display = "block";
+	}
+
+	function cancelBtnIn() {
+		var sel = document.getElementById("cancelSelect");
+
+		var val = sel.options[sel.cancelSelect].value;
+		alert(val)
+	}
 </script>
 </head>
 <body>
@@ -131,11 +154,45 @@
 									<div class="w3-row">
 										<div class="w3-col w3-container w3-left" style="width: 100px;">
 											<h2>13:22</h2>
+											<input type="text" value="338" />
 										</div>
 										<div class="w3-col w3-container w3-right"
 											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-blue h100">주문접수</button>
+
+											<button class="w3-button w3-blue h100"
+												onclick="jumunBtn(this)">주문1</button>
+											<button class="w3-button w3-yellow h100"
+												onClick="cancelBtn(this)">주문취소</button>
+										</div>
+										<div class="w3-rest w3-container">
+											<strong>[메뉴 4개]</strong> &nbsp; 홍길동 <br /> 서울 구로구 구로동 구로빌딩
+											254-14 402호
+											<hr />
+											김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 /
+											스테이크 10 / 고등어자반 5
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- load  new order  -->
+
+							<!-- load  new order  -->
+							<!-- 신규, 조리중 주문 목록  -->
+							<div class="w3-section">
+								<div class="w3-card w3-padding">
+									<div class="w3-row">
+										<div class="w3-col w3-container w3-left" style="width: 100px;">
+											<h2>13:22</h2>
+											<input type="text" value="999" />
+										</div>
+										<div class="w3-col w3-container w3-right"
+											style="width: 200px; padding: 0px;">
+
+											<button class="w3-button w3-blue h100"
+												onclick="jumunBtn(this)">주문2</button>
 											<button class="w3-button w3-yellow h100">주문취소</button>
+
+
 										</div>
 
 										<div class="w3-rest w3-container">
@@ -168,8 +225,8 @@
 										</div>
 										<div class="w3-col w3-container w3-right"
 											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-blue h100">주문접수</button>
-											<button class="w3-button w3-yellow h100">주문취소</button>
+											<button class="w3-button w3-orange h100"
+												onClick="cancelBtn(this)">취소</button>
 										</div>
 
 										<div class="w3-rest w3-container">
@@ -221,7 +278,90 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab2" class="w3-cyan tabcontent2">aaa</div>
+				<div id="tabtab2" class="w3-cyan w3-container tabcontent2">
+					<h2 style="display:inline">메뉴구성</h2><br><h2 style="display:inline;"><input type="button" value="메뉴추가"></h2>
+					
+					<div style="width:50%;float:left">
+					<input class="w3-input w3-border w3-padding" type="text"
+						placeholder="Search for names.." id="myInput"
+						onkeyup="myFunction()" style="width: 40%;">
+					<table class="w3-table-all w3-margin-top" id="myTable">
+						<tr>
+							<th style="width: 20%;">이름</th>
+							<th style="width: 80%;">재료</th>
+						</tr>
+						<tr>
+							<td>김치찌개</td>
+							<td>김치,물,돼지고기</td>
+						</tr>
+						<tr>
+							<td>된장찌개</td>
+							<td>된장,물,두부</td>
+						</tr>
+						<tr>
+							<td>순댓국</td>
+							<td>순대,물</td>
+						</tr>
+						<tr>
+							<td>감자탕</td>
+							<td>감자,돼지고기,야채</td>
+						</tr>
+						<tr>
+							<td>불고기</td>
+							<td>돼지고기</td>
+						</tr>
+						<tr>
+							<td>김치전</td>
+							<td>김치,식용유</td>
+						</tr>
+					</table>
+					</div>
+					<table border="1" style="width:50%;float:right">
+						<tr>
+							<th style="width: 20%;">목록</th>
+							<th style="width: 80%;">입력창</th>
+						</tr>
+						<tr>
+							<td>가격</td>
+							<td><input type="text"></td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><input type="text"></td>
+						</tr>
+						<tr>
+							<td>설명</td>
+							<td><input type="text"></td>
+						</tr>
+						<tr>
+							<td>카테고리</td>
+							<td><input type="text"></td>
+						</tr>
+					
+					</table>
+				</div>
+
+				<script>
+					function myFunction() {
+						var input, filter, table, tr, td, i;
+						input = document.getElementById("myInput");
+						filter = input.value.toUpperCase();
+						table = document.getElementById("myTable");
+						tr = table.getElementsByTagName("tr");
+						for (i = 0; i < tr.length; i++) {
+							td = tr[i].getElementsByTagName("td")[0];
+							if (td) {
+								txtValue = td.textContent || td.innerText;
+								if (txtValue.toUpperCase().indexOf(filter) > -1) {
+									tr[i].style.display = "";
+								} else {
+									tr[i].style.display = "none";
+								}
+							}
+						}
+					}
+				</script>
+
 
 				<script>
 					function openTab(evt, tabName) {
@@ -267,8 +407,6 @@
 					document.getElementById("defaultOpen").click();
 					document.getElementById("defaultOpen2").click();
 				</script>
-
-
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
 		</div>
@@ -276,7 +414,6 @@
 	<!-- main content end----------------------------------------------------------------------- -->
 	<script>
 		window.onresize = responsiveMenuClose;
-		/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 		function responsiveMenuPopUp() {
 			var x = document.getElementById("topNav");
 			if (x.className === "topnav w3-card-4") {
@@ -295,6 +432,46 @@
 	<!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
 	<!-- 매장 main페이지는 별도의 상단바 필요할지도....????? -->
 	<jsp:include page="../sw_css/topnav.jsp" />
+
+
+	<!-- 주문접수 Modal시작 -->
+	<div class="w3-modal" id="jumunReady">
+		<div class="w3-modal-content">
+			<div class="w3-container">
+				<input id="jumunSiganNo" type="text" />
+				<div class="w3-tag">주문접수시간</div>
+				<div class="w3-tag w3-red">시간입력</div>
+				<div class="w3-label w3-green">접수버튼처리</div>
+				<div
+					onclick="document.getElementById('jumunReady').style.display='none'"
+					class="w3-button w3-display">닫기</div>
+				<!-- w3-container 끝-->
+			</div>
+		</div>
+	</div>
+	<%--주문접수 모달 Modal끝 --%>
+	<!--주문 취소 Modal시작 -->
+	<div class="w3-modal" id="jumunCancel">
+		<div class="w3-modal-content">
+			<div class="w3-container">
+				<div class="whyCancel">취소사유</div>
+				<div class="cancelText">
+					<select id="cancelSelect">
+						<option class="cel" value="배달 사고">배달 사고</option>
+						<option class="cel" value="거리멀음">거리 멀음</option>
+						<option class="cel" value="재료없음">재료없음</option>
+					</select>
+				</div>
+				<div class="cancelBtn" onclick="cancelBtnIn">취소버튼처리</div>
+				<div
+					onclick="document.getElementById('jumunCancel').style.display='none'"
+					class="w3-button w3-display">닫기</div>
+			</div>
+			<!-- w3-container 끝-->
+		</div>
+	</div>
+	<%--주문 취소 Modal끝 --%>
+
 
 </body>
 </html>
