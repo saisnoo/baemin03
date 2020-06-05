@@ -20,6 +20,13 @@ memberY double
 );
 
 
+insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
+values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로중앙로34길 33-4','경영 기술 개발원 401호','2000-01-01'
+,3 ,126.884660819027,37.5009565732326);
+
+select * from member;
+
+
 create table shop
 (
 shopNo int(4) primary key  auto_increment,
@@ -85,6 +92,8 @@ reviewContent text,
 reviewRank int(2) default 0,
 reviewDate datetime
 );
+
+
 
 
 
