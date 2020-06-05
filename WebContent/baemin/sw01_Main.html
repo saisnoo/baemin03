@@ -12,12 +12,29 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- CDN OFFLINE- sw_topNav.css -->
     <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
+    <!-- CDN - daum zipCode -->
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
     <style>
         img {
             width: 100%;
         }
+
+        .mySlides {
+            display: none;
+        }
     </style>
+    <script>
+        function openDaumPostcode() {
+
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    document.getElementById('juso').value = data.address;
+                }
+
+            }).open();
+        }//openDaumPostcode()---
+    </script>
 
 </head>
 
@@ -33,74 +50,105 @@
     <div class="sw-center">
         <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
         <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-        <div class="sw-container-400">
-            <div class="w3-container w3-section">
+        <div class="sw-container-500">
+            <div class="w3-row w3-section">
                 <!--  main content start here!!!----------------------------------------------------------- -->
-                <select id="juso" class="w3-input w3-border w3-round-large">
-                    <option value="0">서울 구로중앙테스트테스트테스트45-14</option>
-                    <option value="1">+ 주소변경</option>
-                </select>
+                <div class="w3-col w3-right" style="width:60px">
+                    &nbsp;
+                    <button class="w3-button w3-circle w3-white w3-border" onclick="openDaumPostcode()">+</button>
+                </div>
+
+                <div class="w3-rest">
+                    <input id="juso" class="w3-input w3-border w3-round-large" value="서울 구로중앙테스트테스트테스트45-14">
+                </div>
+
             </div>
         </div>
 
         <!--  광고 슬라이드 start here!!!----------------------------------------------------------- -->
-        <div class="sw-container-700 w3-section">
+        <!-- <div class="sw-container-500 w3-section">
             <div style="width: 100%; background: cyan;" class="w3-center w3-border">
                 <img src="../source//ad_sample.jpg" alt="" width="100%">
             </div>
+        </div> -->
+        <div class="w3-content w3-section sw-container-500" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/1.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/2.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/3.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/4.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/5.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/6.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/7.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/8.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/9.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/10.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/11.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/12.png" style="width:100%">
+            <img class="w3-round mySlides" src="../source/img/13.png" style="width:100%">
         </div>
+        <script>
+            var myIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) { myIndex = 1 }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 2000); // Change image every 2 seconds
+            }
+        </script>
         <!-- main content end----------------------------------------------------------------------- -->
 
 
 
         <!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
-        <div class="sw-container-700 w3-section">
-            <div class="w3-container w3-red">
+        <div class="sw-container-500 w3-section">
+            <div class="w3-container">
                 <!--  main content start here!!!----------------------------------------------------------- -->
                 <div class="w3-row">
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/hansik.png" alt="한식" max-width="110px">
+                        <div>한식</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/yangsik.png" alt="양식" max-width="110px">
+                        <div>양식</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/jungsik.png" alt="중식" max-width="110px">
+                        <div>중식</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/ilsik.png" alt="일식" max-width="110px">
+                        <div>일식</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/pizza.png" alt="피자" max-width="110px">
+                        <div>피자</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/chicken.png" alt="치킨" max-width="110px">
+                        <div>치킨</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/fastfood.png" alt="햄버거" max-width="110px">
+                        <div>햄버거</div>
                     </div>
                     <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
-                    </div>
-                    <!-- .... -->
-                    <div class="w3-col s3 m2 w3-center w3-padding w3-border">
-                        <img src="../source/img/main_icon_yangsik.png" alt="">
-                        <div>테스트</div>
+                    <div class="w3-quarter w3-center w3-padding">
+                        <img src="../source/img/cafe.png" alt="카페" max-width="110px">
+                        <div>카페</div>
                     </div>
                     <!-- .... -->
                 </div>

@@ -13,5 +13,5 @@
 <%
 	String category = (String) request.getParameter("category");
 	ShopDAO dao = ShopDAO.getInstance();
-	//List<ShopDTO> list = dao.getListByCategory("category");
+	List<ShopDTO> list = dao.getListByCategory("category");
 %>
