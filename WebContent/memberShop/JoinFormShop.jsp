@@ -56,9 +56,73 @@ System.out.println("------ JoinFormShop.jsp --- ");
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
+    <div class="w3-container w3-card-4">
+
+        <div class="w3-container w3-blue">
+            <h2>사업자 회원가입</h2>
+        </div>
+            <br>
+        <form class="w3-container">
+            <p>
+                <label>아이디</label>
+                <input class="w3-input" type="text" name="id"></p>
+                <br>
+            <p>
+                <label>비밀번호</label>
+                <input class="w3-input" type="password" name="pw"></p>
+                <br>
+            <p>
+                <label>비밀번호 확인</label>
+                <input class="w3-input" type="password" name="pwc"></p>
+                <br>
+            <p>
+                <label>이름</label>
+                <input class="w3-input" type="text" name="name"></p>
+                <br>
+            <p>
+                <label>전화번호</label>
+                <input class="w3-input" type="text" name="tel"></p>
+                <br>
+            <p>
+                <label>주소</label>
+                <input class="w3-input" type="text" name="addr"></p>
+                <br>
+            <p>
+                <label>매장명</label>
+                <input class="w3-input" type="text" name="shopname"></p>
+                <br>
+            <p>
+                <label>분류</label>
+                <select class="w3-select" name="category">
+                    <option value="" disabled selected>선택해주세요</option>
+                    <option value="chicken">치킨</option>
+                    <option value="pizza">피자</option>
+                    <option value="Pork">돈까스</option>
+                    <option value="jpfood">일식</option>
+                    <option value="chfood">중식</option>
+                    <option value="drink">술집</option>
+                  </select></p>
+                <br>
+            <p>
+                <label>설명</label>
+                <input class="w3-input" type="text" name="ex"></p>
+                <br>
+            <p>
+                <label>지역</label>
+                <input class="w3-input" type="text" name="place"></p>
+                <br>
+            <p>
+                <label>연락처</label>
+                <input class="w3-input" type="text" name="shoptel"></p>
+                <br>
+            <p>
+                <input class="w3-button w3-blue w3-margin" type="button" value="회원가입" onClick="location='./memberShop/JoinShopPro.jsp'">
+                <input class="w3-button w3-blue w3-margin" type="button" value="뒤로가기" onClick="history.back()">
+            </p>
+        </form>
+    </div>
 
 
-여기에 본 페이지를 작성하시오
 
 
 <!-- main content end----------------------------------------------------------------------- -->
