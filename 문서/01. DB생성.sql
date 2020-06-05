@@ -22,9 +22,9 @@ memberY double
 
 create table shop
 (
-shopNo int(4) primary key,
+shopNo int(4) primary key  auto_increment,
 shopName varchar(30) not null,
-shopCategory int(4) not null,
+shopCategory text not null,
 shopEx varchar(30),
 shopAddr varchar(60) not null,
 shopAddr2 varchar(60),
