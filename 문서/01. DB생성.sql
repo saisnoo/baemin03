@@ -34,7 +34,7 @@ shopName varchar(30) not null,
 shopCategory text not null,
 shopEx text,
 shopAddr varchar(60) not null,
-shopAddr2 varchar(60),
+shopAddr2 varchar(60) not null,
 shopTel varchar(20) not null,
 shopX double ,
 shopY double ,
@@ -56,28 +56,27 @@ menuStatus int(4) default 0
 
 create table orderlist (
 no int(4) primary key auto_increment,
-shopNo int(4),
-name varchar(20),
-nameNo int(4),
-orderDate datetime,
-status int(4) default 0,
-orderList text  ,
+shopNo int(4)  not null ,
+name varchar(20)  not null ,
+nameNo int(4)  not null ,
+orderDate datetime  not null ,
+status int(4)  not null  default 0,
+orderList text    not null ,
 completeTime datetime,
 whyCancel text,
-addr varchar(60),
-addr2 varchar(60)
+addr varchar(60)  not null ,
+addr2 varchar(60)  not null 
 );
 
 
 	
-
 create table notice
 (
 no int(4) primary key auto_increment,
 title varchar(60) not null,
-content text,
-startDate date,
-endDate date
+content text not null,
+startDate date not null,
+endDate date not null
 );
 
 
@@ -87,7 +86,7 @@ reviewNo int(4) primary key auto_increment,
 reviewShopNo int(4) not null,
 reviewOrderNo int(4) not null,
 reviewerNo  int(4) not null,
-reviewContent text,
+reviewContent text not null,
 reviewRank int(2) default 0,
 reviewDate datetime
 );
@@ -106,3 +105,4 @@ desc review;
 
 show tables;
 ;
+
