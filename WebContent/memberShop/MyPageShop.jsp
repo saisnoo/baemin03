@@ -60,7 +60,88 @@ System.out.println("------ MyPageShop.jsp --- ");
 
 
 
-여기에 본 페이지를 작성하시오
+        <!--사업자 마이 페이지-->
+        <div class="w3-card">
+                <h2>XXX님의 마이페이지</h2>
+            <br>
+                    <p>
+                        ID : kildong
+                    </p>
+                    <p>
+                        비밀번호 : ********
+                    </p>
+                    <p>
+                        이름 : 홍길동
+                    </p>
+                    <p>
+                        전화번호 : 010-8282-5959
+                    </p>
+                    <p>
+                        주소 : 사랑시 고백구 행복동
+                    </p>
+                    <p>
+                        매장명 : BHC치킨
+                    </p>
+                    <p>
+                        분류 : 치킨
+                    </p>
+                    <p>
+                        설명 : 맛잇는 뿌링클 치킨과 뿌링클 치즈볼 드셔보실? JMT
+                    </p>
+                    <p>
+                        지역 : 사랑시 고백구 행복동
+                    </p>
+                    <p>
+                        연락처 : 010-5252-8282
+                    </p>
+                    <!-- 변경창을 이용할때는 모달을 이용하자 -->
+                <script>
+                function modalOn(){
+                	document.getElementById('update').style.display='block'
+                }
+                function modalOff(){
+                	document.getElementById('update').style.display='none'
+                }
+                </script>
+                <p>
+ <button onClick="modalOn()" class="w3-button w3-black">개인정보 수정</button>
+            </p>
+        </div>
+        
+        
+        <!-- ------------------------------------------------------------------------------------------- -->
+        <!-- 모달창 시작 -->
+        <div id="update" class="w3-modal">
+          <div class="w3-modal-content">
+            <div class="w3-container">
+              <span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
+              <form method="post" action="UpdateClientPro.jsp">
+              
+                  <p>비밀번호 변경</p>
+                  <p><input type="password" name="pw"></p>
+                  
+                  <!-- Ajax 처리로 비밀번호 체크 -->
+                  <p>비밀번호 확인</p>
+                  <p><input type="password" name="pwc"></p>
+                  
+                  <!-- 기존의 전화번호를 value값에 집어넣어 수정하고싶으면 하고 아니면 원래값 그대로 넘기기 -->
+                  <p>전화번호 변경</p>
+                  <p><input type="text" name="tel" value="010-5252-8282"></p>
+					
+                  <!-- 기존의 전화번호를 value값에 집어넣어 수정하고싶으면 하고 아니면 원래값 그대로 넘기기 -->
+                  <p>매장전화번호 변경</p>
+                  <p><input type="text" name="tel" value="010-8282-5353"></p>
+                  
+                  <p>
+                      <input class="w3-button w3-border" type="submit" value="변경">
+                      <input class="w3-button w3-border" type="button" value="취소" onclick="modalOff()">
+                    </p>
+                </form>
+            </div>
+          </div>
+        </div>
+        <!-- 모달창 끝 -->
+        <!-- ------------------------------------------------------------------------------------------- -->
 
 
 <!-- main content end----------------------------------------------------------------------- -->
