@@ -1,3 +1,6 @@
+delete from shop;
+
+
 insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, shopY, shopEx) values('101번지남산돈까스','일식','서울 구로구 신도림동 692','228호','02-2210-9702',126.889258680872,37.5088200786126,'101번지남산돈까스,\n일식,\n서울 구로구 신도림동 692,\n02-2210-9702,\n126.889258680872,\n37.5088200786126,');
 insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, shopY, shopEx) values('1식당','술집','서울 마포구 합정동 433-60','261호','070-8246-1535',126.906894093325,37.5521770548473,'1식당,\n술집,\n서울 마포구 합정동 433-60,\n070-8246-1535,\n126.906894093325,\n37.5521770548473,');
 insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, shopY, shopEx) values('32파르페','패스트푸드','서울 마포구 서교동 369-5','286호','02-333-0472',126.92136127055,37.5524326477236,'32파르페,\n패스트푸드,\n서울 마포구 서교동 369-5,\n02-333-0472,\n126.92136127055,\n37.5524326477236,');
@@ -466,6 +469,12 @@ insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, s
 insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, shopY, shopEx) values('히게쯔라','술집','서울 마포구 합정동 389-23','222호','02-3144-4883',126.91039972883,37.5505543667275,'히게쯔라,\n술집,\n서울 마포구 합정동 389-23,\n02-3144-4883,\n126.91039972883,\n37.5505543667275,');
 insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, shopY, shopEx) values('히메시야','한식','서울 마포구 상수동 313-1','284호','070-8245-4562',126.921288265113,37.5486772386944,'히메시야,\n한식,\n서울 마포구 상수동 313-1,\n070-8245-4562,\n126.921288265113,\n37.5486772386944,');
 insert into shop (shopName, shopCategory, shopAddr, shopAddr2, shopTel, shopX, shopY, shopEx) values('히어로스터 신도림점',',','서울 구로구 신도림동 382-2','121호','070-8245-4562',126.88461300991,37.5084336060668,'히어로스터 신도림점,\n,,\n서울 구로구 신도림동 382-2,\n070-8245-4562,\n126.88461300991,\n37.5084336060668,');
+
+
+select count(*) from shop;
+;
+
+delete from shop where shopCategory like '%술집%';
 
 
 select count(*) from shop;
