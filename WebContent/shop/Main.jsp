@@ -66,6 +66,14 @@
 .scroll-box {
 	overflow-y: auto;
 }
+
+ #tabtab2{
+ height:500px;
+ }
+ #menucell{
+ height:415px;
+ overflow-y:auto;
+ }
 </style>
 <script>
 	// 스크립트
@@ -278,13 +286,15 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab2" class="w3-cyan w3-container tabcontent2">
+				<div id="tabtab2" class="w3-cyan w3-container tabcontent2"">
 					<h2 style="display:inline">메뉴구성</h2><br><h2 style="display:inline;"><input type="button" value="메뉴추가"></h2>
 					
 					<div style="width:50%;float:left">
 					<input class="w3-input w3-border w3-padding" type="text"
 						placeholder="Search for names.." id="myInput"
 						onkeyup="myFunction()" style="width: 40%;">
+					<div id="menucell">
+					
 					<table class="w3-table-all w3-margin-top" id="myTable">
 						<tr>
 							<th style="width: 20%;">이름</th>
@@ -314,7 +324,56 @@
 							<td>김치전</td>
 							<td>김치,식용유</td>
 						</tr>
+						<tr>
+							<td>김치찌개</td>
+							<td>김치,물,돼지고기</td>
+						</tr>
+						<tr>
+							<td>된장찌개</td>
+							<td>된장,물,두부</td>
+						</tr>
+						<tr>
+							<td>순댓국</td>
+							<td>순대,물</td>
+						</tr>
+						<tr>
+							<td>감자탕</td>
+							<td>감자,돼지고기,야채</td>
+						</tr>
+						<tr>
+							<td>불고기</td>
+							<td>돼지고기</td>
+						</tr>
+						<tr>
+							<td>김치전</td>
+							<td>김치,식용유</td>
+						</tr>
+						<tr>
+							<td>김치찌개</td>
+							<td>김치,물,돼지고기</td>
+						</tr>
+						<tr>
+							<td>된장찌개</td>
+							<td>된장,물,두부</td>
+						</tr>
+						<tr>
+							<td>순댓국</td>
+							<td>순대,물</td>
+						</tr>
+						<tr>
+							<td>감자탕</td>
+							<td>감자,돼지고기,야채</td>
+						</tr>
+						<tr>
+							<td>불고기</td>
+							<td>돼지고기</td>
+						</tr>
+						<tr>
+							<td>김치전</td>
+							<td>김치,식용유</td>
+						</tr>
 					</table>
+					</div>
 					</div>
 					<table border="1" style="width:50%;float:right">
 						<tr>
