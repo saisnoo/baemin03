@@ -1,3 +1,5 @@
+<%@page import="com.baemin.orderlist.OrderListDTO"%>
+<%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
  
@@ -5,6 +7,10 @@
 //자바 구문
 request.setCharacterEncoding("UTF-8");
 System.out.println("------NewOrderList.jsp");
+
+OrderListDAO dao= OrderListDAO.getInstance();
+List<OrderListDTO> list = dao.getListOfCurrent("shopno");
+
 %>
 
 <%  
