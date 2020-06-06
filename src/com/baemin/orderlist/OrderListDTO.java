@@ -15,8 +15,13 @@ public class OrderListDTO {
     private int nameNo; // 주문자 번호
     private Date orderDate; // now
     private int status;
+    // -1 취소
+    // default 0 신규주문
+    // 1 접수 . 조리중
+    // 2 배달보냄
+    // 3 마감
+    // 영업종료 하면 0,1 >> -1 , 2 >> 3
     private String orderList; // 메뉴, 수량
-    private Date estimatedTime;
     private Date completeTime;
     private String whyCancel;
     private String addr;

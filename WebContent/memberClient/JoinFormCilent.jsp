@@ -27,6 +27,24 @@ System.out.println("------ JoinFormCilent.jsp --- ");
 </style>
 <script>
 // 스크립트
+function checkIt(){
+	var int i = 0;
+	var pw = $("#pw").val();
+	var pwc = $("#pwc").val();
+	
+	if(pw != "" || pwc != ""){
+		if(pw == pwc){
+			i = 1;
+		}
+	}
+	
+}
+
+function startCk(){
+	setInterval(checkIt(), 500);
+	alert(i);
+}
+  
   
 </script>
 </head>
@@ -55,8 +73,44 @@ System.out.println("------ JoinFormCilent.jsp --- ");
 <!--  main content start here!!!----------------------------------------------------------- -->
 
 
+    <div class="w3-container w3-card-4">
 
-여기에 본 페이지를 작성하시오
+        <div class="w3-container w3-blue">
+            <h2>사용자 회원가입</h2>
+        </div>
+			<br>
+        <form class="w3-container">
+            <p>
+                <label>아이디</label>
+                <input class="w3-input" type="text" name="id"></p>
+                <p><input type="button" value="ID체크" onClick="checkIt()"></p>
+				<br>
+            <p>
+                <label>비밀번호</label>
+                <input class="w3-input" type="password" name="pw" id="pw"></p>
+				<br>
+            <p>
+                <label>비밀번호 확인</label>
+                <input class="w3-input" type="password" name="pwc" id="pwc"></p>
+				<br>
+            <p>
+                <label>이름</label>
+                <input class="w3-input" type="text" name="name"></p>
+				<br>
+            <p>
+                <label>전화번호</label>
+                <input class="w3-input" type="text" name="tel"></p>
+				<br>
+            <p>
+                <label>주소</label>
+                <input class="w3-input" type="text" name="addr"></p>
+				<br>
+            <p>
+                <input class="w3-button w3-blue w3-margin" type="button" value="회원가입" onClick="location='./memberShop/JoinShopPro.jsp'" disabled>
+                <input class="w3-button w3-blue w3-margin" type="button" value="뒤로가기" onClick="history.back()">
+            </p>
+        </form>
+    </div>
 
 
 <!-- main content end----------------------------------------------------------------------- -->

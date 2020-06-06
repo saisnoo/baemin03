@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <!-- 모달창 시작 -->
+        <div id="detail" class="w3-modal">
+            <div class="w3-modal-content">
+              <div class="w3-container">
+                <span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
+                <form method="post" action="UpdateClientPro.jsp">
+                    <p>비밀번호 변경</p>
+                    <p><input type="password" name="pw"></p>
+                    
+                    <!-- Ajax 처리로 비밀번호 체크 -->
+                    <p>비밀번호 확인</p>
+                    <p><input type="password" name="pwc"></p>
+                    
+                    <!-- 기존의 전화번호를 value값에 집어넣어 수정하고싶으면 하고 아니면 원래값 그대로 넘기기 -->
+                    <p>전화번호 변경</p>
+                    <p><input type="text" name="tel" value="010-5252-8282"></p>
+                    
+                    <p>
+                        <input class="w3-button w3-border" type="submit" value="변경">
+                        <input class="w3-button w3-border" type="button" value="취소" onclick="modalOff()">
+                      </p>
+                  </form>
+              </div>
+            </div>
+          </div>
+          <!-- 모달창 끝 -->
+
+
+
+
+</body>
+</html>
