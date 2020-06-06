@@ -67,31 +67,36 @@
 	overflow-y: auto;
 }
 
- #tabtab2{
- height:500px;
- }
- #menucell{
- height:415px;
- overflow-y:auto;
- }
+#tabtab2 {
+	height: 500px;
+}
+
+#menucell {
+	height: 415px;
+	overflow-y: auto;
+}
+
+.w90 {
+	width: 90px;
+}
+
+#menuEx {
+	resize: none;
+}
 </style>
 <script>
 	// 스크립트
+
 	function jumunBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[1].value;
 		console.log(a1);
 		document.getElementById("jumunSiganNo").value = a1;
 		document.getElementById("jumunReady").style.display = "block";
 	}
-	function cancelBtn() {
+	function cancelBtn(e) {
+		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(a1);
 		document.getElementById("jumunCancel").style.display = "block";
-	}
-
-	function cancelBtnIn() {
-		var sel = document.getElementById("cancelSelect");
-
-		var val = sel.options[sel.cancelSelect].value;
-		alert(val)
 	}
 </script>
 </head>
@@ -157,67 +162,102 @@
 							<!-- 신규, 조리중 주문 목록  -->
 							<!-- 신규, 조리중 주문 목록  -->
 							<!-- 신규, 조리중 주문 목록  -->
+							<!-- 접수대기 리스트 -->
 							<div class="w3-section">
 								<div class="w3-card w3-padding">
+									<!-- 상단 컨테이너 끝 -->
 									<div class="w3-row">
-										<div class="w3-col w3-container w3-left" style="width: 100px;">
-											<h2>13:22</h2>
-											<input type="text" value="338" />
+										<!-- 왼쪽 -->
+										<div class="w3-col w3-container w3-left" style="width: 150px;">
+											<h2>15:22</h2>
 										</div>
+										<!-- 왼쪽 끝 -->
+
+										<!-- 오른쪽-->
 										<div class="w3-col w3-container w3-right"
 											style="width: 200px; padding: 0px;">
-
 											<button class="w3-button w3-blue h100"
-												onclick="jumunBtn(this)">주문1</button>
+												onclick="jumunBtn(this)">주문버튼</button>
 											<button class="w3-button w3-yellow h100"
 												onClick="cancelBtn(this)">주문취소</button>
 										</div>
+										<!-- 오른쪽-->
+										<!-- 가운데 -->
 										<div class="w3-rest w3-container">
-											<strong>[메뉴 4개]</strong> &nbsp; 홍길동 <br /> 서울 구로구 구로동 구로빌딩
-											254-14 402호
-											<hr />
-											김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 /
-											스테이크 10 / 고등어자반 5
+											<div class="w3-row">
+												<div class="w3-col">
+													<strong>[메뉴 4개]</strong> &nbsp;박문자
+												</div>
+												<div class="w3-col">주문번호 5번</div>
+											</div>
+											<div class="w3-row">서울시 구로구 구로5동 경영기술개발원</div>
 										</div>
+										<!-- 가운데 끝 -->
 									</div>
+									<!-- 상단 컨테이너 끝 -->
+									<!-- 하단 컨테이너 -->
+									<div>
+										<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨
+											2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 /
+											된장찌개 2김치찌개 2 / 된장찌개 2 / 후라이드치킨2 / 양념치킨 반마리 1 된장찌개 2</div>
+										<div class="w3-row w3-padding">젓가락 두개 주세요</div>
+									</div>
+									<!-- 하단 컨테이너 끝-->
 								</div>
 							</div>
-							<!-- load  new order  -->
+							<!-- 접수대기 리스트 끝 -->
 
 							<!-- load  new order  -->
 							<!-- 신규, 조리중 주문 목록  -->
+							<!-- 접수대기 리스트 -->
 							<div class="w3-section">
 								<div class="w3-card w3-padding">
+									<!-- 상단 컨테이너 끝 -->
 									<div class="w3-row">
-										<div class="w3-col w3-container w3-left" style="width: 100px;">
-											<h2>13:22</h2>
-											<input type="text" value="999" />
+										<!-- 왼쪽 -->
+										<div class="w3-col w3-container w3-left" style="width: 150px;">
+											<h2>15:22</h2>
 										</div>
+										<!-- 왼쪽 끝 -->
+
+										<!-- 오른쪽-->
 										<div class="w3-col w3-container w3-right"
 											style="width: 200px; padding: 0px;">
-
 											<button class="w3-button w3-blue h100"
-												onclick="jumunBtn(this)">주문2</button>
-											<button class="w3-button w3-yellow h100">주문취소</button>
-
-
+												onclick="jumunBtn(this)">주문버튼</button>
+											<button class="w3-button w3-yellow h100"
+												onClick="cancelBtn(this)">주문취소</button>
 										</div>
-
+										<!-- 오른쪽-->
+										<!-- 가운데 -->
 										<div class="w3-rest w3-container">
-											<strong>[메뉴 4개]</strong> &nbsp; 홍길동 <br /> 서울 구로구 구로동 구로빌딩
-											254-14 402호
-											<hr />
-
-											김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 /
-											스테이크 10 / 고등어자반 5
+											<div class="w3-row">
+												<div class="w3-col">
+													<strong>[메뉴 4개]</strong> &nbsp;박문자
+												</div>
+												<div class="w3-col">주문번호 5번</div>
+											</div>
+											<div class="w3-row">서울시 구로구 구로5동 경영기술개발원</div>
 										</div>
+										<!-- 가운데 끝 -->
 									</div>
+									<!-- 상단 컨테이너 끝 -->
+									<!-- 하단 컨테이너 -->
+									<div>
+										<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨
+											2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 /
+											된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 /
+											고등어자반 5</div>
+										<div class="w3-row w3-padding">젓가락 두개 주세요</div>
+									</div>
+									<!-- 하단 컨테이너 끝-->
 								</div>
 							</div>
-							<!-- load  new order  -->
-							<!-- load  new order  -->
-							<!-- load  new order  -->
+							<!-- 접수대기 리스트 끝 -->
 
+							<!-- load  new order  -->
+							<!-- load  new order  -->
+							<!-- load  new order  -->
 
 						</div>
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -230,11 +270,12 @@
 									<div class="w3-row">
 										<div class="w3-col w3-container w3-left" style="width: 100px;">
 											<h2>13:22</h2>
+											<input type="text" value="555">
 										</div>
 										<div class="w3-col w3-container w3-right"
-											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-orange h100"
-												onClick="cancelBtn(this)">취소</button>
+											style="width: 100px; padding: 0px;">
+											<button class="w3-button w3-orange w90 h100"
+												onClick="cancelBtn(this)">주문취소</button>
 										</div>
 
 										<div class="w3-rest w3-container">
@@ -262,8 +303,8 @@
 										</div>
 										<div class="w3-col w3-container w3-right"
 											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-blue h100">주문접수</button>
-											<button class="w3-button w3-yellow h100">주문취소</button>
+											<button class="w3-button w3-blue w90 h100">주문접수</button>
+											<button class="w3-button w3-yellow w90 h100">주문취소</button>
 										</div>
 
 										<div class="w3-rest w3-container">
@@ -286,118 +327,82 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab2" class="w3-cyan w3-container tabcontent2"">
-					<h2 style="display:inline">메뉴구성</h2><br><h2 style="display:inline;"><input type="button" value="메뉴추가"></h2>
-					
-					<div style="width:50%;float:left">
-					<input class="w3-input w3-border w3-padding" type="text"
-						placeholder="Search for names.." id="myInput"
-						onkeyup="myFunction()" style="width: 40%;">
-					<div id="menucell">
-					
-					<table class="w3-table-all w3-margin-top" id="myTable">
-						<tr>
-							<th style="width: 20%;">이름</th>
-							<th style="width: 80%;">재료</th>
-						</tr>
-						<tr>
-							<td>김치찌개</td>
-							<td>김치,물,돼지고기</td>
-						</tr>
-						<tr>
-							<td>된장찌개</td>
-							<td>된장,물,두부</td>
-						</tr>
-						<tr>
-							<td>순댓국</td>
-							<td>순대,물</td>
-						</tr>
-						<tr>
-							<td>감자탕</td>
-							<td>감자,돼지고기,야채</td>
-						</tr>
-						<tr>
-							<td>불고기</td>
-							<td>돼지고기</td>
-						</tr>
-						<tr>
-							<td>김치전</td>
-							<td>김치,식용유</td>
-						</tr>
-						<tr>
-							<td>김치찌개</td>
-							<td>김치,물,돼지고기</td>
-						</tr>
-						<tr>
-							<td>된장찌개</td>
-							<td>된장,물,두부</td>
-						</tr>
-						<tr>
-							<td>순댓국</td>
-							<td>순대,물</td>
-						</tr>
-						<tr>
-							<td>감자탕</td>
-							<td>감자,돼지고기,야채</td>
-						</tr>
-						<tr>
-							<td>불고기</td>
-							<td>돼지고기</td>
-						</tr>
-						<tr>
-							<td>김치전</td>
-							<td>김치,식용유</td>
-						</tr>
-						<tr>
-							<td>김치찌개</td>
-							<td>김치,물,돼지고기</td>
-						</tr>
-						<tr>
-							<td>된장찌개</td>
-							<td>된장,물,두부</td>
-						</tr>
-						<tr>
-							<td>순댓국</td>
-							<td>순대,물</td>
-						</tr>
-						<tr>
-							<td>감자탕</td>
-							<td>감자,돼지고기,야채</td>
-						</tr>
-						<tr>
-							<td>불고기</td>
-							<td>돼지고기</td>
-						</tr>
-						<tr>
-							<td>김치전</td>
-							<td>김치,식용유</td>
-						</tr>
-					</table>
+				<div id="tabtab2" class="w3-border tabcontent2">
+
+					<div class="w3-row-padding w3-section">
+						<!-- 왼쪽 half -->
+						<div class="w3-half">
+							<div class="w3-row">
+								<div class="w3-col w3-left" style="width: 150px">
+									<h2>메뉴구성</h2>
+								</div>
+							</div>
+							<input class="w3-input w3-border w3-round-large" type="text"
+								placeholder="Search for names.." id="myInput"
+								onkeyup="myFunction()" style="width: 70%;">
+							<div id="menucell">
+								<table class="w3-table-all w3-margin-top" id="myTable">
+									<tr>
+										<th style="width: 20%;">이름</th>
+										<th style="width: 80%;">재료</th>
+									</tr>
+									<tr>
+										<td>김치찌개</td>
+										<td>김치,물,돼지고기</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>된장,물,두부</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+						<!-- 오른쪽 half -->
+						<div class="w3-half">
+							<!-- 메뉴입력창 -->
+							<div class="w3-half">
+								<table class="w3-table" border="1">
+									<tr>
+										<th>목록</th>
+										<th>입력창</th>
+									</tr>
+									<tr>
+										<td>가격</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td>이름</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td>카테고리</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td colspan="2">설명</td>
+									</tr>
+									<tr>
+										<td colspan="2"><textarea name="menuEx" id="menuEx"
+												class="w3-input w3-border" rows="10"></textarea></td>
+									</tr>
+								</table>
+							</div>
+							<!-- 메뉴입력창  끝-->
+							<!-- 메뉴입력 추가버튼-->
+							<div class="w3-half">
+								<div class="" style="width: 100px">
+									<input type="button" value="메뉴추가">
+								</div>
+								<div class="" style="width: 100px">
+									<input type="button" value="지우기">
+								</div>
+							</div>
+							<!-- 메뉴입력 버튼 끝 -->
+						</div>
+						<!-- 오른쪽 half 끝 -->
 					</div>
-					</div>
-					<table border="1" style="width:50%;float:right">
-						<tr>
-							<th style="width: 20%;">목록</th>
-							<th style="width: 80%;">입력창</th>
-						</tr>
-						<tr>
-							<td>가격</td>
-							<td><input type="text"></td>
-						</tr>
-						<tr>
-							<td>이름</td>
-							<td><input type="text"></td>
-						</tr>
-						<tr>
-							<td>설명</td>
-							<td><input type="text"></td>
-						</tr>
-						<tr>
-							<td>카테고리</td>
-							<td><input type="text"></td>
-						</tr>
-					
-					</table>
+
 				</div>
 
 				<script>
@@ -513,18 +518,14 @@
 	<div class="w3-modal" id="jumunCancel">
 		<div class="w3-modal-content">
 			<div class="w3-container">
-				<div class="whyCancel">취소사유</div>
-				<div class="cancelText">
-					<select id="cancelSelect">
-						<option class="cel" value="배달 사고">배달 사고</option>
-						<option class="cel" value="거리멀음">거리 멀음</option>
-						<option class="cel" value="재료없음">재료없음</option>
-					</select>
-				</div>
-				<div class="cancelBtn" onclick="cancelBtnIn">취소버튼처리</div>
-				<div
+				<span class="whyCancel">취소사유</span> <span align="right"
 					onclick="document.getElementById('jumunCancel').style.display='none'"
-					class="w3-button w3-display">닫기</div>
+					class="w3-button w3-display">X</span><br>
+				<div class="cancelText">
+					<input type="button" value="영업종료" /> <input type="button"
+						value="재료 소진" /> <input type="button" value="배달불가지역" /> <input
+						type="button" value="고객요청" />
+				</div>
 			</div>
 			<!-- w3-container 끝-->
 		</div>
