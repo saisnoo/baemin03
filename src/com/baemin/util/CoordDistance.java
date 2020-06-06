@@ -44,10 +44,10 @@ public class CoordDistance {
 
     public static void main(String[] args) {
 
-        double x1 = 126.477632596019;
-        double y1 = 37.4562891099177;
-        double x2 = 128.951560549331;
-        double y2 = 37.7709516183773;
+        double x1 = 126.879075005289;
+        double y1 = 37.509455211363;
+        double x2 = 126.879152928654;
+        double y2 = 37.508125408825;
 
         double distance = CoordDistance.getDistance(y1, x1, y2, x2);
         double distance2 = CoordDistance.getDistance(x1, y1, y2, x2);

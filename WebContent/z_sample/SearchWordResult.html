@@ -11,30 +11,36 @@
 	
 </script>
 <script>
+	function search() {
+		 
+		var content="";
+		
+		var keyword = document.getElementById("keyword").value;
 
-function search(){
-	var keyword = document.getElementById("keyword").value;
+		var places = new kakao.maps.services.Places();
 
-	var places = new kakao.maps.services.Places();
-
-	var callback = function(result, status) {
-		if (status === kakao.maps.services.Status.OK) {
-			console.log(result);
-			for (var i = 0; i < 14; i++) {
-				var a1 = result[i].place_name;
-				var a2 = result[i].category_name;
-				var a3 = result[i].address_name;
-				var a4 = result[i].phone;
-				var a5 = result[i].x;
-				var a6 = result[i].y;
-				var a7 = a1 + "|" + a2 + "|" + a3 + "|" + a4 + "|" + a5 + "|"
-						+ a6;
-				document.getElementById("aa"+i).innerText=a7;
-			} // for end
-		} // if end
-	};
-	places.keywordSearch(keyword, callback);
-}
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				console.log(result);
+				for (var i = 0; i < 14; i++) {
+					var a1 = result[i].place_name;
+					var a2 = result[i].category_name;
+					var a3 = result[i].address_name;
+					var a4 = result[i].phone;
+					var a5 = result[i].x;
+					var a6 = result[i].y;
+					var a7 = "<tr><td>" + a1 + "</td><td>" + a2 + "</td><td>" + a3 + "</td><td>"
+							+  a5 + "</td><td>" + a6 + "</td></tr>";
+					//document.getElementById("aa" + i).innerText = a7;
+					content = content + a7;
+				} // for end
+			} // if end
+		document.getElementById("table").innerHTML = content;
+		};
+		places.keywordSearch(keyword, callback);
+		
+		//console.log(content);
+	}
 </script>
 
 </head>
@@ -60,6 +66,10 @@ function search(){
 	<div id="aa13"></div>
 	<div id="aa14"></div>
 	<div id="aa15"></div>
+	
+	<table id ="table">
+	
+	</table>
 
 
 </body>
