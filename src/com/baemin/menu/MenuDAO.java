@@ -15,6 +15,85 @@ public class MenuDAO {
     Context cont = null;
     DataSource ds = null;
 
+    // insertMenu_start-----------------------------------------------------------------------------
+    public int insertMenu(MenuDTO dto) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---MenuDAO insertMenu");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "insert into menu(menoShopNo, menuName, menuCategory, menuEx, menuPrice)"
+                    + "values (?, ?, ?, ?, ?)";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, dto.getMenuShopNo());
+            pstmt.setString(2, dto.getMenuName());
+            pstmt.setString(3, dto.getMenuCategory());
+            pstmt.setString(4, dto.getMenuEx());
+            pstmt.setInt(5, dto.getMenuPrice());
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" insertMenu() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // insertMenu_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // updateStatus_start-----------------------------------------------------------------------------
+    public int updateStatus(int menuNo, int menuStatus) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---MenuDAO updateStatus");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "update menu set ";
+
+            // ##INSERT
+            // "insert into board(no, title, content, writer, pw) "
+            // + " values(board_seq.nextval, ?, ?, ?, sysdate)";
+            // ##SELECT
+            // "select no, title, writer, to_char(writedate, 'yyyy.mm.dd') writedate,"
+            // + " hit from board where no = ? order by no desc";
+            // ##UPDATE
+            // "update board set hit = hit + 1 , title = ? "
+            // + " where no = ?";
+            // ##DELETE
+            // "delete from board where no = ?";
+
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, no);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            result = pstmt.executeUpdate();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    // BoardReplyDTO dto = new BoardReplyDTO();
+                    // dto.setNo(rs.getInt("no"));
+                    // dto.setContent(rs.getString("content"));
+                    // vec.add(dto);
+                }
+            }
+
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" updateStatus() 예외  ");
+        } finally {
+            DBInfo.close(con, pstmt, rs);
+        } // finally end
+
+        return result;
+
+    } // updateStatus_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getMenuByNo_start-----------------------------------------------------------------------------
     public MenuDTO getMenuByNo(int menuNo) throws Exception {
         // 출력객체
