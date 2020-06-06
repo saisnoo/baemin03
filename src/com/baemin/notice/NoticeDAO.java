@@ -103,7 +103,7 @@ public class NoticeDAO {
 				dto.setContent(rs.getString("content"));
 				dto.setStartDate(rs.getDate("startdate") + "");
 				dto.setEndDate(rs.getDate("enddate") + "");
-			}// if end
+			} // if end
 		} catch (Exception ex) {
 			ex.getStackTrace();
 			System.out.println("viewNotice() 예외");
@@ -112,7 +112,7 @@ public class NoticeDAO {
 				close(con, pstmt, rs);
 			} catch (Exception ex2) {
 			}
-		}// finally end
+		} // finally end
 		return dto;
 	}// viewNotice_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
@@ -127,8 +127,8 @@ public class NoticeDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update notice set title=?, content=?, startdate='"
-					+ startDate + "', enddate='" + endDate + "' WHERE no = ?";
+			String sql = "update notice set title=?, content=?, startdate='" + startDate + "', enddate='" + endDate
+					+ "' WHERE no = ?";
 			System.out.println("sql---" + sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
@@ -194,8 +194,7 @@ public class NoticeDAO {
 	}
 
 	// close 1
-	static final void close(Connection con, PreparedStatement pstmt,
-			ResultSet rs) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt, ResultSet rs) throws Exception {
 		close(con, pstmt);
 		if (rs != null) {
 			rs.close();
@@ -203,8 +202,7 @@ public class NoticeDAO {
 	} // close () end
 
 	// close 2
-	static final void close(Connection con, PreparedStatement pstmt)
-			throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt) throws Exception {
 		if (con != null) {
 			con.close();
 		}

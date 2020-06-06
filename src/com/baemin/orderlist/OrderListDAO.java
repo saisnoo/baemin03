@@ -47,7 +47,6 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getDate("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
@@ -90,7 +89,6 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getDate("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
@@ -116,7 +114,8 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from orderlist where shopno=? AND (status=1 OR status=2 ) order by orderdate desc";
+            String sql = "select * from orderlist WHERE ShopNo=? AND (status=0 OR status=1) "
+                    + " ORDER BY orderDate ASC";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -133,7 +132,6 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getDate("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
@@ -159,7 +157,8 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from orderlist where shopno=? AND status=3 order by orderdate desc";
+            String sql = "select * from orderlist WHERE shopNo = ? AND status = 2 AND completeTime > NOW() "
+                    + " ORDER BY orderdate ASC";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -176,7 +175,6 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getDate("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
@@ -206,7 +204,8 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "SELECT * FROM orderlist WHERE DATE_FORMAT(orderdate, '%Y-%m-%d') = CURDATE()";
+            String sql = "select * from orderlist WHERE shopNo = ? AND status = 2 AND completetime < NOW() "
+                    + " ORDER BY orderdate DESC";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -223,7 +222,6 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getDate("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setEstimatedTime(rs.getDate("estimatedTime"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
@@ -245,17 +243,26 @@ public class OrderListDAO {
         // 출력객체
         int result = -1;
         System.out.println("---OrderListDAO closeShop");
-
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update orderlist set status = -1 , whyCancel = '영업종료' WHERE status=1 or status=2";
+            String sql = "update orderlist set status = -1, whyCancel = '영업종료' WHERE "
+                    + " (status=0 or status=1) AND shopNo = ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
             // 5. 실행
             result = pstmt.executeUpdate();
+
+            // 3. sql
+            sql = "update orderlist set status = 3 WHERE status=2 AND shopNo = ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            result = pstmt.executeUpdate();
+
         } catch (Exception e) {
             e.getStackTrace();
             throw new Exception(" closeShop() 예외  ");
@@ -367,7 +374,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select count(*) from orderlist where (shopNo = ? AND status = 3 AND DATE_FORMAT(orderdate, '%Y-%m-%d') = CURDATE())";
+            String sql = "select count(*) from orderlist where (shopNo = ? AND status = 3 AND completeTime < now()   DATE_FORMAT(orderdate, '%Y-%m-%d') = CURDATE())";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);

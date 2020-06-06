@@ -49,49 +49,25 @@ public class MenuDAO {
         // 출력객체
         int result = -1;
         System.out.println("---MenuDAO updateStatus");
+        menuStatus = (menuStatus + 1) / 2; // 0을 1로, 1을 0으로
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update menu set ";
-
-            // ##INSERT
-            // "insert into board(no, title, content, writer, pw) "
-            // + " values(board_seq.nextval, ?, ?, ?, sysdate)";
-            // ##SELECT
-            // "select no, title, writer, to_char(writedate, 'yyyy.mm.dd') writedate,"
-            // + " hit from board where no = ? order by no desc";
-            // ##UPDATE
-            // "update board set hit = hit + 1 , title = ? "
-            // + " where no = ?";
-            // ##DELETE
-            // "delete from board where no = ?";
-
+            String sql = "update menu set menuStatus = ? where menuNo =  ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, no);
+            pstmt.setInt(1, menuStatus);
+            pstmt.setInt(2, menuNo);
             // 5. 실행
-            rs = pstmt.executeQuery();
             result = pstmt.executeUpdate();
-            // 6. 표시 --- select 때만 표시
-            if (rs != null) {
-                while (rs.next()) {
-                    // BoardReplyDTO dto = new BoardReplyDTO();
-                    // dto.setNo(rs.getInt("no"));
-                    // dto.setContent(rs.getString("content"));
-                    // vec.add(dto);
-                }
-            }
-
         } catch (Exception e) {
             e.getStackTrace();
             throw new Exception(" updateStatus() 예외  ");
         } finally {
-            DBInfo.close(con, pstmt, rs);
+            close(con, pstmt, rs);
         } // finally end
-
         return result;
-
     } // updateStatus_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getMenuByNo_start-----------------------------------------------------------------------------
@@ -99,7 +75,6 @@ public class MenuDAO {
         // 출력객체
         MenuDTO dto = new MenuDTO();
         System.out.println("---MenuDAO getMenuByNo");
-
         try {
             // 1+2
             con = getConnection();
@@ -130,8 +105,8 @@ public class MenuDAO {
         return dto;
     } // getMenuByNo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-    // getListByShop_start-----------------------------------------------------------------------------
-    public List<MenuDTO> getListByShop(int menuShopNo) throws Exception {
+    // getListByShopActive_start-----------------------------------------------------------------------------
+    public List<MenuDTO> getListByShopActive(int menuShopNo) throws Exception {
         // 출력객체
         List<MenuDTO> list = new ArrayList<>();
         System.out.println("---MenuDAO getListByShop");
@@ -139,7 +114,8 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where menuShopNo = ? order by menuName desc, menuCategory desc ";
+            String sql = "select * from member where (menuShopNo = ? AND menuStatus = 1)"
+                    + " order by menuName desc, menuCategory desc ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, menuShopNo);
@@ -165,7 +141,46 @@ public class MenuDAO {
             close(con, pstmt, rs);
         } // finally end
         return list;
-    } // getListByShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+    } // getListByShopActive_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // getListByShopNoStatusDesc_start-----------------------------------------------------------------------------
+    public List<MenuDTO> getListByShopNoStatusDesc(int menuShopNo) throws Exception {
+        // 출력객체
+        List<MenuDTO> list = new ArrayList<>();
+        System.out.println("---MenuDAO getListByShopNoStatusDesc");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select * from member where menuShopNo = ? "
+                    + " order by menuName desc, menuCategory desc, menuStatus desc";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, menuShopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    MenuDTO dto = new MenuDTO();
+                    dto.setMenuNo(rs.getInt("menuNo"));
+                    dto.setMenuShopNo(rs.getInt("menuShopNo"));
+                    dto.setMenuCategory(rs.getString("menuCategory"));
+                    dto.setMenuEx(rs.getString("menuEX"));
+                    dto.setMenuName(rs.getString("menuName"));
+                    dto.setMenuPrice(rs.getInt("price"));
+                    dto.setMenuStatus(rs.getInt("menuStatus"));
+                    list.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getListByShopNoStatusDesc() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return list;
+    } // getListByShopNoStatusDesc_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListByMenuNoList_start-----------------------------------------------------------------------------
     public List<MenuDTO> getListByMenuNoList(List<Integer> menuNoList) throws Exception {
