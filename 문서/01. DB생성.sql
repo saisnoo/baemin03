@@ -65,7 +65,8 @@ orderList text    not null ,
 completeTime datetime,
 whyCancel text,
 addr varchar(60)  not null ,
-addr2 varchar(60)  not null 
+addr2 varchar(60)  not null ,
+comment text
 );
 
 
