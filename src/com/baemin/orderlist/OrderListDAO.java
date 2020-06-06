@@ -21,6 +21,44 @@ public class OrderListDAO {
     SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
     SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
+    // insertOrder_start-----------------------------------------------------------------------------
+    public int insertOrder(OrderListDTO dto) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO insertOrder");
+
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "insert into orderlist(shopNo, name, nameNo, orderDate, status, orderList, addr, addr2)"
+                    + " values()";
+
+            // ##INSERT
+            // "insert into board(no, title, content, writer, pw) "
+            // + " values(board_seq.nextval, ?, ?, ?, sysdate)";
+            // ##SELECT
+            // "select no, title, writer, to_char(writedate, 'yyyy.mm.dd') writedate,"
+            // + " hit from board where no = ? order by no desc";
+            // ##UPDATE
+            // "update board set hit = hit + 1 , title = ? "
+            // + " where no = ?";
+            // ##DELETE
+            // "delete from board where no = ?";
+
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" insertOrder() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // insertOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getOrder_start-----------------------------------------------------------------------------
     public OrderListDTO getOrder(int no) throws Exception {
         // 출력객체
