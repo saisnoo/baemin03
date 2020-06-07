@@ -21,6 +21,36 @@ public class MemberDAO {
     SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
     SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
+    // getNoByID_start-----------------------------------------------------------------------------
+    public int getNoByID(String id) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---MemberDAO getNoByID");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select count(*) from member where id = ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getNoByID() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // getNoByID_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getDTO_start-----------------------------------------------------------------------------
     public MemberDTO getDTO(int no) throws Exception {
         // 출력객체
@@ -39,7 +69,7 @@ public class MemberDAO {
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
                 while (rs.next()) {
-                	dto.setGrade(rs.getInt("grade"));
+                    dto.setGrade(rs.getInt("grade"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setId(rs.getString("id"));
                     dto.setName(rs.getString("name"));
