@@ -1,3 +1,5 @@
+<%@page import="com.baemin.member.MemberDAO"%>
+<%@page import="com.baemin.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
@@ -36,4 +38,26 @@
 	System.out.println("addr2=" + addr2);
 	System.out.println("memberX=" + memberX);
 	System.out.println("memberY=" + memberY);
+
+	MemberDTO dto = new MemberDTO();
+
+	dto.setId(id);
+	dto.setPw(pw);
+	dto.setName(name);
+	dto.setTel(tel);
+	dto.setAddr(addr);
+	dto.setAddr2(addr2);
+	dto.setMemberX(memberX);
+	dto.setMemberY(memberY);
+
+	MemberDAO dao = MemberDAO.getInstance();
+	int result = dao.insertMember(dto);
+
+	if (result == 1) {
+		System.out.println("회원가입 성공");
+	} else {
+		System.out.println("!!! 회원가입 실패");
+	}
+
+	response.sendRedirect("../index.html");
 %>
