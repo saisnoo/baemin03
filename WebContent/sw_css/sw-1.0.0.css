@@ -8,6 +8,11 @@ body {
   color: white;
 }
 
+@font-face {
+  font-family: 'baemin_font';
+  src: url('./BMHANNAPro.ttf');
+}
+
 .sw-center {
   width: 100%;
   /* topnav 높이만큼 마진탑 */
