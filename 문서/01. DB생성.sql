@@ -24,12 +24,18 @@ insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, mem
 values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로중앙로34길 33-4','경영 기술 개발원 401호','2000-01-01'
 ,3 ,126.884660819027,37.5009565732326);
 
+insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
+values ('scott','tiger','김경영', '010-1234-1234' ,'서울 구로구 구로중앙로34길 33-4','경영 기술 개발원 401호','2000-01-01'
+,1 ,126.884660819027,37.5009565732326);
+
 select * from member;
 
 
 create table shop
 (
 shopNo int(4) primary key  auto_increment,
+shopID varchar(30) not null,
+shopPW varchar(30) not null,
 shopName varchar(30) not null,
 shopCategory text not null,
 shopEx text,
@@ -40,6 +46,9 @@ shopX double ,
 shopY double ,
 shopStatus int(4) default 0
 );
+
+
+
 
 
 create table menu
@@ -65,7 +74,8 @@ orderList text    not null ,
 completeTime datetime,
 whyCancel text,
 addr varchar(60)  not null ,
-addr2 varchar(60)  not null 
+addr2 varchar(60)  not null ,
+comment text
 );
 
 
