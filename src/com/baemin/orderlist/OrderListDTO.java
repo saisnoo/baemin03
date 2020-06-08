@@ -26,6 +26,7 @@ public class OrderListDTO {
     private String whyCancel;
     private String addr;
     private String addr2;
+    private String comment;
 
     // NOT IN DB
     private Hashtable<Integer, Integer> hashtable;
