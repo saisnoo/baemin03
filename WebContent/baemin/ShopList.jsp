@@ -65,7 +65,8 @@
 
 		<script>
 			window.onload = function() {
-				//setInterval(listReload, 1500);
+				listReload();
+				setInterval(listReload, 1500);
 				category_first_select();
 			}
 
@@ -90,8 +91,10 @@
 				console.log(selec.value);
 
 				for (var i = 0; i < 8; i++) {
-					if ((selec.value)==(selec_val)) {
+						console.log(i+" "+selec[i].value + "  " + selec_val);
+					if (selec[i].value == selec_val) {
 						selec.selectedIndex = i;
+						console.log(i+""+i+""+i+""+i+""+i+""+i)
 						break;
 					}
 				}
