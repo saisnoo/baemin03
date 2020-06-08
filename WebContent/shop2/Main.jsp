@@ -253,13 +253,15 @@
 
                     // Get the element with id="defaultOpen" and click on it
                     document.getElementById("defaultOpen").click();
-                    document.getElementById("defaultOpen2").click();
+                    document.getElementById("jumoontab").click();
                     
                     $(function(){
                     	function reload(){
                     		$("#NOL").load("NewOrderList.jsp");
+                    		document.getElementById("defaultOpen").click();
+                    		document.getElementById("jumoontab").click();
                     	}
-                    	
+                    	setInterval(reload, 5000);
                     });
                     
                 </script>
