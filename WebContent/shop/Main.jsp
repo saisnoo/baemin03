@@ -3,7 +3,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 
-
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
@@ -25,9 +24,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- CDN OFFLINE- sw_topNav.css -->
 <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -98,6 +94,29 @@
 		console.log(a1);
 		document.getElementById("jumunCancel").style.display = "block";
 	}
+
+	window.onload = function() {
+		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		$("#tab3").load("EndList.jsp?shopNo=1");
+		
+	}
+	
+	setInterval(function() {
+		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		$("#tab3").load("EndList.jsp?shopNo=1");
+		countcount();
+	},3000)
+	
+	function countcount(){
+		var a = document.getElementsByClassName("count0").length;
+		var a1 = document.getElementsByClassName("count1").length;
+		//console.log(a +"/"+ a1);
+		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
+	}
+	
+
 </script>
 </head>
 <body>
@@ -142,15 +161,15 @@
 					<div class="tab w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="defaultOpen">
-							접수대기<br /> <strong>3</strong>
+							접수대기<br /> <strong id="NewOrderCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab2')">
-							배달중<br /> <strong>3</strong>
+							배달중<br /> <strong id="BaesongCount">3</strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab3')">
-							완료<br /> <strong>3</strong>
+							완료<br /> <strong id="EndListCount">3</strong>
 						</button>
 					</div>
 					<div class="w3-rest w3-white scroll-box">
@@ -177,7 +196,7 @@
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 						<div id="tab3" class="tabcontent">
 							<!-- load  new order -/-/-/-/-/-/--/-/-/-/-/-/-/-/-/- -->
-							<%@ include file="EndList.jsp"%>
+
 
 							<!-- load  new order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
 

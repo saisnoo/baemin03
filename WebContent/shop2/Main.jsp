@@ -99,16 +99,30 @@
                         </button>
                     </div>
                 </div>
+              <div id="tabtab1" class="w3-row w3-gray tabcontent2">         
+                <div class="tab w3-col" style="width: 100px;">
+                        <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab1')" id="defaultOpen">
+                            접수대기<br /><strong>3</strong>
+                        </button>
+                        <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab2')">
+                            배달중<br /><strong>3</strong>
+                        </button>
+                        <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab3')">
+                            완료<br /><strong>3</strong>
+                        </button>
+                    </div>
+                
+                
 			<div id="NOL">
             <jsp:include page="NewOrderList.jsp"/>
             </div>
-            <div id="SM">
+            </div>
+          <div id="shopmanage">
             <jsp:include page="ShopManage.jsp"/>
 			</div>
 			</div>
-			</div>
-			</div>
-		
+		</div>
+		</div>
 
  <div class="modal fade take_over" id="take_over" role="dialog">
     <div class="modal-dialog">
@@ -258,10 +272,10 @@
                     $(function(){
                     	function reload(){
                     		$("#NOL").load("NewOrderList.jsp");
-                    		document.getElementById("defaultOpen").click();
-                    		document.getElementById("jumoontab").click();
+                     		document.getElementById("defaultOpen").click();
+                    		//document.getElementById("jumoontab").click(); 
                     	}
-                    	setInterval(reload, 5000);
+                    	setInterval(reload, 10000);
                     });
                     
                 </script>

@@ -4,11 +4,18 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Hashtable;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+
+
 
 @Getter
 @Setter
 @ToString
+
+
 public class OrderListDTO {
     private int no; // PK
     private int shopNo;// 주문 가게 이름
