@@ -7,6 +7,8 @@ import lombok.*;
 @ToString
 public class ShopDTO {
     private int shopNo; // PK reference member.no
+    private String shopID;
+    private String shopPW;
     private String shopName; //
     private String shopCategory; // 가게 분류
     private String shopEx;// 가게 설명

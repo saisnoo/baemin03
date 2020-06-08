@@ -1,0 +1,25 @@
+completeTime < now()
+
+** tab1
+shopNo = ?
+status = 0 or status = 1
+order by orderdate asc
+
+** tab2
+shopno=?	
+status = 2
+completeTime > 현재시간
+order by orderdate asc
+
+**tab3
+shopno = ?
+status =2
+   completetime < 현재시간
+order by orderdate desc
+
+select * from orderlist WHERE ShopNo = 5 AND ( status = 0 OR status = 1 )  ORDER BY orderDate ASC
+
+select * from orderlist WHERE shopNo = 5 AND status = 2 AND completeTime > NOW() ORDER BY orderdate ASC
+
+select * from orderlist WHERE shopNo = 5 AND status = 2 AND completetime < NOW() ORDER BY orderdate DESC
+

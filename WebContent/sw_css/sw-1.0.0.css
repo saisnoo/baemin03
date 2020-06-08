@@ -3,9 +3,19 @@ body {
   padding: 0px;
 }
 
+@font-face {
+  font-family: baemin_font;
+  src: url("../source/BMHANNAPro.ttf");
+}
+
 .w3-baemint {
   background-color: #45c1bf;
   color: white;
+}
+
+@font-face {
+  font-family: 'baemin_font';
+  src: url('./BMHANNAPro.ttf');
 }
 
 .sw-center {
@@ -99,7 +109,6 @@ body {
 .h100 {
   height: 100px;
 }
-
 
 /* Add a black background color to the top navigation */
 .topnav {

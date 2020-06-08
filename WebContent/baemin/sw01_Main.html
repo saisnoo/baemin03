@@ -16,9 +16,15 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <!-- CDN - jquery 3.4.1 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- CDN - Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
     <style>
+        * {
+            font-family: baemin_font;
+        }
+
         img {
             width: 100%;
         }
@@ -29,6 +35,13 @@
 
         .font-80 {
             font-size: 80%;
+        }
+
+        #topnav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            overflow: hidden;
         }
     </style>
     <script>
@@ -58,8 +71,7 @@
         <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
         <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
         <div class="sw-container-500 w3-padding">
-            <div class="w3-row">
-                <!--  main content start here!!!----------------------------------------------------------- -->
+            <!-- <div class="w3-row">
                 <div class="w3-col w3-right" style="width:60px">
                     &nbsp;
                     <button class="w3-button w3-circle w3-white w3-border" onclick="jusoChangeOpen()">+</button>
@@ -69,9 +81,11 @@
                     <input id="juso" class="w3-input w3-border w3-round-large" value="서울 영등포구 국회대로36길 17">
                     1. div로 표기. 버튼 따로없이 주소를 클릭하면 모달창 열기??
                 </div>
-            </div>
+            </div> -->
             <div class="w3-row w3-center">
-                <button type="button" class="w3-button w3-white w3-center font-80"><span id="addr_result">서울 영등포구 국회대로36길 17</span>
+                <button type="button" class="w3-button w3-white w3-center" onclick="jusoModalOpen()"><span
+                        id="addr_result">서울 영등포구
+                        국회대로36길 17</span>
                     &nbsp;<span id="addr2_result">B동 401호</span>
                 </button>
             </div>
@@ -118,27 +132,31 @@
         </script>
         <!-- main content end----------------------------------------------------------------------- -->
 
-
+        shopList.jsp?catogory=hansik
 
         <!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
         <div class="sw-container-500 w3-section">
             <div class="w3-container">
                 <!--  main content start here!!!----------------------------------------------------------- -->
                 <div class="w3-row">
-                    <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/hansik.png" alt="한식" max-width="110px"> <input type="hidden" value="한식" />
+                    <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList("hansik")">
+                        <img src="../source/img/hansik.png" alt="한식" max-width="110px"> <input type="hidden"
+                            value="한식" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/yangsik.png" alt="양식" max-width="110px"> <input type="hidden" value="양식" />
+                        <img src="../source/img/yangsik.png" alt="양식" max-width="110px"> <input type="hidden"
+                            value="양식" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/jungsik.png" alt="중식" max-width="110px"> <input type="hidden" value="중식" />
+                        <img src="../source/img/jungsik.png" alt="중식" max-width="110px"> <input type="hidden"
+                            value="중식" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/ilsik.png" alt="일식" max-width="110px"> <input type="hidden" value="일식" />
+                        <img src="../source/img/ilsik.png" alt="일식" max-width="110px"> <input type="hidden"
+                            value="일식" />
                     </div>
                 </div>
 
@@ -152,15 +170,18 @@
                 <div class="w3-row">
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/pizza.png" alt="피자" max-width="110px"> <input type="hidden" value="피자" />
+                        <img src="../source/img/pizza.png" alt="피자" max-width="110px"> <input type="hidden"
+                            value="피자" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/chicken.png" alt="치킨" max-width="110px"> <input type="hidden" value="치킨" />
+                        <img src="../source/img/chicken.png" alt="치킨" max-width="110px"> <input type="hidden"
+                            value="치킨" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/fastfood.png" alt="햄버거" max-width="110px"> <input type="hidden" value="패스트푸드" />
+                        <img src="../source/img/fastfood.png" alt="햄버거" max-width="110px"> <input type="hidden"
+                            value="패스트푸드" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
@@ -194,12 +215,16 @@
         <div class="w3-modal-content w3-round-large">
             <div class="w3-container w3-center">
                 <div class="w3-row w3-section"> <label>주소</label> </div>
-                <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr" id="addr" readonly> </div>
+                <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr" id="addr"
+                        readonly> </div>
                 <div class="w3-row w3-section"> <label>상세주소</label> </div>
-                <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr2" id="addr2"> </div>
+                <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr2" id="addr2">
+                </div>
                 <div class="w3-row w3-section w3-center">
-                    <button class="w3-button w3-baemint" type="button" onclick="openDaumPostcode()" style="width: 100px;">주소입력</button>
-                    <button class="w3-button w3-baemint" type="button" onclick="updateJuso()" style="width: 100px;">주소변경</button>
+                    <button class="w3-button w3-baemint" type="button" onclick="openDaumPostcode()"
+                        style="width: 100px;">주소입력</button>
+                    <button class="w3-button w3-baemint" type="button" onclick="updateJuso()"
+                        style="width: 100px;">주소변경</button>
                 </div>
                 <span onclick="document.getElementById('jusoChange').style.display='none'"
                     class="w3-button w3-display-topright">&times;</span>
@@ -253,26 +278,16 @@
 
     <!-- HEAD ------------------------------------------------------------------------------------ -->
     <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
-    <div class="topnav w3-card-4" id="topNav">
-        <a href="#" class="w3-baemint">배달의 인종 </a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a> <strong>aaaa</strong>님 환영합니다.
-        </a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="#">마이페이지</a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="https://ceo.baemin.com/guide/detail/G73002">내 주문</a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="#">로그아웃</a>
-        <!-- -------------------------------------------------------------------------- -->
-        <a href="javascript:void(0);" class="icon" onclick="responsiveMenuPopUp()"> <i class="fa fa-bars"></i>
-        </a>
+    <div class="w3-card-4 w3-center w3-baemint" id="topnav">
+        <div class="w3-baemint">
+            <h3 style="font-family: baemin_font;">배달의 인종</h3>
+        </div>
     </div>
 
     <script>
         /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
         function responsiveMenuPopUp() {
-            var x = document.getElementById("topNav");
+            var x = document.getElementById("topnav");
             if (x.className === "topnav w3-card-4") {
                 x.className += " responsive";
             } else {
@@ -281,10 +296,35 @@
         }
 
         window.onresize = function () {
-            var x = document.getElementById("topNav");
-            x.className = "topnav w3-card-4";
+            //   var x = document.getElementById("topNav");
+            //   x.className = "topnav w3-card-4";
         }
     </script>
+    <div class="w3-bottom w3-center w3-border-top">
+        <div class="w3-row sw-container-500" style="margin-top: 5px;">
+            <a href="#" class="w3-button w3-col s3 w3-center" style="padding: 0px;">
+                <i class="material-icons" style="font-size:48px;color:#45c1bf;">home</i>
+            </a>
+            <a href="#" class="w3-button w3-col s3 w3-center" style="padding: 0px;">
+                <i class="material-icons" style="font-size:48px;color:#45c1bf;">notifications</i>
+            </a>
+            <a href="#" class="w3-button w3-col s3 w3-center" style="padding: 0px;">
+                <i class="material-icons" style="font-size:48px;color:#45c1bf;">local_grocery_store</i>
+            </a>
+            <a href="#" class="w3-button w3-col s3 w3-center" style="padding: 0px;">
+                <i class="material-icons" style="font-size:48px;color:#45c1bf;">account_circle</i>
+            </a>
+        </div>
+
+        <div class="w3-row sw-container-500" style="margin-bottom: 5px;">
+            <div class="w3-col s3 w3-center">Home</div>
+            <div class="w3-col s3 w3-center">Notice</div>
+            <div class="w3-col s3 w3-center">Order</div>
+            <div class="w3-col s3 w3-center">Mypage</div>
+        </div>
+
+    </div>
+
 
 
 </body>
