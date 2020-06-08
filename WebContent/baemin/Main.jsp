@@ -20,6 +20,7 @@
 	System.out.println(grade_ob);
 	if (grade_ob == null) {
 		grade_ob = 0;
+		response.sendRedirect("../index.html");
 	}
 
 	int grade = Integer.parseInt(grade_ob + "");
@@ -28,7 +29,6 @@
 
 	if (grade != 1) {
 		System.out.println("사용자가 아니므로 로그인페이지로 돌아갑니다.");
-		response.sendRedirect("../index.html");
 	}
 
 	int memberNo = Integer.parseInt(memberNo_ob + "");
