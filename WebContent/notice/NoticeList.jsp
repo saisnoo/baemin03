@@ -47,8 +47,27 @@ List<NoticeDTO> list = dao.getList();
 		 location.href="NoticeView.jsp?no="+no;		  
 	  });  
   });
-
   
+  function myFunction() {
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("myInput");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("myTable");
+	  tr = table.getElementsByTagName("tr");
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[1];
+	    if (td) {
+	      txtValue = td.textContent || td.innerText;
+	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    }
+	  }
+	}
+  
+
 </script>
 </head>
 <body>
@@ -73,7 +92,7 @@ List<NoticeDTO> list = dao.getList();
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
-<table class="w3-table w3-bordered">
+<table class="w3-table w3-bordered" id="myTable">
 
   <tr>
     <th width="15%">공지번호</th>
@@ -97,7 +116,14 @@ List<NoticeDTO> list = dao.getList();
   
   <tr>
     <td colspan="5">
-      <button class="w3-button w3-blue" onclick="location='NoticeInputForm.jsp'">글쓰기</button>                       
+      <div class="w3-row">
+        <div class="w3-col m2 l2">
+          <button class="w3-button w3-blue" onclick="location='NoticeInputForm.jsp'">글쓰기</button>
+        </div>
+        <div class="w3-col m10 l10">
+          <input class="w3-input w3-border w3-padding" type="text" placeholder="공지글제목 검색" id="myInput" onkeyup="myFunction()">
+        </div>
+      </div>                      
     </td>
   </tr>
 
