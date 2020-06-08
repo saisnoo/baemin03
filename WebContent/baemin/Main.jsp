@@ -20,15 +20,20 @@
 	System.out.println(grade_ob);
 	if (grade_ob == null) {
 		grade_ob = 0;
-		response.sendRedirect("../index.html");
 	}
 
 	int grade = Integer.parseInt(grade_ob + "");
 
 	System.out.println("session grade=" + grade);
 
-	if (grade != 1) {
+	if (grade < 1) {
 		System.out.println("사용자가 아니므로 로그인페이지로 돌아갑니다.");
+		response.sendRedirect("../index.html");
+%>
+<script>
+	location.href = "../index.html";
+</script>
+<%
 	}
 
 	int memberNo = Integer.parseInt(memberNo_ob + "");
@@ -79,13 +84,13 @@ img {
 .font-80 {
 	font-size: 80%;
 }
-#topnav{
+
+#topnav {
 	position: fixed;
 	top: 0;
 	width: 100%;
 	overflow: hidden;
 }
-
 </style>
 <script>
 	function openDaumPostcode() {

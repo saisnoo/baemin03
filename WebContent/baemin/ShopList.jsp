@@ -52,6 +52,8 @@
 		if (category == null) {
 			category = "korean";
 		}
+
+		System.out.println("category=" + category + "----");
 	%>
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
@@ -63,7 +65,8 @@
 
 		<script>
 			window.onload = function() {
-				setInterval(listReload, 1500);
+				//setInterval(listReload, 1500);
+				category_first_select();
 			}
 
 			function listReload() {
@@ -76,6 +79,22 @@
 				var a1 = e.children[0].children[1].children[1].value.trim();
 				console.log(a1);
 				location.href = "ShopPage.jsp?shopNo=" + a1;
+			}
+
+			// get방식 파라미터로 초기   SELCET
+			function category_first_select() {
+				var selec = document.getElementById("category");
+				console.log(selec);
+				var selec_val = "<%=category%>";
+				console.log(selec_val);
+				console.log(selec.value);
+
+				for (var i = 0; i < 8; i++) {
+					if ((selec.value)==(selec_val)) {
+						selec.selectedIndex = i;
+						break;
+					}
+				}
 			}
 		</script>
 
