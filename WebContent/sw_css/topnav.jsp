@@ -11,9 +11,6 @@
 <%
 	String memberNo = (String) session.getAttribute("memberNo");
 
-if(memberNo ==null || memberNo.length()<1){
-	response.sendRedirect("../Index.html");
-}
 %>
 
 
