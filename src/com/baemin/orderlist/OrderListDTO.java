@@ -23,7 +23,7 @@ public class OrderListDTO {
     // 3 마감
     // 영업종료 하면 0,1 >> -1 , 2 >> 3
     private String orderList; // 메뉴, 수량
-    private TimeStamp completeTime;
+    private Timestamp completeTime;
     private String whyCancel;
     private String addr;
     private String addr2;

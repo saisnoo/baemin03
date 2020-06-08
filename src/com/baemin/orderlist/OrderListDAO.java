@@ -103,7 +103,7 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setCompleteTime(rs.getTimestamp("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
@@ -146,7 +146,7 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setCompleteTime(rs.getTimestamp("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
@@ -190,7 +190,7 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setCompleteTime(rs.getTimestamp("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
@@ -234,7 +234,7 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setCompleteTime(rs.getTimestamp("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
@@ -282,7 +282,7 @@ public class OrderListDAO {
                     dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getDate("completeTime"));
+                    dto.setCompleteTime(rs.getTimestamp("completeTime"));
                     dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
