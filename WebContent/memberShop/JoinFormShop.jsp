@@ -112,7 +112,7 @@
 						<input type="checkbox" class="w3-input" name="shopCategory" value="피자">피자
 						<input type="checkbox" class="w3-input" name="shopCategory" value="치킨">치킨
 						<input type="checkbox" class="w3-input" name="shopCategory" value="햄버거">햄버거
-						<input type="checkbox" class="w3-input" name="shopCategory" value="까페">까페
+						<input type="checkbox" class="w3-input" name="shopCategory" value="카페">카페
 					</div>
 
 					<!-- 가게 소개 .................. -->

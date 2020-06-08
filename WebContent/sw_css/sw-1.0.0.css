@@ -14,8 +14,8 @@ body {
 }
 
 @font-face {
-  font-family: 'baemin_font';
-  src: url('./BMHANNAPro.ttf');
+  font-family: "baemin_font";
+  src: url("./BMHANNAPro.ttf");
 }
 
 .sw-center {
