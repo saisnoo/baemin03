@@ -2,26 +2,29 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<!-- CDN - Google Icons -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<!-- CDN - Font Awesome 4 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- CDN - W3CSS -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- CDN OFFLINE- sw_topNav.css -->
-<link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<!-- CDN - Google Icons -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<!-- CDN - Font Awesome 4 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- CDN - W3CSS -->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!-- CDN OFFLINE- sw_topNav.css -->
+	<link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
 
-<style>
-.clickedBtn {
-	background: #45c1bf;
-	font-weight: 500;
-}
-</style>
+	<style>
+		.clickedBtn {
+			background: #45c1bf;
+			font-weight: 500;
+		}
+
+		.starRow {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+	</style>
 
 </head>
 
@@ -41,21 +44,32 @@
 			<div class="w3-card-4 w3-center w3-margin w3-round-large">
 				<p>&nbsp;</p>
 				<h2>
-					<strong>경영부대찌개 구로역점박이</strong>
+					<strong>아부찌 부대찌개 오류동점</strong>
 				</h2>
-				<div class="w3-center">
-					<i class="material-icons" style="font-size: 36px">star_half</i>
-					<!-- ............................................................... -->
-					<i class="material-icons" style="font-size: 36px">star_half</i>
-					<!-- ............................................................... -->
-					<i class="material-icons" style="font-size: 36px">star_half</i>
-					<!-- ............................................................... -->
-					<i class="material-icons" style="font-size: 36px">star_half</i>
-					<!-- ............................................................... -->
-					<i class="material-icons" style="font-size: 36px">star_half</i>
-					<!-- ............................................................... -->
-					<strong>4.5</strong>
+
+
+
+				<div class="sw-center" style="text-align: center;">
+					<div class="starRow">
+						<a></a>
+						<i class="material-icons" style="font-size: 36px; color: #FFBB00;">star</i>
+						<!-- ............................................................... -->
+						<i class="material-icons" style="font-size: 36px; color: #FFBB00;">star</i>
+						<!-- ............................................................... -->
+						<i class="material-icons" style="font-size: 36px; color: #FFBB00;">star</i>
+						<!-- ............................................................... -->
+						<i class="material-icons" style="font-size: 36px; color: #FFBB00;">star</i>
+						<!-- ............................................................... -->
+						<i class="material-icons" style="font-size: 36px; color: #FFBB00;">star_half</i>
+						<!-- ............................................................... -->
+						<div class="w3-container w3-cell w3-cell-middle" style="padding: 16px;"><strong>4.5</strong>
+						</div>
+					</div>
 				</div>
+
+
+
+
 				<div class="w3-row-padding w3-section">
 					<div class="w3-col w3-left" style="width: 150px;">
 						<button class="w3-button w3-gray w3-block w3-round-xlarge" type="button"
@@ -68,8 +82,8 @@
 				<div class="w3-row">가게주소가여기에들어간다</div>
 				<div class="w3-row">상세주소가여기세들어간다</div>
 
-				<input type="text" name="x1" id="x1" value="좌표값이들어가는데hidden 예정"> <input
-					type="text" name="y1" id="y1" value="좌표값이들어가는데hidden 예정">
+				<input type="text" name="x1" id="x1" value="좌표값이들어가는데hidden 예정"> <input type="text" name="y1" id="y1"
+					value="좌표값이들어가는데hidden 예정">
 				<p>&nbsp;</p>
 			</div>
 
@@ -78,7 +92,7 @@
 			<!-- 3 main content start here!!!----------------------------------------------------------- -->
 
 			<script>
-				window.onload = function() {
+				window.onload = function () {
 					btn1click();
 				}
 
@@ -117,21 +131,50 @@
 				<div class="w3-row">
 					<div class="w3-third w3-center">
 						<!-- ................................... -->
-						<button type="button" id="btn1" onclick="btn1click()"
-							class="w3-button w3-block">메뉴</button>
+						<button type="button" id="btn1" onclick="btn1click()" class="w3-button w3-block">메뉴</button>
 					</div>
 					<div class="w3-third w3-center">
 						<!-- ................................... -->
-						<button type="button" id="btn2" onclick="btn2click()"
-							class="w3-button w3-block">정보</button>
+						<button type="button" id="btn2" onclick="btn2click()" class="w3-button w3-block">정보</button>
 					</div>
 					<div class="w3-third w3-center">
 						<!-- ................................... -->
-						<button type="button" id="btn3" onclick="btn3click()"
-							class="w3-button w3-block">리뷰</button>
+						<button type="button" id="btn3" onclick="btn3click()" class="w3-button w3-block">리뷰</button>
 					</div>
 				</div>
-				<div id="tab1" class="w3-row w3-red" style="display: none;">tab1</div>
+				<div id="tab1" class="w3-row" style="display: none;">
+					<div class="w3-container" style="background-color: #EAEAEA;">
+						<p>메뉴 소개</p>
+					</div>
+					<!-- 반복 시작-->
+					<div class="w3-container w3-border-bottom">
+						<p>
+							<label>아부찌 부대찌개3인분(비조리) </label><br>
+							<label class="w3-small w3-text-gray">기본 3인분</label><br>
+							<label>3인분:13900원</label>
+						</p>
+					</div>
+					<!-- 반복 끝-->
+					<!-- 반복 시작-->
+					<div class="w3-container w3-border-bottom">
+						<p>
+							<label>특스팸 부대찌개3인분(비조리) </label><br>
+							<label class="w3-small w3-text-gray">기본 3인분</label><br>
+							<label>3인분:16900원</label>
+						</p>
+					</div>
+					<!-- 반복 끝-->
+					<!-- 반복 시작-->
+					<div class="w3-container w3-border-bottom">
+						<p>
+							<label>우삼겹 부대찌개3인분(비조리) </label><br>
+							<label class="w3-small w3-text-gray">기본 3인분</label><br>
+							<label>3인분:18900원</label>
+						</p>
+					</div>
+					<!-- 반복 끝-->
+
+				</div>
 				<div id="tab2" class="w3-row w3-blue" style="display: none;">tab2</div>
 				<div id="tab3" class="w3-row w3-yellow" style="display: none;">tab3</div>
 			</div>
@@ -170,7 +213,7 @@
 			}
 		}
 
-		window.onresize = function() {
+		window.onresize = function () {
 			var x = document.getElementById("topNav");
 			x.className = "topnav w3-card-4";
 		}

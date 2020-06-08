@@ -17,18 +17,27 @@
 	Object memberNo_ob = session.getAttribute("memberNo");
 	//Object memberX_ob = session.getAttribute("memberX");
 	//Object memberY_ob = session.getAttribute("memberY");
+
 	System.out.println(grade_ob);
+	System.out.println(id_ob);
+	System.out.println(memberNo_ob);
 	if (grade_ob == null) {
 		grade_ob = 0;
-		response.sendRedirect("../index.html");
+	}
+	if (id_ob == null) {
+		id_ob = 0;
+	}
+	if (memberNo_ob == null) {
+		memberNo_ob = 0;
 	}
 
 	int grade = Integer.parseInt(grade_ob + "");
 
 	System.out.println("session grade=" + grade);
 
-	if (grade != 1) {
-		System.out.println("사용자가 아니므로 로그인페이지로 돌아갑니다.");
+	if (grade < 1) {
+		System.out.println("session grade=" + grade);
+		response.sendRedirect("../index.html");
 	}
 
 	int memberNo = Integer.parseInt(memberNo_ob + "");
@@ -79,13 +88,13 @@ img {
 .font-80 {
 	font-size: 80%;
 }
-#topnav{
+
+#topnav {
 	position: fixed;
 	top: 0;
 	width: 100%;
 	overflow: hidden;
 }
-
 </style>
 <script>
 	function openDaumPostcode() {
@@ -143,25 +152,44 @@ img {
         </div> -->
 		<div class="sw-container-500">
 			<div class="w3-content" style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
 				<img class="w3-round mySlides" src="../source/img/1.png"
-					style="width: 100%"> <img class="w3-round mySlides"
-					src="../source/img/2.png" style="width: 100%"> <img
-					class="w3-round mySlides" src="../source/img/3.png"
-					style="width: 100%"> <img class="w3-round mySlides"
-					src="../source/img/4.png" style="width: 100%"> <img
-					class="w3-round mySlides" src="../source/img/5.png"
-					style="width: 100%"> <img class="w3-round mySlides"
-					src="../source/img/6.png" style="width: 100%"> <img
-					class="w3-round mySlides" src="../source/img/7.png"
-					style="width: 100%"> <img class="w3-round mySlides"
-					src="../source/img/8.png" style="width: 100%"> <img
-					class="w3-round mySlides" src="../source/img/9.png"
-					style="width: 100%"> <img class="w3-round mySlides"
-					src="../source/img/10.png" style="width: 100%"> <img
-					class="w3-round mySlides" src="../source/img/11.png"
-					style="width: 100%"> <img class="w3-round mySlides"
-					src="../source/img/12.png" style="width: 100%"> <img
-					class="w3-round mySlides" src="../source/img/13.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/2.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/3.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/4.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/5.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/6.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/7.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/8.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/9.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/10.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/11.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/12.png"
+					style="width: 100%">
+				<!-- ------------------------------------------------------------ -->
+				<img class="w3-round mySlides" src="../source/img/13.png"
 					style="width: 100%">
 			</div>
 		</div>
@@ -241,7 +269,7 @@ img {
 					<div class="w3-col s3 w3-center w3-padding"
 						onclick="go2ShopList(this)">
 						<img src="../source/img/fastfood.png" alt="햄버거" max-width="110px">
-						<input type="hidden" value="hamberger" />
+						<input type="hidden" value="hamburger" />
 					</div>
 					<!-- .... -->
 					<div class="w3-col s3 w3-center w3-padding"
