@@ -59,37 +59,48 @@ System.out.println("------ MyPageClient.jsp --- ");
 
         <!--사용자 마이 페이지-->
         <div class="w3-container w3-card">
-                <h2>XXX님의 마이페이지</h2>
-            <br>
-                <p>
-                    ID : kildong
-                </p>
-                <p>
-                    비밀번호 : ********
-                </p>
-                <p>
-                    이름 : 홍길동
-                </p>
-                <p>
-                    전화번호 : 010-8282-5959
-                </p>
-                <p>
-                    주소 : 사랑시 고백구 행복동
-                </p>
-                <br>
-            <p>
-                <!-- 변경창을 이용할때는 모달을 이용하자 -->
-                <script>
-                function modalOn(){
-                	document.getElementById('update').style.display='block'
-                }
-                function modalOff(){
-                	document.getElementById('update').style.display='none'
-                }
-                </script>
-        <button onClick="modalOn()" class="w3-button w3-black">개인정보 수정</button>
-            </p>
-        </div>
+                    <h2 align="center">개인정보</h2>
+                    <form class="w3-container" method="post" action="#" name="clientMyPage">
+
+                        <label><b>아이디</b></label>
+                        <input class="w3-input w3-border" name="id" id="id" readonly="readonly" type="text"
+                            value="kildong">
+                        <br>
+                        <label><b>비밀번호</b></label>
+                        <input class="w3-input w3-border" name="pw" id="pw" readonly="readonly" type="password"
+                            value="1234">
+                        <br>
+                        <label><b>이름</b></label>
+                        <input class="w3-input w3-border" name="name" id="name" readonly="readonly" type="text"
+                            value="홍길동">
+                        <br>
+                        <label><b>전화번호</b></label>
+                        <input class="w3-input w3-border" name="tel" id="tel" readonly="readonly" type="text"
+                            value="010-8282-5959">
+                        <br>
+                        <label><b>주소</b></label>
+                        <input class="w3-input w3-border" name="addr" id="addr" readonly="readonly" type="text"
+                            value="사랑시 고백구 행복동">
+                        <br>
+                        <div align="center">
+                            <input type="button" class="w3-btn" style="background-color: #45c1bf; color: white;"
+                                value="개인정보수정" onclick="modalOn()">
+                            <input type="button" class="w3-btn" style="background-color: #45c1bf; color: white;"
+                                value="뒤로가기" onclick="location='#'">
+                        </div>
+                        <br>
+
+                        <!-- 변경창을 이용할때는 모달을 이용하자 -->
+                        <script>
+                            function modalOn() {
+                                document.getElementById('update').style.display = 'block'
+                            }
+                            function modalOff() {
+                                document.getElementById('update').style.display = 'none'
+                            }
+                        </script>
+                    </form>
+                </div>
         <!-- ------------------------------------------------------------------------------------------------ -->
         <!-- 모달창 시작 -->
         <div id="update" class="w3-modal">
