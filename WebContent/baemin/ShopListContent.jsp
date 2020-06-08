@@ -14,11 +14,15 @@
 
 
 <%
-	double memberX = (double) session.getAttribute("memberX");
-	double memberY = (double) session.getAttribute("memberY");
+	double memberX = Double.parseDouble(session.getAttribute("memberX")
+			+ "");
+	double memberY = Double.parseDouble(session.getAttribute("memberY")
+			+ "");
 
 	//double memberX = 126.923408957527;
 	//double memberY = 37.5508734651679;
+	System.out.println("memberX=" + memberX);
+	System.out.println("memberY=" + memberY);
 
 	String category = request.getParameter("category");
 	System.out.println("category=" + category);

@@ -218,6 +218,7 @@ public class ShopDAO {
 					dto.setShopCategory(rs.getString("shopCategory"));
 					dto.setShopName(rs.getString("shopName"));
 					dto.setShopNo(rs.getInt("shopNo"));
+					list.add(dto);
 				}
 			}
 		} catch (Exception e) {

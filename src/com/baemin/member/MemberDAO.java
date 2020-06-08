@@ -76,14 +76,14 @@ public class MemberDAO {
 			if (rs != null) {
 				while (rs.next()) {
 					dto.setNo(rs.getInt("no"));
-					// dto.setId(rs.getString("id"));
-					// dto.setName(rs.getString("name"));
-					// dto.setTel(rs.getString("tel"));
-					// dto.setAddr(rs.getString("addr"));
-					// dto.setAddr2(rs.getString("addr2"));
+					dto.setId(rs.getString("id"));
+					dto.setName(rs.getString("name"));
+					dto.setTel(rs.getString("tel"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setAddr2(rs.getString("addr2"));
 					dto.setGrade(rs.getInt("grade"));
-					// dto.setMemberX(rs.getDouble("memberX"));
-					// dto.setMemberY(rs.getDouble("memberY"));
+					dto.setMemberX(rs.getDouble("memberX"));
+					dto.setMemberY(rs.getDouble("memberY"));
 				}
 			}
 		} catch (Exception e) {
@@ -145,6 +145,7 @@ public class MemberDAO {
 				while (rs.next()) {
 					dto.setGrade(rs.getInt("grade"));
 					dto.setAddr(rs.getString("addr"));
+					dto.setAddr2(rs.getString("addr2"));
 					dto.setId(rs.getString("id"));
 					dto.setName(rs.getString("name"));
 					dto.setNo(rs.getInt("no"));

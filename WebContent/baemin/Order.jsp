@@ -23,7 +23,12 @@ System.out.println("------ Order.jsp --- ");
  
 <style>
  * { margin: 0px;   padding: 0px;  } 
- 
+ #topnav{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	overflow: hidden;
+}
 </style>
 <script>
 // 스크립트
