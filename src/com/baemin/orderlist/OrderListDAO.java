@@ -100,7 +100,7 @@ public class OrderListDAO {
                     dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
@@ -143,7 +143,7 @@ public class OrderListDAO {
                     dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
@@ -187,7 +187,7 @@ public class OrderListDAO {
                     dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
@@ -231,7 +231,7 @@ public class OrderListDAO {
                     dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getDate("completeTime"));
@@ -279,7 +279,7 @@ public class OrderListDAO {
                     dto.setShopNo(rs.getInt("shopNo"));
                     dto.setName(rs.getString("name"));
                     dto.setNameNo(rs.getInt("nameNo"));
-                    dto.setOrderDate(rs.getDate("orderdate"));
+                    dto.setOrderDate(rs.getTimestamp("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getDate("completeTime"));

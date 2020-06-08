@@ -35,11 +35,20 @@
 			memberY);
 
 	System.out.println("list.size()=" + list.size());
+
+	if (list.size() < 1) {
 %>
+<div class="w3-container w3-center">
+<i class="fa fa-ban" style="font-size:70px;color:red"></i>
+<p> 죄송합니다 </p>
+<p> 근처에 가까운 매장이 없습니다. </p>
+</div>
 
 <%
-	for (int i = 0; i < list.size(); i++) {
-		ShopDTO dto = list.get(i);
+	} else {
+
+		for (int i = 0; i < list.size(); i++) {
+			ShopDTO dto = list.get(i);
 %>
 <%-- 반복 내용 입력--%>
 <!-- 반복시작 -->
@@ -65,7 +74,8 @@
 <!-- 반복 끝 -->
 
 <%
-	}
+	}//for end
+	} //else end
 %>
 
 
