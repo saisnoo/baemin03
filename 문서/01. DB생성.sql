@@ -4,20 +4,137 @@ create database baemindb;
 
 use baemindb;
 
-create table member
+
+
+        
+CREATE TABLE member
 (
-no int(5) primary key auto_increment,
-id varchar(20) not null unique,
-pw varchar(20) not null,
-name varchar(30) not null,
-tel varchar(20) not null,
-addr varchar(60) not null,
-addr2 varchar(60) not null,
-regDate date,
-grade int(2),
-memberX double,
-memberY double
+  no      INT         NOT NULL AUTO_INCREMENT,
+  id      VARCHAR(20) NOT NULL,
+  pw      VARCHAR(20) NOT NULL,
+  name    VARCHAR(30) NOT NULL,
+  tel     VARCHAR(20) NOT NULL,
+  addr    VARCHAR(60) NOT NULL,
+  addr2   VARCHAR(60) NULL    ,
+  regDate DATETIME    NOT NULL,
+  memberX DOUBLE      NOT NULL,
+  memberY DOUBLE      NOT NULL,
+  grade   INT         NOT NULL DEFAULT 1,
+  PRIMARY KEY (no)
 );
+
+ALTER TABLE member
+  ADD CONSTRAINT UQ_id UNIQUE (id);
+
+CREATE TABLE menu
+(
+  no           INT         NOT NULL AUTO_INCREMENT,
+  menuName     VARCHAR(30) NOT NULL,
+  menuCategory VARCHAR(30) NOT NULL,
+  menuEx       TEXT(65535) NULL    ,
+  menuPrice    INT         NOT NULL,
+  menuStatus   INT         NOT NULL DEFAULT 0,
+  shop_no      INT         NOT NULL,
+  PRIMARY KEY (no)
+);
+
+CREATE TABLE notice
+(
+  no        INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
+  title     VARCHAR(60) NOT NULL,
+  content   TEXT(65535) NULL    ,
+  startDate DATE        NULL    ,
+  endDate   DATE        NULL    ,
+  PRIMARY KEY (no)
+);
+
+CREATE TABLE Order_cancel
+(
+  no           INT         NOT NULL AUTO_INCREMENT,
+  whyCancel    VARCHAR(60) NOT NULL,
+  orderlist_no INT         NOT NULL COMMENT 'AUTO_Increment',
+  PRIMARY KEY (no)
+);
+
+CREATE TABLE orderlist
+(
+  no           INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
+  orderDate    DATETIME    NOT NULL,
+  status       INT         NOT NULL DEFAULT 0,
+  orderList    TEXT(65535) NOT NULL,
+  completeTime DATETIME    NULL    ,
+  addr         VARCHAR(60) NOT NULL,
+  addr2        VARCHAR(60) NOT NULL,
+  shop_no      INT         NOT NULL,
+  member_no    INT         NOT NULL,
+  PRIMARY KEY (no)
+);
+
+CREATE TABLE review
+(
+  no            INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
+  reviewContent VARCHAR(60) NOT NULL,
+  reviewRank    INT         NOT NULL,
+  regDate       DATETIME    NOT NULL,
+  shop_no       INT         NOT NULL,
+  member_no     INT         NOT NULL,
+  PRIMARY KEY (no)
+);
+
+CREATE TABLE shop
+(
+  no           INT         NOT NULL AUTO_INCREMENT,
+  id           VARCHAR(20) NOT NULL,
+  pw           VARCHAR(20) NOT NULL,
+  shopName     VARCHAR(30) NOT NULL,
+  shopCategory VARCHAR(60) NOT NULL,
+  shopEx       TEXT(65535) NULL    ,
+  shopAddr     VARCHAR(60) NOT NULL,
+  shopAddr2    VARCHAR(60) NULL    ,
+  shopTel      VARCHAR(20) NOT NULL,
+  shopX        DOUBLE      NOT NULL,
+  shopY        DOUBLE      NOT NULL,
+  shopStatus   INT         NOT NULL DEFAULT 0,
+  regDate      DATETIME    NULL    ,
+  grade        INT         NULL     DEFAULT 2,
+  PRIMARY KEY (no)
+);
+
+ALTER TABLE shop
+  ADD CONSTRAINT UQ_id UNIQUE (id);
+
+ALTER TABLE orderlist
+  ADD CONSTRAINT FK_member_TO_orderlist
+    FOREIGN KEY (member_no)
+    REFERENCES member (no);
+
+ALTER TABLE review
+  ADD CONSTRAINT FK_shop_TO_review
+    FOREIGN KEY (shop_no)
+    REFERENCES shop (no);
+
+ALTER TABLE orderlist
+  ADD CONSTRAINT FK_shop_TO_orderlist
+    FOREIGN KEY (shop_no)
+    REFERENCES shop (no);
+
+ALTER TABLE Order_cancel
+  ADD CONSTRAINT FK_orderlist_TO_Order_cancel
+    FOREIGN KEY (orderlist_no)
+    REFERENCES orderlist (no);
+
+ALTER TABLE menu
+  ADD CONSTRAINT FK_shop_TO_menu
+    FOREIGN KEY (shop_no)
+    REFERENCES shop (no);
+
+ALTER TABLE review
+  ADD CONSTRAINT FK_member_TO_review
+    FOREIGN KEY (member_no)
+    REFERENCES member (no);
+
+      
+      
 
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
@@ -29,81 +146,6 @@ values ('scott','tiger','김경영', '010-1234-1234' ,'서울 구로구 구로�
 ,1 ,126.884660819027,37.5009565732326);
 
 select * from member;
-
-
-create table shop
-(
-shopNo int(4) primary key  auto_increment,
-shopID varchar(30) not null,
-shopPW varchar(30) not null,
-shopName varchar(30) not null,
-shopCategory text not null,
-shopEx text,
-shopAddr varchar(60) not null,
-shopAddr2 varchar(60) not null,
-shopTel varchar(20) not null,
-shopX double ,
-shopY double ,
-shopStatus int(4) default 0
-);
-
-
-
-
-
-create table menu
-(
-menuNo int(4) primary key auto_increment,
-menuShopNo int(4) not null,
-menuName varchar(30) not null,
-menuCategory varchar(30) not null,
-menuEx text,
-menuPrice int(7) not null,
-menuStatus int(4) default 0
-);
-
-
-create table orderlist (
-no int(4) primary key auto_increment,
-shopNo int(4)  not null ,
-name varchar(20)  not null ,
-nameNo int(4)  not null ,
-orderDate TimeStamp  not null ,
-status int(4)  not null  default 0,
-orderList text    not null ,
-completeTime TimeStamp,
-whyCancel text,
-addr varchar(60)  not null ,
-addr2 varchar(60)  not null ,
-comment text
-);
-
-
-	
-create table notice
-(
-no int(4) primary key auto_increment,
-title varchar(60) not null,
-content text not null,
-startDate date not null,
-endDate date not null
-);
-
-
-create table review
-(
-reviewNo int(4) primary key auto_increment,
-reviewShopNo int(4) not null,
-reviewOrderNo int(4) not null,
-reviewerNo  int(4) not null,
-reviewContent text not null,
-reviewRank int(2) default 0,
-reviewDate datetime
-);
-
-
-
-
 
 desc member;
 desc shop;

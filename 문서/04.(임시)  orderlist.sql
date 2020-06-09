@@ -448,5 +448,5 @@ insert into orderlist( shopNo, name, nameNo, orderDate, orderList, addr, addr2, 
 
 desc orderlist;
 
-select count(*) from orderslist;
+select count(*) from orderlist;
 ;

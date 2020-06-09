@@ -116,6 +116,12 @@
 			<div id="NOL">
             <jsp:include page="NewOrderList.jsp"/>
             </div>
+            <div id="BL">
+            <jsp:include page="BaesongList.jsp"/>
+            </div>
+            <div id="EL">
+            <jsp:include page="EndList.jsp"/>
+            </div>
             </div>
           <div id="shopmanage">
             <jsp:include page="ShopManage.jsp"/>
@@ -225,6 +231,13 @@
 	
 	      <script>
                     function openTab(evt, tabName) {
+                    	if(tabName=="tab2"){
+                    		$("#BL").load("BaesongList.jsp");
+                    	}else if(tabName=="tab3"){
+                    		$("#EL").load("EndList.jsp");
+                    	}
+                    	
+                    	
                         var i, tabcontent, tablinks;
                         tabcontent = document.getElementsByClassName("tabcontent");
                         for (i = 0; i < tabcontent.length; i++) {
@@ -272,6 +285,10 @@
                     $(function(){
                     	function reload(){
                     		$("#NOL").load("NewOrderList.jsp");
+                    		//$("#BL").load("BaesongList.jsp");
+                    		//$("#EL").load("EndList.jsp");
+                    		//$("#shopmanage").load("ShopManage.jsp");
+                    		
                      		document.getElementById("defaultOpen").click();
                     		//document.getElementById("jumoontab").click(); 
                     	}

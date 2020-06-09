@@ -1,5 +1,6 @@
 package com.baemin.util.swsw;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +19,8 @@ public class Time {
         System.out.println(sdf2.format(d1));
         System.out.println(sdf3.format(d1));
         System.out.println(sdf4.format(d1));
+
+        Timestamp tsp = new Timestamp(new Date().getTime());
 
     }
 }

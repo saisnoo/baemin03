@@ -72,7 +72,13 @@ public class ShopDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, shopID);
 			// 5. 실행
-			result = pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
+			// 6. 표시 --- select 때만 표시
+			if (rs != null) {
+				while (rs.next()) {
+					result = rs.getInt(1);
+				}
+			}
 		} catch (Exception e) {
 			e.getStackTrace();
 			throw new Exception(" getNoByID() 예외  ");
@@ -89,7 +95,7 @@ public class ShopDAO {
 		System.out.println("---ShopDAO getShopInfo");
 		try {
 			// 1+2
-			// con=ds.getConnection();
+			con = getConnection();
 			// 3. sql
 			String sql = "select * from shop where shopNo = ?";
 			// 4. 실행객체
@@ -122,7 +128,6 @@ public class ShopDAO {
 		} // finally end
 		return dto;
 	} // getShopInfo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
 
 	// getListByCategory_start-----------------------------------------------------------------------------
 	public List<ShopDTO> getListByCategory(String category, double memberX, double memberY) throws Exception {
