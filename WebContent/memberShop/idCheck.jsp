@@ -20,7 +20,7 @@
 	System.out.println("shopPW=" + shopPW);
 
 	ShopDAO dao = ShopDAO.getInstance();
-int result = dao.getNoByID(shopID);
+int result = dao.idCheck(shopID);
 	
 	System.out.println("result=" + result);
 	

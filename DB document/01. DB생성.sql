@@ -6,6 +6,8 @@ use baemindb;
 
 
 
+ 
+
         
 CREATE TABLE member
 (
@@ -14,8 +16,8 @@ CREATE TABLE member
   pw      VARCHAR(20) NOT NULL,
   name    VARCHAR(30) NOT NULL,
   tel     VARCHAR(20) NOT NULL,
-  addr    VARCHAR(60) NOT NULL,
-  addr2   VARCHAR(60) NULL    ,
+  addr    VARCHAR(90) NOT NULL,
+  addr2   VARCHAR(90) NULL    ,
   regDate DATETIME    NOT NULL,
   memberX DOUBLE      NOT NULL,
   memberY DOUBLE      NOT NULL,
@@ -28,13 +30,13 @@ ALTER TABLE member
 
 CREATE TABLE menu
 (
-  no           INT         NOT NULL AUTO_INCREMENT,
-  menuName     VARCHAR(30) NOT NULL,
-  menuCategory VARCHAR(30) NOT NULL,
-  menuEx       TEXT(65535) NULL    ,
-  menuPrice    INT         NOT NULL,
-  menuStatus   INT         NOT NULL DEFAULT 0,
-  shop_no      INT         NOT NULL,
+  no           INT          NOT NULL AUTO_INCREMENT,
+  menuName     VARCHAR(30)  NOT NULL,
+  menuCategory VARCHAR(30)  NOT NULL,
+  menuEx       VARCHAR(200) NULL    ,
+  menuPrice    INT          NOT NULL,
+  menuStatus   INT          NOT NULL DEFAULT 0,
+  shop_no      INT          NOT NULL,
   PRIMARY KEY (no)
 );
 
@@ -59,12 +61,14 @@ CREATE TABLE Order_cancel
 CREATE TABLE orderlist
 (
   no           INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
+  name         varchar(30) NOT NULL,
   orderDate    DATETIME    NOT NULL,
   status       INT         NOT NULL DEFAULT 0,
   orderList    TEXT(65535) NOT NULL,
   completeTime DATETIME    NULL    ,
-  addr         VARCHAR(60) NOT NULL,
-  addr2        VARCHAR(60) NOT NULL,
+  addr         VARCHAR(90) NOT NULL,
+  addr2        VARCHAR(90) NOT NULL,
+  comment      varchar(90) NULL    ,
   shop_no      INT         NOT NULL,
   member_no    INT         NOT NULL,
   PRIMARY KEY (no)
@@ -89,8 +93,8 @@ CREATE TABLE shop
   shopName     VARCHAR(30) NOT NULL,
   shopCategory VARCHAR(60) NOT NULL,
   shopEx       TEXT(65535) NULL    ,
-  shopAddr     VARCHAR(60) NOT NULL,
-  shopAddr2    VARCHAR(60) NULL    ,
+  shopAddr     VARCHAR(90) NOT NULL,
+  shopAddr2    VARCHAR(90) NULL    ,
   shopTel      VARCHAR(20) NOT NULL,
   shopX        DOUBLE      NOT NULL,
   shopY        DOUBLE      NOT NULL,
@@ -134,8 +138,6 @@ ALTER TABLE review
     REFERENCES member (no);
 
       
-      
-
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
 values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로동 589-7','구로역 3번 승강장','2000-01-01'
