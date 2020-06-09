@@ -6,6 +6,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
+	
+	int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,16 +98,16 @@
 	}
 
 	window.onload = function() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=1");
-		$("#tab2").load("BaesongList.jsp?shopNo=1");
-		$("#tab3").load("EndList.jsp?shopNo=1");
+		$("#tab1").load("NewOrderList.jsp?shopNo="+shopNo);
+		$("#tab2").load("BaesongList.jsp?shopNo="+shopNo);
+		$("#tab3").load("EndList.jsp?shopNo="+shopNo);
 		
 	}
 	
 	setInterval(function() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=1");
-		$("#tab2").load("BaesongList.jsp?shopNo=1");
-		$("#tab3").load("EndList.jsp?shopNo=1");
+		$("#tab1").load("NewOrderList.jsp?shopNo="+shopNo);
+		$("#tab2").load("BaesongList.jsp?shopNo="+shopNo);
+		$("#tab3").load("EndList.jsp?shopNo="+shopNo);
 		countcount();
 	},3000)
 	
