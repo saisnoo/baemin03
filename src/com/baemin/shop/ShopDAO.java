@@ -94,6 +94,7 @@ public class ShopDAO {
 		ShopDTO dto = new ShopDTO();
 		System.out.println("---ShopDAO getShopInfo");
 		try {
+			con=getConnection();
 			// 1+2
 			con = getConnection();
 			// 3. sql
