@@ -86,7 +86,7 @@ for(int i=0;i<NewOrderCount;i++){
 	// 스크립트
 
 	function jumunBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 		//모달창에 값넣기
 		document.getElementById("jumunSiganNo").value = a1;
@@ -94,11 +94,11 @@ for(int i=0;i<NewOrderCount;i++){
 		document.getElementById("jumunReady").style.display = "block";
 	}
 	function baesongBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 	}
 	function cancelBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 		document.getElementById("jumunCancel").style.display = "block";
 	}
