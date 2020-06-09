@@ -6,10 +6,7 @@ import lombok.*;
 @Setter
 @ToString
 public class CartDTO {
-
-    private int menuNo;
     private String menuName;
-    private int menuPrice;
     private int count;
-
+    private int menuPrice;
 }
