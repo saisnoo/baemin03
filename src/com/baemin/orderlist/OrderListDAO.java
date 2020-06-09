@@ -150,7 +150,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate) orderDate, "
+            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist where no = ? ";
             // 4. 실행객체
@@ -194,7 +194,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate) orderDate, "
+            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist where nameno = ? order by status asc, orderdate desc ";
             // 4. 실행객체
@@ -239,7 +239,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate) orderDate, "
+            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist WHERE ShopNo=? AND (status=0 OR status=1) " + " ORDER BY orderDate ASC";
             // 4. 실행객체
@@ -284,7 +284,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate) orderDate, "
+            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist WHERE shopNo = ? AND status = 2 AND completeTime > NOW() "
                     + " ORDER BY orderdate ASC";
@@ -334,7 +334,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate) orderDate, "
+            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist WHERE shopNo = ? AND status = 2 AND completetime < NOW() "
                     + " ORDER BY orderdate DESC";
