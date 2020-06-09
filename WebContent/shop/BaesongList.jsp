@@ -25,6 +25,7 @@
 										<div class="w3-col w3-container w3-left" style="width: 150px;">
 											<h2>15:22</h2>
 											<input type="hidden" value="배송중 1번">
+
 										</div>
 										<!-- 왼쪽 끝 -->
 

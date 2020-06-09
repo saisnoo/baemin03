@@ -32,12 +32,7 @@ System.out.println("------ MyPageShop.jsp --- ");
 </head>
 <body>
 <!-- 내용 -->
-<h2> MyPageShop.jsp </h2><br>
-<%
- 
-%>
- 
-  
+
 
 
 
@@ -46,7 +41,7 @@ System.out.println("------ MyPageShop.jsp --- ");
   
 <!-- responsive template by SW ----------------------------------------------------------- -->
 <!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
-<div class="sw-topnav-margin">
+<div class="sw-topnav-margin w3-section">
 &nbsp;
 </div>
 
@@ -58,57 +53,59 @@ System.out.println("------ MyPageShop.jsp --- ");
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
-
-
         <!--사업자 마이 페이지-->
-        <div class="w3-card">
-                <h2>XXX님의 마이페이지</h2>
-            <br>
-                    <p>
-                        ID : kildong
-                    </p>
-                    <p>
-                        비밀번호 : ********
-                    </p>
-                    <p>
-                        이름 : 홍길동
-                    </p>
-                    <p>
-                        전화번호 : 010-8282-5959
-                    </p>
-                    <p>
-                        주소 : 사랑시 고백구 행복동
-                    </p>
-                    <p>
-                        매장명 : BHC치킨
-                    </p>
-                    <p>
-                        분류 : 치킨
-                    </p>
-                    <p>
-                        설명 : 맛잇는 뿌링클 치킨과 뿌링클 치즈볼 드셔보실? JMT
-                    </p>
-                    <p>
-                        지역 : 사랑시 고백구 행복동
-                    </p>
-                    <p>
-                        연락처 : 010-5252-8282
-                    </p>
-                    <!-- 변경창을 이용할때는 모달을 이용하자 -->
+        <div class="w3-container w3-card">
+        
+            <h2 align="center">개인정보</h2>
+            <form class="w3-container" method="post" action="#" name="clientMyPage">
+
+                <label><b>아이디</b></label>
+                <input class="w3-input w3-border" name="shopId" id="shopId" readonly="readonly" type="text"
+                    value="kildong">
+                <br>
+                <label><b>비밀번호</b></label>
+                <input class="w3-input w3-border" name="shopPw" id="shopPw" readonly="readonly" type="password"
+                    value="1234">
+                <br>
+                <label><b>분류</b></label>
+                <input class="w3-input w3-border" name="shopCategory" id="shopCategory" readonly="readonly" type="text"
+                    value="중식">
+                <br>
+                <label><b>매장명</b></label>
+                <input class="w3-input w3-border" name="shopName" id="shopName" readonly="readonly" type="text"
+                    value="홍콩반전">
+                <br>
+                <label><b>전화번호</b></label>
+                <input class="w3-input w3-border" name="shopTel" id="shopTel" readonly="readonly" type="text"
+                    value="010-8282-5959">
+                <br>
+                <label><b>주소</b></label>
+                <input class="w3-input w3-border" name="shopAddr" id="shopAddr" readonly="readonly" type="text"
+                    value="사랑시 고백구 행복동">
+                <br>
+                <label><b>상세주소</b></label>
+                <input class="w3-input w3-border" name="shopAddr1" id="shopAddr1" readonly="readonly" type="text"
+                    value="486번지">
+                <br>
+                <div align="center">
+                    <input type="button" class="w3-btn" style="background-color: #45c1bf; color: white;"
+                        value="개인정보수정" onclick="modalOn()">
+                    <input type="button" class="w3-btn" style="background-color: #45c1bf; color: white;"
+                        value="뒤로가기" onclick="location='#'">
+                </div>
+                <br>
+
+                <!-- 변경창을 이용할때는 모달을 이용하자 -->
                 <script>
-                function modalOn(){
-                	document.getElementById('update').style.display='block'
-                }
-                function modalOff(){
-                	document.getElementById('update').style.display='none'
-                }
+                    function modalOn() {
+                        document.getElementById('update').style.display = 'block'
+                    }
+                    function modalOff() {
+                        document.getElementById('update').style.display = 'none'
+                    }
                 </script>
-                <p>
- <button onClick="modalOn()" class="w3-button w3-black">개인정보 수정</button>
-            </p>
+            </form>
         </div>
-        
-        
         <!-- ------------------------------------------------------------------------------------------- -->
         <!-- 모달창 시작 -->
         <div id="update" class="w3-modal">

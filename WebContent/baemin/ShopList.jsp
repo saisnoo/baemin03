@@ -34,7 +34,14 @@
 	width: 100%;
 	overflow: hidden;
 }
+
+#selecter {
+	position: fixed;
+	top: 50px;
+	width: 100%;
+}
 </style>
+
 </head>
 
 <body>
@@ -45,19 +52,76 @@
 		if (category == null) {
 			category = "korean";
 		}
+
+		System.out.println("category=" + category + "----");
 	%>
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
-	<div class="sw-topnav-margin">&nbsp;</div>
+	<div class="sw-topnav-margin" style="margin: 30px">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
 	<div class="sw-center">
 
-		<div class="sw-container-500 w3-section">
-			<div class="w3-container">
+		<script>
+			window.onload = function() {
+				listReload();
+				setInterval(listReload, 1500);
+				category_first_select();
+			}
+
+			function listReload() {
+				var a1 = document.getElementById("category").value;
+				console.log(a1);
+				$("#shopListHere").load("ShopListContent.jsp?category=" + a1);
+			}
+
+			function go2Shop(e) {
+				var a1 = e.children[0].children[1].children[1].value.trim();
+				console.log(a1);
+				location.href = "ShopPage.jsp?shopNo=" + a1;
+			}
+
+			// get방식 파라미터로 초기   SELCET
+			function category_first_select() {
+				var selec = document.getElementById("category");
+				console.log(selec);
+				var selec_val = "<%=category%>";
+				console.log(selec_val);
+				console.log(selec.value);
+
+				for (var i = 0; i < 8; i++) {
+						console.log(i+" "+selec[i].value + "  " + selec_val);
+					if (selec[i].value == selec_val) {
+						selec.selectedIndex = i;
+						console.log(i+""+i+""+i+""+i+""+i+""+i)
+						break;
+					}
+				}
+			}
+		</script>
+
+		<!-- 단락구분선-----------------------------------------------------------------------------/-/-/-/-/-/--/-/------------------------------------- -->
+		<div class="sw-container-500 w3-section" id="contentBox">
+			<div id="shopListHere" class="">
 				<!-- 3 main content start here!!!----------------------------------------------------------- -->
 
+
+				<!-- 로딩 화면 -->
+				<div class="w3-center w3-section">
+					<br /> <br /> <br /> <i class="fa fa-spinner fa-spin"
+						style="font-size: 70px"></i>
+				</div>
+
+
+				<!-- main content end----------------------------------------------------------------------- -->
+			</div>
+		</div>
+		<!-- 단락구분선-----------------------------------------------------------------------------/-/-/-/-/-/--/-/------------------------------------- -->
+
+
+		<div id="selecter" class="w3-row w3-center" style="background: #fff">
+			<div class="sw-container-500" style="margin-top: 35px">
 				<select name="category" id="category" class="w3-select w3-border"
 					onchange="listReload()">
 					<option value="korean">한식</option>
@@ -69,45 +133,9 @@
 					<option value="hamburger">햄버거</option>
 					<option value="cafe">카페</option>
 				</select>
-
-				<script>
-					window.onload = function() {
-						setInterval(listReload, 2000);
-					}
-
-					function listReload() {
-						var a1 = document.getElementById("category").value;
-						console.log(a1);
-						$("#shopListHere").load(
-								"ShopListContent.jsp?category=" + a1);
-					}
-				</script>
-
-				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
 		</div>
 
-		<script>
-			function go2Shop(e) {
-				var a1 = e.children[0].children[1].children[1].value.trim();
-				console.log(a1);
-				location.href = "ShopPage.jsp?shopNo=" + a1;
-			}
-		</script>
-
-		<!-- 단락구분선-----------------------------------------------------------------------------/-/-/-/-/-/--/-/------------------------------------- -->
-		<div class="sw-container-500 w3-section">
-			<div id="shopListHere" class="">
-				<!-- 3 main content start here!!!----------------------------------------------------------- -->
-
-
-
-
-
-				<!-- main content end----------------------------------------------------------------------- -->
-			</div>
-		</div>
-		<!-- 단락구분선-----------------------------------------------------------------------------/-/-/-/-/-/--/-/------------------------------------- -->
 
 
 		<!-- responsive template by SW ----------------------------------------------------------- -->
