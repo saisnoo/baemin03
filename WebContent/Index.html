@@ -17,9 +17,9 @@
 			font-size: 105%;
 		}
 
+
 		body {
 			text-align: center;
-			font-family: Arial;
 		}
 
 		h1 {
@@ -83,10 +83,17 @@
 				</div>
 
 				<div id="tab1" class="tabcontent">
-					<form action="./memberClient/loginClientPro.jsp" method="POST" name="LoginFormClient">
-						<br /> <label class="w3-left">아이디</label> <input type="text" class="w3-input font-black"
-							name="id" id="id" /> <br /> <label class="w3-left">비밀번호</label> <input type="password"
-							class="w3-input font-black" name="pw" id="pw" /> <br />
+					<form action="./memberClient/loginClientPro.jsp" method="POST" name="loginFormClient">
+						<!-- ------------------------------------------------------------- -->
+						<label class="w3-left w3-section">아이디</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="text" class="w3-input" name="id" id="id" />
+						<!-- ------------------------------------------------------------- -->
+						<label class="w3-left w3-section">비밀번호</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="password" class="w3-input" name="pw" id="pw" />
+						<!-- ------------------------------------------------------------- -->
+
 						<div class="grid w3-section">
 							<button class="w3-button w3-baemint w3-border" type="submit">
 								로그인</button>
@@ -99,15 +106,20 @@
 
 				<div id="tab2" class="tabcontent">
 					<form action="./memberShop/loginShopPro.jsp" method="POST" name="LoginFormShop">
-						<br /> <label class="w3-left">아이디</label> <input type="text" class="w3-input font-black"
-							name="shopID" id="shopID" /> <br /> <label class="w3-left">비밀번호</label> <input
-							type="password" class="w3-input font-black" name="shopPW" id="shopPW" /> <br />
+						<label class="w3-left w3-section">아이디</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="text" class="w3-input" name="shopID" id="shopID" />
+						<!-- ------------------------------------------------------------- -->
+						<label class="w3-left w3-section">비밀번호</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="password" class="w3-input" name="shopPW" id="shopPW" />
+						<!-- ------------------------------------------------------------- -->
 						<div class="grid w3-section">
 							<button class="w3-button w3-baemint w3-border" type="submit">
 								사장님 로그인</button>
 							<button class="w3-button w3-baemint w3-border" type="button"
-								onClick="location.href='./memberShop/JoinFormShop.jsp'">가맹점 가입
-							</button>
+								onClick="location.href='./memberShop/JoinFormShop.jsp'">가맹점
+								가입</button>
 						</div>
 					</form>
 				</div>

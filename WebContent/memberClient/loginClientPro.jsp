@@ -26,7 +26,10 @@
 	if (no > 0) {
 		System.out.println(" !!! member id=" + id);
 		session.setAttribute("memberNo", no);
+		session.setAttribute("id", dto.getId());
 		session.setAttribute("grade", dto.getGrade());
+		session.setAttribute("memberX", dto.getMemberX());
+		session.setAttribute("memberY", dto.getMemberY());
 		response.sendRedirect("../baemin/Main.jsp");
 	} else {
 		System.out.println(" !!! member null");

@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- CDN OFFLINE- sw_topNav.css -->
     <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
+    <!-- CDN - jquery 3.4.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -27,23 +30,35 @@
     <!-- CONTENT ------------------------------------------------------------------------------------ -->
     <div class="sw-center">
 
-        <div class="sw-container-400 w3-section">
+        <div class="sw-container-500 w3-section">
             <div class="w3-container">
                 <!-- 3 main content start here!!!----------------------------------------------------------- -->
 
-                <select name="category" id="category" class="w3-select w3-border">
+                <select name="category" id="category" class="w3-select w3-border" onchange="listReload(this)">
                     <option value="korean">한식</option>
                     <option value="western">양식</option>
-                    <option value="donkas">돈까스</option>
+                    <option value="chinese">중식</option>
                     <option value="japanese">일식</option>
+                    <option value="pizza">피자</option>
+                    <option value="chicken">치킨</option>
+                    <option value="hamberger">햄버거</option>
+                    <option value="cafe">카페</option>
                 </select>
+
+                <script>
+                    function listReload(e) {
+                        var a1 = e.value;
+                        console.log(a1);
+                        $("#shopListHere").load("ShopListContent.jsp?category=" + a1);
+                    }
+                </script>
 
                 <!-- main content end----------------------------------------------------------------------- -->
             </div>
         </div>
         <!-- 단락구분선-----------------------------------------------------------------------------/-/-/-/-/-/--/-/------------------------------------- -->
-        <div class="sw-container-400 w3-section">
-            <div id="shopListHere" class="w3-container">
+        <div class="sw-container-500 w3-section">
+            <div id="shopListHere" class="">
                 <!-- 3 main content start here!!!----------------------------------------------------------- -->
 
                 <script>
@@ -64,11 +79,12 @@
                         </div>
                     </div>
                     <div class="w3-section">
-                        <p>가게주소가게주소가게주소가게주소</p>
+                        <p>서울 영등포구 가리봉동 457-47</p>
                         <div class="">돈까스, 일식, 한식</div>
                     </div>
                 </div>
                 <!-- 반복 끝 -->
+
 
 
 
