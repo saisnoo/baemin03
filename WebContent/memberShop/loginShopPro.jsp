@@ -9,7 +9,6 @@
 %>
 
 <%
-	session.invalidate();
 
 	String shopID = request.getParameter("shopID");
 	String shopPW = request.getParameter("shopPW");
