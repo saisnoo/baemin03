@@ -15,7 +15,7 @@ public class MemberDTO {
     private String addr; // juso
     private String addr2; // 상세주소
     private String regDate; // now()
-    private int grade; // 1일반 2사업자 3관리자
     private double memberX; // 주소 X좌표
     private double memberY; // 주소 Y좌표
+    private int grade; // 1일반 2사업자 3관리자
 }
