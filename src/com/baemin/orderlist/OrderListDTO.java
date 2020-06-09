@@ -8,13 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
-
 @Getter
 @Setter
 @ToString
-
 
 public class OrderListDTO {
     private int no; // PK
@@ -36,6 +32,6 @@ public class OrderListDTO {
     private String addr2;
     private String comment;
 
-    // NOT IN DB
+    // NOT IN DB - 삭제예정???
     private Hashtable<Integer, Integer> hashtable;
 }
