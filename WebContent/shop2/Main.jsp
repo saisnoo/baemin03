@@ -111,25 +111,28 @@
                             완료<br /><strong>3</strong>
                         </button>
                     </div>
+			   
                 
-                
-			<div id="NOL">
-            <jsp:include page="NewOrderList.jsp"/>
-            </div>
-            <div id="BL">
-            <jsp:include page="BaesongList.jsp"/>
-            </div>
-            <div id="EL">
-            <jsp:include page="EndList.jsp"/>
-            </div>
-            </div>
-          <div id="shopmanage">
-            <jsp:include page="ShopManage.jsp"/>
-			</div>
-			</div>
-		</div>
-		</div>
-
+               <div class="w3-rest w3-white scroll-box">
+               <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+               <div id="tab1" class="tabcontent">    
+			            
+			   </div>
+			    <div id="tab2" class="tabcontent">
+			    
+			    </div>
+			    <div id="tab3" class="tabcontent">
+			    
+			    </div>
+				</div>
+				</div>
+				<div id="SM">
+				<jsp:include page="ShopManage.jsp"></jsp:include>
+				</div>
+				</div>
+				</div>
+				</div>
+				
  <div class="modal fade take_over" id="take_over" role="dialog">
     <div class="modal-dialog">
     
@@ -231,13 +234,6 @@
 	
 	      <script>
                     function openTab(evt, tabName) {
-                    	if(tabName=="tab2"){
-                    		$("#BL").load("BaesongList.jsp");
-                    	}else if(tabName=="tab3"){
-                    		$("#EL").load("EndList.jsp");
-                    	}
-                    	
-                    	
                         var i, tabcontent, tablinks;
                         tabcontent = document.getElementsByClassName("tabcontent");
                         for (i = 0; i < tabcontent.length; i++) {
@@ -283,16 +279,23 @@
                     document.getElementById("jumoontab").click();
                     
                     $(function(){
+                    	window.onload = function() {
+                    		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+                    		$("#tab2").load("BaesongList.jsp?shopNo=1");
+                    		$("#tab3").load("EndList.jsp?shopNo=1");
+                    		$("#SM").load("ShopManage.jsp");
+                    	}
+                    	
                     	function reload(){
-                    		$("#NOL").load("NewOrderList.jsp");
-                    		//$("#BL").load("BaesongList.jsp");
-                    		//$("#EL").load("EndList.jsp");
-                    		//$("#shopmanage").load("ShopManage.jsp");
+                    		$("#tab1").load("NewOrderList.jsp");
+                    		$("#tab2").load("BaesongList.jsp");
+                    		$("#tab3").load("EndList.jsp");
+                    		//$("#tabtab2").load("ShopManage.jsp");
                     		
-                     		document.getElementById("defaultOpen").click();
+                     		//document.getElementById("defaultOpen").click();
                     		//document.getElementById("jumoontab").click(); 
                     	}
-                    	setInterval(reload, 10000);
+                    	setInterval(reload, 1000);
                     });
                     
                 </script>
