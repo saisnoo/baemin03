@@ -2,72 +2,68 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Document</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
 
-<!-- CDN OFFLINE- sw_topNav.css -->
-<link rel="stylesheet" href="./sw_css/sw-1.0.0.css" />
-<!-- CDN - W3CSS -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<!-- CDN OFFLINE- sw_topNav.css -->
+	<link rel="stylesheet" href="./sw_css/sw-1.0.0.css" />
+	<!-- CDN - W3CSS -->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
-<style>
-* {
-	font-family: baemin_font;
-	font-size: 105%;
-}
+	<style>
+		* {
+			font-family: baemin_font;
+			font-size: 105%;
+		}
 
-body {
-	text-align: center;
-	font-family: Arial;
-}
 
-h1 {
-	transition: 1s;
-	color: #f1f1f1;
-}
+		body {
+			text-align: center;
+		}
 
-button {
-	font-weight: 500;
-}
+		h1 {
+			transition: 1s;
+			color: #f1f1f1;
+		}
 
-/* Style the tab */
-.tab {
-	overflow: hidden;
-	border: 1px solid #ccc;
-	background-color: #f1f1f1;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-}
+		button {
+			font-weight: 500;
+		}
 
-.grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-}
+		/* Style the tab */
+		.tab {
+			overflow: hidden;
+			border: 1px solid #ccc;
+			background-color: #f1f1f1;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
 
-/* Style the buttons inside the tab */
-.tab button {
-	background-color: #555;
-	float: left;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	padding: 14px 16px;
-	transition: 0.3s;
-	font-size: 17px;
-	color: #f1f1f1;
-}
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
 
-/* Style the tab content */
-.tabcontent {
-	display: none;
-	padding: 6px 12px;
-}
+		/* Style the buttons inside the tab */
+		.tab button {
+			background-color: #555;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+			color: #f1f1f1;
+		}
 
-.font-black {
-	color: black;
-}
-</style>
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			padding: 6px 12px;
+		}
+	</style>
 </head>
 
 <body>
@@ -87,12 +83,17 @@ button {
 				</div>
 
 				<div id="tab1" class="tabcontent">
-					<form action="./memberClient/loginClientPro.jsp" method="POST"
-						name="LoginFormClient">
-						<br /> <label class="w3-left">아이디</label> <input type="text"
-							class="w3-input font-black" name="id" id="id" /> <br /> <label
-							class="w3-left">비밀번호</label> <input type="password"
-							class="w3-input font-black" name="pw" id="pw" /> <br />
+					<form action="./memberClient/loginClientPro.jsp" method="POST" name="loginFormClient">
+						<!-- ------------------------------------------------------------- -->
+						<label class="w3-left w3-section">아이디</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="text" class="w3-input" name="id" id="id" />
+						<!-- ------------------------------------------------------------- -->
+						<label class="w3-left w3-section">비밀번호</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="password" class="w3-input" name="pw" id="pw" />
+						<!-- ------------------------------------------------------------- -->
+
 						<div class="grid w3-section">
 							<button class="w3-button w3-baemint w3-border" type="submit">
 								로그인</button>
@@ -104,18 +105,21 @@ button {
 				</div>
 
 				<div id="tab2" class="tabcontent">
-					<form action="./memberShop/loginShopPro.jsp" method="POST"
-						name="LoginFormShop">
-						<br /> <label class="w3-left">아이디</label> <input type="text"
-							class="w3-input font-black" name="shopID" id="shopID" /> <br /> <label
-							class="w3-left">비밀번호</label> <input type="password"
-							class="w3-input font-black" name="shopPW" id="shopPW" /> <br />
+					<form action="./memberShop/loginShopPro.jsp" method="POST" name="LoginFormShop">
+						<label class="w3-left w3-section">아이디</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="text" class="w3-input" name="shopID" id="shopID" />
+						<!-- ------------------------------------------------------------- -->
+						<label class="w3-left w3-section">비밀번호</label>
+						<!-- ------------------------------------------------------------- -->
+						<input type="password" class="w3-input" name="shopPW" id="shopPW" />
+						<!-- ------------------------------------------------------------- -->
 						<div class="grid w3-section">
 							<button class="w3-button w3-baemint w3-border" type="submit">
 								사장님 로그인</button>
 							<button class="w3-button w3-baemint w3-border" type="button"
-								onClick="location.href='./memberShop/JoinFormShop.jsp'">가맹점 가입
-							</button>
+								onClick="location.href='./memberShop/JoinFormShop.jsp'">가맹점
+								가입</button>
 						</div>
 					</form>
 				</div>
@@ -126,7 +130,7 @@ button {
 	</div>
 
 	<script>
-		window.onload = function() {
+		window.onload = function () {
 			clientFormOpen();
 		};
 

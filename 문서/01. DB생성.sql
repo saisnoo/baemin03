@@ -21,8 +21,8 @@ memberY double
 
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
-values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로중앙로34길 33-4','경영 기술 개발원 401호','2000-01-01'
-,3 ,126.884660819027,37.5009565732326);
+values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로동 589-7','구로역 3번 승강장','2000-01-01'
+,3 ,126.881396281118,37.5029205056812);
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
 values ('scott','tiger','김경영', '010-1234-1234' ,'서울 구로구 구로중앙로34길 33-4','경영 기술 개발원 401호','2000-01-01'
@@ -68,10 +68,10 @@ no int(4) primary key auto_increment,
 shopNo int(4)  not null ,
 name varchar(20)  not null ,
 nameNo int(4)  not null ,
-orderDate datetime  not null ,
+orderDate dateTime  not null ,
 status int(4)  not null  default 0,
 orderList text    not null ,
-completeTime datetime,
+completeTime dateTime,
 whyCancel text,
 addr varchar(60)  not null ,
 addr2 varchar(60)  not null ,

@@ -3,7 +3,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 
-
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
@@ -25,9 +24,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- CDN OFFLINE- sw_topNav.css -->
 <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -98,6 +94,29 @@
 		console.log(a1);
 		document.getElementById("jumunCancel").style.display = "block";
 	}
+
+	window.onload = function() {
+		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		$("#tab3").load("EndList.jsp?shopNo=1");
+		
+	}
+	
+	setInterval(function() {
+		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		$("#tab3").load("EndList.jsp?shopNo=1");
+		countcount();
+	},3000)
+	
+	function countcount(){
+		var a = document.getElementsByClassName("count0").length;
+		var a1 = document.getElementsByClassName("count1").length;
+		//console.log(a +"/"+ a1);
+		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
+	}
+	
+
 </script>
 </head>
 <body>
@@ -142,118 +161,24 @@
 					<div class="tab w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="defaultOpen">
-							접수대기<br /> <strong>3</strong>
+							접수대기<br /> <strong id="NewOrderCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab2')">
-							배달중<br /> <strong>3</strong>
+							배달중<br /> <strong id="BaesongCount">3</strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab3')">
-							완료<br /> <strong>3</strong>
+							완료<br /> <strong id="EndListCount">3</strong>
 						</button>
 					</div>
 					<div class="w3-rest w3-white scroll-box">
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 						<div id="tab1" class="tabcontent">
 
-
-
 							<!-- 신규, 조리중 주문 목록  -->
 							<!-- 신규, 조리중 주문 목록  -->
 							<!-- 신규, 조리중 주문 목록  -->
-							<!-- 접수대기 리스트 -->
-							<div class="w3-section">
-								<div class="w3-card w3-padding">
-									<!-- 상단 컨테이너 끝 -->
-									<div class="w3-row">
-										<!-- 왼쪽 -->
-										<div class="w3-col w3-container w3-left" style="width: 150px;">
-											<h2>15:22</h2>
-										</div>
-										<!-- 왼쪽 끝 -->
-
-										<!-- 오른쪽-->
-										<div class="w3-col w3-container w3-right"
-											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-blue h100"
-												onclick="jumunBtn(this)">주문버튼</button>
-											<button class="w3-button w3-yellow h100"
-												onClick="cancelBtn(this)">주문취소</button>
-										</div>
-										<!-- 오른쪽-->
-										<!-- 가운데 -->
-										<div class="w3-rest w3-container">
-											<div class="w3-row">
-												<div class="w3-col">
-													<strong>[메뉴 4개]</strong> &nbsp;박문자
-												</div>
-												<div class="w3-col">주문번호 5번</div>
-											</div>
-											<div class="w3-row">서울시 구로구 구로5동 경영기술개발원</div>
-										</div>
-										<!-- 가운데 끝 -->
-									</div>
-									<!-- 상단 컨테이너 끝 -->
-									<!-- 하단 컨테이너 -->
-									<div>
-										<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨
-											2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 /
-											된장찌개 2김치찌개 2 / 된장찌개 2 / 후라이드치킨2 / 양념치킨 반마리 1 된장찌개 2</div>
-										<div class="w3-row w3-padding">젓가락 두개 주세요</div>
-									</div>
-									<!-- 하단 컨테이너 끝-->
-								</div>
-							</div>
-							<!-- 접수대기 리스트 끝 -->
-
-							<!-- load  new order  -->
-							<!-- 신규, 조리중 주문 목록  -->
-							<!-- 접수대기 리스트 -->
-							<div class="w3-section">
-								<div class="w3-card w3-padding">
-									<!-- 상단 컨테이너 끝 -->
-									<div class="w3-row">
-										<!-- 왼쪽 -->
-										<div class="w3-col w3-container w3-left" style="width: 150px;">
-											<h2>15:22</h2>
-										</div>
-										<!-- 왼쪽 끝 -->
-
-										<!-- 오른쪽-->
-										<div class="w3-col w3-container w3-right"
-											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-blue h100"
-												onclick="jumunBtn(this)">주문버튼</button>
-											<button class="w3-button w3-yellow h100"
-												onClick="cancelBtn(this)">주문취소</button>
-										</div>
-										<!-- 오른쪽-->
-										<!-- 가운데 -->
-										<div class="w3-rest w3-container">
-											<div class="w3-row">
-												<div class="w3-col">
-													<strong>[메뉴 4개]</strong> &nbsp;박문자
-												</div>
-												<div class="w3-col">주문번호 5번</div>
-											</div>
-											<div class="w3-row">서울시 구로구 구로5동 경영기술개발원</div>
-										</div>
-										<!-- 가운데 끝 -->
-									</div>
-									<!-- 상단 컨테이너 끝 -->
-									<!-- 하단 컨테이너 -->
-									<div>
-										<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨
-											2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 /
-											된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 /
-											고등어자반 5</div>
-										<div class="w3-row w3-padding">젓가락 두개 주세요</div>
-									</div>
-									<!-- 하단 컨테이너 끝-->
-								</div>
-							</div>
-							<!-- 접수대기 리스트 끝 -->
 
 							<!-- load  new order  -->
 							<!-- load  new order  -->
@@ -265,59 +190,14 @@
 
 
 							<!-- 배달중 목록 --//--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/ -->
-							<div class="w3-section">
-								<div class="w3-card w3-padding">
-									<div class="w3-row">
-										<div class="w3-col w3-container w3-left" style="width: 100px;">
-											<h2>13:22</h2>
-											<input type="text" value="555">
-										</div>
-										<div class="w3-col w3-container w3-right"
-											style="width: 100px; padding: 0px;">
-											<button class="w3-button w3-orange w90 h100"
-												onClick="cancelBtn(this)">주문취소</button>
-										</div>
-
-										<div class="w3-rest w3-container">
-											<strong>[메뉴 4개]</strong> &nbsp; 홍길동 <br /> 서울 구로구 구로동 구로빌딩
-											254-14 402호
-											<hr />
-
-											김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 /
-											스테이크 10 / 고등어자반 5
-										</div>
-									</div>
-								</div>
-							</div>
 							<!-- load  new order --/--/-/-//-/--/-/-/-/-/-/-/-/-//-/-/-/ -->
-
+							<!-- 배달중 목록 끝  -->
 						</div>
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 						<div id="tab3" class="tabcontent">
 							<!-- load  new order -/-/-/-/-/-/--/-/-/-/-/-/-/-/-/- -->
-							<div class="w3-section">
-								<div class="w3-card w3-padding">
-									<div class="w3-row">
-										<div class="w3-col w3-container w3-left" style="width: 100px;">
-											<h2>13:22</h2>
-										</div>
-										<div class="w3-col w3-container w3-right"
-											style="width: 200px; padding: 0px;">
-											<button class="w3-button w3-blue w90 h100">주문접수</button>
-											<button class="w3-button w3-yellow w90 h100">주문취소</button>
-										</div>
 
-										<div class="w3-rest w3-container">
-											<strong>[메뉴 4개]</strong> &nbsp; 완료완료 <br /> 서울 구로구 구로동 구로빌딩
-											254-14 402호
-											<hr />
 
-											김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 /
-											스테이크 10 / 고등어자반 5
-										</div>
-									</div>
-								</div>
-							</div>
 							<!-- load  new order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
 
 						</div>
@@ -361,7 +241,7 @@
 						<!-- 오른쪽 half -->
 						<div class="w3-half">
 							<!-- 메뉴입력창 -->
-							<div class="w3-half">
+							<div class="w3-row">
 								<table class="w3-table" border="1">
 									<tr>
 										<th>목록</th>
@@ -390,13 +270,9 @@
 							</div>
 							<!-- 메뉴입력창  끝-->
 							<!-- 메뉴입력 추가버튼-->
-							<div class="w3-half">
-								<div class="" style="width: 100px">
-									<input type="button" value="메뉴추가">
-								</div>
-								<div class="" style="width: 100px">
-									<input type="button" value="지우기">
-								</div>
+							<div class="w3-row w3-right">
+								<input type="button" value="메뉴추가"> <input type="reset"
+									value="지우기">
 							</div>
 							<!-- 메뉴입력 버튼 끝 -->
 						</div>
@@ -502,7 +378,7 @@
 	<div class="w3-modal" id="jumunReady">
 		<div class="w3-modal-content">
 			<div class="w3-container">
-				<input id="jumunSiganNo" type="text" />
+				<input id="jumunSiganNo" type="hidden" />
 				<div class="w3-tag">주문접수시간</div>
 				<div class="w3-tag w3-red">시간입력</div>
 				<div class="w3-label w3-green">접수버튼처리</div>

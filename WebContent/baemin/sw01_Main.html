@@ -70,7 +70,7 @@
     <div class="sw-center">
         <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
         <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-        <div class="sw-container-500 w3-padding">
+        <div class="sw-container-500">
             <!-- <div class="w3-row">
                 <div class="w3-col w3-right" style="width:60px">
                     &nbsp;
@@ -83,8 +83,7 @@
                 </div>
             </div> -->
             <div class="w3-row w3-center">
-                <button type="button" class="w3-button w3-white w3-center" onclick="jusoModalOpen()"><span
-                        id="addr_result">서울 영등포구
+                <button type="button" class="w3-button w3-white w3-center" onclick="jusoModalOpen()"><span id="addr_result">서울 영등포구
                         국회대로36길 17</span>
                     &nbsp;<span id="addr2_result">B동 401호</span>
                 </button>
@@ -97,20 +96,22 @@
                 <img src="../source//ad_sample.jpg" alt="" width="100%">
             </div>
         </div> -->
-        <div class="w3-content w3-section sw-container-500" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/1.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/2.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/3.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/4.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/5.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/6.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/7.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/8.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/9.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/10.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/11.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/12.png" style="width:100%">
-            <img class="w3-round mySlides" src="../source/img/13.png" style="width:100%">
+        <div class="sw-container-500">
+            <div class="w3-content" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/1.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/2.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/3.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/4.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/5.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/6.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/7.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/8.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/9.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/10.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/11.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/12.png" style="width:100%">
+                <img class="w3-round mySlides" src="../source/img/13.png" style="width:100%">
+            </div>
         </div>
         <script>
             var myIndex = 0;
@@ -132,31 +133,27 @@
         </script>
         <!-- main content end----------------------------------------------------------------------- -->
 
-        shopList.jsp?catogory=hansik
+        <!-- shopList.jsp?category=hansik -->
 
         <!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
         <div class="sw-container-500 w3-section">
             <div class="w3-container">
                 <!--  main content start here!!!----------------------------------------------------------- -->
                 <div class="w3-row">
-                    <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList("hansik")">
-                        <img src="../source/img/hansik.png" alt="한식" max-width="110px"> <input type="hidden"
-                            value="한식" />
+                    <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
+                        <img src="../source/img/hansik.png" alt="한식" max-width="110px"> <input type="hidden" value="korean" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/yangsik.png" alt="양식" max-width="110px"> <input type="hidden"
-                            value="양식" />
+                        <img src="../source/img/yangsik.png" alt="양식" max-width="110px"> <input type="hidden" value="western" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/jungsik.png" alt="중식" max-width="110px"> <input type="hidden"
-                            value="중식" />
+                        <img src="../source/img/jungsik.png" alt="중식" max-width="110px"> <input type="hidden" value="chinese" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/ilsik.png" alt="일식" max-width="110px"> <input type="hidden"
-                            value="일식" />
+                        <img src="../source/img/ilsik.png" alt="일식" max-width="110px"> <input type="hidden" value="japanese" />
                     </div>
                 </div>
 
@@ -170,22 +167,19 @@
                 <div class="w3-row">
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/pizza.png" alt="피자" max-width="110px"> <input type="hidden"
-                            value="피자" />
+                        <img src="../source/img/pizza.png" alt="피자" max-width="110px"> <input type="hidden" value="pizza" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/chicken.png" alt="치킨" max-width="110px"> <input type="hidden"
-                            value="치킨" />
+                        <img src="../source/img/chicken.png" alt="치킨" max-width="110px"> <input type="hidden" value="chicken" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/fastfood.png" alt="햄버거" max-width="110px"> <input type="hidden"
-                            value="패스트푸드" />
+                        <img src="../source/img/fastfood.png" alt="햄버거" max-width="110px"> <input type="hidden" value="hamberger" />
                     </div>
                     <!-- .... -->
                     <div class="w3-col s3 w3-center w3-padding" onclick="go2ShopList(this)">
-                        <img src="../source/img/cafe.png" alt="카페" max-width="110px"> <input type="hidden" value="카페" />
+                        <img src="../source/img/cafe.png" alt="카페" max-width="110px"> <input type="hidden" value="cafe" />
                     </div>
                 </div>
 
@@ -205,7 +199,7 @@
         function go2ShopList(e) {
             var a1 = e.children[1].value;
             console.log(a1);
-            loaction.href = "ShopList.jsp?catogory=" + a1;
+            location.href = "ShopList.jsp?category=" + a1;
         }
     </script>
 
@@ -215,16 +209,13 @@
         <div class="w3-modal-content w3-round-large">
             <div class="w3-container w3-center">
                 <div class="w3-row w3-section"> <label>주소</label> </div>
-                <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr" id="addr"
-                        readonly> </div>
+                <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr" id="addr" readonly> </div>
                 <div class="w3-row w3-section"> <label>상세주소</label> </div>
                 <div class="w3-row w3-center"> <input class="w3-input w3-border" type="text" name="addr2" id="addr2">
                 </div>
                 <div class="w3-row w3-section w3-center">
-                    <button class="w3-button w3-baemint" type="button" onclick="openDaumPostcode()"
-                        style="width: 100px;">주소입력</button>
-                    <button class="w3-button w3-baemint" type="button" onclick="updateJuso()"
-                        style="width: 100px;">주소변경</button>
+                    <button class="w3-button w3-baemint" type="button" onclick="openDaumPostcode()" style="width: 100px;">주소입력</button>
+                    <button class="w3-button w3-baemint" type="button" onclick="updateJuso()" style="width: 100px;">주소변경</button>
                 </div>
                 <span onclick="document.getElementById('jusoChange').style.display='none'"
                     class="w3-button w3-display-topright">&times;</span>
@@ -300,8 +291,8 @@
             //   x.className = "topnav w3-card-4";
         }
     </script>
-    <div class="w3-bottom w3-center w3-border-top">
-        <div class="w3-row sw-container-500" style="margin-top: 5px;">
+    <div class="w3-bottom w3-center w3-border-top" style="padding-bottom: 5px; background: #ffffffdd;">
+        <div class="w3-row sw-container-500" style="margin-top: 5px; height: 20px;">
             <a href="#" class="w3-button w3-col s3 w3-center" style="padding: 0px;">
                 <i class="material-icons" style="font-size:48px;color:#45c1bf;">home</i>
             </a>
@@ -316,7 +307,7 @@
             </a>
         </div>
 
-        <div class="w3-row sw-container-500" style="margin-bottom: 5px;">
+        <div class="w3-row sw-container-500">
             <div class="w3-col s3 w3-center">Home</div>
             <div class="w3-col s3 w3-center">Notice</div>
             <div class="w3-col s3 w3-center">Order</div>
