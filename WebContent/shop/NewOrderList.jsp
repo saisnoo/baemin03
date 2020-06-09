@@ -1,4 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.baemin.orderlist.OrderListDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,8 +8,6 @@
 	//자바 구문
 request.setCharacterEncoding("UTF-8");
 System.out.println("------NewOrderList.jsp");
-
-SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
 System.out.println(request.getParameter("shopNo"));
 int shopNo=Integer.parseInt(request.getParameter("shopNo"));
@@ -31,7 +28,7 @@ for(int i=0;i<NewOrderCount;i++){
 		<div class="w3-row">
 			<!-- 왼쪽 -->
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
-				<%=sdf.format(dto.getOrderDate())%>
+				<%=dto.getOrderDate()%>
 				<input type="hidden" value="<%=dto.getNo()%>">
 
 			</div>
@@ -44,12 +41,12 @@ for(int i=0;i<NewOrderCount;i++){
 					if(dto.getStatus()==0){
 				%>
 				<button class="w3-button w3-blue h100" onclick="jumunBtn(this)">조리버튼</button>
-				<div class="count0"><%=dto.getStatus() %></div>
+				<div class="count0" style="display:none;"><%=dto.getStatus() %></div>
 				<%
 					}else if(dto.getStatus()==1){
 				%>
 				<button class="w3-button w3-blue h100" onclick="baesongBtn(this)">배달출발</button>
-				<div class="count1"><%=dto.getStatus() %></div>
+				<div class="count1" style="display:none;"><%=dto.getStatus() %></div>
 				<%
 					}
 				%>
@@ -89,7 +86,7 @@ for(int i=0;i<NewOrderCount;i++){
 	// 스크립트
 
 	function jumunBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 		//모달창에 값넣기
 		document.getElementById("jumunSiganNo").value = a1;
@@ -97,11 +94,11 @@ for(int i=0;i<NewOrderCount;i++){
 		document.getElementById("jumunReady").style.display = "block";
 	}
 	function baesongBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 	}
 	function cancelBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 		document.getElementById("jumunCancel").style.display = "block";
 	}

@@ -14,8 +14,7 @@ System.out.println("------EndList.jsp");
 
   %>
   
-   <div class="w3-rest w3-white scroll-box">
-    <div id="tab3" class="tabcontent">
+  
                               <!-- load  new order  -->
                            <!-- load  new order  -->
                             <div class="w3-section">
@@ -38,6 +37,3 @@ System.out.println("------EndList.jsp");
                                 </div>
                             </div>	
                 
-                        
-                        </div>
-                        </div>
