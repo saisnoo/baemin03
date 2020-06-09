@@ -5,6 +5,7 @@ create database baemindb;
 use baemindb;
 
 
+
         
 CREATE TABLE member
 (
@@ -15,7 +16,7 @@ CREATE TABLE member
   tel     VARCHAR(20) NOT NULL,
   addr    VARCHAR(60) NOT NULL,
   addr2   VARCHAR(60) NULL    ,
-  regDate DATETIME    NOT NULL DEFAULT now(),
+  regDate DATETIME    NOT NULL,
   memberX DOUBLE      NOT NULL,
   memberY DOUBLE      NOT NULL,
   grade   INT         NOT NULL DEFAULT 1,
@@ -74,7 +75,7 @@ CREATE TABLE review
   no            INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
   reviewContent VARCHAR(60) NOT NULL,
   reviewRank    INT         NOT NULL,
-  regDate       DATETIME    NOT NULL DEFAULT now(),
+  regDate       DATETIME    NOT NULL,
   shop_no       INT         NOT NULL,
   member_no     INT         NOT NULL,
   PRIMARY KEY (no)
@@ -94,7 +95,7 @@ CREATE TABLE shop
   shopX        DOUBLE      NOT NULL,
   shopY        DOUBLE      NOT NULL,
   shopStatus   INT         NOT NULL DEFAULT 0,
-  regDate      DATETIME    NULL     DEFAULT now(),
+  regDate      DATETIME    NULL    ,
   grade        INT         NULL     DEFAULT 2,
   PRIMARY KEY (no)
 );
@@ -132,6 +133,7 @@ ALTER TABLE review
     FOREIGN KEY (member_no)
     REFERENCES member (no);
 
+      
       
 
 

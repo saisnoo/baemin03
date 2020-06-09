@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 5.599999904632568,
-    "scrollLeft": 244.8000030517578,
+    "scrollTop": 0,
+    "scrollLeft": 936.7999877929688,
     "show": {
       "tableComment": false,
       "columnComment": false,
@@ -17,7 +17,7 @@
     },
     "database": "MySQL",
     "databaseName": "",
-    "canvasType": "ERD",
+    "canvasType": "SQL",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -420,7 +420,7 @@
             "name": "regDate",
             "comment": "",
             "dataType": "DATETIME",
-            "default": "now()",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -489,7 +489,7 @@
           "active": false,
           "left": 907.6000000000014,
           "top": 33.199999999999974,
-          "zIndex": 581,
+          "zIndex": 600,
           "widthName": 60,
           "widthComment": 60
         },
@@ -779,7 +779,7 @@
             "name": "regDate",
             "comment": "",
             "dataType": "DATETIME",
-            "default": "now()",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -826,7 +826,7 @@
           "active": false,
           "left": 257.6000000000021,
           "top": 371.59999999999985,
-          "zIndex": 577,
+          "zIndex": 598,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1002,7 +1002,7 @@
             "name": "regDate",
             "comment": "",
             "dataType": "DATETIME",
-            "default": "now()",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1094,7 +1094,7 @@
           "active": false,
           "left": 257.20000000000016,
           "top": 76.39999999999951,
-          "zIndex": 575,
+          "zIndex": 596,
           "widthName": 60,
           "widthComment": 60
         },
