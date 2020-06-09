@@ -17,7 +17,7 @@ public class OrderListDTO {
     private int shopNo;// 주문 가게 이름
     private String name; // 주문자 이름
     private int nameNo; // 주문자 번호
-    private Timestamp orderDate; // now
+    private String orderDate; // now
     private int status;
     // -1 취소
     // default 0 신규주문
@@ -26,7 +26,7 @@ public class OrderListDTO {
     // 3 마감
     // 영업종료 하면 0,1 >> -1 , 2 >> 3
     private String orderList; // 메뉴, 수량
-    private Timestamp completeTime;
+    private String completeTime;
     private String whyCancel;
     private String addr;
     private String addr2;
