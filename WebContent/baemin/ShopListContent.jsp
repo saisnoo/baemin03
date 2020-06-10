@@ -56,13 +56,13 @@
 	onclick="go2Shop(this)">
 	<div class="w3-row w3-section">
 		<div class="w3-col w3-right" style="width: 55px;">
-			<i class="material-icons" style="color: orange;">star</i><strong><%=dto.getReviewRank()%></strong>
+			<i class="material-icons" style="color: orange;">star</i><strong><%=dto.getRank()%></strong>
 		</div>
 		<div class="w3-rest">
 			<h6>
 				<%=dto.getShopName()%>
 			</h6>
-			<input type="hidden" class="no" value="<%=dto.getShopNo()%>" />
+			<input type="hidden" class="no" value="<%=dto.getNo()%>" />
 		</div>
 	</div>
 	<div class="w3-section">

@@ -4,5 +4,5 @@
 <%
 int no = Integer.parseInt(request.getParameter("shopNo"));
 OrderListDAO dao = OrderListDAO.getInstance();
-dao.updateStatusPlus1(no);
+dao.updateStatusTo1(no);
 %>
