@@ -89,6 +89,7 @@
 		$("#tab1").load("NewOrderList.jsp?shopNo=1");
 		$("#tab2").load("BaesongList.jsp?shopNo=1");
 		$("#tab3").load("EndList.jsp?shopNo=1");
+		countcount();
 	}
 	
 	setInterval(function() {
@@ -96,15 +97,17 @@
 		$("#tab2").load("BaesongList.jsp?shopNo=1");
 		$("#tab3").load("EndList.jsp?shopNo=1");
 		countcount();
-	},1000)
+	},1500)
 	
 	function countcount(){
 		var a = document.getElementsByClassName("count0").length;
 		var a1 = document.getElementsByClassName("count1").length;
 		var a2 = document.getElementsByClassName("count2").length;
+		var a3 = document.getElementsByClassName("count3").length;
 		//console.log(a +"/"+ a1);
 		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
 		document.getElementById("BaesongCount").innerText=(a2);
+		document.getElementById("EndListCount").innerText=(a3);
 	}
 	
 

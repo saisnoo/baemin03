@@ -47,9 +47,9 @@ for(int i=0;i<BaesongCount;i++){
 												<div class="w3-col">
 													<strong>[메뉴 4개]</strong> &nbsp;<%=dto.getName() %>
 												</div>
-												<div class="w3-col">주문번호 5번</div>
+												<div class="w3-col">주문번호: <%=dto.getNo() %></div>
 											</div>
-											<div class="w3-row">서울시 구로구 구로5동 경영기술개발원</div>
+											<div class="w3-row"><%=dto.getAddr() %> <%=dto.getAddr2() %> </div>
 										</div>
 										<!-- 가운데 끝 -->
 									</div>
@@ -60,7 +60,7 @@ for(int i=0;i<BaesongCount;i++){
 											2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 /
 											된장찌개 2 / 후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 /
 											고등어자반 5</div>
-										<div class="w3-row w3-padding">젓가락 두개 주세요</div>
+										<div class="w3-row w3-padding"><%=dto.getComment() %></div>
 									</div>
 									<!-- 하단 컨테이너 끝-->
 								</div>
