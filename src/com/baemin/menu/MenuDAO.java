@@ -24,11 +24,11 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "insert into menu(menoShopNo, menuName, menuCategory, menuEx, menuPrice)"
+            String sql = "insert into menu(shop_no, menuName, menuCategory, menuEx, menuPrice)"
                     + "values (?, ?, ?, ?, ?)";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, dto.getMenuShopNo());
+            pstmt.setInt(1, dto.getShop_no());
             pstmt.setString(2, dto.getMenuName());
             pstmt.setString(3, dto.getMenuCategory());
             pstmt.setString(4, dto.getMenuEx());
@@ -45,7 +45,7 @@ public class MenuDAO {
     } // insertMenu_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // updateStatus_start-----------------------------------------------------------------------------
-    public int updateStatus(int menuNo, int menuStatus) throws Exception {
+    public int updateStatus(int no, int menuStatus) throws Exception {
         // 출력객체
         int result = -1;
         System.out.println("---MenuDAO updateStatus");
@@ -54,11 +54,11 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update menu set menuStatus = ? where menuNo =  ?";
+            String sql = "update menu set menuStatus = ? where no =  ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, menuStatus);
-            pstmt.setInt(2, menuNo);
+            pstmt.setInt(2, no);
             // 5. 실행
             result = pstmt.executeUpdate();
         } catch (Exception e) {
@@ -88,11 +88,12 @@ public class MenuDAO {
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
                 while (rs.next()) {
+                    dto.setMenuStatus(rs.getInt("menuStatus"));
                     dto.setMenuEx(rs.getString("menuex"));
                     dto.setMenuName(rs.getString("menuname"));
-                    dto.setMenuNo(rs.getInt("menuNo"));
+                    dto.setNo(rs.getInt("no"));
                     dto.setMenuPrice(rs.getInt("menuPrice"));
-                    dto.setMenuShopNo(rs.getInt("menuShopNo"));
+                    dto.setShop_no(rs.getInt("shop_no"));
                     dto.setMenuCategory(rs.getString("menuCategory"));
                 }
             }
@@ -114,8 +115,8 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where (menuShopNo = ? AND menuStatus = 1)"
-                    + " order by menuName desc, menuCategory desc ";
+            String sql = "select * from member where (shop_no = ? AND menuStatus = 1)"
+                    + " order by menuName desc, menuCategory asc ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, menuShopNo);
@@ -125,11 +126,12 @@ public class MenuDAO {
             if (rs != null) {
                 while (rs.next()) {
                     MenuDTO dto = new MenuDTO();
+                    dto.setMenuStatus(rs.getInt("menuStatus"));
                     dto.setMenuEx(rs.getString("menuex"));
                     dto.setMenuName(rs.getString("menuname"));
-                    dto.setMenuNo(rs.getInt("menuNo"));
+                    dto.setNo(rs.getInt("no"));
                     dto.setMenuPrice(rs.getInt("menuPrice"));
-                    dto.setMenuShopNo(rs.getInt("menuShopNo"));
+                    dto.setShop_no(rs.getInt("shop_no"));
                     dto.setMenuCategory(rs.getString("menuCategory"));
                     list.add(dto);
                 }
@@ -152,8 +154,8 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where menuShopNo = ? "
-                    + " order by menuName desc, menuCategory desc, menuStatus desc";
+            String sql = "select * from member where shop_No = ? "
+                    + " order by menuName desc, menuCategory asc, menuStatus desc";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, menuShopNo);
@@ -163,13 +165,13 @@ public class MenuDAO {
             if (rs != null) {
                 while (rs.next()) {
                     MenuDTO dto = new MenuDTO();
-                    dto.setMenuNo(rs.getInt("menuNo"));
-                    dto.setMenuShopNo(rs.getInt("menuShopNo"));
-                    dto.setMenuCategory(rs.getString("menuCategory"));
-                    dto.setMenuEx(rs.getString("menuEX"));
-                    dto.setMenuName(rs.getString("menuName"));
-                    dto.setMenuPrice(rs.getInt("price"));
                     dto.setMenuStatus(rs.getInt("menuStatus"));
+                    dto.setMenuEx(rs.getString("menuex"));
+                    dto.setMenuName(rs.getString("menuname"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setMenuPrice(rs.getInt("menuPrice"));
+                    dto.setShop_no(rs.getInt("shop_no"));
+                    dto.setMenuCategory(rs.getString("menuCategory"));
                     list.add(dto);
                 }
             }
@@ -201,6 +203,7 @@ public class MenuDAO {
             con = getConnection();
             // 3. sql
             String sql = "select * from menu " + where;
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             // 5. 실행
@@ -209,11 +212,12 @@ public class MenuDAO {
             if (rs != null) {
                 while (rs.next()) {
                     MenuDTO dto = new MenuDTO();
+                    dto.setMenuStatus(rs.getInt("menuStatus"));
                     dto.setMenuEx(rs.getString("menuex"));
                     dto.setMenuName(rs.getString("menuname"));
-                    dto.setMenuNo(rs.getInt("menuNo"));
+                    dto.setNo(rs.getInt("no"));
                     dto.setMenuPrice(rs.getInt("menuPrice"));
-                    dto.setMenuShopNo(rs.getInt("menuShopNo"));
+                    dto.setShop_no(rs.getInt("shop_no"));
                     dto.setMenuCategory(rs.getString("menuCategory"));
                     list.add(dto);
                 }
