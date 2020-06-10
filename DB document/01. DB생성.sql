@@ -7,7 +7,7 @@ use baemindb;
 
 
  
-
+ 
         
 CREATE TABLE member
 (
@@ -53,7 +53,7 @@ CREATE TABLE notice
 CREATE TABLE Order_cancel
 (
   no           INT         NOT NULL AUTO_INCREMENT,
-  whyCancel    VARCHAR(60) NOT NULL DEFAULT ...,
+  whyCancel    VARCHAR(60) NOT NULL,
   orderlist_no INT         NOT NULL COMMENT 'AUTO_Increment',
   PRIMARY KEY (no)
 );
@@ -139,6 +139,8 @@ ALTER TABLE review
   ADD CONSTRAINT FK_member_TO_review
     FOREIGN KEY (member_no)
     REFERENCES member (no);
+
+      
 
       
 

@@ -83,6 +83,7 @@ public class OrderListDAO {
             // 3. sql
             String sql = "update orderlist set  status = 2 , completeTime = DATE_ADD( NOW() , Interval " + minute
                     + " minute) where no = ? ";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -195,6 +196,7 @@ public class OrderListDAO {
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist LEFT JOIN Order_Cancel ON  orderlist.no = order_cancel.orderlist_no WHERE "
                     + " member_No = ? order by status asc, orderdate desc ";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, nameNo);
@@ -240,6 +242,7 @@ public class OrderListDAO {
             String sql = "select no, shop_No, name, member_no, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, addr, addr2, comment "
                     + " from orderlist WHERE shop_No = ? AND (status=0 OR status=1) " + " ORDER BY orderDate ASC";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -284,6 +287,7 @@ public class OrderListDAO {
                     + " status, orderList, completeTime, addr, addr2, comment "
                     + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime > NOW() "
                     + " ORDER BY orderdate ASC";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -332,8 +336,8 @@ public class OrderListDAO {
             String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, addr, addr2, comment "
                     + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() AND "
-                    + " orderDate BETWEEN (    now()   ,  DATE_ADD(NOW(), INTERVAL 1 DAY)    )"
-                    + " ORDER BY orderdate ASC";
+                    + " orderDate BETWEEN ( DATE_ADD(NOW(), INTERVAL -1 DAY) , now() )" + " ORDER BY orderdate ASC";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -359,7 +363,7 @@ public class OrderListDAO {
             }
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" getListOfGoing() 예외  ");
+            throw new Exception(" getListFinishToday() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
