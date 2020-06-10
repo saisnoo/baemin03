@@ -226,7 +226,7 @@ public class ShopDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getListAll() 예외  ");
+			throw new Exception(" getListAll() 예외  "+e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
