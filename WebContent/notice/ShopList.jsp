@@ -140,7 +140,7 @@ List<ShopDTO> list = dao.getListAll();
 							<td width="20%"><%=list.get(i).getShopName()%></td>
 							<td width="15%"><%=list.get(i).getShopCategory()%></td>
 							<td width="50%"><%=list.get(i).getShopAddr()%>&nbsp;<%=list.get(i).getShopAddr2()%></td>
-							<td class="shopNoNo" width="15%"><%=list.get(i).getShopNo()%></td>
+							<td class="shopNoNo" width="15%"><%=list.get(i).getNo()%></td>
 						</tr>
 						<%
 							}

@@ -242,8 +242,8 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "insert into board( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
-					+ " shopTel, shopX , shopY)  values( ?, ?, ?, ?, ?, ?, ?, ? )";
+			String sql = "insert into shop( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
+					+ " shopTel, shopX , shopY , regDate)  values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -260,7 +260,7 @@ public class ShopDAO {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" joinShop() 예외  ");
+			throw new Exception(" insertShop() 예외  "+e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
