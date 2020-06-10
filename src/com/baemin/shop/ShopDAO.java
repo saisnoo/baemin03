@@ -296,6 +296,32 @@ public class ShopDAO {
 		return result;
 	} // updateShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
+	// magam_start-----------------------------------------------------------------------------
+	public int magam(int no) throws Exception {
+		// 출력객체
+		int result = -1;
+		System.out.println("---ShopDAO magam");
+
+		try {
+			// 1+2
+			con = getConnection();
+			// con=ds.getConnection();
+			// 3. sql
+			String sql = "update shop set status = 0 WHERE no = ?";
+			// 4. 실행객체
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			// 5. 실행
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.getStackTrace();
+			throw new Exception(" magam() 예외  ");
+		} finally {
+			close(con, pstmt, rs);
+		} // finally end
+		return result;
+	} // magam_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////
