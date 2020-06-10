@@ -7,8 +7,7 @@ request.setCharacterEncoding("UTF-8");
 System.out.println("------BaesongList.jsp");
 %>
 
- <div class="w3-rest w3-white scroll-box">
-  <div id="tab2" class="tabcontent">
+ 
                             <!-- load  new order  -->
                            <!-- load  new order  -->
                             <div class="w3-section">
@@ -55,5 +54,3 @@ System.out.println("------BaesongList.jsp");
                                     </div>
                                 </div>
                             </div>		
-  </div>
-</div>

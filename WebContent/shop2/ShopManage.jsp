@@ -7,8 +7,8 @@ System.out.println("------ShopManage.jsp");
 %> 
    
    
-
-          <div id="tabtab2" class="w3-cyan tabcontent2">
+<div id="tabtab2" class="w3-cyan tabcontent2">
+       
                        <div class="container">
   <button type="button" class="btn btn-primary">영업시작</button>
   <button type="button" class="btn btn-success">영업종료</button>

@@ -19,7 +19,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- CDN - jquery 3.4.1 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- CDN - W3CSS -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- CDN OFFLINE- sw_topNav.css -->
@@ -37,6 +38,8 @@
 	margin: 0px;
 	padding: 0px;
 }
+
+
 </style>
 <script>
 	//DAUM 주소 openAPI
@@ -91,9 +94,9 @@
 					</div>
 					<!-- 비밀번호 체크 .................. -->
 					<div class="w3-row w3-section">
-						<input class="w3-input" type="password" name="shopPW2" id="shopPW2"
-							pattern="^[a-z0-9]{4,12}$" required onkeypress="pwValueChange() "
-							placeholder="비밀번호 확인용">
+						<input class="w3-input" type="password" name="shopPW2"
+							id="shopPW2" pattern="^[a-z0-9]{4,12}$" required
+							onkeypress="pwValueChange() " placeholder="비밀번호 확인용">
 					</div>
 					<!-- 비밀번호 체크 결과 .................. -->
 					<div id="passwordCheckResultDisplay" class="w3-row w3-section"></div>
@@ -105,20 +108,22 @@
 
 					<!-- 카데고리.................. -->
 					<div class="w3-row w3-section">
-						<input type="checkbox" class="w3-input" name="shopCategory" value="한식">한식
-						<input type="checkbox" class="w3-input" name="shopCategory" value="양식">양식
-						<input type="checkbox" class="w3-input" name="shopCategory" value="중식">중식
-						<input type="checkbox" class="w3-input" name="shopCategory" value="일식">일식
-						<input type="checkbox" class="w3-input" name="shopCategory" value="피자">피자
-						<input type="checkbox" class="w3-input" name="shopCategory" value="치킨">치킨
-						<input type="checkbox" class="w3-input" name="shopCategory" value="햄버거">햄버거
-						<input type="checkbox" class="w3-input" name="shopCategory" value="카페">카페
+						<input type="checkbox" class="w3-input" name="shopCategory"
+							value="한식">한식 <input type="checkbox" class="w3-input"
+							name="shopCategory" value="양식">양식 <input type="checkbox"
+							class="w3-input" name="shopCategory" value="중식">중식 <input
+							type="checkbox" class="w3-input" name="shopCategory" value="일식">일식
+						<input type="checkbox" class="w3-input" name="shopCategory"
+							value="피자">피자 <input type="checkbox" class="w3-input"
+							name="shopCategory" value="치킨">치킨 <input type="checkbox"
+							class="w3-input" name="shopCategory" value="햄버거">햄버거 <input
+							type="checkbox" class="w3-input" name="shopCategory" value="카페">카페
 					</div>
 
 					<!-- 가게 소개 .................. -->
 					<div class="w3-row w3-section">
-						<textarea rows="10" class="w3-input w3-border" placeholder="매장 소개글 입력"
-							name="shopEx" style="width: 100%"></textarea>
+						<textarea rows="10" class="w3-input w3-border"
+							placeholder="매장 소개글 입력" name="shopEx" style="width: 100%"></textarea>
 					</div>
 
 					<!-- 전화번호 .................. -->
@@ -157,12 +162,12 @@
 							</select>
 						</div>
 						<div class="w3-col s4">
-							<input type="text" class="w3-input w3-border" name="tel2" id="tel2"
-								pattern="^\d{3,4}$">
+							<input type="text" class="w3-input w3-border" name="tel2"
+								id="tel2" pattern="^\d{3,4}$">
 						</div>
 						<div class="w3-col s4">
-							<input type="text" class="w3-input w3-border" name="tel3" id="tel3"
-								pattern="^\d{4,4}$">
+							<input type="text" class="w3-input w3-border" name="tel3"
+								id="tel3" pattern="^\d{4,4}$">
 						</div>
 					</div>
 					<!-- 주소 .................. -->
@@ -181,13 +186,14 @@
 							placeholder="주소" readonly>
 					</div>
 					<div class="w3-row w3-center w3-section">
-						<input type="text" name="shopAddr2" id="shopAddr2" class="w3-input"
-							pattern="^[^;]{1,30}$" placeholder="상세주소" required>
+						<input type="text" name="shopAddr2" id="shopAddr2"
+							class="w3-input" pattern="^[^;]{1,30}$" placeholder="상세주소"
+							required>
 					</div>
 					<!-- 버튼 .................. -->
 					<div class="w3-row w3-center w3-section">
-						<input id="btn" name="btn" class="w3-button w3-baemint" type="submit"
-							value="회원가입" disabled>
+						<input id="btn" name="btn" class="w3-button w3-baemint"
+							type="submit" value="회원가입" disabled>
 						<!-- ................................................................ -->
 						<input class="w3-button w3-baemint" type="button" value="뒤로가기"
 							onClick="back2index()">
@@ -271,7 +277,9 @@
 		} //  idValueChange() end
 
 		function checkId() {
-			console.log("--checkId()"+ document.getElementById("ShopID").value);
+			console
+					.log("--checkId()"
+							+ document.getElementById("ShopID").value);
 			var data1 = {
 				// 항목이름 : 값(변수)
 				id : document.getElementById("ShopID").value,

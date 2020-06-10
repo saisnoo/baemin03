@@ -7,7 +7,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ NoticeUpdateForm.jsp --- ");
+	System.out.println("------ NoticeView.jsp --- ");
 
 	int no = Integer.parseInt(request.getParameter("no"));
 	NoticeDAO dao = NoticeDAO.getInstance();
