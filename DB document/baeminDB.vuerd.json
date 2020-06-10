@@ -1399,7 +1399,7 @@
             "name": "whyCancel",
             "comment": "",
             "dataType": "VARCHAR(60)",
-            "default": "",
+            "default": "...",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1446,7 +1446,7 @@
           "active": false,
           "left": 656.8000000000045,
           "top": 154.8000000238436,
-          "zIndex": 719,
+          "zIndex": 721,
           "widthName": 78,
           "widthComment": 60
         },

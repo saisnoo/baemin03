@@ -7,6 +7,7 @@ use baemindb;
 
 
  
+
         
 CREATE TABLE member
 (
@@ -52,7 +53,7 @@ CREATE TABLE notice
 CREATE TABLE Order_cancel
 (
   no           INT         NOT NULL AUTO_INCREMENT,
-  whyCancel    VARCHAR(60) NOT NULL,
+  whyCancel    VARCHAR(60) NOT NULL DEFAULT '.',
   orderlist_no INT         NOT NULL COMMENT 'AUTO_Increment',
   PRIMARY KEY (no)
 );
@@ -140,8 +141,9 @@ ALTER TABLE review
     REFERENCES member (no);
 
       
-      
-      
+
+
+
       
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
