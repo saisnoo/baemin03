@@ -149,14 +149,14 @@ public class ShopDAO {
 					+ "    from shop LEFT JOIN review on shop.no = review.shop_no "
 					+ "    WHERE (shopX  BETWEEN ? AND ?) " + "     AND (shopY  BETWEEN ? AND ?)"
 					+ "     AND shopCategory  like '%" + category + "%' " + "  GROUP BY shop.no   "
-					+ "   ORDER BY rank DESC      ";
+					+ "   ORDER BY avg(rank) DESC      ";
 			// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
 			// from shop LEFT JOIN review on shop.no = review.shop_no
 			// WHERE (shopX BETWEEN 126.859660819027 AND 126.90966081902701)
 			// AND (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)
 			// AND shopCategory like '%양식%'
 			// GROUP BY shop.no
-			// ORDER BY rank DESC
+			// ORDER BY avg(rank) DESC
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
@@ -386,27 +386,13 @@ public class ShopDAO {
 
 	public static void main(String[] args) {
 
-		String category = "양식";
-
-		double memberX = 126.884660819027;
-		double memberY = 37.5009565732326;
-
-		double x_min = memberX - CoordDistance.CoordLimit;
-		double x_max = memberX + CoordDistance.CoordLimit;
-		double y_min = memberY - CoordDistance.CoordLimit;
-		double y_max = memberY + CoordDistance.CoordLimit;
-
-		// (select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
+		// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
 		// from shop LEFT JOIN review on shop.no = review.shop_no
 		// WHERE (shopX BETWEEN 126.859660819027 AND 126.90966081902701)
 		// AND (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)
 		// AND shopCategory like '%양식%'
 		// GROUP BY shop.no
-		// ORDER BY rank DESC
-		// )
-
-		System.out.println();
-		System.out.println();
+		// ORDER BY avg(rank) DESC
 
 	}
 }
