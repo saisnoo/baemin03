@@ -3,6 +3,8 @@ package com.baemin.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.*;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -242,6 +244,47 @@ public class MemberDAO {
 		} // finally end
 		return result;
 	} // changeTel_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+	// getListAll_start-----------------------------------------------------------------------------
+	public List<MemberDTO> getListAll() throws Exception {
+		// 출력객체
+		List<MemberDTO> list = new ArrayList<>();
+		System.out.println("---MemberDAO getListAll");
+
+		try {
+			// 1+2
+			con = getConnection();
+			// 3. sql
+			String sql = "select no, id, pw, name, tel, addr, addr2, memberX, memberY, "
+					+ " grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) from member " + " ORDER BY name ";
+			// 4. 실행객체
+			pstmt = con.prepareStatement(sql);
+			// 5. 실행
+			rs = pstmt.executeQuery();
+			// 6. 표시 --- select 때만 표시
+			if (rs != null) {
+				while (rs.next()) {
+					MemberDTO dto = new MemberDTO();
+					dto.setGrade(rs.getInt("grade"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setAddr2(rs.getString("addr2"));
+					dto.setId(rs.getString("id"));
+					dto.setName(rs.getString("name"));
+					dto.setNo(rs.getInt("no"));
+					dto.setRegDate(rs.getString("regdate"));
+					dto.setTel(rs.getString("tel"));
+					System.out.println(dto.toString());
+					list.add(dto);
+				}
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+			throw new Exception(" getListAll() 예외  ");
+		} finally {
+			close(con, pstmt, rs);
+		} // finally end
+		return list;
+	} // getListAll_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////
