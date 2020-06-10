@@ -3,6 +3,8 @@
     pageEncoding="UTF-8"%>
 <%
 int no = Integer.parseInt(request.getParameter("shopNo"));
+int minute = Integer.parseInt(request.getParameter("minute"));
 OrderListDAO dao = OrderListDAO.getInstance();
-dao.updateStatusTo1(no);
+int result = dao.updateCompleteTime(no, minute);
+
 %>
