@@ -1,6 +1,7 @@
 package com.baemin.orderlist;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import lombok.*;
 
@@ -16,8 +17,7 @@ public class OrderListDTO {
     // default 0 신규주문
     // 1 접수 . 조리중
     // 2 배달보냄
-    // 3 마감
-    // 영업종료 하면 0,1 >> -1 , 2 >> 3
+    // 영업종료 하면
     private String orderList; // 메뉴, 수량
     private String completeTime;
     private String addr;
@@ -28,9 +28,14 @@ public class OrderListDTO {
     private int shop_NO;// 주문 가게 이름
     private int member_No; // 주문자 번호
 
+    // NOT IN DB ------------------------------
     /// JOIN
     private String whyCancel;
+    /// JOIN
+    private List<Order_MenuDTO> menuList; // ????
+    // TODO: 게터세터 어떻게?????
 
     // NOT IN DB - 삭제예정???
     private Hashtable<Integer, Integer> hashtable;
+
 }
