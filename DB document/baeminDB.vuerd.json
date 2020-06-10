@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 5.599999904632568,
-    "scrollLeft": 402.3999938964844,
+    "scrollTop": 221.60000610351562,
+    "scrollLeft": 153.60000610351562,
     "show": {
       "tableComment": false,
       "columnComment": false,
@@ -17,7 +17,7 @@
     },
     "database": "MySQL",
     "databaseName": "",
-    "canvasType": "SQL",
+    "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
