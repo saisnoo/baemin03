@@ -3,7 +3,6 @@ package com.baemin.review;
 import javax.naming.*;
 import javax.sql.*;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReviewDAO {
@@ -53,7 +52,7 @@ public class ReviewDAO {
     } // getReview_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListByShop_start-----------------------------------------------------------------------------
-    public List<ReviewDTO> getListByShop(int shop_no) throws Exception {
+    public List<ReviewDTO> getListByShop(int shop_no, int howManyData) throws Exception {
         // 출력객체
         List<ReviewDTO> list = new ArrayList<>();
         System.out.println("---ReviewDAO getListByShop");
@@ -62,10 +61,11 @@ public class ReviewDAO {
             con = getConnection();
             // 3. sql
             String sql = "select no, content, DATE_FORMAT( regdate, '%y-%m-%d %h:%i') regDate "
-                    + " rank, shop_no, member_no from review WHERE shop_no = ?  ORDER by regDate DESC";
+                    + " rank, shop_no, member_no from review WHERE shop_no = ?  ORDER by regDate DESC limit 0, ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shop_no);
+            pstmt.setInt(2, howManyData);
             // 5. 실행
             rs = pstmt.executeQuery();
             // 6. 표시 --- select 때만 표시

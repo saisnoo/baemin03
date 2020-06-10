@@ -129,7 +129,7 @@ public class MemberDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select no, id, pw, name, tel, addr, addr2, memberX, memberY, grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) from member where no = ?";
+			String sql = "select no, id, pw, name, tel, addr, addr2, memberX, memberY, grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) regdate from member where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
@@ -256,7 +256,7 @@ public class MemberDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "select no, id, pw, name, tel, addr, addr2, memberX, memberY, "
-					+ " grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) from member " + " ORDER BY name ";
+					+ " grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) regdate from member " + " ORDER BY name ";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			// 5. 실행
