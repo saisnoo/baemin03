@@ -15,6 +15,38 @@ public class ReviewDAO {
     Context cont = null;
     DataSource ds = null;
 
+    // writeReview_start-----------------------------------------------------------------------------
+    public int writeReview(ReviewDTO dto) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---ReviewDAO writeReview");
+
+        try {
+            // 1+2
+            con = getConnection();
+            // con=ds.getConnection();
+            // 3. sql
+            String sql = "insert into review ( content, rank, shop_No, member_No, regDate  )     "
+                    + " values ( ? , ?,  ?,  ?,  now()  ) ";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, dto.getContent());
+            pstmt.setInt(2, dto.getRank());
+            pstmt.setInt(3, dto.getShop_no());
+            pstmt.setInt(4, dto.getMember_no());
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" writeReview() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+
+        return result;
+
+    } // writeReview_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getReview_start-----------------------------------------------------------------------------
     public ReviewDTO getReview(int no) throws Exception {
         // 출력객체

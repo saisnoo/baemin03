@@ -271,7 +271,7 @@ public class MemberDAO {
 					dto.setId(rs.getString("id"));
 					dto.setName(rs.getString("name"));
 					dto.setNo(rs.getInt("no"));
-					dto.setRegDate(rs.getString("regdate"));
+					dto.setRegDate(rs.getString("regdate") + "");
 					dto.setTel(rs.getString("tel"));
 					System.out.println(dto.toString());
 					list.add(dto);
@@ -279,7 +279,7 @@ public class MemberDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getListAll() 예외  ");
+			throw new Exception(" getListAll() 예외  "+e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end

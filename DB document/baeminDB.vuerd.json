@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 225.60000610351562,
-    "scrollLeft": 592,
+    "scrollTop": 221.60000610351562,
+    "scrollLeft": 153.60000610351562,
     "show": {
       "tableComment": false,
       "columnComment": false,
@@ -17,7 +17,7 @@
     },
     "database": "MySQL",
     "databaseName": "",
-    "canvasType": "SQL",
+    "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -486,7 +486,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 917.6000000000014,
           "top": 605.2,
           "zIndex": 725,
@@ -1399,7 +1399,7 @@
             "name": "whyCancel",
             "comment": "",
             "dataType": "VARCHAR(60)",
-            "default": "...",
+            "default": "",
             "option": {
               "autoIncrement": false,
               "primaryKey": false,
@@ -1446,7 +1446,7 @@
           "active": false,
           "left": 656.8000000000045,
           "top": 154.8000000238436,
-          "zIndex": 721,
+          "zIndex": 729,
           "widthName": 78,
           "widthComment": 60
         },
