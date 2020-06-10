@@ -1,22 +1,15 @@
 package com.baemin.orderlist;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Hashtable;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
-
 public class OrderListDTO {
     private int no; // PK
-    private int shopNo;// 주문 가게 이름
     private String name; // 주문자 이름
-    private int nameNo; // 주문자 번호
     private String orderDate; // now
     private int status;
     // -1 취소
@@ -27,10 +20,16 @@ public class OrderListDTO {
     // 영업종료 하면 0,1 >> -1 , 2 >> 3
     private String orderList; // 메뉴, 수량
     private String completeTime;
-    private String whyCancel;
     private String addr;
     private String addr2;
     private String comment;
+
+    // FOREIGN KEY FOREIGN KEY FOREIGN KEY FOREIGN KEY FOREIGN KEY
+    private int shop_NO;// 주문 가게 이름
+    private int member_No; // 주문자 번호
+
+    /// JOIN
+    private String whyCancel;
 
     // NOT IN DB - 삭제예정???
     private Hashtable<Integer, Integer> hashtable;

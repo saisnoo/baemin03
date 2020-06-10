@@ -86,7 +86,7 @@ public class Order2Cart {
         return result;
     }
 
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
 
         String a1 = "김치|1|2000|된장|3|500|감자|1|200|";
 
@@ -107,6 +107,6 @@ public class Order2Cart {
 
         // <%=order2cart.totalmoney(dto.getOrderList())%>
 
-    }
+    }*/
 
 }

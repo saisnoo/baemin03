@@ -16,7 +16,7 @@
 	System.out.println("id=" + id);
 
 	MemberDAO dao = MemberDAO.getInstance();
-	int result = dao.getNoByID(id);
+	int result = dao.idCheck(id);
 	
 	System.out.println("result=" + result);
 	

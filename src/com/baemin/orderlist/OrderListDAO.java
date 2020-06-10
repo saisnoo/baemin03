@@ -4,7 +4,6 @@ import javax.naming.*;
 import javax.sql.*;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +16,6 @@ public class OrderListDAO {
     Context cont = null;
     DataSource ds = null;
 
-    SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy.MM.dd");
-    SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-    SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
     // insertOrder_start-----------------------------------------------------------------------------
     public int insertOrder(OrderListDTO dto) throws Exception {
         // 출력객체
@@ -31,13 +26,13 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "insert into orderlist(shopNo, name, nameNo, orderDate, orderList, addr, addr2, comment)"
+            String sql = "insert into orderlist(shop_NO, name, member_No, orderList, addr, addr2, comment, orderDate)"
                     + " values(?, ?, ?, now(), ?, ?, ?, ? )";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, dto.getShopNo());
+            pstmt.setInt(1, dto.getShop_NO());
             pstmt.setString(2, dto.getName());
-            pstmt.setInt(3, dto.getNameNo());
+            pstmt.setInt(3, dto.getMember_No());
             pstmt.setString(4, dto.getOrderList());
             pstmt.setString(5, dto.getAddr());
             pstmt.setString(6, dto.getAddr2());
@@ -53,16 +48,16 @@ public class OrderListDAO {
         return result;
     } // insertOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-    // updateStatusPlus1_start-----------------------------------------------------------------------------
-    public int updateStatusPlus1(int no) throws Exception {
+    // updateStatusTo1_start-----------------------------------------------------------------------------
+    public int updateStatusTo1(int no) throws Exception {
         // 출력객체
         int result = -1;
-        System.out.println("---OrderListDAO updateStatusPlus1");
+        System.out.println("---OrderListDAO updateStatusTo1");
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update orderlist set status = status+1 WHERE no = ?";
+            String sql = "update orderlist set status = 1 WHERE no = ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -75,58 +70,19 @@ public class OrderListDAO {
             close(con, pstmt, rs);
         } // finally end
         return result;
-    } // updateStatusPlus1_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
-    // orderCancel-----------------------------------------------------------------------------
-    public int orderCancel(String whyCancel, int no) throws Exception {
-        return orderCancel(no, whyCancel);
-    }
-
-    public int orderCancel(OrderListDTO dto) throws Exception {
-        return orderCancel(dto.getNo(), dto.getWhyCancel());
-    }
-
-    public int orderCancel(int no, String whyCancel) throws Exception {
-        // 출력객체
-        int result = -1;
-        System.out.println("---OrderListDAO orderCancle");
-        try {
-            // 1+2
-            con = getConnection();
-            // 3. sql
-            String sql = "update orderlist set whyCancel = ? , status = -1 " + " WHERE  no = ? ";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, whyCancel);
-            pstmt.setInt(2, no);
-            // 5. 실행
-            result = pstmt.executeUpdate();
-        } catch (Exception e) {
-            e.getStackTrace();
-            throw new Exception(" orderCancle() 예외  ");
-        } finally {
-            close(con, pstmt, rs);
-        } // finally end
-        return result;
-    } // orderCancel-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+    } // updateStatusTo1_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // updateCompleteTime_start-----------------------------------------------------------------------------
-    public int updateCompleteTime(int no, int timeDelayFromNow) throws Exception {
+    public int updateCompleteTime(int no, int minute) throws Exception {
         // 출력객체
         int result = -1;
         System.out.println("---OrderListDAO updateCompleteTime");
-
-        // TODO: 현재시간 + 몇분 으로 새로운 시간 값
-
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "SQL_SOMETHING";
-            // ##UPDATE
-            // "update board set hit = hit + 1 , title = ? "
-            // + " where no = ?";
-
+            String sql = "update orderlist set  status = 2 , completeTime = DATE_ADD( NOW() , Interval " + minute
+                    + " minute) where no = ? ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -141,6 +97,46 @@ public class OrderListDAO {
         return result;
     } // updateCompleteTime_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
+    // orderCancel-----------------------------------------------------------------------------
+    public int orderCancel(String whyCancel, int no) throws Exception {
+        return orderCancel(no, whyCancel);
+    }
+
+    public int orderCancel(OrderListDTO dto) throws Exception {
+        return orderCancel(dto.getNo(), dto.getWhyCancel());
+    }
+
+    public int orderCancel(int no, String whyCancel) throws Exception {
+        // 출력객체
+        int result1 = -1;
+        int result2 = -1;
+        System.out.println("---OrderListDAO orderCancle");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "insert into Order_cancel (whyCancel, orderlist_No) values ( ?, ? ) ";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, whyCancel);
+            pstmt.setInt(2, no);
+            // 5. 실행
+            result1 = pstmt.executeUpdate();
+            // 3. sql
+            sql = "update orderList set status = -1 WHERE no = " + no;
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            // 5. 실행
+            result2 = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" orderCancle() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return Math.min(result1, result2);
+    } // orderCancel-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getOrder_start-----------------------------------------------------------------------------
     public OrderListDTO getOrder(int no) throws Exception {
         // 출력객체
@@ -150,9 +146,10 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
+            String sql = "select orderlist.no no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
-                    + " from orderlist where no = ? ";
+                    + " from orderlist LEFT JOIN Order_Cancel ON  orderlist.no = order_cancel.orderlist_no WHERE orderlist.no = ? ";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -162,9 +159,9 @@ public class OrderListDAO {
             if (rs != null) {
                 while (rs.next()) {
                     dto.setNo(rs.getInt("no"));
-                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setShop_NO(rs.getInt("shop_no"));
                     dto.setName(rs.getString("name"));
-                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setMember_No(rs.getInt("member_no"));
                     dto.setOrderDate(rs.getString("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
@@ -185,18 +182,19 @@ public class OrderListDAO {
         return dto;
     } // getOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-    // getListByNameNO_start-----------------------------------------------------------------------------
-    public List<OrderListDTO> getListByNameNO(int nameNo) throws Exception {
+    // getLIstByMember_No_start-----------------------------------------------------------------------------
+    public List<OrderListDTO> getListByMember_No(int nameNo) throws Exception {
         // 출력객체
         List<OrderListDTO> list = new ArrayList<>();
-        System.out.println("---OrderListDAO getListByNameNO");
+        System.out.println("---OrderListDAO getListByMember_No");
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
+            String sql = "select orderlist.no no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
-                    + " from orderlist where nameno = ? order by status asc, orderdate desc ";
+                    + " from orderlist LEFT JOIN Order_Cancel ON  orderlist.no = order_cancel.orderlist_no WHERE "
+                    + " member_No = ? order by status asc, orderdate desc ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, nameNo);
@@ -207,9 +205,9 @@ public class OrderListDAO {
                 while (rs.next()) {
                     OrderListDTO dto = new OrderListDTO();
                     dto.setNo(rs.getInt("no"));
-                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setShop_NO(rs.getInt("shop_no"));
                     dto.setName(rs.getString("name"));
-                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setMember_No(rs.getInt("member_no"));
                     dto.setOrderDate(rs.getString("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
@@ -223,12 +221,12 @@ public class OrderListDAO {
             }
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" getListByNameNO() 예외  ");
+            throw new Exception(" getLIstByMember_No() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
         return list;
-    } // getListByNameNO_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+    } // getLIstByMember_No_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListOfCurrent_start-----------------------------------------------------------------------------
     public List<OrderListDTO> getListOfCurrent(int shopNo) throws Exception {
@@ -239,9 +237,9 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-                    + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
-                    + " from orderlist WHERE ShopNo=? AND (status=0 OR status=1) " + " ORDER BY orderDate ASC";
+            String sql = "select no, shop_No, name, member_no, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
+                    + " status, orderList, addr, addr2, comment "
+                    + " from orderlist WHERE shop_No = ? AND (status=0 OR status=1) " + " ORDER BY orderDate ASC";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -252,14 +250,12 @@ public class OrderListDAO {
                 while (rs.next()) {
                     OrderListDTO dto = new OrderListDTO();
                     dto.setNo(rs.getInt("no"));
-                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setShop_NO(rs.getInt("shop_no"));
                     dto.setName(rs.getString("name"));
-                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setMember_No(rs.getInt("member_no"));
                     dto.setOrderDate(rs.getString("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getString("completeTime"));
-                    dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
                     dto.setComment(rs.getString("comment"));
@@ -284,9 +280,9 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-                    + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
-                    + " from orderlist WHERE shopNo = ? AND status = 2 AND completeTime > NOW() "
+            String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
+                    + " status, orderList, completeTime, addr, addr2, comment "
+                    + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime > NOW() "
                     + " ORDER BY orderdate ASC";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
@@ -298,14 +294,13 @@ public class OrderListDAO {
                 while (rs.next()) {
                     OrderListDTO dto = new OrderListDTO();
                     dto.setNo(rs.getInt("no"));
-                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setShop_NO(rs.getInt("shop_no"));
                     dto.setName(rs.getString("name"));
-                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setMember_No(rs.getInt("member_no"));
                     dto.setOrderDate(rs.getString("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getString("completeTime"));
-                    dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
                     dto.setComment(rs.getString("comment"));
@@ -334,10 +329,10 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shopNo, name, nameNo, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-                    + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
-                    + " from orderlist WHERE shopNo = ? AND status = 2 AND completetime < NOW() "
-                    + " ORDER BY orderdate DESC";
+            String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
+                    + " status, orderList, completeTime, addr, addr2, comment "
+                    + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() "
+                    + " ORDER BY orderdate ASC";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -348,14 +343,13 @@ public class OrderListDAO {
                 while (rs.next()) {
                     OrderListDTO dto = new OrderListDTO();
                     dto.setNo(rs.getInt("no"));
-                    dto.setShopNo(rs.getInt("shopNo"));
+                    dto.setShop_NO(rs.getInt("shop_no"));
                     dto.setName(rs.getString("name"));
-                    dto.setNameNo(rs.getInt("nameNo"));
+                    dto.setMember_No(rs.getInt("member_no"));
                     dto.setOrderDate(rs.getString("orderdate"));
                     dto.setStatus(rs.getInt("status"));
                     dto.setOrderList(rs.getString("orderlist"));
                     dto.setCompleteTime(rs.getString("completeTime"));
-                    dto.setWhyCancel(rs.getString("whyCancel"));
                     dto.setAddr(rs.getString("addr"));
                     dto.setAddr2(rs.getString("addr2"));
                     dto.setComment(rs.getString("comment"));
@@ -379,14 +373,19 @@ public class OrderListDAO {
         try {
             // 1+2
             con = getConnection();
+
+            // TODO: 지금 (status = 0 OR status = 1) AND shop_No = ? 주문번호 구해서, order_cancel
+
+            // 테이블에서 취소삭제 처리
             // 3. sql
-            String sql = "update orderlist set status = -1, whyCancel = '영업종료' WHERE "
-                    + " (status=0 OR status=1) AND shopNo = ?";
+            String sql = "update orderlist set status = -1  WHERE (status=0 OR status=1) AND shop_No = ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
             // 5. 실행
             result += pstmt.executeUpdate();
+
+            ////////// 3. status = 2 해당하는 모든 주문 status = 3으로
             // 3. sql
             sql = "update orderlist set status = 3 WHERE status=2 AND shopNo = ?";
             // 4. 실행객체
@@ -394,6 +393,7 @@ public class OrderListDAO {
             pstmt.setInt(1, shopNo);
             // 5. 실행
             result += pstmt.executeUpdate();
+
         } catch (Exception e) {
             e.getStackTrace();
             throw new Exception(" closeShop() 예외  ");
@@ -402,130 +402,6 @@ public class OrderListDAO {
         } // finally end
         return result;
     } // closeShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
-    // countNewOrder_start-----------------------------------------------------------------------------
-    public int countNewOrder(int shopNo) throws Exception {
-        // 출력객체
-        int result = -1;
-        System.out.println("---OrderListDAO countNewOrder");
-        try {
-            // 1+2
-            con = getConnection();
-            // 3. sql
-            String sql = "select count(*) from orderlist where shopNo = ? AND status = 0";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
-            // 5. 실행
-            rs = pstmt.executeQuery();
-            result = pstmt.executeUpdate();
-            // 6. 표시 --- select 때만 표시
-            if (rs != null) {
-                while (rs.next()) {
-                    result = rs.getInt(1);
-                }
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-            throw new Exception(" countNewOrder() 예외  ");
-        } finally {
-            close(con, pstmt, rs);
-        } // finally end
-        return result;
-    } // countNewOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
-    // countCurrentOrder_start-----------------------------------------------------------------------------
-    public int countCurrentOrder(int shopNo) throws Exception {
-        // 출력객체
-        int result = -1;
-        System.out.println("---OrderListDAO countCurrentOrder");
-        try {
-            // 1+2
-            con = getConnection();
-            // 3. sql
-            String sql = "select count(*) from orderlist where shopNo = ? AND status = 1";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
-            // 5. 실행
-            rs = pstmt.executeQuery();
-            result = pstmt.executeUpdate();
-            // 6. 표시 --- select 때만 표시
-            if (rs != null) {
-                while (rs.next()) {
-                    result = rs.getInt(1);
-                }
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-            throw new Exception(" countNewOrder() 예외  ");
-        } finally {
-            close(con, pstmt, rs);
-        } // finally end
-        return result;
-    } // countCurrentOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
-    // countGoingOrder_start-----------------------------------------------------------------------------
-    public int countGoingOrder(int shopNo) throws Exception {
-        // 출력객체
-        int result = -1;
-        System.out.println("---OrderListDAO countGoingOrder");
-        try {
-            // 1+2
-            con = getConnection();
-            // 3. sql
-            String sql = "select count(*) from orderlist where shopNo = ? AND status = 2";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
-            // 5. 실행
-            rs = pstmt.executeQuery();
-            result = pstmt.executeUpdate();
-            // 6. 표시 --- select 때만 표시
-            if (rs != null) {
-                while (rs.next()) {
-                    result = rs.getInt(1);
-                }
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-            throw new Exception(" countNewOrder() 예외  ");
-        } finally {
-            close(con, pstmt, rs);
-        } // finally end
-        return result;
-    } // countGoingOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
-    // countDoneOrder_start-----------------------------------------------------------------------------
-    public int countDoneOrder(int shopNo) throws Exception {
-        // 출력객체
-        int result = -1;
-        System.out.println("---OrderListDAO countDoneOrder");
-        try {
-            // 1+2
-            con = getConnection();
-            // 3. sql
-            String sql = "select count(*) from orderlist WHERE shopNo = 5 AND status = 2 AND completetime < NOW()";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
-            // 5. 실행
-            rs = pstmt.executeQuery();
-            result = pstmt.executeUpdate();
-            // 6. 표시 --- select 때만 표시
-            if (rs != null) {
-                while (rs.next()) {
-                    result = rs.getInt(1);
-                }
-            }
-        } catch (Exception e) {
-            e.getStackTrace();
-            throw new Exception(" countNewOrder() 예외  ");
-        } finally {
-            close(con, pstmt, rs);
-        } // finally end
-        return result;
-    } // countDoneOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
