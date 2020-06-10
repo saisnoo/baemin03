@@ -226,7 +226,7 @@ public class ShopDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getListAll() 예외  ");
+			throw new Exception(" getListAll() 예외  " + e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
@@ -242,8 +242,8 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "insert into shop( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
-					+ " shopTel, shopX , shopY , regDate)  values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+			String sql = "insert into shop ( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
+					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ? ,now() )";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -303,7 +303,7 @@ public class ShopDAO {
 			con = getConnection();
 			// con=ds.getConnection();
 			// 3. sql
-			String sql = "update shop set status = 0 WHERE no = ?";
+			String sql = "update shop set shopStatus = 0 WHERE no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
@@ -328,7 +328,7 @@ public class ShopDAO {
 			con = getConnection();
 			// con=ds.getConnection();
 			// 3. sql
-			String sql = "update shop set status = 1 WHERE no = ?";
+			String sql = "update shop set shopStatus = 1 WHERE no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);

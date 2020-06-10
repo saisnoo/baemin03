@@ -336,8 +336,7 @@ public class OrderListDAO {
             String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, addr, addr2, comment "
                     + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() AND "
-                    + " orderDate BETWEEN (    now()   ,  DATE_ADD(NOW(), INTERVAL 1 DAY)    )"
-                    + " ORDER BY orderdate ASC";
+                    + " orderDate BETWEEN ( DATE_ADD(NOW(), INTERVAL -1 DAY) , now() )" + " ORDER BY orderdate ASC";
             System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
@@ -364,7 +363,7 @@ public class OrderListDAO {
             }
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" getListOfGoing() 예외  ");
+            throw new Exception(" getListFinishToday() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
