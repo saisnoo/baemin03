@@ -10,6 +10,10 @@ body {
 	overflow: hidden;
 }
 
+textarea {
+	resize: none;
+}
+
 .baemin_topnav {
 	position: fixed;
 	top: 0;

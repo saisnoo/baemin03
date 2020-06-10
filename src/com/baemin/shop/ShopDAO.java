@@ -58,11 +58,11 @@ public class ShopDAO {
 		return dto;
 	} // login_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// getNoByID_start-----------------------------------------------------------------------------
-	public int getNoByID(String shopID) throws Exception {
+	// idCheck_start-----------------------------------------------------------------------------
+	public int idCheck(String shopID) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---ShopDAO getNoByID");
+		System.out.println("---ShopDAO idCheck");
 		try {
 			// 1+2
 			con = getConnection();
@@ -72,15 +72,21 @@ public class ShopDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, shopID);
 			// 5. 실행
-			result = pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
+			// 6. 표시 --- select 때만 표시
+			if (rs != null) {
+				while (rs.next()) {
+					result = rs.getInt(1);
+				}
+			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getNoByID() 예외  ");
+			throw new Exception(" idCheck() 예외  ");
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
 		return result;
-	} // getNoByID_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	} // idCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getShopInfo_start-----------------------------------------------------------------------------
 	public ShopDTO getShopInfo(int shopNo) throws Exception {
@@ -88,8 +94,9 @@ public class ShopDAO {
 		ShopDTO dto = new ShopDTO();
 		System.out.println("---ShopDAO getShopInfo");
 		try {
+			con = getConnection();
 			// 1+2
-			// con=ds.getConnection();
+			con = getConnection();
 			// 3. sql
 			String sql = "select * from shop where shopNo = ?";
 			// 4. 실행객체
@@ -122,7 +129,6 @@ public class ShopDAO {
 		} // finally end
 		return dto;
 	} // getShopInfo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
 
 	// getListByCategory_start-----------------------------------------------------------------------------
 	public List<ShopDTO> getListByCategory(String category, double memberX, double memberY) throws Exception {
