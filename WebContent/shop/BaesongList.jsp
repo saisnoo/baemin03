@@ -4,29 +4,33 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 
-<%-- <%
+<%
 	//자바 구문
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------BaesongList.jsp");
-	int shopNo = Integer.parseInt(request.getParameter("shopNo"));
-	OrderListDAO dao = OrderListDAO.getInstance();
+request.setCharacterEncoding("UTF-8");
+System.out.println("------BaesongList.jsp");
 
-	List<OrderListDTO> orderList = dao.getListOfCurrent(shopNo);
-	//out.println(shopNo);
+System.out.println(request.getParameter("shopNo"));
+int shopNo=Integer.parseInt(request.getParameter("shopNo"));
+OrderListDAO dao= OrderListDAO.getInstance();
 
-	for (int i = 0; i < orderList.size(); i++) {
-		OrderListDTO dto = orderList.get(i);
-%> --%>
+List<OrderListDTO> orderList = dao.getListOfGoing(shopNo);
+System.out.println(shopNo);
+int BaesongCount =orderList.size();
+for(int i=0;i<BaesongCount;i++){
+	OrderListDTO dto =orderList.get(i);
+%>
+
 							<div class="w3-section">
 								<div class="w3-card w3-padding">
 									<!-- 상단 컨테이너 끝 -->
 									<div class="w3-row">
 										<!-- 왼쪽 -->
-										<div class="w3-col w3-container w3-left" style="width: 150px;">
-											<h2>15:22</h2>
-											<input type="hidden" value="배송중 1번">
 
+										<div class="w3-col w3-container w3-left" style="width: 150px;">
+											<%=dto.getOrderDate()%>
+											<input type="hidden" value="<%=dto.getNo()%>">
 										</div>
+										
 										<!-- 왼쪽 끝 -->
 
 										<!-- 오른쪽-->
@@ -34,13 +38,14 @@
 											style="width: 100px; padding: 0px;">
 											<button class="w3-button w3-orange w90 h100"
 												onClick="cancelBtn(this)">주문취소</button>
+											<div class="count2" style="display:none;"><%=dto.getStatus() %></div>
 										</div>
 										<!-- 오른쪽-->
 										<!-- 가운데 -->
 										<div class="w3-rest w3-container">
 											<div class="w3-row">
 												<div class="w3-col">
-													<strong>[메뉴 4개]</strong> &nbsp;박문자
+													<strong>[메뉴 4개]</strong> &nbsp;<%=dto.getName() %>
 												</div>
 												<div class="w3-col">주문번호 5번</div>
 											</div>
@@ -60,6 +65,15 @@
 									<!-- 하단 컨테이너 끝-->
 								</div>
 							</div>
-<%-- <%	
+<%	
 }//for end
-%> --%>
+%>
+
+<script>
+	// 스크립트
+	function cancelBtn(e) {
+		var a1 = e.parentNode.parentNode.children[0].children[0].value;
+		console.log(a1);
+		document.getElementById("jumunCancel").style.display = "block";
+	}
+</script>
