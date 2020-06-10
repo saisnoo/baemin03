@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 124,
-    "scrollLeft": 196,
+    "scrollTop": 225.60000610351562,
+    "scrollLeft": 592,
     "show": {
       "tableComment": false,
       "columnComment": false,
@@ -371,7 +371,7 @@
           },
           {
             "id": "02ad2595-94f0-731c-dafe-1cfc6c664d27",
-            "name": "reviewContent",
+            "name": "content",
             "comment": "",
             "dataType": "VARCHAR(60)",
             "default": "",
@@ -386,7 +386,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 87,
+              "widthName": 60,
               "widthComment": 60,
               "widthDataType": 83,
               "widthDefault": 60
@@ -394,7 +394,7 @@
           },
           {
             "id": "8cd161bd-0f06-362a-c39a-33f9c34b3d55",
-            "name": "reviewRank",
+            "name": "rank",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -409,7 +409,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 68,
+              "widthName": 60,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -486,10 +486,10 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 917.6000000000014,
           "top": 605.2,
-          "zIndex": 667,
+          "zIndex": 725,
           "widthName": 60,
           "widthComment": 60
         },

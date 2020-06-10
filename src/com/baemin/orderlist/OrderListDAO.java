@@ -83,6 +83,7 @@ public class OrderListDAO {
             // 3. sql
             String sql = "update orderlist set  status = 2 , completeTime = DATE_ADD( NOW() , Interval " + minute
                     + " minute) where no = ? ";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -195,6 +196,7 @@ public class OrderListDAO {
                     + " status, orderList, completeTime, whyCancel, addr, addr2, comment "
                     + " from orderlist LEFT JOIN Order_Cancel ON  orderlist.no = order_cancel.orderlist_no WHERE "
                     + " member_No = ? order by status asc, orderdate desc ";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, nameNo);
@@ -240,6 +242,7 @@ public class OrderListDAO {
             String sql = "select no, shop_No, name, member_no, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, addr, addr2, comment "
                     + " from orderlist WHERE shop_No = ? AND (status=0 OR status=1) " + " ORDER BY orderDate ASC";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -284,6 +287,7 @@ public class OrderListDAO {
                     + " status, orderList, completeTime, addr, addr2, comment "
                     + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime > NOW() "
                     + " ORDER BY orderdate ASC";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -331,8 +335,10 @@ public class OrderListDAO {
             // 3. sql
             String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, addr, addr2, comment "
-                    + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() "
+                    + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() AND "
+                    + " orderDate BETWEEN (    now()   ,  DATE_ADD(NOW(), INTERVAL 1 DAY)    )"
                     + " ORDER BY orderdate ASC";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, shopNo);
@@ -364,44 +370,6 @@ public class OrderListDAO {
         } // finally end
         return list;
     } // getListFinishToday_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
-    // closeShop_start-----------------------------------------------------------------------------
-    public int closeShop(int shopNo) throws Exception {
-        // 출력객체
-        int result = 0;
-        System.out.println("---OrderListDAO closeShop");
-        try {
-            // 1+2
-            con = getConnection();
-
-            // TODO: 지금 (status = 0 OR status = 1) AND shop_No = ? 주문번호 구해서, order_cancel
-
-            // 테이블에서 취소삭제 처리
-            // 3. sql
-            String sql = "update orderlist set status = -1  WHERE (status=0 OR status=1) AND shop_No = ?";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
-            // 5. 실행
-            result += pstmt.executeUpdate();
-
-            ////////// 3. status = 2 해당하는 모든 주문 status = 3으로
-            // 3. sql
-            sql = "update orderlist set status = 3 WHERE status=2 AND shopNo = ?";
-            // 4. 실행객체
-            pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
-            // 5. 실행
-            result += pstmt.executeUpdate();
-
-        } catch (Exception e) {
-            e.getStackTrace();
-            throw new Exception(" closeShop() 예외  ");
-        } finally {
-            close(con, pstmt, rs);
-        } // finally end
-        return result;
-    } // closeShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
