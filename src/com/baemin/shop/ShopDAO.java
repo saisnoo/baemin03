@@ -243,7 +243,7 @@ public class ShopDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "insert into board( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
-					+ " shopTel, shopX , shopY)  values( ?, ?, ?, ?, ?, ?, ?, ? )";
+					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ? ,now() )";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
