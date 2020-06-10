@@ -3,27 +3,27 @@ body {
   padding: 0px;
 }
 
-#topnav{
-	position: fixed;
-	top: 0;
-	width: 100%;
-	overflow: hidden;
+#topnav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 textarea {
-	resize: none;
+  resize: none;
 }
 
 .baemin_topnav {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 @font-face {
   font-family: baemin_font;
-  src: url("../source/BMHANNAPro.ttf");
+  src: url('../source/BMHANNAPro.ttf');
 }
 
 .w3-baemint {
@@ -32,8 +32,8 @@ textarea {
 }
 
 @font-face {
-  font-family: "baemin_font";
-  src: url("./BMHANNAPro.ttf");
+  font-family: 'baemin_font';
+  src: url('./BMHANNAPro.ttf');
 }
 
 .sw-center {
@@ -186,6 +186,24 @@ textarea {
 .topnav .icon,
 .bottomnav .icon {
   display: none;
+}
+
+.star-rating {
+  width: 304px;
+}
+
+.star-rating,
+.star-rating span {
+  display: inline-block;
+  height: 55px;
+  overflow: hidden;
+  background: url(../source/img/star.png) no-repeat;
+}
+
+.star-rating span {
+  background-position: left bottom;
+  line-height: 0;
+  vertical-align: top;
 }
 
 @media screen and (max-width: 900px) {
