@@ -53,7 +53,7 @@ CREATE TABLE notice
 CREATE TABLE Order_cancel
 (
   no           INT         NOT NULL AUTO_INCREMENT,
-  whyCancel    VARCHAR(60) NOT NULL DEFAULT '.',
+  whyCancel    VARCHAR(60) NOT NULL DEFAULT ...,
   orderlist_no INT         NOT NULL COMMENT 'AUTO_Increment',
   PRIMARY KEY (no)
 );
@@ -79,12 +79,12 @@ CREATE TABLE orderlist
 
 CREATE TABLE review
 (
-  no            INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
-  reviewContent VARCHAR(60) NOT NULL,
-  reviewRank    INT         NOT NULL,
-  regDate       DATETIME    NOT NULL,
-  shop_no       INT         NOT NULL,
-  member_no     INT         NOT NULL,
+  no        INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
+  content   VARCHAR(60) NOT NULL,
+  rank      INT         NOT NULL,
+  regDate   DATETIME    NOT NULL,
+  shop_no   INT         NOT NULL,
+  member_no INT         NOT NULL,
   PRIMARY KEY (no)
 );
 
@@ -141,7 +141,6 @@ ALTER TABLE review
     REFERENCES member (no);
 
       
-
 
 
       
