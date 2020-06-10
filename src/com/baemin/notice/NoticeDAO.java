@@ -30,7 +30,7 @@ public class NoticeDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select * from notice where (startDate <= CURDATE() AND CURDATE() <= endDate) ORDER BY no DESC";
+			String sql = "select * from notice where (startDate <= now() AND now() <= endDate) ORDER BY no DESC";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			// 5. 실행
@@ -87,8 +87,7 @@ public class NoticeDAO {
 
 	// viewNotice_start-----------------------------------------------------------------------------
 	public NoticeDTO viewNotice(int no) throws Exception {
-		NoticeDTO dto = null;
-		dto = new NoticeDTO();
+		NoticeDTO dto = new NoticeDTO();
 		try {
 			con = getConnection();
 
@@ -108,10 +107,7 @@ public class NoticeDAO {
 			ex.getStackTrace();
 			System.out.println("viewNotice() 예외");
 		} finally {
-			try {
-				close(con, pstmt, rs);
-			} catch (Exception ex2) {
-			}
+			close(con, pstmt, rs);
 		} // finally end
 		return dto;
 	}// viewNotice_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
