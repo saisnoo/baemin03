@@ -56,6 +56,10 @@ List<ShopDTO> list = dao.getListAll();
 	top: 135px;
 }
 
+  .btn {
+    background-color: #45c1bf;
+    color: white;
+  }
 
 
 
@@ -126,10 +130,10 @@ List<ShopDTO> list = dao.getListAll();
 					<table class="w3-table w3-bordered" id="myTable">
 
 						<tr class="first">
+							<th width="10%"><div class="th-text">매장번호</div></th>
 							<th width="20%"><div class="th-text">매장이름</div></th>
 							<th width="15%"><div class="th-text">매장분류</div></th>
 							<th width="55%"><div class="th-text">매장주소</div></th>
-							<th width="10%"><div class="th-text">매장번호</div></th>
 						</tr>
 						<div>&nbsp;</div>
 
@@ -137,10 +141,10 @@ List<ShopDTO> list = dao.getListAll();
 							for (int i = 0; i < list.size(); i++) {
 						%>
 						<tr class="contentLine" onclick="click(this)">
+							<td class="shopNoNo" width="15%"><%=list.get(i).getNo()%></td>
 							<td width="20%"><%=list.get(i).getShopName()%></td>
 							<td width="15%"><%=list.get(i).getShopCategory()%></td>
 							<td width="50%"><%=list.get(i).getShopAddr()%>&nbsp;<%=list.get(i).getShopAddr2()%></td>
-							<td class="shopNoNo" width="15%"><%=list.get(i).getShopNo()%></td>
 						</tr>
 						<%
 							}
@@ -153,20 +157,16 @@ List<ShopDTO> list = dao.getListAll();
 				<div>&nbsp;</div>
 				<div class="w3-row">
 
-					<div class="w3-bar w3-col m4">
-						<button class="w3-bar-item w3-button w3-blue"
+					<div class="w3-bar w3-col m2">
+						<button class="w3-bar-item w3-button btn"
 							onclick="location='NoticeInputForm.jsp'">공지쓰기</button>
-						<button class="w3-bar-item w3-button w3-light-blue"
-							onclick="location='NoticeList.jsp'">공지가기</button>
-						<button class="w3-bar-item w3-button w3-cyan"
-							onclick="location='MemberList.jsp'">회원보기</button>
 					</div>
 
 					<div class="w3-col m2">
 						<select class="w3-select w3-border" id="selec">
-							<option value="0">매장이름</option>
-							<option value="1">매장분류</option>
-							<option value="2">매장주소</option>
+							<option value="1">매장이름</option>
+							<option value="2">매장분류</option>
+							<option value="3">매장주소</option>
 						</select>
 
 					</div>
@@ -201,7 +201,7 @@ List<ShopDTO> list = dao.getListAll();
 
 	<!-- 모든페이지 공통 -->
 	<!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
-
+<jsp:include page="../sw_css/admintopnav.jsp" />
 
 </body>
 </html>

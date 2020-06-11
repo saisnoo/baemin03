@@ -29,6 +29,7 @@ for(int i=0;i<NewOrderCount;i++){
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
 				<%=dto.getOrderDate()%>
 				<input type="hidden" value="<%=dto.getNo()%>">
+				<input id="shopNo" type="hidden" value="<%=dto.getShop_NO()%>">
 			</div>
 			<!-- 왼쪽 끝 -->
 
@@ -38,7 +39,7 @@ for(int i=0;i<NewOrderCount;i++){
 				<%
 					if(dto.getStatus()==0){
 				%>
-				<button class="w3-button w3-blue h100" onclick="jumunBtn(this)">조리버튼</button>
+				<button class="w3-button w3-blue h100" onclick="CookBtn(this)">조리버튼</button>
 				<div class="count0" style="display:none;"><%=dto.getStatus() %></div>
 				<%
 					}else if(dto.getStatus()==1){
@@ -83,18 +84,49 @@ for(int i=0;i<NewOrderCount;i++){
 <script>
 	// 스크립트
 
-	function jumunBtn(e) {
+	function CookBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 		//모달창에 값넣기
 		document.getElementById("jumunSiganNo").value = a1;
+		var sid = document.getElementById("shopNo").value;
 		//모달창띄우기
 		document.getElementById("jumunReady").style.display = "block";
+		
+		$.ajax({
+			type: "post",
+			url : "CheckOrderPro.jsp",
+			data: "shopNo="+sid,
+			success : function(result){
+				console.log(result);
+				if(result==1){
+					alert("조리O");
+				}else{
+					alert("조리X");
+				}//else
+			}//success
+		});//ajax
 	}
 	function baesongBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
-		location="BaesongSelect.jsp?shopNo="+a1;
+		
+		$.ajax({
+			type: "post",
+			url : "BaesongSelect.jsp",
+			data: {
+				"shopNo" : shopNo,
+				"minute" : minute
+			},
+			success : function(result){
+				console.log(result);
+				if(result==1){
+					
+				}else{
+					
+				}//else
+			}//success
+		});//ajax
 	}
 	function cancelBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;

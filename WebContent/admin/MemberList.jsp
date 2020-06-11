@@ -1,14 +1,16 @@
-<%@page import="com.baemin.shop.*"%>
+<%@page import="com.baemin.member.MemberDTO"%>
+<%@page import="com.baemin.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "java.sql.*"%>
  
 <%
 request.setCharacterEncoding("utf-8");
-System.out.println("------ ShopListAll.jsp --- ");
+System.out.println("------ MemberListAll.jsp --- ");
 
-ShopDAO dao=ShopDAO.getInstance();
-List<ShopDTO> list = dao.getListAll();
+MemberDAO dao=MemberDAO.getInstance();
+List<MemberDTO> list = dao.getListAll();
+
 %>
 
 <!DOCTYPE html>
@@ -16,7 +18,7 @@ List<ShopDTO> list = dao.getListAll();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title> ShopList.jsp  </title>
+<title> MemberList.jsp  </title>
 
 <!-- CDN - Font Awesome 4 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -50,18 +52,33 @@ List<ShopDTO> list = dao.getListAll();
         
     }
 
+  .btn {
+    background-color: #45c1bf;
+    color: white;
+  }
 
  
 </style>
 <script>
 // 스크립트
-  $(function(){
+/*   $(function(){
 	  $(".contentLine").click(function(){
-		 var no=$(this).find(".shopNo").text().trim();
-		 console.log(no);
-		 //location.href="NoticeView.jsp?no="+no;		  
+		 var memberNo=$(this).find(".memberNo").text().trim();
+		 console.log(memberNo);
+		 location.href="MemberView.jsp?memberNo="+memberNo;		  
 	  });  
-  });
+  }); */
+  
+  $(function() {
+		$(".contentLine").click(function() {
+			var memberNo = $(this).find(".memberNo").text().trim();
+			console.log(memberNo);
+			//location.href="ShopView.jsp?shopNo="+shopNo;	
+			document.getElementById("id01").style.display = "block";		
+			$("#swsw").load("MemberView.jsp?memberNo="+memberNo);
+
+		});
+	});
   
 
   
@@ -87,12 +104,14 @@ List<ShopDTO> list = dao.getListAll();
 	    }
 	  }
 	}
+  
+  
 
 </script>
 </head>
 <body>
 <!-- 내용 -->
-<h2> ShopListAll.jsp </h2><br>
+<h2> MemberListAll.jsp </h2><br>
 <%
 
 %>
@@ -118,10 +137,11 @@ List<ShopDTO> list = dao.getListAll();
 <table class="w3-table w3-bordered" id="myTable">
 
   <tr class="first">  
-    <th width="20%"><div class="th-text">매장이름</div></th>
-    <th width="15%"><div class="th-text">매장분류</div></th>
-    <th width="55%"><div class="th-text">매장주소</div></th>
-    <th width="10%"><div class="th-text">매장번호</div></th>    
+    <th width="10%"><div class="th-text">회원번호</div>
+    <th width="25%"><div class="th-text">회원이름</div></th>
+    <th width="15%"><div class="th-text">회원ID</div></th>
+    <th width="35%"><div class="th-text">회원주소</div></th>
+    <th width="20%"><div class="th-text">회원전화번호</div></th>    
   </tr>
   <div>&nbsp;</div>
     
@@ -129,10 +149,11 @@ List<ShopDTO> list = dao.getListAll();
     for(int i=0; i<list.size(); i++){
     	%>
       <tr class="contentLine" onclick="click(this)">
-    	<td width="20%"><%=list.get(i).getShopName() %></td>
-    	<td width="15%"><%=list.get(i).getShopCategory() %></td>
-    	<td width="50%"><%=list.get(i).getShopAddr() %>&nbsp;<%=list.get(i).getShopAddr2() %></td>   	
-    	<td class="shopNo" width="15%"><%=list.get(i).getShopNo() %></td>
+    	<td class="memberNo" width="10%"><%=list.get(i).getNo() %></td>
+    	<td width="25%"><%=list.get(i).getName() %></td>
+    	<td width="15%"><%=list.get(i).getId() %></td>
+    	<td width="35%"><%=list.get(i).getAddr() %>&nbsp;<%=list.get(i).getAddr2() %></td>   	
+    	<td width="20%"><%=list.get(i).getTel() %></td>
       </tr>
     	<%    	
     }       
@@ -144,17 +165,14 @@ List<ShopDTO> list = dao.getListAll();
 <div>&nbsp;</div>
       <div class="w3-row">
               
-        <div class="w3-bar w3-col m4">
-          <button class="w3-bar-item w3-button w3-blue" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>          
-          <button class="w3-bar-item w3-button w3-light-blue" onclick="location='NoticeList.jsp'">공지가기</button>
-          <button class="w3-bar-item w3-button w3-cyan" onclick="location='MemberList.jsp'">회원보기</button>
+        <div class="w3-bar w3-col m2">
+          <button class="w3-bar-item w3-button btn" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>
         </div>
 
         <div class="w3-col m2">
           <select class="w3-select w3-border" id ="selec">   			
-  			 <option value="0">매장이름</option>
-  			 <option value="1">매장분류</option>
- 			 <option value="2">매장주소</option>
+  			 <option value="1">회원이름</option>
+  			 <option value="2">회원ID</option> 			 
  		  </select>
        
         </div>       
@@ -165,6 +183,20 @@ List<ShopDTO> list = dao.getListAll();
         </div>
         
       </div>  
+      
+      <!-- Modal -->
+				<div id="id01" class="w3-modal">
+					<div class="w3-modal-content">
+						<div class="w3-container">
+							<span
+								onclick="document.getElementById('id01').style.display='none'"
+								class="w3-button w3-display-topright">&times;</span>
+
+							<div id="swsw"></div>
+
+						</div>
+					</div>
+				</div>
 
 <!-- main content end----------------------------------------------------------------------- -->
 </div>
@@ -174,7 +206,7 @@ List<ShopDTO> list = dao.getListAll();
 
 <!-- 모든페이지 공통 -->
 <!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
- 
+ <jsp:include page="../sw_css/admintopnav.jsp" />
  
 </body>
 </html>

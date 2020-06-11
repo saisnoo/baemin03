@@ -48,6 +48,11 @@ List<NoticeDTO> list = dao.getList();
         top:135px;             
         
     }
+    
+  .btn {
+    background-color: #45c1bf;
+    color: white;
+  }
 
 
 
@@ -103,7 +108,7 @@ List<NoticeDTO> list = dao.getList();
 <div class="sw-center">
 <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-<div class="sw-container-1000">
+<div class="sw-container-800">
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
@@ -137,10 +142,8 @@ List<NoticeDTO> list = dao.getList();
 
  <div class="w3-row">
               
-        <div class="w3-bar w3-col m4">
-          <button class="w3-bar-item w3-button w3-blue" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>
-          <button class="w3-bar-item w3-button w3-light-blue" onclick="location='ShopList.jsp'">매장보기</button>
-          <button class="w3-bar-item w3-button w3-cyan" onclick="location='MemberList.jsp'">회원보기</button>
+        <div class="w3-bar w3-col m2">
+          <button class="w3-bar-item w3-button btn" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>        
         </div>
         
         <div class="w3-col m8">
@@ -157,7 +160,7 @@ List<NoticeDTO> list = dao.getList();
 
 <!-- 모든페이지 공통 -->
 <!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
-<jsp:include page="../sw_css/topnav.jsp" />  
+<jsp:include page="../sw_css/admintopnav.jsp" />  
  
 </body>
 </html>
