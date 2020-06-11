@@ -16,7 +16,7 @@
     <description>컨트롤러</description>
     <display-name>DispacherController</display-name>
     <servlet-name>DispacherController</servlet-name>
-    <servlet-class>ch19.controller.DispacherController</servlet-class>
+    <servlet-class>com.mvc.controller.DispacherController</servlet-class>
     <init-param>
       <param-name>proFile</param-name>
       <param-value>/WEB-INF/commandPro.properties</param-value>
