@@ -3,7 +3,7 @@
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.mvc.command.CommandAction;
+import com.mvc.action.CommandAction;
 
 import java.io.*;
 import java.util.*;//HashMap
@@ -13,6 +13,10 @@ import java.util.*;//HashMap
 //스프링 에서는 front controller 라 한다 
 public class DispacherController extends HttpServlet {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 4382893576874033285L;
 	private Map<String, Object> map = new HashMap<>();// 변수
 
 	// init() : 초기화 작업

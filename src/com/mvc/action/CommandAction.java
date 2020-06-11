@@ -1,4 +1,4 @@
-﻿package com.mvc.command;
+﻿package com.mvc.action;
 
 import javax.servlet.http.*;
 

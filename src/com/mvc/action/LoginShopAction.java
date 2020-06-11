@@ -2,13 +2,13 @@ package com.mvc.action;
 
 import javax.servlet.http.*;
 
-public class NoticeWriteAction implements CommandAction {
+public class LoginShopAction implements CommandAction {
 
     @Override
     public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         request.setCharacterEncoding("UTF-8");
-        System.out.println("- - - - NoticeWriteAction - - - - ");
+        System.out.println("- - - - LoginShopAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
         //
