@@ -137,6 +137,7 @@ for(int i=0;i<list.size();i++)
 		}); 
 	
 	}
+
 	function baesongBtn(e) {
 		var orderList_No = e.parentNode.parentNode.children[0].children[1].value;
 		var shop_No = e.parentNode.parentNode.children[0].children[2].value;
@@ -147,54 +148,8 @@ for(int i=0;i<list.size();i++)
 
 		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
 		
-		 $("#take_overbtn").click(function(){
-			 var estimated_time = $(":input:radio[name=estimated_time]:checked").val();
-			
-			 
-			 var data={
-					//항목이름: 값(변수)
-				//	no:no,
-					//rno:rno,
-				
-					orderList_No:orderList_No,
-					estimated_time:estimated_time
-			}
-			//alert(JSON.stringify(reply));
-			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
-			$.ajax({
-				type : "post",
-				url : "BaesongSelect.jsp",
-				//data : JSON.stringify(reply),
-				data : data,
-				//리턴 되어 돌려 받는 데이터의 타입
-				dataType: "text" ,
-				//기본값이므로 삭제 가능
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				success : function(result,status,xhr){
-					console.log("배달접수 완료");
-				},
-				error : function(xhr,status,error){
-					console.log("배달접수 실패");
-				}//error의 끝
-				
-			});//ajax의 끝*/
-		}); 
-		
-		
-		
-	}
-	function cancelBtn(e) {
-		var orderList_No = e.parentNode.parentNode.children[0].children[1].value;
-		var shop_No = e.parentNode.parentNode.children[0].children[2].value;
-		var getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
-	/* 	var 시 = Math.floor((간격 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		var 분 = Math.floor((간격 % (1000 * 60 * 60)) / (1000 * 60));
-		var 초 = Math.floor((간격 % (1000 * 60)) / 1000);
-
-		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
-		
-		 $("#take_overbtn").click(function(){
-			 var estimated_time = $(":input:radio[name=estimated_time]:checked").val();
+		 //$("#take_overbtn").click(function(){
+			/*  var estimated_time = $(":input:radio[name=estimated_time]:checked").val(); */
 			
 			 
 			 var data={
@@ -224,8 +179,55 @@ for(int i=0;i<list.size();i++)
 				}//error의 끝
 				
 			});//ajax의 끝*/
-		}); 
+		//});  
 				
+	}
+	
+	function cancelBtn(e) {
+		var orderList_No = e.parentNode.parentNode.children[0].children[1].value;
+		var shop_No = e.parentNode.parentNode.children[0].children[2].value;
+		var getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
+	/* 	var 시 = Math.floor((간격 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var 분 = Math.floor((간격 % (1000 * 60 * 60)) / (1000 * 60));
+		var 초 = Math.floor((간격 % (1000 * 60)) / 1000);
+
+		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
+		
+		 $("#jumoon_calcel_btn").click(function(){
+			 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
+			
+			 
+			 var data={
+					//항목이름: 값(변수)
+				//	no:no,
+					//rno:rno,
+				
+					orderList_No:orderList_No,
+					whyCancel:whyCancel
+			}
+			//alert(JSON.stringify(reply));
+			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
+			$.ajax({
+				type : "post",
+				url : "BaesongSelect.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("취소접수 완료");
+				},
+				error : function(xhr,status,error){
+					console.log("취소접수 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+		}); 
+		
+		
+		
 	}
 </script>
 
