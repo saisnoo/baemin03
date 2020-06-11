@@ -145,18 +145,18 @@ public class OrderListDAO {
             result = pstmt.executeUpdate();
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" updateStatus0to1() 예외  ");
+            throw new Exception(" updateStatusTo1() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
         return result;
     } // updateStatusTo1_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-    // updateCompleteTime_start-----------------------------------------------------------------------------
-    public int updateCompleteTime(int no) throws Exception {
+    // updateStatusTo2_start-----------------------------------------------------------------------------
+    public int updateStatusTo2(int no) throws Exception {
         // 출력객체
         int result = -1;
-        System.out.println("---OrderListDAO updateCompleteTime");
+        System.out.println("---OrderListDAO updateStatusTo2");
         try {
             // 1+2
             con = getConnection();
@@ -170,12 +170,12 @@ public class OrderListDAO {
             result = pstmt.executeUpdate();
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" updateCompleteTime() 예외  ");
+            throw new Exception(" updateStatusTo2() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
         return result;
-    } // updateCompleteTime_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+    } // updateStatusTo2_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // orderCancel-----------------------------------------------------------------------------
     public int orderCancel(String whyCancel, int no) throws Exception {
