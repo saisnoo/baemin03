@@ -1,14 +1,15 @@
-package com.mvc.action;
+package com.mvc.action.memberclient;
 
 import javax.servlet.http.*;
+import com.mvc.action.CommandAction;
 
-public class NoticeUpdateAction implements CommandAction {
+public class JoinClientProAction implements CommandAction {
 
     @Override
     public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         request.setCharacterEncoding("UTF-8");
-        System.out.println("- - - - NoticeUpdateAction - - - - ");
+        System.out.println("- - - - joinClientProAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
         //

@@ -127,7 +127,7 @@ public class OrderListDAO {
     } // insertOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // updateStatusTo1_start-----------------------------------------------------------------------------
-    public int updateStatusTo1(int no) throws Exception {
+    public int updateStatusTo1(int no, int minute) throws Exception {
         // 출력객체
         int result = -1;
         System.out.println("---OrderListDAO updateStatusTo1");
@@ -135,7 +135,9 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update orderlist set status = 1 WHERE no = ?";
+            String sql = "update orderlist set  status = 1 , completeTime = DATE_ADD( NOW() , Interval " + minute
+                    + " minute) where no = ? ";
+
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, no);
@@ -151,7 +153,7 @@ public class OrderListDAO {
     } // updateStatusTo1_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // updateCompleteTime_start-----------------------------------------------------------------------------
-    public int updateCompleteTime(int no, int minute) throws Exception {
+    public int updateCompleteTime(int no) throws Exception {
         // 출력객체
         int result = -1;
         System.out.println("---OrderListDAO updateCompleteTime");
@@ -159,8 +161,7 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "update orderlist set  status = 2 , completeTime = DATE_ADD( NOW() , Interval " + minute
-                    + " minute) where no = ? ";
+            String sql = "update orderlist set status = 2 WHERE no = ?";
             System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);

@@ -1,14 +1,15 @@
-package com.mvc.action;
+package com.mvc.action.memberclient;
 
 import javax.servlet.http.*;
+import com.mvc.action.CommandAction;
 
-public class NoticeWriteAction implements CommandAction {
+public class IdCheckAction implements CommandAction {
 
     @Override
     public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         request.setCharacterEncoding("UTF-8");
-        System.out.println("- - - - NoticeWriteAction - - - - ");
+        System.out.println("- - - - idCheckAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
         //
