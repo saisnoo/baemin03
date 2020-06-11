@@ -14,7 +14,6 @@ System.out.println("------memberTopNav.jsp");
 			<h3 style="font-family: baemin_font;">배다른 민족</h3>
 		</div>
 	</div>
-
 	<script>
 		/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 	</script>

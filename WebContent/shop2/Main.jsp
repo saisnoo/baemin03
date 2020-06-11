@@ -161,13 +161,13 @@
 			 <!-- 글번호입력 -->
 			    <label for="writer">예상시간</label><hr>
 			 
-			 <input type="radio" name="estimated_time" value="30" >30분<br>
-			 <input type="radio" name="estimated_time" value="40" >40분<br>
-			 <input type="radio" name="estimated_time" value="50" >50분<br>
-			 <input type="radio" name="estimated_time" value="60" >60분<br>
-			 <input type="radio" name="estimated_time" value="70" >70분<br>
-			 <input type="radio" name="estimated_time" value="80" >80분<br>
-			 <input type="radio" name="estimated_time" value="90" >90분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="30" >30분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="40" >40분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="50" >50분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="60" >60분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="70" >70분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="80" >80분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="90" >90분<br>
 			 
 			 <!-- 
 			    <select name="estimated_time">
@@ -209,10 +209,10 @@
 			 <div class="form-group">
 			 <!-- 글번호입력 -->
 			    <label for="writer">취소사유</label><br>
-			    <input type="radio" name="whyCancel" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
-			    <input type="radio" name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
-			    <input type="radio" name="whyCancel" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소<br>
-			    <input type="radio" name="whyCancel" value="거리에 따른 취소">거리에 따른 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="거리에 따른 취소">거리에 따른 취소<br>
 				
 				<!-- 			    
 			    <select>
@@ -323,6 +323,8 @@
                     		//document.getElementById("jumoontab").click(); 
                     	}
                     	setInterval(reload, 3000);
+                    	
+                    	
                     });
                     function countcount(){
                 		var a = document.getElementsByClassName("count0").length;
@@ -334,7 +336,7 @@
                 		document.getElementById("BaeSongCount").innerText=(b);
                 		document.getElementById("EndCount").innerText=(c);
                     }
-                    
+   					                 
                     
                 </script>
 	
