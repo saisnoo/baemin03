@@ -105,14 +105,11 @@ for(int i=0;i<NewOrderCount;i++){
 	
 	function baesongBtn(e) {
 		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
-		var time = e.parentNode.parentNode.children[0].children[0].value;
 		var shop = e.parentNode.parentNode.children[0].children[2].value;
 		console.log(jumunNo);
-		console.log(time);
 		console.log(shop);
 		//모달창에 값넣기
 		document.getElementById("jumunNo").value = jumunNo;
-		document.getElementById("time").value = time;
 		document.getElementById("shop").value = shop;
 		//모달창띄우기
 		document.getElementById("jumunReady").style.display = "block";
