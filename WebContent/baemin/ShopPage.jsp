@@ -16,6 +16,8 @@ System.out.println("------ ShopPage.jsp --- ");
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <!-- CDN - Google Icons -->
  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+ <!-- CDN - jquery 3.4.1 -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <!-- CDN - W3CSS -->
  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  <!-- CDN OFFLINE- sw_topNav.css -->
@@ -36,8 +38,14 @@ System.out.println("------ ShopPage.jsp --- ");
 <%
  
 %>
- 
   
+ 	<!-- responsive template by SW ----------------------------------------------------------- -->
+	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
+	<div class="sw-topnav-margin">&nbsp;</div>
+	<div class="sw-topnav-margin">&nbsp;</div>
+	<%-- 사이트 공통 부분 Include - topnav --%>
+	<jsp:include page="../sw_css/memberTopNav.jsp" />
+
  
 </body>
 </html>
