@@ -59,15 +59,15 @@
 			<i class="material-icons" style="color: orange;">star</i><strong><%=dto.getRank()%></strong>
 		</div>
 		<div class="w3-rest">
-			<h6>
-				<%=dto.getShopName()%>
-			</h6>
+			<h4>
+				<b><%=dto.getShopName()%></b>
+			</h4>
 			<input type="hidden" class="no" value="<%=dto.getNo()%>" />
 		</div>
 	</div>
 	<div class="w3-section">
 		<p><%=dto.getShopAddr()%></p>
-		<div class="w3-label">
+		<div class="w3-label" style="color: #8C8C8C; font-size: small;">
 			<%=dto.getShopCategory()%></div>
 	</div>
 </div>

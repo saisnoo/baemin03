@@ -133,7 +133,7 @@ img {
                     1. div로 표기. 버튼 따로없이 주소를 클릭하면 모달창 열기??
                 </div>
             </div> -->
-			<div class="w3-row w3-center">
+			<div class="w3-row w3-center" style="margin-top: 3%">
 				<button type="button" class="w3-button w3-white w3-center"
 					onclick="jusoModalOpen()">
 					<!-- ------------------------------------------------------- -->
@@ -150,7 +150,7 @@ img {
                 <img src="../source//ad_sample.jpg" alt="" width="100%">
             </div>
         </div> -->
-		<div class="sw-container-500">
+		<div class="sw-container-500" style="margin-top: 1%">
 			<div class="w3-content" style="width: 100%">
 				<!-- ------------------------------------------------------------ -->
 				<img class="w3-round mySlides" src="../source/img/1.png"
@@ -216,7 +216,7 @@ img {
 		<!-- shopList.jsp?category=hansik -->
 
 		<!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
-		<div class="sw-container-500 w3-section">
+		<div class="sw-container-500" style="margin-top: 2%;">
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
 				<div class="w3-row">
