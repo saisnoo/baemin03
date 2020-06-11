@@ -318,9 +318,9 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shop_No, name, member_no, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-                    + " status, orderList, addr, addr2, comment "
-                    + " from orderlist WHERE shop_No = ? AND (status=0 OR status=1) " + " ORDER BY orderDate ASC";
+            String sql = "";
+            // TODO: 쿼리문 작성 및 daO
+
             System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
@@ -362,10 +362,9 @@ public class OrderListDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-                    + " status, orderList, completeTime, addr, addr2, comment "
-                    + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime > NOW() "
-                    + " ORDER BY orderdate ASC";
+            String sql = "";
+            // TODO: 쿼리문 작성 및 daO
+
             System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
@@ -400,44 +399,90 @@ public class OrderListDAO {
     } // getListOfGoing_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListFinishToday_start-----------------------------------------------------------------------------
-    public List<OrderListDTO> getListDone(int shopNo) throws Exception {
-        return getListFinishToday(shopNo);
+    public List<OrderListDTO> getListDone(int shop_No) throws Exception {
+        return getListFinishToday(shop_No);
     }
 
-    public List<OrderListDTO> getListFinishToday(int shopNo) throws Exception {
+    public List<OrderListDTO> getListFinishToday(int shop_No) throws Exception {
         // 출력객체
         List<OrderListDTO> list = new ArrayList<>();
+
         System.out.println("---OrderListDAO getListFinishToday");
         try {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-                    + " status, orderList, completeTime, addr, addr2, comment "
-                    + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() AND "
-                    + " orderDate BETWEEN ( DATE_ADD(NOW(), INTERVAL -1 DAY) , now() )" + " ORDER BY orderdate ASC";
+            String sql = "";
+            // TODO: 쿼리문 작성 및 daO
+            // TODO: 쿼리문 작성 및 daO
+            // TODO: 쿼리문 작성 및 daO
+
             System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, shopNo);
+            pstmt.setInt(1, shop_No);
             // 5. 실행
             rs = pstmt.executeQuery();
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
+                int i = 0; // 주문번호 rowNum
+                int j = 0; // 같은 주문번호 내부 rowNum
+                int preNo = -1; // 이전 주문번호
                 while (rs.next()) {
-                    OrderListDTO dto = new OrderListDTO();
-                    dto.setNo(rs.getInt("no"));
-                    dto.setShop_NO(rs.getInt("shop_no"));
-                    dto.setName(rs.getString("name"));
-                    dto.setMember_No(rs.getInt("member_no"));
-                    dto.setOrderDate(rs.getString("orderdate"));
-                    dto.setStatus(rs.getInt("status"));
-                    dto.setOrderList(rs.getString("orderlist"));
-                    dto.setCompleteTime(rs.getString("completeTime"));
-                    dto.setAddr(rs.getString("addr"));
-                    dto.setAddr2(rs.getString("addr2"));
-                    dto.setComment(rs.getString("comment"));
-                    list.add(dto);
+                    int thisNo = rs.getInt("no");
+
+                    if (preNo == -1) {
+                        // preNo == -1 >> rs.next 처음
+                        preNo = thisNo;
+                    }
+
+                    if (preNo == thisNo) {
+                        // 같은 주문건
+                    } else if (preNo != thisNo) {
+                        // 주문번호 바뀌었다.
+                        i++; // i++ 하고
+                        j = 0; // j초기화
+                        preNo = thisNo; // 이전 주문번호 갱신
+                    }
+
+                    System.out.println(" i = " + i + "\tj = " + j);
+
+                    OrderListDTO orderListDto = new OrderListDTO();
+                    List<Order_MenuDTO> order_menu_list = new ArrayList<>();
+                    Order_MenuDTO order_menuDto = new Order_MenuDTO();
+                    order_menu_list.add(order_menuDto);
+                    orderListDto.setMenuList(order_menu_list);
+                    list.add(orderListDto);
+                    // orderListDto.setNo(rs.getInt("no"));
+                    // orderListDto.setName(rs.getString("name"));
+                    // orderListDto.setOrderDate(rs.getString("orderdate"));
+                    // orderListDto.setStatus(rs.getInt("status"));
+                    // orderListDto.setAddr(rs.getString("addr"));
+                    // orderListDto.setAddr2(rs.getString("addr2"));
+                    // orderListDto.setComment(rs.getString("comment"));
+                    // orderListDto.setShop_NO(rs.getInt("shop_no"));
+                    // orderListDto.setMember_No(rs.getInt("member_no"));
+                    // orderListDto.setCompleteTime(rs.getString("completeTime"));
+                    list.get(i).setNo(rs.getInt("no"));
+                    list.get(i).setName(rs.getString("name"));
+                    list.get(i).setOrderDate(rs.getString("orderdate"));
+                    list.get(i).setStatus(rs.getInt("status"));
+                    list.get(i).setAddr(rs.getString("addr"));
+                    list.get(i).setAddr2(rs.getString("addr2"));
+                    list.get(i).setComment(rs.getString("comment"));
+                    list.get(i).setShop_NO(rs.getInt("shop_no"));
+                    list.get(i).setMember_No(rs.getInt("member_no"));
+                    list.get(i).setCompleteTime(rs.getString("completeTime"));
+                    // dto2.setCount(rs.getInt("count"));
+                    // dto2.setMenu_Name(rs.getString("menu_name"));
+                    // dto2.setMenu_No(rs.getInt("menu_no"));
+                    // dto2.setPrice(rs.getInt("price"));
+                    list.get(i).getMenuList().get(j).setCount(rs.getInt("count"));
+                    list.get(i).getMenuList().get(j).setMenu_Name(rs.getString("menu_name"));
+                    list.get(i).getMenuList().get(j).setPrice(rs.getInt("price"));
+                    list.get(i).getMenuList().get(j).setMenu_No(rs.getInt("menu_No"));
+                    j++;
+
                 }
             }
         } catch (Exception e) {
