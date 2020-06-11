@@ -1,14 +1,15 @@
-package com.mvc.action;
+package com.mvc.action.admin;
 
 import javax.servlet.http.*;
+import com.mvc.action.CommandAction;
 
-public class JoinMemberAction implements CommandAction {
+public class NoticeDeleteProAction implements CommandAction {
 
     @Override
     public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         request.setCharacterEncoding("UTF-8");
-        System.out.println("- - - - JoinMemberAction - - - - ");
+        System.out.println("- - - - NoticeDeleteProAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
         //
