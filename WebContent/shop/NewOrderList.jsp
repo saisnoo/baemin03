@@ -27,7 +27,7 @@ for(int i=0;i<NewOrderCount;i++){
 		<div class="w3-row">
 			<!-- 왼쪽 -->
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
-				<input type="text" value="<%=dto.getOrderDate()%>">
+				<div><%=dto.getOrderDate()%></div>
 				<input type="hidden" value="<%=dto.getNo()%>">
 				<input id="shopNo" type="hidden" value="<%=dto.getShop_NO()%>">
 			</div>
@@ -84,7 +84,7 @@ for(int i=0;i<NewOrderCount;i++){
 	// 스크립트
 
 	function baesongBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].innerText;
 		console.log(jumunNo);
 		document.getElementById("jumunNo").value = jumunNo;
 		$.ajax({
