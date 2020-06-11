@@ -6,9 +6,9 @@ import lombok.*;
 @Setter
 @ToString
 public class ShopDTO {
-    private int shopNo; // PK reference member.no
-    private String shopID;
-    private String shopPW;
+    private int no; // PK reference member.no
+    private String id;
+    private String pw;
     private String shopName; //
     private String shopCategory; // 가게 분류
     private String shopEx;// 가게 설명
@@ -18,7 +18,9 @@ public class ShopDTO {
     private double shopX;
     private double shopY;
     private int shopStatus; // 0 영업종료 1영업중
+    private String regDate;
+    private int grade;
 
     // NOT IN TABLE
-    private double reviewRank;
+    private double rank; // 평균 별점 담는 객체
 }

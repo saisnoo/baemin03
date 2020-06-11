@@ -11,6 +11,25 @@
   </resource-ref>
 
 
+  <!--프론트  컨트롤러 등록 -->
+  <servlet>
+    <description>컨트롤러</description>
+    <display-name>DispacherController</display-name>
+    <servlet-name>DispacherController</servlet-name>
+    <servlet-class>com.mvc.controller.DispacherController</servlet-class>
+    <init-param>
+      <param-name>proFile</param-name>
+      <param-value>/WEB-INF/commandPro.properties</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DispacherController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

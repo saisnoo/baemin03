@@ -3,7 +3,8 @@ package com.baemin.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
+import java.util.*;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -17,10 +18,6 @@ public class MemberDAO {
 	Context cont = null;
 	DataSource ds = null;
 
-	SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy.MM.dd");
-	SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-	SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
 	// insertMember_start-----------------------------------------------------------------------------
 	public int insertMember(MemberDTO dto) throws Exception {
 		// 출력객체
@@ -31,8 +28,8 @@ public class MemberDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "insert into member (id , pw , name , tel , addr , addr2 , regdate , grade , memberX , memberY ) "
-					+ " values ( ?, ?, ?, ?, ?, ? , curdate() ,1 ,? ,?  ) ";
+			String sql = "insert into member (id , pw , name , tel , addr , addr2 , regdate ,  memberX , memberY ) "
+					+ " values ( ?, ?, ?, ?, ?, ? , now() ,? ,?  ) ";
 			// "insert into board(no, title, content, writer, pw) "
 			// + " values(board_seq.nextval, ?, ?, ?, sysdate)";
 			// 4. 실행객체
@@ -75,12 +72,10 @@ public class MemberDAO {
 			// 6. 표시 --- select 때만 표시
 			if (rs != null) {
 				while (rs.next()) {
+					// 세션에 담을 6가지
 					dto.setNo(rs.getInt("no"));
 					dto.setId(rs.getString("id"));
 					dto.setName(rs.getString("name"));
-					dto.setTel(rs.getString("tel"));
-					dto.setAddr(rs.getString("addr"));
-					dto.setAddr2(rs.getString("addr2"));
 					dto.setGrade(rs.getInt("grade"));
 					dto.setMemberX(rs.getDouble("memberX"));
 					dto.setMemberY(rs.getDouble("memberY"));
@@ -95,11 +90,11 @@ public class MemberDAO {
 		return dto;
 	} // login_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// getNoByID_start-----------------------------------------------------------------------------
-	public int getNoByID(String id) throws Exception {
+	// idCheck_start-----------------------------------------------------------------------------
+	public int idCheck(String id) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---MemberDAO getNoByID");
+		System.out.println("---MemberDAO idCheck");
 		try {
 			// 1+2
 			con = getConnection();
@@ -118,24 +113,23 @@ public class MemberDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getNoByID() 예외  ");
+			throw new Exception(" idCheck() 예외  ");
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
 		return result;
-	} // getNoByID_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	} // idCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getDTO_start-----------------------------------------------------------------------------
 	public MemberDTO getDTO(int no) throws Exception {
 		// 출력객체
 		MemberDTO dto = new MemberDTO();
 		System.out.println("---MemberDAO getDTO");
-
 		try {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select * from member where no = ?";
+			String sql = "select no, id, pw, name, tel, addr, addr2, memberX, memberY, grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) regdate from member where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
@@ -150,7 +144,7 @@ public class MemberDAO {
 					dto.setName(rs.getString("name"));
 					dto.setNo(rs.getInt("no"));
 					dto.setPw(rs.getString("pw"));
-					dto.setRegDate(dateFormat3.format(rs.getDate("regdate")));
+					dto.setRegDate(rs.getString("regdate"));
 					dto.setTel(rs.getString("tel"));
 					System.out.println(dto.toString());
 				}
@@ -164,43 +158,12 @@ public class MemberDAO {
 		return dto;
 	} // getDTO_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// getMemberNo_start-----------------------------------------------------------------------------
-	public int getMemberNo(String id, String pw) throws Exception {
-		// 출력객체
-		int result = -1;
-		System.out.println("---MemberDAO getMemberNo");
-		try {
-			// 1+2
-			con = getConnection();
-			// 3. sql
-			String sql = "select no from member where id = ? and pw = ?";
-			// 4. 실행객체
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
-			// 5. 실행
-			rs = pstmt.executeQuery();
-			// 6. 표시 --- select 때만 표시
-			if (rs != null) {
-				while (rs.next()) {
-					result = rs.getInt("no");
-				}
-			}
-		} catch (Exception e) {
-			e.getStackTrace();
-			throw new Exception(" getMemberNo() 예외  ");
-		} finally {
-			close(con, pstmt, rs);
-		} // finally end
-		return result;
-	} // getMemberNo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
 	// changePW_start-----------------------------------------------------------------------------
-	public int changePW(int memberNo, String pw) throws Exception {
-		return changePW(pw, memberNo);
+	public int changePW(int no, String pw) throws Exception {
+		return changePW(pw, no);
 	}
 
-	public int changePW(String pw, int memberNo) throws Exception {
+	public int changePW(String pw, int no) throws Exception {
 		// 출력객체
 		int result = -1;
 		System.out.println("---MemberDAO changePW");
@@ -209,11 +172,11 @@ public class MemberDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update member set pw = ? where memberNo = ?";
+			String sql = "update member set pw = ? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pw);
-			pstmt.setInt(2, memberNo);
+			pstmt.setInt(2, no);
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -234,13 +197,14 @@ public class MemberDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update member set addr=?, memberX=?, memberY=? where memberNo = ?";
+			String sql = "update member set addr = ?, addr2 = ?, memberX=?, memberY=? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getAddr());
-			pstmt.setDouble(2, dto.getMemberX());
-			pstmt.setDouble(3, dto.getMemberY());
-			pstmt.setInt(4, dto.getNo());
+			pstmt.setString(2, dto.getAddr2());
+			pstmt.setDouble(3, dto.getMemberX());
+			pstmt.setDouble(4, dto.getMemberY());
+			pstmt.setInt(5, dto.getNo());
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -253,11 +217,11 @@ public class MemberDAO {
 	} // changeAddr_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// changeTel_start-----------------------------------------------------------------------------
-	public int changeTel(String tel, int memberNo) throws Exception {
-		return changeTel(memberNo, tel);
+	public int changeTel(String tel, int no) throws Exception {
+		return changeTel(no, tel);
 	}
 
-	public int changeTel(int memberNo, String tel) throws Exception {
+	public int changeTel(int no, String tel) throws Exception {
 		// 출력객체
 		int result = -1;
 		System.out.println("---MemberDAO changeTel");
@@ -269,7 +233,7 @@ public class MemberDAO {
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, tel);
-			pstmt.setInt(2, memberNo);
+			pstmt.setInt(2, no);
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -280,6 +244,47 @@ public class MemberDAO {
 		} // finally end
 		return result;
 	} // changeTel_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+	// getListAll_start-----------------------------------------------------------------------------
+	public List<MemberDTO> getListAll() throws Exception {
+		// 출력객체
+		List<MemberDTO> list = new ArrayList<>();
+		System.out.println("---MemberDAO getListAll");
+
+		try {
+			// 1+2
+			con = getConnection();
+			// 3. sql
+			String sql = "select no, id, pw, name, tel, addr, addr2, memberX, memberY, "
+					+ " grade, DATE_FORMAT( regDate, '%y-%m-%d %H:%i' ) regdate from member " + " ORDER BY name ";
+			// 4. 실행객체
+			pstmt = con.prepareStatement(sql);
+			// 5. 실행
+			rs = pstmt.executeQuery();
+			// 6. 표시 --- select 때만 표시
+			if (rs != null) {
+				while (rs.next()) {
+					MemberDTO dto = new MemberDTO();
+					dto.setGrade(rs.getInt("grade"));
+					dto.setAddr(rs.getString("addr"));
+					dto.setAddr2(rs.getString("addr2"));
+					dto.setId(rs.getString("id"));
+					dto.setName(rs.getString("name"));
+					dto.setNo(rs.getInt("no"));
+					dto.setRegDate(rs.getString("regdate") + "");
+					dto.setTel(rs.getString("tel"));
+					System.out.println(dto.toString());
+					list.add(dto);
+				}
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+			throw new Exception(" getListAll() 예외  "+e);
+		} finally {
+			close(con, pstmt, rs);
+		} // finally end
+		return list;
+	} // getListAll_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////
@@ -305,8 +310,7 @@ public class MemberDAO {
 	}
 
 	// close 1
-	static final void close(Connection con, PreparedStatement pstmt,
-			ResultSet rs) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt, ResultSet rs) throws Exception {
 		close(con, pstmt);
 		if (rs != null) {
 			rs.close();
@@ -314,8 +318,7 @@ public class MemberDAO {
 	} // close () end
 
 	// close 2
-	static final void close(Connection con, PreparedStatement pstmt)
-			throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt) throws Exception {
 		if (con != null) {
 			con.close();
 		}

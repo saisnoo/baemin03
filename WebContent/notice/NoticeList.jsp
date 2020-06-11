@@ -35,6 +35,26 @@ List<NoticeDTO> list = dao.getList();
   background-color: #eeeeee;
   cursor: pointer;
  }
+ 
+ #ys {
+  height: 400px;
+  overflow-y:auto;
+}
+
+
+.th-text {
+        position: absolute;        
+        width: inherit;
+        top:135px;             
+        
+    }
+    
+  .btn {
+    background-color: #45c1bf;
+    color: white;
+  }
+
+
 
  
 </style>
@@ -88,47 +108,49 @@ List<NoticeDTO> list = dao.getList();
 <div class="sw-center">
 <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-<div class="sw-container-1000">
+<div class="sw-container-800">
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
+<div id="ys">
 <table class="w3-table w3-bordered" id="myTable">
 
   <tr>
-    <th width="15%">공지번호</th>
-    <th width="55%">공지글제목</th>
-    <th width="15%">공지시작일</th>
-    <th width="15%">공지종료일</th>
+    <th width="15%"><div class="th-text">공지번호</div></th>
+    <th width="55%"><div class="th-text">공지글제목</div></th>
+    <th width="15%"><div class="th-text">공지시작일</div></th>
+    <th width="15%"><div class="th-text">공지종료일</div></th>
   </tr>
   
     <%
     for(int i=0; i<list.size(); i++){
     	%>
       <tr class="contentLine" onclick="click(this)">
-    	<td class="noticeNo"><%=list.get(i).getNo() %></td>
-    	<td><%=list.get(i).getTitle() %></td>
-    	<td><%=list.get(i).getStartDate() %></td>
-    	<td><%=list.get(i).getEndDate() %></td>   	
+    	<td class="noticeNo" width="15%"><%=list.get(i).getNo() %></td>
+    	<td width="55%"><%=list.get(i).getTitle() %></td>
+    	<td width="15%"><%=list.get(i).getStartDate() %></td>
+    	<td width="15%"><%=list.get(i).getEndDate() %></td>   	
       </tr>
     	<%    	
     }       
-    %>  
-  
-  <tr>
-    <td colspan="5">
-      <div class="w3-row">
-        <div class="w3-col m2 l2">
-          <button class="w3-button w3-blue" onclick="location='NoticeInputForm.jsp'">글쓰기</button>
-        </div>
-        <div class="w3-col m10 l10">
-          <input class="w3-input w3-border w3-padding" type="text" placeholder="공지글제목 검색" id="myInput" onkeyup="myFunction()">
-        </div>
-      </div>                      
-    </td>
-  </tr>
+    %> 
+ 
 
 </table>
+</div>
+<div>&nbsp;</div>
 
+ <div class="w3-row">
+              
+        <div class="w3-bar w3-col m2">
+          <button class="w3-bar-item w3-button btn" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>        
+        </div>
+        
+        <div class="w3-col m8">
+          <input class="w3-input w3-border w3-padding" type="text" placeholder="공지글제목 검색" id="myInput" onkeyup="myFunction()">
+        </div>
+        
+      </div>            
 
 <!-- main content end----------------------------------------------------------------------- -->
 </div>
@@ -138,7 +160,7 @@ List<NoticeDTO> list = dao.getList();
 
 <!-- 모든페이지 공통 -->
 <!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
-<jsp:include page="../sw_css/topnav.jsp" />  
+<jsp:include page="../sw_css/admintopnav.jsp" />  
  
 </body>
 </html>

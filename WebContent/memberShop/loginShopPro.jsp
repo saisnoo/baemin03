@@ -9,7 +9,6 @@
 %>
 
 <%
-
 	String shopID = request.getParameter("shopID");
 	String shopPW = request.getParameter("shopPW");
 	System.out.println("shopID=" + shopID);
@@ -20,10 +19,22 @@
 
 	System.out.println(dto.toString());
 
-	if (shopID == null) {
-		System.out.println(" !!! shop shopID null");
+	int no = dto.getNo();
+
+	if (no > 0) {
+		System.out.println(" !!! shop id=" + shopID);
+		session.setAttribute("no", no);
+		session.setAttribute("id", dto.getId());
+		session.setAttribute("grade", 2);
+		session.setAttribute("name", dto.getShopName());
+		response.sendRedirect("../shop/Main.jsp");
 	} else {
-		System.out.println(" !!! shop shopID=" + shopID);
-		session.setAttribute("shopID", dto.getShopNo());
+		System.out.println(" !!! shop null");
+%>
+<script>
+	alert("로그인에 실패하였습니다");
+	location.href = "../index.html";
+</script>
+<%
 	}
 %>

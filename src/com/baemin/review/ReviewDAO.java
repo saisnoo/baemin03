@@ -3,7 +3,6 @@ package com.baemin.review;
 import javax.naming.*;
 import javax.sql.*;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReviewDAO {
@@ -16,38 +15,63 @@ public class ReviewDAO {
     Context cont = null;
     DataSource ds = null;
 
-    SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy.MM.dd");
-    SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-    SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-
-    // getReview_start-----------------------------------------------------------------------------
-    public ReviewDTO getReview(int reviewOrderNo) throws Exception {
+    // writeReview_start-----------------------------------------------------------------------------
+    public int writeReview(ReviewDTO dto) throws Exception {
         // 출력객체
-        ReviewDTO dto = new ReviewDTO();
-        System.out.println("---ReviewDAO getReview");
+        int result = -1;
+        System.out.println("---ReviewDAO writeReview");
 
         try {
             // 1+2
             con = getConnection();
+            // con=ds.getConnection();
             // 3. sql
-            String sql = "select * from review where reviewOrderNo = ?";
-            // "select no, title, writer, to_char(writedate, 'yyyy.mm.dd') writedate,"
-            // + " hit from board where no = ? order by no desc";
+            String sql = "insert into review ( content, rank, shop_No, member_No, regDate  )     "
+                    + " values ( ? , ?,  ?,  ?,  now()  ) ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, reviewOrderNo);
+            pstmt.setString(1, dto.getContent());
+            pstmt.setInt(2, dto.getRank());
+            pstmt.setInt(3, dto.getShop_no());
+            pstmt.setInt(4, dto.getMember_no());
+            // 5. 실행
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" writeReview() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+
+        return result;
+
+    } // writeReview_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // getReview_start-----------------------------------------------------------------------------
+    public ReviewDTO getReview(int no) throws Exception {
+        // 출력객체
+        ReviewDTO dto = new ReviewDTO();
+        System.out.println("---ReviewDAO getReview");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select no, content, DATE_FORMAT( regdate, '%y-%m-%d %h:%i') regDate "
+                    + " rank, shop_no, member_no " + " from review where no = ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, no);
             // 5. 실행
             rs = pstmt.executeQuery();
             // 6. 표시 --- select 때만 표시
             if (rs != null) {
                 while (rs.next()) {
-                    dto.setReviewNo(rs.getInt("reviewno"));
-                    dto.setReviewShopNo(rs.getInt("reviewShopNo"));
-                    dto.setReviewOrderNo(rs.getInt("reviewOrderNo"));
-                    dto.setReviewContent(rs.getString("reviewcontent"));
-                    dto.setReviewDate(dateFormat3.format(rs.getDate("reviewdate")));
-                    dto.setReviewRank(rs.getInt("reviewRank"));
-                    dto.setReviewerNo(rs.getInt("reviewerNo"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setContent(rs.getString("content"));
+                    dto.setRegDate(rs.getString("regdate"));
+                    dto.setRank(rs.getInt("rank"));
+                    dto.setShop_no(rs.getInt("shop_no"));
+                    dto.setMember_no(rs.getInt("member_no"));
                 }
             }
         } catch (Exception e) {
@@ -59,8 +83,49 @@ public class ReviewDAO {
         return dto;
     } // getReview_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
+    // getListByShop_start-----------------------------------------------------------------------------
+    public List<ReviewDTO> getListByShop(int shop_no, int howManyData) throws Exception {
+        // 출력객체
+        List<ReviewDTO> list = new ArrayList<>();
+        System.out.println("---ReviewDAO getListByShop");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select no, content, DATE_FORMAT( regdate, '%y-%m-%d %h:%i') regDate "
+                    + " rank, shop_no, member_no from review WHERE shop_no = ?  ORDER by regDate DESC limit 0, ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shop_no);
+            pstmt.setInt(2, howManyData);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    ReviewDTO dto = new ReviewDTO();
+                    dto.setNo(rs.getInt("no"));
+                    dto.setContent(rs.getString("content"));
+                    dto.setRegDate(rs.getString("regdate"));
+                    dto.setRank(rs.getInt("rank"));
+                    dto.setShop_no(rs.getInt("shop_no"));
+                    dto.setMember_no(rs.getInt("member_no"));
+                    list.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getListByShop() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+
+        return list;
+
+    } // getListByShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // getListByRank_start-----------------------------------------------------------------------------
-    public List<ReviewDTO> getListByRank(int whichShopNo, int howmany, int rank) throws Exception {
+    public List<ReviewDTO> getListByRank(int shop_no, int howmany, int rank) throws Exception {
         // 출력객체
         List<ReviewDTO> list = new ArrayList<>();
         System.out.println("---ReviewDAO getListByRank");
@@ -68,10 +133,12 @@ public class ReviewDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from review where reviewShopNo=? and reviewRank=?  order by reviewdate desc limit 0, ?";
+            String sql = "select no, content, DATE_FORMAT( regdate, '%y-%m-%d %h:%i') regDate "
+                    + " rank, shop_no, member_no " + " from review where shop_no = ? and reviewRank = ? "
+                    + " ORDER by regDate desc limit 0, ?";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, whichShopNo);
+            pstmt.setInt(1, shop_no);
             pstmt.setInt(2, rank);
             pstmt.setInt(3, howmany);
             // 5. 실행
@@ -80,13 +147,12 @@ public class ReviewDAO {
             if (rs != null) {
                 while (rs.next()) {
                     ReviewDTO dto = new ReviewDTO();
-                    dto.setReviewNo(rs.getInt("reviewno"));
-                    dto.setReviewShopNo(rs.getInt("reviewShopNo"));
-                    dto.setReviewOrderNo(rs.getInt("reviewOrderNo"));
-                    dto.setReviewContent(rs.getString("reviewcontent"));
-                    dto.setReviewDate(dateFormat3.format(rs.getDate("reviewdate")));
-                    dto.setReviewRank(rs.getInt("reviewRank"));
-                    dto.setReviewerNo(rs.getInt("reviewerNo"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setContent(rs.getString("content"));
+                    dto.setRegDate(rs.getString("regdate"));
+                    dto.setRank(rs.getInt("rank"));
+                    dto.setShop_no(rs.getInt("shop_no"));
+                    dto.setMember_no(rs.getInt("member_no"));
                     list.add(dto);
                 }
             }
@@ -108,9 +174,8 @@ public class ReviewDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from review where reviewerNo=? order by reviewDate";
-            // "select no, title, writer, to_char(writedate, 'yyyy.mm.dd') writedate,"
-            // + " hit from board where no = ? order by no desc";
+            String sql = "select no, content, DATE_FORMAT( regdate, '%y-%m-%d %h:%i') regDate "
+                    + " rank, shop_no, member_no " + " from review where reviewerNo=? order by reviewDate";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, clientNo);
@@ -120,13 +185,12 @@ public class ReviewDAO {
             if (rs != null) {
                 while (rs.next()) {
                     ReviewDTO dto = new ReviewDTO();
-                    dto.setReviewNo(rs.getInt("reviewno"));
-                    dto.setReviewShopNo(rs.getInt("reviewShopNo"));
-                    dto.setReviewOrderNo(rs.getInt("reviewOrderNo"));
-                    dto.setReviewContent(rs.getString("reviewcontent"));
-                    dto.setReviewDate(dateFormat3.format(rs.getDate("reviewdate")));
-                    dto.setReviewRank(rs.getInt("reviewRank"));
-                    dto.setReviewerNo(rs.getInt("reviewerNo"));
+                    dto.setNo(rs.getInt("no"));
+                    dto.setContent(rs.getString("content"));
+                    dto.setRegDate(rs.getString("regdate"));
+                    dto.setRank(rs.getInt("rank"));
+                    dto.setShop_no(rs.getInt("shop_no"));
+                    dto.setMember_no(rs.getInt("member_no"));
                     list.add(dto);
                 }
             }
@@ -138,6 +202,36 @@ public class ReviewDAO {
         } // finally end
         return list;
     } // getListByClient_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // getReviewCount_start-----------------------------------------------------------------------------
+    public int[] getReviewCount(int shop_no) throws Exception {
+        // 출력객체
+        int[] result = { 0, 0, 0, 0, 0 };
+        System.out.println("---ReviewDAO getReviewCount");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select rank, count(rank) cnt from review where shop_no = ? group by rank";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shop_no);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    // TODO: 컬럼명이 어떻게 나오지?
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getReviewCount() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // getReviewCount_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////

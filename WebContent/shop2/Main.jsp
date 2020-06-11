@@ -4,9 +4,16 @@
 <%@ page import="java.sql.*"%>
 
 
+
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
+	session.setAttribute("shop_No", "1");
+	int jumooncount=0;
+	int joricount=0;
+	int deliverycount=0;
+	int completecount=0;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +76,12 @@
 </style>
 <script>
 	// 스크립트
+	window.onload = function() {
+                    		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+                    		$("#tab2").load("BaesongList.jsp?shopNo=1");
+                    		$("#tab3").load("EndList.jsp?shopNo=1");
+                    		$("#SM").load("ShopManage.jsp");
+                    	}
 </script>
 </head>
 <body>
@@ -102,28 +115,37 @@
               <div id="tabtab1" class="w3-row w3-gray tabcontent2">         
                 <div class="tab w3-col" style="width: 100px;">
                         <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab1')" id="defaultOpen">
-                            접수대기<br /><strong>3</strong>
+                            접수대기<br /><strong id="NewOrderCount"></strong>
                         </button>
                         <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab2')">
-                            배달중<br /><strong>3</strong>
+                            배달중<br /><strong id="BaeSongCount"></strong>
                         </button>
                         <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab3')">
-                            완료<br /><strong>3</strong>
+                            완료<br /><strong id="EndCount"></strong>
                         </button>
                     </div>
+			   
                 
-                
-			<div id="NOL">
-            <jsp:include page="NewOrderList.jsp"/>
-            </div>
-            </div>
-          <div id="shopmanage">
-            <jsp:include page="ShopManage.jsp"/>
-			</div>
-			</div>
-		</div>
-		</div>
-
+               <div class="w3-rest w3-white scroll-box">
+               <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+               <div id="tab1" class="tabcontent">    
+			            
+			   </div>
+			    <div id="tab2" class="tabcontent">
+			    
+			    </div>
+			    <div id="tab3" class="tabcontent">
+			    
+			    </div>
+				</div>
+				</div>
+				<div id="SM">
+				<jsp:include page="ShopManage.jsp"></jsp:include>
+				</div>
+				</div>
+				</div>
+				</div>
+				
  <div class="modal fade take_over" id="take_over" role="dialog">
     <div class="modal-dialog">
     
@@ -137,7 +159,17 @@
           	<form id="take_over_Form">
 			 <div class="form-group">
 			 <!-- 글번호입력 -->
-			    <label for="writer">예상시간</label>
+			    <label for="writer">예상시간</label><hr>
+			 
+			 <input type="radio" class="estimated_time" name="estimated_time" value="30" >30분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="40" >40분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="50" >50분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="60" >60분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="70" >70분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="80" >80분<br>
+			 <input type="radio" class="estimated_time" name="estimated_time" value="90" >90분<br>
+			 
+			 <!-- 
 			    <select name="estimated_time">
 			    <option value="" selected disabled hidden>배달예상시간 선택</option>
 			    <option value="30">30분후</option>
@@ -147,6 +179,7 @@
 			    <option value="70">70분후</option>
 			    <option value="80">80분후</option>
 			    </select>
+			     -->
 			    </div>
 			</form>
         </div>
@@ -176,10 +209,10 @@
 			 <div class="form-group">
 			 <!-- 글번호입력 -->
 			    <label for="writer">취소사유</label><br>
-			    <input type="radio" name="whyCancel" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
-			    <input type="radio" name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
-			    <input type="radio" name="whyCancel" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소<br>
-			    <input type="radio" name="whyCancel" value="거리에 따른 취소">거리에 따른 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel" value="거리에 따른 취소">거리에 따른 취소<br>
 				
 				<!-- 			    
 			    <select>
@@ -225,7 +258,14 @@
 	
 	      <script>
                     function openTab(evt, tabName) {
-                        var i, tabcontent, tablinks;
+                       if(tabName=="tab2"){
+                    	   $("#tab2").load("BaesongList.jsp");
+                   		
+                       }else if(tabName=="tab3"){
+                    	   $("#tab3").load("EndList.jsp"); 
+                       }
+                    	
+                    	var i, tabcontent, tablinks;
                         tabcontent = document.getElementsByClassName("tabcontent");
                         for (i = 0; i < tabcontent.length; i++) {
                             tabcontent[i].style.display = "none";
@@ -270,13 +310,33 @@
                     document.getElementById("jumoontab").click();
                     
                     $(function(){
+                    	
+                    	
                     	function reload(){
-                    		$("#NOL").load("NewOrderList.jsp");
-                     		document.getElementById("defaultOpen").click();
+                    		$("#tab1").load("NewOrderList.jsp");
+                    		//$("#tab2").load("BaesongList.jsp");
+                    		//$("#tab3").load("EndList.jsp");
+                    		countcount();
+                    		//$("#tabtab2").load("ShopManage.jsp");
+                    		
+                     		//document.getElementById("defaultOpen").click();
                     		//document.getElementById("jumoontab").click(); 
                     	}
-                    	setInterval(reload, 10000);
+                    	setInterval(reload, 3000);
+                    	
+                    	
                     });
+                    function countcount(){
+                		var a = document.getElementsByClassName("count0").length;
+                		var a1 = document.getElementsByClassName("count1").length;
+                		var b = document.getElementsByClassName("count2").length;
+                		var c = document.getElementsByClassName("count3").length;
+                		//console.log(a +"/"+ a1);
+                		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
+                		document.getElementById("BaeSongCount").innerText=(b);
+                		document.getElementById("EndCount").innerText=(c);
+                    }
+   					                 
                     
                 </script>
 	
