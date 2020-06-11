@@ -15,6 +15,82 @@ public class OrderListDAO {
     ResultSet rs = null;
     Context cont = null;
     DataSource ds = null;
+    Statement stmt = null;
+
+    // testTransaction_start-----------------------------------------------------------------------------
+    public int testTransaction(OrderListDTO dto) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO testTransaction");
+        int orderList_No = -1; // 만약 최근 주문번호 못불러오면.... 외래키 설정으로 3번때 insert 또한 오류 발생
+
+        try {
+            // 1+2
+            con = getConnection();
+            // ##### 트랜잭션 시작
+            con.setAutoCommit(false);
+
+            // 111111111111111111111111111111111111111111
+            // 3. sql
+            String sql = "insert into orderlist(shop_NO, name, member_No, addr, addr2, comment, orderDate)"
+                    + " values( ? , ? , ? , ? , ? , ? , now()   )";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, dto.getShop_NO());
+            pstmt.setString(2, dto.getName());
+            pstmt.setInt(3, dto.getMember_No());
+            pstmt.setString(4, dto.getAddr());
+            pstmt.setString(5, dto.getAddr2());
+            pstmt.setString(6, dto.getComment());
+            // 5. 실행
+            result = pstmt.executeUpdate();
+            System.out.println("111111111111111111111111111111111111111111");
+
+            // 222222222222222222222222222222222222222222
+            // 3. sql
+            sql = "select LAST_INSERT_ID()";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 결과값
+            while (rs.next()) {
+                orderList_No = rs.getInt(1);
+                System.out.println("마지막으로 추가된 주문번호=" + orderList_No);
+            }
+            System.out.println("222222222222222222222222222222222222222222");
+
+            // 333333333333333333333333333333333333333333
+            // 3. sql
+            sql = "insert into order_Menu (orderlist_No, menu_No, count) VALUES ";
+            List<Order_MenuDTO> menuList = dto.getMenuList();
+            // 여러개 입력 문 만들기
+            for (int i = 0; i < menuList.size(); i++) {
+                Order_MenuDTO o = menuList.get(i);
+                sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
+                System.out.println(sql);
+            }
+            sql += ",,,";
+            sql = sql.replace(",,,,", "");
+            System.out.println(sql);
+            // 4. 실행객체
+            stmt = con.createStatement();
+            // 5. 실행
+            result = stmt.executeUpdate(sql);
+            System.out.println("333333333333333333333333333333333333333333");
+
+        } catch (Exception e) {
+            con.rollback();
+            System.out.println("!!!!!! 롤백!!");
+            e.getStackTrace();
+            throw new Exception(" testTransaction() 예외  ");
+        } finally {
+            con.setAutoCommit(true);
+            System.out.println("다시 오토커밋");
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // testTransaction_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // insertOrder_start-----------------------------------------------------------------------------
     public int insertOrder(OrderListDTO dto) throws Exception {
@@ -336,8 +412,7 @@ public class OrderListDAO {
             String sql = "select no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
                     + " status, orderList, completeTime, addr, addr2, comment "
                     + " from orderlist WHERE shop_NO = ? AND status = 2 AND completeTime < NOW() AND "
-                    + " orderDate BETWEEN (    now()   ,  DATE_ADD(NOW(), INTERVAL 1 DAY)    )"
-                    + " ORDER BY orderdate ASC";
+                    + " orderDate BETWEEN ( DATE_ADD(NOW(), INTERVAL -1 DAY) , now() )" + " ORDER BY orderdate ASC";
             System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
@@ -364,7 +439,7 @@ public class OrderListDAO {
             }
         } catch (Exception e) {
             e.getStackTrace();
-            throw new Exception(" getListOfGoing() 예외  ");
+            throw new Exception(" getListFinishToday() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end

@@ -19,12 +19,12 @@
 
 	System.out.println(dto.toString());
 
-	int no = dto.getShopNo();
+	int no = dto.getNo();
 
 	if (no > 0) {
 		System.out.println(" !!! shop id=" + shopID);
 		session.setAttribute("no", no);
-		session.setAttribute("id", dto.getShopID());
+		session.setAttribute("id", dto.getId());
 		session.setAttribute("grade", 2);
 		session.setAttribute("name", dto.getShopName());
 		response.sendRedirect("../shop/Main.jsp");
