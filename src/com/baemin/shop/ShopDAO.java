@@ -2,7 +2,6 @@ package com.baemin.shop;
 
 import javax.naming.*;
 import javax.sql.*;
-
 import com.baemin.util.CoordDistance;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class ShopDAO {
 	DataSource ds = null;
 
 	// login_start-----------------------------------------------------------------------------
-	public ShopDTO login(String shopID, String shopPW) throws Exception {
+	public ShopDTO login(String id, String pw) throws Exception {
 		// 출력객체
 		ShopDTO dto = new ShopDTO();
 		System.out.println("---ShopDAO login");
@@ -26,18 +25,18 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select * from shop WHERE  shopID = ? AND shopPW = ?";
+			String sql = "select * from shop WHERE  id = ? AND pw = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, shopID);
-			pstmt.setString(2, shopPW);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
 			// 5. 실행
 			rs = pstmt.executeQuery();
 			// 6. 표시 --- select 때만 표시
 			if (rs != null) {
 				while (rs.next()) {
-					dto.setShopNo(rs.getInt("shopNo"));
-					dto.setShopID(rs.getString("shopID"));
+					dto.setNo(rs.getInt("no"));
+					dto.setId(rs.getString("id"));
 					dto.setShopName(rs.getString("shopName"));
 					dto.setShopCategory(rs.getString("shopCategory"));
 					dto.setShopEx(rs.getString("shopEx"));
@@ -59,7 +58,7 @@ public class ShopDAO {
 	} // login_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// idCheck_start-----------------------------------------------------------------------------
-	public int idCheck(String shopID) throws Exception {
+	public int idCheck(String id) throws Exception {
 		// 출력객체
 		int result = -1;
 		System.out.println("---ShopDAO idCheck");
@@ -67,10 +66,10 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select count(*) from shop where shopID = ?";
+			String sql = "select count(*) from shop where id = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, shopID);
+			pstmt.setString(1, id);
 			// 5. 실행
 			rs = pstmt.executeQuery();
 			// 6. 표시 --- select 때만 표시
@@ -89,7 +88,7 @@ public class ShopDAO {
 	} // idCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getShopInfo_start-----------------------------------------------------------------------------
-	public ShopDTO getShopInfo(int shopNo) throws Exception {
+	public ShopDTO getShopInfo(int no) throws Exception {
 		// 출력객체
 		ShopDTO dto = new ShopDTO();
 		System.out.println("---ShopDAO getShopInfo");
@@ -98,18 +97,18 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select * from shop where shopNo = ?";
+			String sql = "select * from shop where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, shopNo);
+			pstmt.setInt(1, no);
 			// 5. 실행
 			rs = pstmt.executeQuery();
 			// 6. 표시 --- select 때만 표시
 			if (rs != null) {
 				while (rs.next()) {
-					dto.setShopNo(rs.getInt("shopNo"));
-					dto.setShopID(rs.getString("shopID"));
-					dto.setShopPW(rs.getString("shopPW"));
+					dto.setNo(rs.getInt("no"));
+					dto.setId(rs.getString("id"));
+					dto.setPw(rs.getString("pw"));
 					dto.setShopName(rs.getString("shopName"));
 					dto.setShopCategory(rs.getString("shopCategory"));
 					dto.setShopEx(rs.getString("shopEx"));
@@ -146,26 +145,25 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String a1 = "shopNo, shopName, shopCategory, shopAddr, shopX, shopY, reviewRank ";
-			String a2 = "shopNo, shopName, shopCategory, shopAddr, shopX, shopY, avg(reviewRank) reviewRank ";
-			String a3 = "WHERE (shopX BETWEEN " + x_min + " AND " + x_max + ") AND (shopY BETWEEN " + y_min + " AND "
-					+ y_max + ")";
-			String sql = "(select " + a1 + " from shop LEFT JOIN review on shop.shopNo = reviewShopNo " + a3 + ") CNT";
-			sql = "select " + a2 + " from " + sql + " where shopCategory  like '%" + category
-					+ "%'  GROUP BY shopNo ORDER BY reviewRank DESC ";
-
-			// select shopNo, shopName, shopCategory, shopAddr, shopX, shopY,
-			// avg(reviewRank) reviewRank
-			// from (select shopNo, shopName, shopCategory, shopAddr, shopX, shopY,
-			// reviewRank from shop
-			// LEFT JOIN review on shop.shopNo = reviewShopNo WHERE
-			// (shopX BETWEEN 126.859660819027 AND 126.90966081902701) AND
-			// (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)) CNT where shopCategory
-			// like '%양식%' GROUP BY shopNo ORDER BY reviewRank DESC
-
+			String sql = "select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank) "
+					+ "    from shop LEFT JOIN review on shop.no = review.shop_no "
+					+ "    WHERE (shopX  BETWEEN ? AND ?) " + "     AND (shopY  BETWEEN ? AND ?)"
+					+ "     AND shopCategory  like '%" + category + "%' " + "  GROUP BY shop.no   "
+					+ "   ORDER BY avg(rank) DESC      ";
+			// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
+			// from shop LEFT JOIN review on shop.no = review.shop_no
+			// WHERE (shopX BETWEEN 126.859660819027 AND 126.90966081902701)
+			// AND (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)
+			// AND shopCategory like '%양식%'
+			// GROUP BY shop.no
+			// ORDER BY avg(rank) DESC
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
+			pstmt.setDouble(1, x_min);
+			pstmt.setDouble(2, x_max);
+			pstmt.setDouble(3, y_min);
+			pstmt.setDouble(4, y_max);
 			// 5. 실행
 			rs = pstmt.executeQuery();
 			// 6. 표시 --- select 때만 표시
@@ -178,16 +176,15 @@ public class ShopDAO {
 					double distance = CoordDistance.getDistance(shopX, shopY, memberX, memberY);
 					// 거리 계산해서, BaeDalLimit 보다 작을때만 리스트 add
 					if (distance < CoordDistance.BaeDalLimit) {
-						double temp_rank = rs.getDouble("reviewRank");
+						double temp_rank = rs.getDouble("avg(rank)");
 						temp_rank = Math.round(temp_rank * 10) / 10.0;
-
-						dto.setShopNo(rs.getInt("shopNo"));
+						dto.setNo(rs.getInt("no"));
 						dto.setShopName(rs.getString("shopName"));
 						dto.setShopCategory(rs.getString("shopCategory"));
 						dto.setShopAddr(rs.getString("shopAddr"));
-						dto.setReviewRank(temp_rank);
 						dto.setShopX(shopX);
 						dto.setShopY(shopY);
+						dto.setRank(temp_rank);
 						list.add(dto);
 					}
 				}
@@ -223,13 +220,13 @@ public class ShopDAO {
 					dto.setShopAddr2(rs.getString("shopAddr2"));
 					dto.setShopCategory(rs.getString("shopCategory"));
 					dto.setShopName(rs.getString("shopName"));
-					dto.setShopNo(rs.getInt("shopNo"));
+					dto.setNo(rs.getInt("no"));
 					list.add(dto);
 				}
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getListAll() 예외  ");
+			throw new Exception(" getListAll() 예외  " + e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
@@ -245,12 +242,12 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "insert into board( shopID, shopPW,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, shopTel, shopX , shopY) "
-					+ "values( ?, ?, ?, ?, ?, ?, ?, ? )";
+			String sql = "insert into shop ( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
+					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ? ,now() )";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dto.getShopID());
-			pstmt.setString(2, dto.getShopPW());
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPw());
 			pstmt.setString(3, dto.getShopName());
 			pstmt.setString(4, dto.getShopCategory());
 			pstmt.setString(5, dto.getShopEx());
@@ -279,12 +276,12 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update shop set shopEx = ? , shopTel = ? where shopNo = ?";
+			String sql = "update shop set shopEx = ? , shopTel = ? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getShopEx());
 			pstmt.setString(2, dto.getShopTel());
-			pstmt.setInt(3, dto.getShopNo());
+			pstmt.setInt(3, dto.getNo());
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -295,6 +292,56 @@ public class ShopDAO {
 		} // finally end
 		return result;
 	} // updateShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+	// magam_start-----------------------------------------------------------------------------
+	public int magam(int no) throws Exception {
+		// 출력객체
+		int result = -1;
+		System.out.println("---ShopDAO magam");
+		try {
+			// 1+2
+			con = getConnection();
+			// con=ds.getConnection();
+			// 3. sql
+			String sql = "update shop set shopStatus = 0 WHERE no = ?";
+			// 4. 실행객체
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			// 5. 실행
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.getStackTrace();
+			throw new Exception(" magam() 예외  ");
+		} finally {
+			close(con, pstmt, rs);
+		} // finally end
+		return result;
+	} // magam_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+	// shopOpen_start-----------------------------------------------------------------------------
+	public int shopOpen(int no) throws Exception {
+		// 출력객체
+		int result = -1;
+		System.out.println("---ShopDAO shopOpen");
+		try {
+			// 1+2
+			con = getConnection();
+			// con=ds.getConnection();
+			// 3. sql
+			String sql = "update shop set shopStatus = 1 WHERE no = ?";
+			// 4. 실행객체
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			// 5. 실행
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.getStackTrace();
+			throw new Exception(" magam() 예외  ");
+		} finally {
+			close(con, pstmt, rs);
+		} // finally end
+		return result;
+	} // shopOpen_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////
@@ -339,26 +386,13 @@ public class ShopDAO {
 
 	public static void main(String[] args) {
 
-		String category = "양식";
-
-		double memberX = 126.884660819027;
-		double memberY = 37.5009565732326;
-		double x_min = memberX - CoordDistance.CoordLimit;
-		double x_max = memberX + CoordDistance.CoordLimit;
-		double y_min = memberY - CoordDistance.CoordLimit;
-		double y_max = memberY + CoordDistance.CoordLimit;
-
-		String a1 = "shopNo, shopName, shopCategory, shopAddr, shopX, shopY, reviewRank ";
-		String a2 = "shopNo, shopName, shopCategory, shopAddr, shopX, shopY, avg(reviewRank) reviewRank ";
-		String a3 = "WHERE (shopX BETWEEN " + x_min + " AND " + x_max + ") AND (shopY BETWEEN " + y_min + " AND "
-				+ y_max + ")";
-		String sql = "(select " + a1 + " from shop LEFT JOIN review on shop.shopNo = reviewShopNo " + a3 + ") CNT";
-		sql = "select " + a2 + " from " + sql + " where shopCategory  like '%" + category
-				+ "%'  GROUP BY shopNo ORDER BY reviewRank DESC ";
-
-		System.out.println();
-		System.out.println(sql);
-		System.out.println();
+		// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
+		// from shop LEFT JOIN review on shop.no = review.shop_no
+		// WHERE (shopX BETWEEN 126.859660819027 AND 126.90966081902701)
+		// AND (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)
+		// AND shopCategory like '%양식%'
+		// GROUP BY shop.no
+		// ORDER BY avg(rank) DESC
 
 	}
 }

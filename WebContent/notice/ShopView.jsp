@@ -40,7 +40,7 @@ System.out.println(dto.toString());
 
   <p>      
     <label class="w3-text-blue"><b>매장번호</b></label>
-    <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getShopNo() %>" readonly>
+    <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getNo() %>" readonly>
   </p>
   
   <p>      

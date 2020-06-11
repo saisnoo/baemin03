@@ -6,7 +6,7 @@ use baemindb;
 
 
 
- 
+
 
         
 CREATE TABLE member
@@ -44,9 +44,9 @@ CREATE TABLE notice
 (
   no        INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
   title     VARCHAR(60) NOT NULL,
-  content   TEXT(65535) NULL    ,
-  startDate DATE        NULL    ,
-  endDate   DATE        NULL    ,
+  content   TEXT        NOT NULL,
+  startDate DATE        NOT NULL,
+  endDate   DATE        NOT NULL,
   PRIMARY KEY (no)
 );
 
@@ -58,13 +58,25 @@ CREATE TABLE Order_cancel
   PRIMARY KEY (no)
 );
 
+ALTER TABLE Order_cancel
+  ADD CONSTRAINT UQ_orderlist_no UNIQUE (orderlist_no);
+
+CREATE TABLE order_menu
+(
+  no           int NOT NULL AUTO_INCREMENT,
+  orderlist_No INT NOT NULL COMMENT 'AUTO_Increment',
+  menu_No      INT NOT NULL,
+  count        INT NOT NULL,
+  PRIMARY KEY (no)
+);
+
 CREATE TABLE orderlist
 (
   no           INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
   name         varchar(30) NOT NULL,
   orderDate    DATETIME    NOT NULL,
-  status       INT         NOT NULL DEFAULT 0,
-  orderList    TEXT(65535) NOT NULL,
+  status       INT         NULL     DEFAULT 0,
+  orderList    TEXT        NULL    ,
   completeTime DATETIME    NULL    ,
   addr         VARCHAR(90) NOT NULL,
   addr2        VARCHAR(90) NOT NULL,
@@ -76,12 +88,12 @@ CREATE TABLE orderlist
 
 CREATE TABLE review
 (
-  no            INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
-  reviewContent VARCHAR(60) NOT NULL,
-  reviewRank    INT         NOT NULL,
-  regDate       DATETIME    NOT NULL,
-  shop_no       INT         NOT NULL,
-  member_no     INT         NOT NULL,
+  no        INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
+  content   VARCHAR(60) NOT NULL,
+  rank      INT         NOT NULL,
+  regDate   DATETIME    NOT NULL,
+  shop_no   INT         NOT NULL,
+  member_no INT         NOT NULL,
   PRIMARY KEY (no)
 );
 
@@ -92,15 +104,15 @@ CREATE TABLE shop
   pw           VARCHAR(20) NOT NULL,
   shopName     VARCHAR(30) NOT NULL,
   shopCategory VARCHAR(60) NOT NULL,
-  shopEx       TEXT(65535) NULL    ,
+  shopEx       TEXT        NULL    ,
   shopAddr     VARCHAR(90) NOT NULL,
   shopAddr2    VARCHAR(90) NULL    ,
   shopTel      VARCHAR(20) NOT NULL,
   shopX        DOUBLE      NOT NULL,
   shopY        DOUBLE      NOT NULL,
   shopStatus   INT         NOT NULL DEFAULT 0,
-  regDate      DATETIME    NULL    ,
-  grade        INT         NULL     DEFAULT 2,
+  regDate      DATETIME    NOT NULL,
+  grade        INT         NOT NULL DEFAULT 2,
   PRIMARY KEY (no)
 );
 
@@ -137,7 +149,23 @@ ALTER TABLE review
     FOREIGN KEY (member_no)
     REFERENCES member (no);
 
+ALTER TABLE order_menu
+  ADD CONSTRAINT FK_orderlist_TO_order_menu
+    FOREIGN KEY (orderlist_No)
+    REFERENCES orderlist (no);
+
+ALTER TABLE order_menu
+  ADD CONSTRAINT FK_menu_TO_order_menu
+    FOREIGN KEY (menu_No)
+    REFERENCES menu (no);
+
       
+
+
+
+
+
+
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
 values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로동 589-7','구로역 3번 승강장','2000-01-01'

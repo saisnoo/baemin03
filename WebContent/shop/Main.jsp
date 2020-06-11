@@ -7,7 +7,8 @@
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
 	
-	int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
+	//int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,38 +85,29 @@
 </style>
 <script>
 	// 스크립트
-
-	function jumunBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(a1);
-		document.getElementById("jumunSiganNo").value = a1;
-		document.getElementById("jumunReady").style.display = "block";
-	}
-	function cancelBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(a1);
-		document.getElementById("jumunCancel").style.display = "block";
-	}
-
 	window.onload = function() {
-		$("#tab1").load("NewOrderList.jsp?shopNo="+shopNo);
-		$("#tab2").load("BaesongList.jsp?shopNo="+shopNo);
-		$("#tab3").load("EndList.jsp?shopNo="+shopNo);
-		
+		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		$("#tab3").load("EndList.jsp?shopNo=1");
+		countcount();
 	}
 	
 	setInterval(function() {
-		$("#tab1").load("NewOrderList.jsp?shopNo="+shopNo);
-		$("#tab2").load("BaesongList.jsp?shopNo="+shopNo);
-		$("#tab3").load("EndList.jsp?shopNo="+shopNo);
+		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		$("#tab3").load("EndList.jsp?shopNo=1");
 		countcount();
-	},3000)
+	},1500)
 	
 	function countcount(){
 		var a = document.getElementsByClassName("count0").length;
 		var a1 = document.getElementsByClassName("count1").length;
+		var a2 = document.getElementsByClassName("count2").length;
+		var a3 = document.getElementsByClassName("count3").length;
 		//console.log(a +"/"+ a1);
 		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
+		document.getElementById("BaesongCount").innerText=(a2);
+		document.getElementById("EndListCount").innerText=(a3);
 	}
 	
 
@@ -167,11 +159,11 @@
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab2')">
-							배달중<br /> <strong id="BaesongCount">3</strong>
+							배달중<br /> <strong id="BaesongCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab3')">
-							완료<br /> <strong id="EndListCount">3</strong>
+							완료<br /> <strong id="EndListCount"></strong>
 						</button>
 					</div>
 					<div class="w3-rest w3-white scroll-box">
@@ -387,6 +379,7 @@
 				<div
 					onclick="document.getElementById('jumunReady').style.display='none'"
 					class="w3-button w3-display">닫기</div>
+					
 				<!-- w3-container 끝-->
 			</div>
 		</div>
