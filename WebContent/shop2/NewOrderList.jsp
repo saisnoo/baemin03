@@ -1,5 +1,6 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.baemin.orderlist.cart.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "com.baemin.orderlist.*" %>
 
@@ -8,22 +9,22 @@
 //자바 구문
 request.setCharacterEncoding("UTF-8");
 System.out.println("------NewOrderList.jsp");
-SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
-int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
-System.out.println(shopNo);
+int shop_No=Integer.parseInt((String)session.getAttribute("shop_No"));
+System.out.println(shop_No);
 OrderListDAO orderListDAO = OrderListDAO.getInstance();
-List<OrderListDTO> list = orderListDAO.getListOfCurrent(shopNo);
+List<OrderListDTO> list = orderListDAO.getListOfCurrent(shop_No);
 
-
-
-
+CartDTO cartDTO=new CartDTO();
 %>
-
 <%
+
 for(int i=0;i<list.size();i++)
 {	
 	OrderListDTO orderListDTO=list.get(i);
+	String k="";
+	k=Order2Cart.toMsg(orderListDTO.getOrderList());
 	%>
 	    <!-- load  new order  -->
 	<div class="w3-section">
@@ -63,18 +64,16 @@ for(int i=0;i<list.size();i++)
 					<div class="w3-col">
 						<strong>[메뉴 4개]</strong> &nbsp;<%=orderListDTO.getName()%>
 					</div>
-					<div class="w3-col">주문번호 5번</div>
+					<div class="w3-col">주문번호 : <%= %></div>
 				</div>
-				<div class="w3-row"><%=orderListDTO.getAddr() + orderListDTO.getAddr2() %></div>
+				<div class="w3-row"><%=orderListDTO.getAddr() +"  "+ orderListDTO.getAddr2() %></div>
 			</div>
 			<!-- 가운데 끝 -->
 		</div>
 		<!-- 상단 컨테이너 끝 -->
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 /
-				양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 / 된장찌개 2김치찌개 2
-				/ 된장찌개 2 / 후라이드치킨2 / 양념치킨 반마리 1 된장찌개 2</div>
+			<div class="w3-row w3-padding"><%=k %></div>
 			<div class="w3-row w3-padding"><%=orderListDTO.getComment() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->
@@ -91,11 +90,7 @@ for(int i=0;i<list.size();i++)
 
 	function jumunBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
-		console.log(a1);
-		//모달창에 값넣기
-		document.getElementById("jumunSiganNo").value = a1;
-		//모달창띄우기
-		document.getElementById("jumunReady").style.display = "block";
+	
 	}
 	function baesongBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
@@ -104,7 +99,7 @@ for(int i=0;i<list.size();i++)
 	function cancelBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
-		document.getElementById("jumunCancel").style.display = "block";
+		
 	}
 </script>
 

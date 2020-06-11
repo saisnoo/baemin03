@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 
-	session.setAttribute("shopNo", "1");
+	session.setAttribute("shop_No", "1");
 response.sendRedirect("Main.jsp");	
 %>
