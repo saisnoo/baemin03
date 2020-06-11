@@ -91,9 +91,7 @@
 
 	function refresh() {
 		$("#tab1").load("NewOrderList.jsp?shopNo=1");
-		sleep(1000);
 		$("#tab2").load("BaesongList.jsp?shopNo=1");
-		sleep(1000);
 		$("#tab3").load("EndList.jsp?shopNo=1");
 		setTimeout(countcount, 1000);
 		setTimeout(countcount, 2000);
