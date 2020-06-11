@@ -18,13 +18,11 @@ public class OrderListDTO {
     // 1 접수 . 조리중
     // 2 배달보냄
     // 영업종료 하면
-    private String orderList; // 메뉴, 수량
     private String completeTime;
     private String addr;
     private String addr2;
     private String comment;
-
-    // FOREIGN KEY FOREIGN KEY FOREIGN KEY FOREIGN KEY FOREIGN KEY
+    // FOREIGN KEY
     private int shop_NO;// 주문 가게 이름
     private int member_No; // 주문자 번호
 
@@ -33,9 +31,8 @@ public class OrderListDTO {
     private String whyCancel;
     /// JOIN
     private List<Order_MenuDTO> menuList; // ????
-    // TODO: 게터세터 어떻게?????
 
-    // NOT IN DB - 삭제예정???
-    private Hashtable<Integer, Integer> hashtable;
+    //// 삭제 예정
+    private String orderList; // 메뉴, 수량
 
 }

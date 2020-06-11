@@ -4,10 +4,12 @@
 <%@ page import="java.sql.*"%>
 
 
+
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-	session.setAttribute("shopNo", "1");
+	session.setAttribute("shop_No", "1");
 	int jumooncount=0;
 	int joricount=0;
 	int deliverycount=0;
@@ -116,10 +118,10 @@
                             접수대기<br /><strong id="NewOrderCount"></strong>
                         </button>
                         <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab2')">
-                            배달중<br /><strong>3</strong>
+                            배달중<br /><strong id="BaeSongCount"></strong>
                         </button>
                         <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab3')">
-                            완료<br /><strong>3</strong>
+                            완료<br /><strong id="EndCount"></strong>
                         </button>
                     </div>
 			   
@@ -325,9 +327,14 @@
                     function countcount(){
                 		var a = document.getElementsByClassName("count0").length;
                 		var a1 = document.getElementsByClassName("count1").length;
+                		var b = document.getElementsByClassName("count2").length;
+                		var c = document.getElementsByClassName("count3").length;
                 		//console.log(a +"/"+ a1);
                 		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
+                		document.getElementById("BaeSongCount").innerText=(b);
+                		document.getElementById("EndCount").innerText=(c);
                     }
+                    
                     
                 </script>
 	
