@@ -110,7 +110,6 @@
 		document.getElementById("EndListCount").innerText=(a3);
 	}
 	
-
 </script>
 </head>
 <body>
@@ -368,23 +367,68 @@
 	<jsp:include page="../sw_css/topnav.jsp" />
 
 
-	<!-- 주문접수 Modal시작 -->
+	<!-- 배달시작 Modal시작 -->
 	<div class="w3-modal" id="jumunReady">
-		<div class="w3-modal-content">
+		<div class="w3-modal-content"  style="width:400px;height:500px;">
 			<div class="w3-container">
-				<input id="jumunSiganNo" type="hidden" />
-				<div class="w3-tag">주문접수시간</div>
-				<div class="w3-tag w3-red">시간입력</div>
-				<div class="w3-label w3-green">접수버튼처리</div>
-				<div
-					onclick="document.getElementById('jumunReady').style.display='none'"
-					class="w3-button w3-display">닫기</div>
-					
-				<!-- w3-container 끝-->
+				<div onclick="document.getElementById('jumunReady').style.display='none'"
+					class="w3-button w3-display w3-right">닫기</div>
+				<input id="jumunNo" type="text"/>
+				<input id="shop" type="hidden"/>
+				<!-- 주문 접수시간 -->
+				<input id="time" type="text"/>
+				<!-- 주문 접수시간 -->
+				<!-- 배달 도착시간입력 -->
+					<div class="w3-tag w3-container w3-row">
+						<div class="w3-col">
+					  		<button class="w3-button w3-yellow h100" onClick="time(this)" value="15">15분</button>
+					  		<button class="w3-button w3-yellow h100" onClick="time(this)" value="30">30분</button>
+						</div>
+					</div>
+					<div class="w3-tag w3-container w3-row">
+						<div class="w3-col">
+						  	<button class="w3-button w3-yellow h100" onClick="time(this)" value="45">45분</button>
+						  	<button class="w3-button w3-yellow h100" onClick="time(this)" value="60">60분</button>
+						</div>
+					</div>
+				<!-- 배달 도착시간입력 -->
+				<button class="w3-label w3-green" onClick="CookOk(this)">조리시작</button>
 			</div>
+			<!-- w3-container 끝-->
 		</div>
 	</div>
-	<%--주문접수 모달 Modal끝 --%>
+	<%--배달시작 모달 Modal끝 --%>
+	
+	<script>
+	function time(e){
+		var e=e.value;
+		console.log(e);
+		document.getElementById("time").value=e;
+	}
+	
+	function CookOk(e){
+		var no = e.parentNode.children[1].value;
+		var minute = e.parentNode.children[3].value;
+		console.log(no);
+		console.log(minute);
+		$.ajax({
+			type: "post",
+			url : "BaesongSelect.jsp",
+			data: {"no" : no, "minute" : minute},
+			success : function(result){
+				console.log(result);
+				if(result==1){
+					alert("배달시작");
+					document.getElementById("jumunReady").style.display = "none";
+				}else{
+					alert("조리X");
+				}//else
+			}//success
+		});//ajax
+	}//CookOk
+	</script>
+
+
 	<!--주문 취소 Modal시작 -->
 	<div class="w3-modal" id="jumunCancel">
 		<div class="w3-modal-content">

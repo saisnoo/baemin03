@@ -1,14 +1,15 @@
-package com.mvc.action;
+package com.mvc.action.shop;
 
 import javax.servlet.http.*;
+import com.mvc.action.CommandAction;
 
-public class JoinShopAction implements CommandAction {
+public class Business_STARTAction implements CommandAction {
 
     @Override
     public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         request.setCharacterEncoding("UTF-8");
-        System.out.println("- - - - JoinShopAction - - - - ");
+        System.out.println("- - - - Business_STARTAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
         //
