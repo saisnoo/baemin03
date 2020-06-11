@@ -413,12 +413,12 @@
 		console.log(minute);
 		$.ajax({
 			type: "post",
-			url : "BaesongSelect.jsp",
+			url : "CheckOrderPro.jsp",
 			data: {"no" : no, "minute" : minute},
 			success : function(result){
 				console.log(result);
 				if(result==1){
-					alert("배달시작");
+					alert("조리시작");
 					document.getElementById("jumunReady").style.display = "none";
 				}else{
 					alert("조리X");

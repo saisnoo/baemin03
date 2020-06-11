@@ -86,25 +86,6 @@ for(int i=0;i<NewOrderCount;i++){
 
 	function CookBtn(e) {
 		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(jumunNo);
-		document.getElementById("jumunNo").value = jumunNo;
-		$.ajax({
-			type: "post",
-			url : "CheckOrderPro.jsp",
-			data: {"no" : jumunNo},
-			success : function(result){
-				console.log(result);
-				if(result==1){
-					alert("조리시작");
-				}else{
-					alert("조리X");
-				}//else
-			}//success
-		});//ajax
-	}//CookBtn
-	
-	function baesongBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
 		var shop = e.parentNode.parentNode.children[0].children[2].value;
 		console.log(jumunNo);
 		console.log(shop);
@@ -114,6 +95,25 @@ for(int i=0;i<NewOrderCount;i++){
 		//모달창띄우기
 		document.getElementById("jumunReady").style.display = "block";
 	}//baesongBtn
+	
+	function baesongBtn(e) {
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(jumunNo);
+		document.getElementById("jumunNo").value = jumunNo;
+		$.ajax({
+			type: "post",
+			url : "BaesongSelect.jsp",
+			data: {"no" : jumunNo},
+			success : function(result){
+				console.log(result);
+				if(result==1){
+					alert("배달시작");
+				}else{
+					alert("조리X");
+				}//else
+			}//success
+		});//ajax
+	}//CookBtn
 	
 	function cancelBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
