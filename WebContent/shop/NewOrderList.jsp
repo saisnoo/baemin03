@@ -39,7 +39,7 @@ for(int i=0;i<NewOrderCount;i++){
 				<%
 					if(dto.getStatus()==0){
 				%>
-				<button class="w3-button w3-blue h100" onclick="CookBtn(this)">조리버튼</button>
+				<button class="w3-button w3-blue h100" onclick="CookBtn(this)">주문접수<br>조리시작</button>
 				<div class="count0" style="display:none;"><%=dto.getStatus() %></div>
 				<%
 					}else if(dto.getStatus()==1){
@@ -80,22 +80,9 @@ for(int i=0;i<NewOrderCount;i++){
 	}//for end
 %>
 
-
 <script>
 	// 스크립트
 
-	function CookBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
-		var shop = e.parentNode.parentNode.children[0].children[2].value;
-		console.log(jumunNo);
-		console.log(shop);
-		//모달창에 값넣기
-		document.getElementById("jumunNo").value = jumunNo;
-		document.getElementById("shop").value = shop;
-		//모달창띄우기
-		document.getElementById("jumunReady").style.display = "block";
-	}//baesongBtn
-	
 	function baesongBtn(e) {
 		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
 		console.log(jumunNo);
@@ -113,6 +100,7 @@ for(int i=0;i<NewOrderCount;i++){
 				}//else
 			}//success
 		});//ajax
+		refresh(); // 새로고침
 	}//CookBtn
 	
 	function cancelBtn(e) {

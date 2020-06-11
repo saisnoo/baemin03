@@ -6,9 +6,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-	
+
 	//int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
-	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,32 +83,37 @@
 }
 </style>
 <script>
-	// 스크립트
-	window.onload = function() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=1");
-		$("#tab2").load("BaesongList.jsp?shopNo=1");
-		$("#tab3").load("EndList.jsp?shopNo=1");
-		countcount();
+	function sleep(delay) {
+		var start = new Date().getTime();
+		while (new Date().getTime() < start + delay)
+			;
 	}
-	
-	setInterval(function() {
+
+	function refresh() {
 		$("#tab1").load("NewOrderList.jsp?shopNo=1");
+		sleep(1000);
 		$("#tab2").load("BaesongList.jsp?shopNo=1");
+		sleep(1000);
 		$("#tab3").load("EndList.jsp?shopNo=1");
-		countcount();
-	},1500)
-	
-	function countcount(){
+		setTimeout(countcount, 1000);
+		setTimeout(countcount, 2000);
+	}
+	// 스크립트
+
+	setInterval(function() {
+		refresh();
+	}, 1500)
+
+	function countcount() {
 		var a = document.getElementsByClassName("count0").length;
 		var a1 = document.getElementsByClassName("count1").length;
 		var a2 = document.getElementsByClassName("count2").length;
 		var a3 = document.getElementsByClassName("count3").length;
 		//console.log(a +"/"+ a1);
-		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
-		document.getElementById("BaesongCount").innerText=(a2);
-		document.getElementById("EndListCount").innerText=(a3);
+		document.getElementById("NewOrderCount").innerText = (a + "/" + a1);
+		document.getElementById("BaesongCount").innerText = (a2);
+		document.getElementById("EndListCount").innerText = (a3);
 	}
-	
 </script>
 </head>
 <body>
@@ -369,28 +373,32 @@
 
 	<!-- 배달시작 Modal시작 -->
 	<div class="w3-modal" id="jumunReady">
-		<div class="w3-modal-content"  style="width:400px;height:500px;">
+		<div class="w3-modal-content" style="width: 400px; height: 500px;">
 			<div class="w3-container">
-				<div onclick="document.getElementById('jumunReady').style.display='none'"
+				<div
+					onclick="document.getElementById('jumunReady').style.display='none'"
 					class="w3-button w3-display w3-right">닫기</div>
-				<input id="jumunNo" type="text"/>
-				<input id="shop" type="hidden"/>
+				<input id="jumunNo" type="text" /> <input id="shop" type="hidden" />
 				<!-- 주문 접수시간 -->
-				<input id="time" type="text"/>
+				<input id="time" type="text" />
 				<!-- 주문 접수시간 -->
 				<!-- 배달 도착시간입력 -->
-					<div class="w3-tag w3-container w3-row">
-						<div class="w3-col">
-					  		<button class="w3-button w3-yellow h100" onClick="time(this)" value="15">15분</button>
-					  		<button class="w3-button w3-yellow h100" onClick="time(this)" value="30">30분</button>
-						</div>
+				<div class="w3-tag w3-container w3-row">
+					<div class="w3-col">
+						<button class="w3-button w3-yellow h100" onClick="time(this)"
+							value="15">15분</button>
+						<button class="w3-button w3-yellow h100" onClick="time(this)"
+							value="30">30분</button>
 					</div>
-					<div class="w3-tag w3-container w3-row">
-						<div class="w3-col">
-						  	<button class="w3-button w3-yellow h100" onClick="time(this)" value="45">45분</button>
-						  	<button class="w3-button w3-yellow h100" onClick="time(this)" value="60">60분</button>
-						</div>
+				</div>
+				<div class="w3-tag w3-container w3-row">
+					<div class="w3-col">
+						<button class="w3-button w3-yellow h100" onClick="time(this)"
+							value="45">45분</button>
+						<button class="w3-button w3-yellow h100" onClick="time(this)"
+							value="60">60분</button>
 					</div>
+				</div>
 				<!-- 배달 도착시간입력 -->
 				<button class="w3-label w3-green" onClick="CookOk(this)">조리시작</button>
 			</div>
@@ -398,34 +406,51 @@
 		</div>
 	</div>
 	<%--배달시작 모달 Modal끝 --%>
-	
+
 	<script>
-	function time(e){
-		var e=e.value;
-		console.log(e);
-		document.getElementById("time").value=e;
-	}
-	
-	function CookOk(e){
-		var no = e.parentNode.children[1].value;
-		var minute = e.parentNode.children[3].value;
-		console.log(no);
-		console.log(minute);
-		$.ajax({
-			type: "post",
-			url : "CheckOrderPro.jsp",
-			data: {"no" : no, "minute" : minute},
-			success : function(result){
-				console.log(result);
-				if(result==1){
-					alert("조리시작");
-					document.getElementById("jumunReady").style.display = "none";
-				}else{
-					alert("조리X");
-				}//else
-			}//success
-		});//ajax
-	}//CookOk
+		function time(e) {
+			var e = e.value;
+			console.log(e);
+			document.getElementById("time").value = e;
+		}
+
+		function CookBtn(e) {
+			var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+			var shop = e.parentNode.parentNode.children[0].children[2].value;
+			console.log(jumunNo);
+			console.log(shop);
+			//모달창에 값넣기
+			document.getElementById("jumunNo").value = jumunNo;
+			document.getElementById("shop").value = shop;
+			//모달창띄우기
+			document.getElementById("jumunReady").style.display = "block";
+		}//baesongBtn
+
+		function CookOk(e) {
+			var no = e.parentNode.children[1].value;
+			var minute = e.parentNode.children[3].value;
+			console.log(no);
+			console.log(minute);
+			$
+					.ajax({
+						type : "post",
+						url : "CheckOrderPro.jsp",
+						data : {
+							"no" : no,
+							"minute" : minute
+						},
+						success : function(result) {
+							console.log(result);
+							if (result == 1) {
+								//alert("조리시작");
+								document.getElementById("jumunReady").style.display = "none";
+							} else {
+								alert("조리X");
+							}//else
+						}//success
+					});//ajax
+			refresh(); // 새로고침
+		}//CookOk
 	</script>
 
 
