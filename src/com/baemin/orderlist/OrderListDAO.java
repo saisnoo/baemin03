@@ -27,13 +27,15 @@ public class OrderListDAO {
         try {
             // 1+2
             con = getConnection();
+            System.out.println("커넥션 ㅇㅇ");
             // ##### 트랜잭션 시작
             con.setAutoCommit(false);
+            System.out.println("오토커밋 껐다");
 
             // 111111111111111111111111111111111111111111
             // 3. sql
             String sql = "insert into orderlist(shop_NO, name, member_No, addr, addr2, comment, orderDate)"
-                    + " values( ? , ? , ? , ? , ? , ? , now()   )";
+                    + " values( ? , ? , ? , ? , ? , ? , now() )";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, dto.getShop_NO());
@@ -85,7 +87,7 @@ public class OrderListDAO {
             e.getStackTrace();
             throw new Exception(" testTransaction() 예외  ");
         } finally {
-            con.setAutoCommit(true);
+            // con.setAutoCommit(true);
             System.out.println("다시 오토커밋");
             close(con, pstmt, rs);
         } // finally end
@@ -486,5 +488,52 @@ public class OrderListDAO {
             pstmt.close();
         }
     } // close () end
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    public static void main(String[] args) {
+        OrderListDAO dao = OrderListDAO.getInstance();
+        OrderListDTO dto = new OrderListDTO();
+        int r = -1;
+
+        dto.setAddr("주소주소");
+        dto.setAddr2("상세주소");
+        dto.setComment("맛없게 배달해주세요");
+        dto.setMember_No(5);
+        dto.setName("5번손님");
+        dto.setShop_NO(1);
+
+        List<Order_MenuDTO> list1 = new ArrayList<>();
+        for (int i = 1; i < 6; i++) {
+            Order_MenuDTO temp = new Order_MenuDTO();
+            temp.setCount(i + 5);
+            temp.setMenu_Name("메뉴" + i + "번");
+            temp.setMenu_No(i);
+            list1.add(temp);
+        }
+        dto.setMenuList(list1);
+
+        String sql = "insert into order_Menu (orderlist_No, menu_No, count) VALUES ";
+        List<Order_MenuDTO> menuList = dto.getMenuList();
+        // 여러개 입력 문 만들기
+        for (int i = 0; i < menuList.size(); i++) {
+            Order_MenuDTO o = menuList.get(i);
+            sql += " ( " + 3 + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
+            System.out.println(sql);
+        }
+        sql += ",,,";
+        sql = sql.replace(",,,,", "");
+        System.out.println(sql);
+
+        try {
+            r = dao.testTransaction(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("r=" + r);
+    }
 
 }
