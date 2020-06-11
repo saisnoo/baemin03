@@ -381,14 +381,14 @@
 				<!-- 배달 도착시간입력 -->
 					<div class="w3-tag w3-container w3-row">
 						<div class="w3-col">
-					  		<button class="w3-button w3-yellow h100" onClick="">15분</button>
-					  		<button class="w3-button w3-yellow h100" onClick="">30분</button>
+					  		<button class="w3-button w3-yellow h100" onClick="time(this)" value="15">15분</button>
+					  		<button class="w3-button w3-yellow h100" onClick="time(this)" value="30">30분</button>
 						</div>
 					</div>
 					<div class="w3-tag w3-container w3-row">
 						<div class="w3-col">
-						  	<button class="w3-button w3-yellow h100" onClick="">45분</button>
-						  	<button class="w3-button w3-yellow h100" onClick="">60분</button>
+						  	<button class="w3-button w3-yellow h100" onClick="time(this)" value="45">45분</button>
+						  	<button class="w3-button w3-yellow h100" onClick="time(this)" value="60">60분</button>
 						</div>
 					</div>
 				<!-- 배달 도착시간입력 -->
@@ -400,6 +400,12 @@
 	<%--배달시작 모달 Modal끝 --%>
 	
 	<script>
+	function time(e){
+		var e=e.value;
+		console.log(e);
+		document.getElementById("time").value=e;
+	}
+	
 	function CookOk(e){
 		var no = e.parentNode.children[1].value;
 		var minute = e.parentNode.children[3].value;
