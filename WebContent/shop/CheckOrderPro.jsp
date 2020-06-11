@@ -6,7 +6,7 @@
 //자바 구문
 request.setCharacterEncoding("UTF-8");
 System.out.println("------CheckOrderPro.jsp");
-int no = Integer.parseInt(request.getParameter("shopNo"));
+int no = Integer.parseInt(request.getParameter("no"));
 OrderListDAO dao = OrderListDAO.getInstance();
 int result = dao.updateStatusTo1(no);
 %>

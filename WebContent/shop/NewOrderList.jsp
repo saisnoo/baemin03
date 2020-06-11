@@ -27,7 +27,7 @@ for(int i=0;i<NewOrderCount;i++){
 		<div class="w3-row">
 			<!-- 왼쪽 -->
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
-				<%=dto.getOrderDate()%>
+				<input type="text" value="<%=dto.getOrderDate()%>">
 				<input type="hidden" value="<%=dto.getNo()%>">
 				<input id="shopNo" type="hidden" value="<%=dto.getShop_NO()%>">
 			</div>
@@ -85,52 +85,42 @@ for(int i=0;i<NewOrderCount;i++){
 	// 스크립트
 
 	function CookBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[0].value;
-		console.log(a1);
-		//모달창에 값넣기
-		document.getElementById("jumunSiganNo").value = a1;
-		var sid = document.getElementById("shopNo").value;
-		//모달창띄우기
-		document.getElementById("jumunReady").style.display = "block";
-		
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(jumunNo);
+		document.getElementById("jumunNo").value = jumunNo;
 		$.ajax({
 			type: "post",
 			url : "CheckOrderPro.jsp",
-			data: "shopNo="+sid,
+			data: {"no" : jumunNo},
 			success : function(result){
 				console.log(result);
 				if(result==1){
-					alert("조리O");
+					alert("조리시작");
 				}else{
 					alert("조리X");
 				}//else
 			}//success
 		});//ajax
-	}
+	}//CookBtn
+	
 	function baesongBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[0].value;
-		console.log(a1);
-		
-		$.ajax({
-			type: "post",
-			url : "BaesongSelect.jsp",
-			data: {
-				"shopNo" : shopNo,
-				"minute" : minute
-			},
-			success : function(result){
-				console.log(result);
-				if(result==1){
-					
-				}else{
-					
-				}//else
-			}//success
-		});//ajax
-	}
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+		var time = e.parentNode.parentNode.children[0].children[0].value;
+		var shop = e.parentNode.parentNode.children[0].children[2].value;
+		console.log(jumunNo);
+		console.log(time);
+		console.log(shop);
+		//모달창에 값넣기
+		document.getElementById("jumunNo").value = jumunNo;
+		document.getElementById("time").value = time;
+		document.getElementById("shop").value = shop;
+		//모달창띄우기
+		document.getElementById("jumunReady").style.display = "block";
+	}//baesongBtn
+	
 	function cancelBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 		document.getElementById("jumunCancel").style.display = "block";
-	}
+	}//cancelBtn
 </script>
