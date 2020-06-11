@@ -6,8 +6,8 @@ use baemindb;
 
 
 
- 
- 
+
+
         
 CREATE TABLE member
 (
@@ -61,13 +61,22 @@ CREATE TABLE Order_cancel
 ALTER TABLE Order_cancel
   ADD CONSTRAINT UQ_orderlist_no UNIQUE (orderlist_no);
 
+CREATE TABLE order_menu
+(
+  no           int NOT NULL AUTO_INCREMENT,
+  orderlist_No INT NOT NULL COMMENT 'AUTO_Increment',
+  menu_No      INT NOT NULL,
+  count        INT NOT NULL,
+  PRIMARY KEY (no)
+);
+
 CREATE TABLE orderlist
 (
   no           INT         NOT NULL AUTO_INCREMENT COMMENT 'AUTO_Increment',
   name         varchar(30) NOT NULL,
   orderDate    DATETIME    NOT NULL,
-  status       INT         NOT NULL DEFAULT 0,
-  orderList    TEXT        NOT NULL,
+  status       INT         NULL     DEFAULT 0,
+  orderList    TEXT        NULL    ,
   completeTime DATETIME    NULL    ,
   addr         VARCHAR(90) NOT NULL,
   addr2        VARCHAR(90) NOT NULL,
@@ -140,12 +149,23 @@ ALTER TABLE review
     FOREIGN KEY (member_no)
     REFERENCES member (no);
 
-      
+ALTER TABLE order_menu
+  ADD CONSTRAINT FK_orderlist_TO_order_menu
+    FOREIGN KEY (orderlist_No)
+    REFERENCES orderlist (no);
+
+ALTER TABLE order_menu
+  ADD CONSTRAINT FK_menu_TO_order_menu
+    FOREIGN KEY (menu_No)
+    REFERENCES menu (no);
 
       
 
 
-      
+
+
+
+
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
 values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로동 589-7','구로역 3번 승강장','2000-01-01'
