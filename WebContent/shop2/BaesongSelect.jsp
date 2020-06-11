@@ -5,7 +5,6 @@
 int no = Integer.parseInt(request.getParameter("orderList_No"));
 int minute = Integer.parseInt(request.getParameter("estimated_time"));
 OrderListDAO dao = OrderListDAO.getInstance();
-//int result = dao.updateStatusTo1(no, minute);
+int result = dao.updateCompleteTime(no, minute);
 
 %>
-<%-- <%=result%> --%>
