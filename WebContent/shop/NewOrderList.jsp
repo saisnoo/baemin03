@@ -84,9 +84,9 @@ for(int i=0;i<NewOrderCount;i++){
 	// 스크립트
 
 	function baesongBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].innerText;
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
 		console.log(jumunNo);
-		document.getElementById("jumunNo").value = jumunNo;
+		document.getElementById("jumunNo").innerText = jumunNo;
 		$.ajax({
 			type: "post",
 			url : "BaesongSelect.jsp",
@@ -104,8 +104,8 @@ for(int i=0;i<NewOrderCount;i++){
 	}//CookBtn
 	
 	function cancelBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[0].value;
-		console.log(a1);
+		var cancelNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(cancelNo);
 		document.getElementById("jumunCancel").style.display = "block";
 	}//cancelBtn
 </script>

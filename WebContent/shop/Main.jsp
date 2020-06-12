@@ -376,9 +376,8 @@
 				<div
 					onclick="document.getElementById('jumunReady').style.display='none'"
 					class="w3-button w3-display w3-right">닫기</div>
-				<input id="jumunNo" type="text" /> <input id="shop" type="hidden" />
-				<!-- 주문 접수시간 -->
-				<input id="time" type="text" />
+				주문번호:<span id="jumunNo"></span><br> <input id="shop" type="hidden" />
+				배달 소요 시간:<span id="time">0</span> 분<br>
 				<!-- 주문 접수시간 -->
 				<!-- 배달 도착시간입력 -->
 				<div class="w3-tag w3-container w3-row">
@@ -409,7 +408,7 @@
 		function time(e) {
 			var e = e.value;
 			console.log(e);
-			document.getElementById("time").value = e;
+			document.getElementById("time").innerText = e;
 		}
 
 		function CookBtn(e) {
@@ -418,19 +417,19 @@
 			console.log(jumunNo);
 			console.log(shop);
 			//모달창에 값넣기
-			document.getElementById("jumunNo").value = jumunNo;
+			document.getElementById("jumunNo").innerText = jumunNo;
 			document.getElementById("shop").value = shop;
 			//모달창띄우기
 			document.getElementById("jumunReady").style.display = "block";
+			document.getElementById("time").innerText = 0;
 		}//baesongBtn
 
 		function CookOk(e) {
-			var no = e.parentNode.children[1].value;
-			var minute = e.parentNode.children[3].value;
+			var no = e.parentNode.children[1].innerText;
+			var minute = e.parentNode.children[3].innerText;
 			console.log(no);
 			console.log(minute);
-			$
-					.ajax({
+			$.ajax({
 						type : "post",
 						url : "CheckOrderPro.jsp",
 						data : {
