@@ -219,19 +219,70 @@
 								<table class="w3-table-all w3-margin-top" id="myTable">
 									<tr>
 										<th style="width: 20%;">이름</th>
-										<th style="width: 80%;">재료</th>
+										<th style="width: 20%;">가격</th>
+										<th style="width: 20%;">카테고리</th>
+										<th style="width: 40%;">설명</th>
 									</tr>
 									<tr>
 										<td>김치찌개</td>
-										<td>김치,물,돼지고기</td>
+										<td>8000</td>
+										<td>주메뉴</td>
+										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
 									</tr>
 									<tr>
 										<td>된장찌개</td>
-										<td>된장,물,두부</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>고기</td>
+										<td>11000</td>
+										<td>부메뉴</td>
+										<td>고기고기고기고기고기고기고기고기</td>
+									</tr>
+									<tr>
+										<td>동그랑땡</td>
+										<td>8000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>김치찌개</td>
+										<td>8000</td>
+										<td>주메뉴</td>
+										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
 									</tr>
 								</table>
 							</div>
 						</div>
+
+				<script>
+					function myFunction() {
+						var input, filter, table, tr, td, i;
+						input = document.getElementById("myInput");
+						filter = input.value.toUpperCase();
+						table = document.getElementById("myTable");
+						tr = table.getElementsByTagName("tr");
+						for (i = 0; i < tr.length; i++) {
+							td = tr[i].getElementsByTagName("td")[0];
+							if (td) {
+								txtValue = td.textContent || td.innerText;
+								if (txtValue.toUpperCase().indexOf(filter) > -1) {
+									tr[i].style.display = "";
+								} else {
+									tr[i].style.display = "none";
+								}
+							}
+						}
+					}
+				</script>
 
 						<!-- 오른쪽 half -->
 						<div class="w3-half">
@@ -275,27 +326,6 @@
 					</div>
 
 				</div>
-
-				<script>
-					function myFunction() {
-						var input, filter, table, tr, td, i;
-						input = document.getElementById("myInput");
-						filter = input.value.toUpperCase();
-						table = document.getElementById("myTable");
-						tr = table.getElementsByTagName("tr");
-						for (i = 0; i < tr.length; i++) {
-							td = tr[i].getElementsByTagName("td")[0];
-							if (td) {
-								txtValue = td.textContent || td.innerText;
-								if (txtValue.toUpperCase().indexOf(filter) > -1) {
-									tr[i].style.display = "";
-								} else {
-									tr[i].style.display = "none";
-								}
-							}
-						}
-					}
-				</script>
 
 
 				<script>
@@ -380,22 +410,15 @@
 				배달 소요 시간:<span id="time">0</span>분<br>
 				<!-- 주문 접수시간 -->
 				<!-- 배달 도착시간입력 -->
-				<div class="w3-tag w3-container w3-row">
-					<div class="w3-col">
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="15">15분</button>
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="30">30분</button>
-					</div>
-				</div>
-				<div class="w3-tag w3-container w3-row">
-					<div class="w3-col">
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="45">45분</button>
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="60">60분</button>
-					</div>
-				</div>
+							<br>
 				<!-- 배달 도착시간입력 -->
 				<button class="w3-label w3-green" onClick="CookOk(this)">조리시작</button>
 			</div>
