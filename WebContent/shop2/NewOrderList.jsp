@@ -23,8 +23,9 @@ CartDTO cartDTO=new CartDTO();
 for(int i=0;i<list.size();i++)
 {	
 	OrderListDTO orderListDTO=list.get(i);
-	String k="";
+	/* String k="";
 	k=Order2Cart.toMsg(orderListDTO.getOrderList());
+	System.out.println(k); */
 	%>
 	    <!-- load  new order  -->
 	<div class="w3-section">
@@ -67,7 +68,7 @@ for(int i=0;i<list.size();i++)
 					<div class="w3-col">
 						<strong>[메뉴 4개]</strong> &nbsp;<%=orderListDTO.getName()%>
 					</div>
-					<div class="w3-col">주문번호 : </div>
+					<div class="w3-col">전화번호 :<%=orderListDTO.getTel() %></div>
 				</div>
 				<div class="w3-row"><%=orderListDTO.getAddr() +"  "+ orderListDTO.getAddr2() %></div>
 			</div>
@@ -76,7 +77,7 @@ for(int i=0;i<list.size();i++)
 		<!-- 상단 컨테이너 끝 -->
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding"><%=k %></div>
+			<div class="w3-row w3-padding"><%=orderListDTO.getMenu_String() %></div>
 			<div class="w3-row w3-padding"><%=orderListDTO.getComment() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->
@@ -89,37 +90,36 @@ for(int i=0;i<list.size();i++)
 
 
 <script>
-	// 스크립트
 
+
+	// 스크립트
+console.log("------NewOrderList.jsp");
 	//데이터를 변경하는 함수 -update	
 	
 	function jumunBtn(e) {
-		var orderList_No = e.parentNode.parentNode.children[0].children[1].value;
-		var shop_No = e.parentNode.parentNode.children[0].children[2].value;
-		var getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
+		orderList_No = e.parentNode.parentNode.children[0].children[1].value;
+		shop_No = e.parentNode.parentNode.children[0].children[2].value;
+		getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
 	/* 	var 시 = Math.floor((간격 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		var 분 = Math.floor((간격 % (1000 * 60 * 60)) / (1000 * 60));
 		var 초 = Math.floor((간격 % (1000 * 60)) / 1000);
 
 		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
-		
+		console.log(orderList_No);
 		 $("#take_overbtn").click(function(){
 			 var estimated_time = $(":input:radio[name=estimated_time]:checked").val();
-			
+				console.log(orderList_No);
 			 
 			 var data={
-					//항목이름: 값(변수)
-				//	no:no,
-					//rno:rno,
-				
 					orderList_No:orderList_No,
 					estimated_time:estimated_time
 			}
 			//alert(JSON.stringify(reply));
 			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
+			
 			$.ajax({
 				type : "post",
-				url : "makeorder.jsp",
+				url : "CheckOrderPro.jsp",
 				//data : JSON.stringify(reply),
 				data : data,
 				//리턴 되어 돌려 받는 데이터의 타입
@@ -134,20 +134,29 @@ for(int i=0;i<list.size();i++)
 				}//error의 끝
 				
 			});//ajax의 끝*/
+			// $("#take_over").modal("hide");
+			$("#take_cancle").click(function(){
+				$('.modal').on('hidden.bs.modal', function (e) {
+				    $(this).find('form')[0].reset()
+				});
+			});
+			$('.modal').on('hidden.bs.modal', function (e) {
+			    $(this).find('form')[0].reset()
+			});
 		}); 
 	
 	}
 
 	function baesongBtn(e) {
 		var orderList_No = e.parentNode.parentNode.children[0].children[1].value;
-		var shop_No = e.parentNode.parentNode.children[0].children[2].value;
-		var getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
+		//var shop_No = e.parentNode.parentNode.children[0].children[2].value;
+		//var getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
 	/* 	var 시 = Math.floor((간격 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		var 분 = Math.floor((간격 % (1000 * 60 * 60)) / (1000 * 60));
 		var 초 = Math.floor((간격 % (1000 * 60)) / 1000);
 
 		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
-		
+		console.log(orderList_No);
 		 //$("#take_overbtn").click(function(){
 			/*  var estimated_time = $(":input:radio[name=estimated_time]:checked").val(); */
 			
@@ -158,13 +167,13 @@ for(int i=0;i<list.size();i++)
 					//rno:rno,
 				
 					orderList_No:orderList_No,
-					estimated_time:estimated_time
+					
 			}
 			//alert(JSON.stringify(reply));
 			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
 			$.ajax({
 				type : "post",
-				url : "CancelOrderPro.jsp",
+				url : "BaesongSelect.jsp",
 				//data : JSON.stringify(reply),
 				data : data,
 				//리턴 되어 돌려 받는 데이터의 타입
@@ -192,7 +201,7 @@ for(int i=0;i<list.size();i++)
 		var 초 = Math.floor((간격 % (1000 * 60)) / 1000);
 
 		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
-		
+		console.log(orderList_No);
 		 $("#jumoon_calcel_btn").click(function(){
 			 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
 			
@@ -209,7 +218,7 @@ for(int i=0;i<list.size();i++)
 			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
 			$.ajax({
 				type : "post",
-				url : "BaesongSelect.jsp",
+				url : "CancelOrderPro.jsp",
 				//data : JSON.stringify(reply),
 				data : data,
 				//리턴 되어 돌려 받는 데이터의 타입
