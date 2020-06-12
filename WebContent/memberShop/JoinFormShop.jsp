@@ -81,7 +81,7 @@
 								onClick="checkId()" tabindex="2">
 						</div>
 						<div class="w3-rest">
-							<input class="w3-input" type="text" name="ShopID" id="ShopID"
+							<input class="w3-input" type="text" name="shopID" id="shopID"
 								onkeypress="idValueChange()" pattern="^[a-z0-9]{4,15}$" required
 								placeholder="아이디 영어소문자, 숫자 4~15" tabindex="1">
 						</div>
@@ -279,10 +279,10 @@
 		function checkId() {
 			console
 					.log("--checkId()"
-							+ document.getElementById("ShopID").value);
+							+ document.getElementById("shopID").value);
 			var data1 = {
 				// 항목이름 : 값(변수)
-				id : document.getElementById("ShopID").value,
+				id : document.getElementById("shopID").value,
 			}
 
 			$
