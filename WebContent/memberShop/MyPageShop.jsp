@@ -1,3 +1,5 @@
+<%@page import="com.baemin.shop.ShopDTO"%>
+<%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
@@ -33,10 +35,34 @@
 </style>
 <script>
 	// 스크립트
+			function pwCheck() {
+			var pw = document.modalForm.pw.value;
+			var pwc = document.modalForm.pwc.value;
+			if (pw == pwc && pw.length > 3) {
+				console.log("비밀번호 일치");
+				document.getElementById("btn").disabled = false;
+				pwCk = 1;
+			} else {
+				console.log("비밀번호 틀림");
+				document.getElementById("btn").disabled = true;
+				pwCk = 0;
+			}
+		} //  pwCheck() end
+		
+function rePwCheck(){
+	document.getElementById("btn").disabled = true;
+		}
+		
 </script>
 </head>
 <body>
 	<!-- 내용 -->
+	<%
+		Object no_ob = session.getAttribute("no");
+		int no = Integer.parseInt(no_ob + "");
+		ShopDAO dao = ShopDAO.getInstance();
+		ShopDTO dto = dao.getShopInfo(no);
+	%>
 
 
 
@@ -63,23 +89,46 @@
 					<form class="w3-container" method="post" action="#"
 						name="clientMyPage">
 
-						<label><b>아이디</b></label> <input class="w3-input w3-border"
-							name="shopId" id="shopId" readonly="readonly" type="text"
-							value="kildong"> <br> <label><b>비밀번호</b></label> <input
-							class="w3-input w3-border" name="shopPw" id="shopPw"
-							readonly="readonly" type="password" value="1234"> <br>
-						<label><b>분류</b></label> <input class="w3-input w3-border"
-							name="shopCategory" id="shopCategory" readonly="readonly"
-							type="text" value="중식"> <br> <label><b>매장명</b></label>
-						<input class="w3-input w3-border" name="shopName" id="shopName"
-							readonly="readonly" type="text" value="홍콩반전"> <br> <label><b>전화번호</b></label>
-						<input class="w3-input w3-border" name="shopTel" id="shopTel"
-							readonly="readonly" type="text" value="010-8282-5959"> <br>
-						<label><b>주소</b></label> <input class="w3-input w3-border"
-							name="shopAddr" id="shopAddr" readonly="readonly" type="text"
-							value="사랑시 고백구 행복동"> <br> <label><b>상세주소</b></label>
-						<input class="w3-input w3-border" name="shopAddr1" id="shopAddr1"
-							readonly="readonly" type="text" value="486번지"> <br>
+						<!--  -->
+						<label><b>아이디</b></label> <input class="w3-input w3-border" name="shopId" id="shopId" readonly="readonly" type="text" value="<%=dto.getId()%>">
+						<!--  -->
+						<br>
+						<!--  -->
+						<label><b>비밀번호</b></label>
+						<!--  -->
+						<input class="w3-input w3-border" name="shopPw" id="shopPw" readonly="readonly" type="password" value="<%=dto.getPw()%>">
+						<!--  -->
+						<br>
+						<!--  -->
+						<label><b>분류</b></label>
+						<!--  -->
+						<input class="w3-input w3-border" name="shopCategory" id="shopCategory" readonly="readonly" type="text" value="<%=dto.getShopCategory()%>">
+						<!--  -->
+						<br>
+						<!--  -->
+						<label><b>매장명</b></label>
+						<!--  -->
+						<input class="w3-input w3-border" name="shopName" id="shopName" readonly="readonly" type="text" value="<%=dto.getShopName()%>">
+						<!--  -->
+						<br>
+						<!--  -->
+						<label><b>전화번호</b></label>
+						<!--  -->
+						<input class="w3-input w3-border" name="shopTel" id="shopTel" readonly="readonly" type="text" value="<%=dto.getShopTel()%>">
+						<!--  -->
+						<br>
+						<!--  -->
+						<label><b>주소</b></label>
+						<!--  -->
+						<input class="w3-input w3-border" name="shopAddr" id="shopAddr" readonly="readonly" type="text" value="<%=dto.getShopAddr()%>">
+						<!--  -->
+						<br>
+						<!--  -->
+						<label><b>상세주소</b></label>
+						<!--  -->
+						<input class="w3-input w3-border" name="shopAddr1" id="shopAddr1" readonly="readonly" type="text" value="<%=dto.getShopAddr2()%>">
+						<!--  -->
+						<br>
 						<div align="center">
 							<input type="button" class="w3-btn"
 								style="background-color: #45c1bf; color: white;" value="개인정보수정"
@@ -106,33 +155,23 @@
 					<div class="w3-modal-content">
 						<div class="w3-container">
 							<span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
-							<form method="post" action="UpdateClientPro.jsp">
-
+							<form method="post" action="UpdateShopPro.jsp" name="modalForm">
+								<input type="hidden" value="<%=dto.getNo()%>" name="no">
 								<p>비밀번호 변경</p>
 								<p>
-									<input type="password" name="pw">
+									<input type="password" name="pw" id="pw" onkeydown="rePwCheck()">
 								</p>
 
 								<!-- Ajax 처리로 비밀번호 체크 -->
 								<p>비밀번호 확인</p>
 								<p>
-									<input type="password" name="pwc">
+									<input type="password" name="pwc" id="pwc" onkeydown="rePwCheck()">
 								</p>
-
-								<!-- 기존의 전화번호를 value값에 집어넣어 수정하고싶으면 하고 아니면 원래값 그대로 넘기기 -->
-								<p>전화번호 변경</p>
-								<p>
-									<input type="text" name="tel" value="010-5252-8282">
+																<p>
+									<input type="button" value="비밀번호 확인" onClick="pwCheck()">
 								</p>
-
-								<!-- 기존의 전화번호를 value값에 집어넣어 수정하고싶으면 하고 아니면 원래값 그대로 넘기기 -->
-								<p>매장전화번호 변경</p>
 								<p>
-									<input type="text" name="tel" value="010-8282-5353">
-								</p>
-
-								<p>
-									<input class="w3-button w3-border" type="submit" value="변경">
+									<input class="w3-button w3-border" type="submit" value="변경" disabled="disabled" name="btn" id="btn">
 									<input class="w3-button w3-border" type="button" value="취소"
 										onclick="modalOff()">
 								</p>
