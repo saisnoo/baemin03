@@ -59,9 +59,7 @@ for(int i=0;i<BaesongCount;i++){
 		<!-- 상단 컨테이너 끝 -->
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 /
-				양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 / 된장찌개 2 /
-				후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5</div>
+			<div class="w3-row w3-padding"><%=dto.getMenu_String() %></div>
 			<div class="w3-row w3-padding"><%=dto.getComment() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->

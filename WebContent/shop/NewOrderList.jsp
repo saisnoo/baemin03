@@ -22,8 +22,6 @@ CartDTO cart = new CartDTO();
 int NewOrderCount =orderList.size();
 for(int i=0;i<NewOrderCount;i++){
 	OrderListDTO dto =orderList.get(i);
-	String MenuList="";
-	MenuList=Order2Cart.toMsg(dto.getOrderList());
 %>
 
 <!-- 접수대기 리스트 -->
@@ -74,7 +72,7 @@ for(int i=0;i<NewOrderCount;i++){
 		<!-- 하단 컨테이너 -->
 		<div>
 			<div class="w3-row w3-padding">
-			<%=MenuList%>
+			<%=dto.getMenu_String()%>
 			</div>
 			<div class="w3-row w3-padding"><%=dto.getComment() %></div>
 		</div>

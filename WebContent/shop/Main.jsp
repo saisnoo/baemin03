@@ -68,6 +68,9 @@
 #tabtab2 {
 	height: 500px;
 }
+#tabtab3 {
+	height: 500px;
+}
 
 #menucell {
 	height: 415px;
@@ -148,6 +151,12 @@
 							<h4>매장관리</h4>
 						</button>
 					</div>
+					<div class="w3-quarter tablink2">
+						<button onclick="openTab2(event, 'tabtab3')"
+							class="w3-button w3-block w3-black w3-border">
+							<h4>리뷰</h4>
+						</button>
+					</div>
 				</div>
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -165,6 +174,10 @@
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab3')">
 							완료<br /> <strong id="EndListCount"></strong>
+						</button>
+						<button class="w3-button w3-block w3-border tablinks"
+							onclick="openTab(event, 'tab4')">
+							취소<br /> <strong id="CancelCount"></strong>
 						</button>
 					</div>
 					<div class="w3-rest w3-white scroll-box">
@@ -196,12 +209,20 @@
 							<!-- load  new order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
 
 						</div>
+						<div id="tab4" class="tabcontent">
+							<!-- cancel order -/-/-/-/-/-/--/-/-/-/-/-/-/-/-/- -->
+
+
+							<!-- cancel order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
+
+						</div>
 					</div>
 				</div>
 				<!--tabtab1 end-->
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+				<!-- 매장관리탭 -->
 				<div id="tabtab2" class="w3-border tabcontent2">
 
 					<div class="w3-row-padding w3-section">
@@ -326,7 +347,12 @@
 					</div>
 
 				</div>
-
+				<!-- 매장관리탭 끝 -->
+				<!-- 리뷰탭 -->
+				<div id="tabtab3" class="w3-border tabcontent2">
+				
+				</div>
+				<!-- 리뷰탭 -->
 
 				<script>
 					function openTab(evt, tabName) {
@@ -477,13 +503,13 @@
 	<!--주문 취소 Modal시작 -->
 	<div class="w3-modal" id="jumunCancel">
 		<div class="w3-modal-content">
+		<span	onclick="document.getElementById('jumunCancel').style.display='none'"
+				class="w3-button w3-display w3-right">닫기</span>
 			<div class="w3-container">
 			취소번호: <span id="cancelNo"></span><br>
 			 <input id="shop" type="hidden" />
 			취소사유: <span id="CancelWhy"></span>
-				  <span align="right"
-					onclick="document.getElementById('jumunCancel').style.display='none'"
-					class="w3-button w3-display">X</span><br>
+				  
 				<div class="cancelText">
 				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
 							value="영업종료">영업종료</button>
@@ -529,7 +555,7 @@
 				if (result == 1) {
 					document.getElementById("jumunCancel").style.display = "none";
 				} else {
-					alert("취소");
+					alert("취소를취소");
 				}//else
 			}//success
 		});//ajax
