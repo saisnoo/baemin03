@@ -328,7 +328,7 @@ public class OrderListDAO {
                     + " orderlist.completeTime completeTime , member.tel ,"
                     + "  order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName,"
                     + " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member"
-                    + "  WHERE orderlist.shop_no = 1" + " AND orderlist.no = order_menu.orderlist_No"
+                    + "  WHERE orderlist.shop_no = ?" + " AND orderlist.no = order_menu.orderlist_No"
                     + " AND order_menu.menu_No = menu.no" + " AND orderlist.STATUS BETWEEN 0 AND 1"
                     + " AND member.no = orderlist.member_no" + "   ORDER BY orderlist.orderdate ASC , orderlist.no asc"
                     + "   ) CNT" + " )CNT" + " GROUP BY NO";
@@ -408,7 +408,7 @@ public class OrderListDAO {
                     + "  orderlist.completeTime completeTime , member.tel , "
                     + " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
                     + " menu.menuPrice menuPrice " + "FROM orderlist, order_menu, menu , member "
-                    + " WHERE orderlist.shop_no = 1 " + " AND orderlist.no = order_menu.orderlist_No "
+                    + " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
                     + "AND order_menu.menu_No = menu.no " + "  AND orderlist.STATUS = 2 "
                     + " AND orderlist.completeTime > NOW() " + " AND member.no = orderlist.member_no "
                     + "ORDER BY orderlist.orderdate ASC , orderlist.no asc " + " ) CNT " + ")CNT " + " GROUP BY no; ";
@@ -494,7 +494,7 @@ public class OrderListDAO {
                     + " orderlist.completeTime completeTime , member.tel , "
                     + " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
                     + " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member "
-                    + "  WHERE orderlist.shop_no = 1 " + " AND orderlist.no = order_menu.orderlist_No "
+                    + "  WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
                     + " AND order_menu.menu_No = menu.no" + " AND orderlist.completeTime < NOW() "
                     + " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and now() "
                     + " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
