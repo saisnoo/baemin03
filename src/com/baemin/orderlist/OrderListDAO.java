@@ -98,33 +98,65 @@ public class OrderListDAO {
     // insertOrder_start-----------------------------------------------------------------------------
     public int insertOrder(OrderListDTO dto) throws Exception {
         // 출력객체
-        int result = -1;
+        int result1 = -1;
+        int result2 = -1;
         System.out.println("---OrderListDAO insertOrder");
-
+        int orderList_No = -1; // 추가된 orderList 의 no
         try {
+            // TODO: 트랜잭션 트랜잭션 트랜잭션 트랜잭션 트랜잭션 트랜잭션
             // 1+2
             con = getConnection();
+            // ---------------------------------------------------------------------------------------
             // 3. sql
-            String sql = "insert into orderlist(shop_NO, name, member_No, orderList, addr, addr2, comment, orderDate)"
-                    + " values(?, ?, ?, now(), ?, ?, ?, ? )";
+            System.out.println("-- 1 -- ");
+            String sql = "insert into orderlist(name, orderDate, addr, addr2, comment, shop_No, member_No )"
+                    + " values(?, now(), ?, ?, ?, ?, ? )";
+            System.out.println(sql);
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
-            pstmt.setInt(1, dto.getShop_NO());
-            pstmt.setString(2, dto.getName());
-            pstmt.setInt(3, dto.getMember_No());
-            pstmt.setString(4, dto.getOrderList());
-            pstmt.setString(5, dto.getAddr());
-            pstmt.setString(6, dto.getAddr2());
-            pstmt.setString(7, dto.getComment());
+            pstmt.setString(1, dto.getName());
+            pstmt.setString(2, dto.getAddr());
+            pstmt.setString(3, dto.getAddr2());
+            pstmt.setString(4, dto.getComment());
+            pstmt.setInt(5, dto.getShop_NO());
+            pstmt.setInt(6, dto.getMember_No());
             // 5. 실행
-            result = pstmt.executeUpdate();
+            result1 = pstmt.executeUpdate();
+            // ---------------------------------------------------------------------------------------
+            // 3. sql // 4. 실행객체
+            pstmt = con.prepareStatement("select LAST_INSERT_ID()");
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 결과값
+            while (rs.next()) {
+                orderList_No = rs.getInt(1);
+            }
+            System.out.println("마지막으로 추가된 주문번호=" + orderList_No);
+            // ---------------------------------------------------------------------------------------
+            // 3. sql
+            sql = "insert into order_Menu (orderlist_No, menu_No, count) VALUES ";
+            List<Order_MenuDTO> menuList = dto.getMenuList();
+            // 여러개 입력 문 만들기
+            for (int i = 0; i < menuList.size(); i++) {
+                Order_MenuDTO o = menuList.get(i);
+                sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
+                System.out.println(sql);
+            }
+            sql += ",,,";
+            sql = sql.replace(",,,,", "");
+            System.out.println(sql);
+            // 4. 실행객체
+            stmt = con.createStatement();
+            // 5. 실행
+            result2 = stmt.executeUpdate(sql);
+            // ---------------------------------------------------------------------------------------
         } catch (Exception e) {
             e.getStackTrace();
             throw new Exception(" insertOrder() 예외  ");
         } finally {
             close(con, pstmt, rs);
         } // finally end
-        return result;
+        return Math.min(result1, result2);
     } // insertOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // updateStatusTo1_start-----------------------------------------------------------------------------
@@ -557,6 +589,87 @@ public class OrderListDAO {
         return list;
     } // getListFinishToday_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
+    // getListOfCancel_start-----------------------------------------------------------------------------
+    public List<OrderListDTO> getListOfCancel(int shopNo, int INTERVAL_HOUR) throws Exception {
+        // 출력객체
+        List<OrderListDTO> list = new ArrayList<>();
+        System.out.println("---OrderListDAO getListOfCancel");
+
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, "
+                    + " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + " FROM( "
+                    + " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
+                    + " SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
+                    + " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
+                    + " orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT, "
+                    + " orderlist.shop_no shop_no, orderlist.member_no member_No, "
+                    + " orderlist.completeTime completeTime , member.tel , "
+                    + " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
+                    + " menu.menuPrice menuPrice " + " FROM orderlist, order_menu, menu , member "
+                    + " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
+                    + " AND order_menu.menu_No = menu.no " + " AND STATUS = -1 "
+                    + " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24 HOUR)) and now() "
+                    + " AND member.no = orderlist.member_no " + " ORDER BY orderlist.orderdate ASC , orderlist.no asc "
+                    + " ) CNT  )CNT GROUP BY no; ";
+
+            // SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no,
+            // member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString
+            // FROM(
+            // SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM (
+            // SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT(
+            // orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS,
+            // orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT,
+            // orderlist.shop_no shop_no, orderlist.member_no member_No,
+            // orderlist.completeTime completeTime , member.tel ,
+            // order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName,
+            // menu.menuPrice menuPrice
+            // FROM orderlist, order_menu, menu , member
+            // WHERE orderlist.shop_no = 1
+            // AND orderlist.no = order_menu.orderlist_No
+            // AND order_menu.menu_No = menu.no
+            // AND STATUS = -1
+            // AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24 HOUR)) and
+            // now()
+            // AND member.no = orderlist.member_no
+            // ORDER BY orderlist.orderdate ASC , orderlist.no asc
+            // ) CNT )CNT GROUP BY no;
+            System.out.println(sql);
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shopNo);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    OrderListDTO dto = new OrderListDTO();
+                    dto.setNo(rs.getInt("no"));
+                    dto.setName(rs.getString("name"));
+                    dto.setOrderDate(rs.getString("orderdate"));
+                    dto.setTel(rs.getString("tel"));
+                    dto.setStatus(rs.getInt("status"));
+                    dto.setAddr(rs.getString("addr"));
+                    dto.setAddr2(rs.getString("addr2"));
+                    dto.setComment(rs.getString("comment"));
+                    dto.setShop_NO(rs.getInt("shop_no"));
+                    dto.setMember_No(rs.getInt("member_no"));
+                    dto.setCompleteTime(rs.getString("completeTime"));
+                    dto.setMenu_String(rs.getString("menuString"));
+                    list.add(dto);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getListOfCancel() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return list;
+    } // getListOfCancel_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -609,15 +722,43 @@ public class OrderListDAO {
 
         OrderListDAO dao = OrderListDAO.getInstance();
 
-        int a = -1;
+        OrderListDTO dto = new OrderListDTO();
+
+        List<Order_MenuDTO> list = new ArrayList<>();
+
+        Order_MenuDTO a1 = new Order_MenuDTO();
+        a1.setCount(1);
+        a1.setMenu_No(28);
+        Order_MenuDTO a2 = new Order_MenuDTO();
+        a2.setCount(2);
+        a2.setMenu_No(28);
+        Order_MenuDTO a3 = new Order_MenuDTO();
+        a3.setCount(3);
+        a3.setMenu_No(28);
+
+        list.add(a1);
+        list.add(a2);
+        list.add(a3);
+
+        dto.setMenuList(list);
+
+        dto.setAddr("평양시 원산구");
+        dto.setAddr2("혁명기념관 401호");
+
+        dto.setComment("날래날래 갖고오라우");
+        dto.setShop_NO(7);
+        dto.setMember_No(2);
+        dto.setName("김경영");
+        dto.setTel("123-456-789");
+
+        System.out.println(dto.toString());
+
         try {
-            a = dao.updateStatusTo1(2, 30);
+            dao.insertOrder(dto);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        System.out.println(a);
 
     }
 
