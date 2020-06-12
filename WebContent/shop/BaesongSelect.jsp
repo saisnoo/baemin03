@@ -4,6 +4,6 @@
 <%
 int no = Integer.parseInt(request.getParameter("no"));
 OrderListDAO dao = OrderListDAO.getInstance();
-int result = dao.updateCompleteTime(no);
+int result = dao.updateStatusTo2(no);
 %>
 <%=result%>

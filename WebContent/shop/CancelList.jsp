@@ -1,4 +1,4 @@
-<%@page import="com.baemin.orderlist.OrderListDTO"%>
+<%-- <%@page import="com.baemin.orderlist.OrderListDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,16 +7,16 @@
 <%
 //자바 구문
 request.setCharacterEncoding("UTF-8");
-System.out.println("------EndList.jsp");
+System.out.println("------CancelList.jsp");
 
 System.out.println(request.getParameter("shopNo"));
 int shopNo=Integer.parseInt(request.getParameter("shopNo"));
 OrderListDAO dao= OrderListDAO.getInstance();
 
-List<OrderListDTO> orderList = dao.getListFinishToday(shopNo);
+List<OrderListDTO> orderList = dao.취소리스트;
 System.out.println(shopNo);
-int EndListCount =orderList.size();
-for(int i=0;i<EndListCount;i++){
+int CancelListCount =orderList.size();
+for(int i=0;i<CancelListCount;i++){
 	OrderListDTO dto =orderList.get(i);
 %>
 
@@ -54,11 +54,13 @@ for(int i=0;i<EndListCount;i++){
 		
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding"><%=dto.getMenu_String() %></div>
+			<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 /
+				양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 / 된장찌개 2 /
+				후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5</div>
 		</div>
 		<!-- 하단 컨테이너 끝-->
 	</div>
 </div>
 <%
 }
-%>
+%> --%>

@@ -68,6 +68,9 @@
 #tabtab2 {
 	height: 500px;
 }
+#tabtab3 {
+	height: 500px;
+}
 
 #menucell {
 	height: 415px;
@@ -148,6 +151,12 @@
 							<h4>매장관리</h4>
 						</button>
 					</div>
+					<div class="w3-quarter tablink2">
+						<button onclick="openTab2(event, 'tabtab3')"
+							class="w3-button w3-block w3-black w3-border">
+							<h4>리뷰</h4>
+						</button>
+					</div>
 				</div>
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -165,6 +174,10 @@
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab3')">
 							완료<br /> <strong id="EndListCount"></strong>
+						</button>
+						<button class="w3-button w3-block w3-border tablinks"
+							onclick="openTab(event, 'tab4')">
+							취소<br /> <strong id="CancelCount"></strong>
 						</button>
 					</div>
 					<div class="w3-rest w3-white scroll-box">
@@ -196,12 +209,20 @@
 							<!-- load  new order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
 
 						</div>
+						<div id="tab4" class="tabcontent">
+							<!-- cancel order -/-/-/-/-/-/--/-/-/-/-/-/-/-/-/- -->
+
+
+							<!-- cancel order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
+
+						</div>
 					</div>
 				</div>
 				<!--tabtab1 end-->
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+				<!-- 매장관리탭 -->
 				<div id="tabtab2" class="w3-border tabcontent2">
 
 					<div class="w3-row-padding w3-section">
@@ -219,19 +240,70 @@
 								<table class="w3-table-all w3-margin-top" id="myTable">
 									<tr>
 										<th style="width: 20%;">이름</th>
-										<th style="width: 80%;">재료</th>
+										<th style="width: 20%;">가격</th>
+										<th style="width: 20%;">카테고리</th>
+										<th style="width: 40%;">설명</th>
 									</tr>
 									<tr>
 										<td>김치찌개</td>
-										<td>김치,물,돼지고기</td>
+										<td>8000</td>
+										<td>주메뉴</td>
+										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
 									</tr>
 									<tr>
 										<td>된장찌개</td>
-										<td>된장,물,두부</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>고기</td>
+										<td>11000</td>
+										<td>부메뉴</td>
+										<td>고기고기고기고기고기고기고기고기</td>
+									</tr>
+									<tr>
+										<td>동그랑땡</td>
+										<td>8000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>김치찌개</td>
+										<td>8000</td>
+										<td>주메뉴</td>
+										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
 									</tr>
 								</table>
 							</div>
 						</div>
+
+				<script>
+					function myFunction() {
+						var input, filter, table, tr, td, i;
+						input = document.getElementById("myInput");
+						filter = input.value.toUpperCase();
+						table = document.getElementById("myTable");
+						tr = table.getElementsByTagName("tr");
+						for (i = 0; i < tr.length; i++) {
+							td = tr[i].getElementsByTagName("td")[0];
+							if (td) {
+								txtValue = td.textContent || td.innerText;
+								if (txtValue.toUpperCase().indexOf(filter) > -1) {
+									tr[i].style.display = "";
+								} else {
+									tr[i].style.display = "none";
+								}
+							}
+						}
+					}
+				</script>
 
 						<!-- 오른쪽 half -->
 						<div class="w3-half">
@@ -275,28 +347,12 @@
 					</div>
 
 				</div>
-
-				<script>
-					function myFunction() {
-						var input, filter, table, tr, td, i;
-						input = document.getElementById("myInput");
-						filter = input.value.toUpperCase();
-						table = document.getElementById("myTable");
-						tr = table.getElementsByTagName("tr");
-						for (i = 0; i < tr.length; i++) {
-							td = tr[i].getElementsByTagName("td")[0];
-							if (td) {
-								txtValue = td.textContent || td.innerText;
-								if (txtValue.toUpperCase().indexOf(filter) > -1) {
-									tr[i].style.display = "";
-								} else {
-									tr[i].style.display = "none";
-								}
-							}
-						}
-					}
-				</script>
-
+				<!-- 매장관리탭 끝 -->
+				<!-- 리뷰탭 -->
+				<div id="tabtab3" class="w3-border tabcontent2">
+				
+				</div>
+				<!-- 리뷰탭 -->
 
 				<script>
 					function openTab(evt, tabName) {
@@ -376,27 +432,19 @@
 				<div
 					onclick="document.getElementById('jumunReady').style.display='none'"
 					class="w3-button w3-display w3-right">닫기</div>
-				<input id="jumunNo" type="text" /> <input id="shop" type="hidden" />
-				<!-- 주문 접수시간 -->
-				<input id="time" type="text" />
+				주문번호:<span id="jumunNo"></span><br><input id="shop" type="hidden" />
+				배달 소요 시간:<span id="time">0</span>분<br>
 				<!-- 주문 접수시간 -->
 				<!-- 배달 도착시간입력 -->
-				<div class="w3-tag w3-container w3-row">
-					<div class="w3-col">
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="15">15분</button>
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="30">30분</button>
-					</div>
-				</div>
-				<div class="w3-tag w3-container w3-row">
-					<div class="w3-col">
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="45">45분</button>
 						<button class="w3-button w3-yellow h100" onClick="time(this)"
 							value="60">60분</button>
-					</div>
-				</div>
+							<br>
 				<!-- 배달 도착시간입력 -->
 				<button class="w3-label w3-green" onClick="CookOk(this)">조리시작</button>
 			</div>
@@ -409,7 +457,7 @@
 		function time(e) {
 			var e = e.value;
 			console.log(e);
-			document.getElementById("time").value = e;
+			document.getElementById("time").innerText = e;
 		}
 
 		function CookBtn(e) {
@@ -418,19 +466,19 @@
 			console.log(jumunNo);
 			console.log(shop);
 			//모달창에 값넣기
-			document.getElementById("jumunNo").value = jumunNo;
+			document.getElementById("jumunNo").innerText = jumunNo;
 			document.getElementById("shop").value = shop;
 			//모달창띄우기
 			document.getElementById("jumunReady").style.display = "block";
+			document.getElementById("time").innerText = 0;
 		}//baesongBtn
 
 		function CookOk(e) {
-			var no = e.parentNode.children[1].value;
-			var minute = e.parentNode.children[3].value;
+			var no = e.parentNode.children[1].innerText;
+			var minute = e.parentNode.children[4].innerText;
 			console.log(no);
 			console.log(minute);
-			$
-					.ajax({
+			$.ajax({
 						type : "post",
 						url : "CheckOrderPro.jsp",
 						data : {
@@ -455,21 +503,65 @@
 	<!--주문 취소 Modal시작 -->
 	<div class="w3-modal" id="jumunCancel">
 		<div class="w3-modal-content">
+		<span	onclick="document.getElementById('jumunCancel').style.display='none'"
+				class="w3-button w3-display w3-right">닫기</span>
 			<div class="w3-container">
-				<span class="whyCancel">취소사유</span> <span align="right"
-					onclick="document.getElementById('jumunCancel').style.display='none'"
-					class="w3-button w3-display">X</span><br>
+			취소번호: <span id="cancelNo"></span><br>
+			 <input id="shop" type="hidden" />
+			취소사유: <span id="CancelWhy"></span>
+				  
 				<div class="cancelText">
-					<input type="button" value="영업종료" /> <input type="button"
-						value="재료 소진" /> <input type="button" value="배달불가지역" /> <input
-						type="button" value="고객요청" />
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="영업종료">영업종료</button>
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="재료 소진">재료 소진</button>
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="배달불가지역">배달불가지역</button>
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="고객요청">고객요청</button>
 				</div>
+				<button class="w3-label w3-green" onClick="CancelOk(this)">주문취소</button>
 			</div>
 			<!-- w3-container 끝-->
 		</div>
 	</div>
 	<%--주문 취소 Modal끝 --%>
-
+	<script>
+	function CancelWhy(e){
+		var e = e.value;
+		console.log(e);
+		document.getElementById("CancelWhy").innerText = e;
+	}
+	
+	function cancelBtn(e) {
+		var cancelNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(cancelNo);
+		//모달창에 값넣기
+		document.getElementById("cancelNo").innerText=cancelNo;
+		document.getElementById("jumunCancel").style.display = "block";
+	}//cancelBtn
+	function CancelOk(e){
+		var no = e.parentNode.children[0].innerText;
+		var whyCancel = e.parentNode.children[2].innerText;
+		$.ajax({
+			type : "post",
+			url : "CancelOrderPro.jsp",
+			data : {
+				"no" : no,
+				"whyCancel" : whyCancel
+			},
+			success : function(result) {
+				console.log(result);
+				if (result == 1) {
+					document.getElementById("jumunCancel").style.display = "none";
+				} else {
+					alert("취소를취소");
+				}//else
+			}//success
+		});//ajax
+	}
+	
+	</script>
 
 </body>
 </html>
