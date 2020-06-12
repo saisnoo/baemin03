@@ -376,8 +376,8 @@
 				<div
 					onclick="document.getElementById('jumunReady').style.display='none'"
 					class="w3-button w3-display w3-right">닫기</div>
-				주문번호:<span id="jumunNo"></span><br> <input id="shop" type="hidden" />
-				배달 소요 시간:<span id="time">0</span> 분<br>
+				주문번호:<span id="jumunNo"></span><br><input id="shop" type="hidden" />
+				배달 소요 시간:<span id="time">0</span>분<br>
 				<!-- 주문 접수시간 -->
 				<!-- 배달 도착시간입력 -->
 				<div class="w3-tag w3-container w3-row">
@@ -426,7 +426,7 @@
 
 		function CookOk(e) {
 			var no = e.parentNode.children[1].innerText;
-			var minute = e.parentNode.children[3].innerText;
+			var minute = e.parentNode.children[4].innerText;
 			console.log(no);
 			console.log(minute);
 			$.ajax({
@@ -455,20 +455,64 @@
 	<div class="w3-modal" id="jumunCancel">
 		<div class="w3-modal-content">
 			<div class="w3-container">
-				<span class="whyCancel">취소사유</span> <span align="right"
+			취소번호: <span id="cancelNo"></span><br>
+			 <input id="shop" type="hidden" />
+			취소사유: <span id="CancelWhy"></span>
+				  <span align="right"
 					onclick="document.getElementById('jumunCancel').style.display='none'"
 					class="w3-button w3-display">X</span><br>
 				<div class="cancelText">
-					<input type="button" value="영업종료" /> <input type="button"
-						value="재료 소진" /> <input type="button" value="배달불가지역" /> <input
-						type="button" value="고객요청" />
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="영업종료">영업종료</button>
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="재료 소진">재료 소진</button>
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="배달불가지역">배달불가지역</button>
+				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+							value="고객요청">고객요청</button>
 				</div>
+				<button class="w3-label w3-green" onClick="CancelOk(this)">주문취소</button>
 			</div>
 			<!-- w3-container 끝-->
 		</div>
 	</div>
 	<%--주문 취소 Modal끝 --%>
-
+	<script>
+	function CancelWhy(e){
+		var e = e.value;
+		console.log(e);
+		document.getElementById("CancelWhy").innerText = e;
+	}
+	
+	function cancelBtn(e) {
+		var cancelNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(cancelNo);
+		//모달창에 값넣기
+		document.getElementById("cancelNo").innerText=cancelNo;
+		document.getElementById("jumunCancel").style.display = "block";
+	}//cancelBtn
+	function CancelOk(e){
+		var no = e.parentNode.children[0].innerText;
+		var whyCancel = e.parentNode.children[2].innerText;
+		$.ajax({
+			type : "post",
+			url : "CancelOrderPro.jsp",
+			data : {
+				"no" : no,
+				"whyCancel" : whyCancel
+			},
+			success : function(result) {
+				console.log(result);
+				if (result == 1) {
+					document.getElementById("jumunCancel").style.display = "none";
+				} else {
+					alert("취소");
+				}//else
+			}//success
+		});//ajax
+	}
+	
+	</script>
 
 </body>
 </html>

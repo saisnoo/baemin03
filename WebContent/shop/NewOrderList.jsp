@@ -102,10 +102,5 @@ for(int i=0;i<NewOrderCount;i++){
 		});//ajax
 		refresh(); // 새로고침
 	}//CookBtn
-	
-	function cancelBtn(e) {
-		var cancelNo = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(cancelNo);
-		document.getElementById("jumunCancel").style.display = "block";
-	}//cancelBtn
+
 </script>
