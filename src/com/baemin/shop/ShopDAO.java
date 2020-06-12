@@ -243,7 +243,7 @@ public class ShopDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "insert into shop ( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
-					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ? ,now() )";
+					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ?,?,? ,now() )";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -268,20 +268,19 @@ public class ShopDAO {
 	} // insertShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// updateShop_start-----------------------------------------------------------------------------
-	public int updateShop(ShopDTO dto) throws Exception {
+	public int changePw(String pw,int no) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---ShopDAO updateShop");
+		System.out.println("---ShopDAO changePw");
 		try {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update shop set shopEx = ? , shopTel = ? where no = ?";
+			String sql = "update shop set pw = ? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dto.getShopEx());
-			pstmt.setString(2, dto.getShopTel());
-			pstmt.setInt(3, dto.getNo());
+			pstmt.setString(1, pw);
+			pstmt.setInt(2, no);
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
