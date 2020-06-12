@@ -20,8 +20,7 @@ CartDTO cartDTO=new CartDTO();
 for(int i=0;i<list.size();i++)
 {	
 	OrderListDTO orderListDTO=list.get(i);
-	String k="";
-	k=Order2Cart.toMsg(orderListDTO.getOrderList());
+
 	
 	%>
 	    <!-- load  new order  -->
@@ -33,7 +32,8 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
 				<h1><big><strong><%=orderListDTO.getOrderDate()%></strong></big></h1>
 				<input type="hidden" value="<%=orderListDTO.getNo()%>">
-
+				<input type="hidden" id="shop_No" value="<%=shop_No %>">
+				<input type="hidden" id="orderdate" value="<%=orderListDTO.getOrderDate() %>">
 			</div>
 			<!-- 왼쪽 끝 -->
 
@@ -41,7 +41,7 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-col w3-container w3-right"
 				style="width: 200px; padding: 0px;">
 			
-				<button class="w3-button w3-yellow h100"  onClick="cancelBtn(this)" data-toggle="modal" data-target="#jumoon_calcel">주문취소</button>
+				<button class="w3-button w3-yellow h100"  onClick="cancelBtn2(this)" data-toggle="modal" data-target="#jumoon_calcel">주문취소</button>
 				<div class="count2" style="display:none;"><%=orderListDTO.getStatus() %></div>
 			</div>
 			<!-- 오른쪽-->
@@ -51,7 +51,7 @@ for(int i=0;i<list.size();i++)
 					<div class="w3-col">
 						<strong>[메뉴 4개]</strong> &nbsp;<%=orderListDTO.getName()%>
 					</div>
-					<div class="w3-col">주문번호 5번</div>
+					<div class="w3-col"></div>
 				</div>
 				<div class="w3-row"><%=orderListDTO.getAddr() +"  "+ orderListDTO.getAddr2() %></div>
 			</div>
@@ -60,7 +60,7 @@ for(int i=0;i<list.size();i++)
 		<!-- 상단 컨테이너 끝 -->
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding"><%=k %></div>
+			<div class="w3-row w3-padding"><%=orderListDTO.getMenu_String() %></div>
 			<div class="w3-row w3-padding"><%=orderListDTO.getComment() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->
@@ -74,7 +74,7 @@ for(int i=0;i<list.size();i++)
 
 <script>
 	// 스크립트
-
+console.log("------BaesongList.jsp");
 	function jumunBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 	
@@ -83,9 +83,50 @@ for(int i=0;i<list.size();i++)
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 		console.log(a1);
 	}
-	function cancelBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[0].value;
-		console.log(a1);
+	function cancelBtn2(e) {
+		var orderList_No = e.parentNode.parentNode.children[0].children[1].value;
+		var shop_No = e.parentNode.parentNode.children[0].children[2].value;
+		var getOrderDate = e.parentNode.parentNode.children[0].children[3].value;
+	/* 	var 시 = Math.floor((간격 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var 분 = Math.floor((간격 % (1000 * 60 * 60)) / (1000 * 60));
+		var 초 = Math.floor((간격 % (1000 * 60)) / 1000);
+
+		console.log( 시 +"시간 "+ 분 +"분 "+ 초 +"초" ); */
+		
+		 $("#jumoon_calcel_btn").click(function(){
+			 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
+			
+			 
+			 var data={
+					//항목이름: 값(변수)
+				//	no:no,
+					//rno:rno,
+				
+					orderList_No:orderList_No,
+					whyCancel:whyCancel
+			}
+			//alert(JSON.stringify(reply));
+			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
+			$.ajax({
+				type : "post",
+				url : "CancelOrderPro.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("취소접수 완료");
+				},
+				error : function(xhr,status,error){
+					console.log("취소접수 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+		}); 
+		
+		
 		
 	}
 </script>
