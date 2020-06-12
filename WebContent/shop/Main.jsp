@@ -68,6 +68,7 @@
 #tabtab2 {
 	height: 500px;
 }
+
 #tabtab3 {
 	height: 500px;
 }
@@ -86,24 +87,23 @@
 }
 </style>
 <script>
-	function sleep(delay) {
-		var start = new Date().getTime();
-		while (new Date().getTime() < start + delay)
-			;
+	window.onload = function() {
+		refresh();
 	}
 
+
 	function refresh() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=1");
-		$("#tab2").load("BaesongList.jsp?shopNo=1");
-		$("#tab3").load("EndList.jsp?shopNo=1");
+		$("#tab1").load("NewOrderList.jsp?shopNo=2");
+		$("#tab2").load("BaesongList.jsp?shopNo=2");
+		$("#tab3").load("EndList.jsp?shopNo=2");
 		setTimeout(countcount, 1000);
 		setTimeout(countcount, 2000);
 	}
 	// 스크립트
 
 	setInterval(function() {
-		refresh();
-	}, 1500)
+		//refresh();
+	}, 15000)
 
 	function countcount() {
 		var a = document.getElementsByClassName("count0").length;
@@ -284,26 +284,28 @@
 							</div>
 						</div>
 
-				<script>
-					function myFunction() {
-						var input, filter, table, tr, td, i;
-						input = document.getElementById("myInput");
-						filter = input.value.toUpperCase();
-						table = document.getElementById("myTable");
-						tr = table.getElementsByTagName("tr");
-						for (i = 0; i < tr.length; i++) {
-							td = tr[i].getElementsByTagName("td")[0];
-							if (td) {
-								txtValue = td.textContent || td.innerText;
-								if (txtValue.toUpperCase().indexOf(filter) > -1) {
-									tr[i].style.display = "";
-								} else {
-									tr[i].style.display = "none";
+						<script>
+							function myFunction() {
+								var input, filter, table, tr, td, i;
+								input = document.getElementById("myInput");
+								filter = input.value.toUpperCase();
+								table = document.getElementById("myTable");
+								tr = table.getElementsByTagName("tr");
+								for (i = 0; i < tr.length; i++) {
+									td = tr[i].getElementsByTagName("td")[0];
+									if (td) {
+										txtValue = td.textContent
+												|| td.innerText;
+										if (txtValue.toUpperCase().indexOf(
+												filter) > -1) {
+											tr[i].style.display = "";
+										} else {
+											tr[i].style.display = "none";
+										}
+									}
 								}
 							}
-						}
-					}
-				</script>
+						</script>
 
 						<!-- 오른쪽 half -->
 						<div class="w3-half">
@@ -349,9 +351,7 @@
 				</div>
 				<!-- 매장관리탭 끝 -->
 				<!-- 리뷰탭 -->
-				<div id="tabtab3" class="w3-border tabcontent2">
-				
-				</div>
+				<div id="tabtab3" class="w3-border tabcontent2"></div>
 				<!-- 리뷰탭 -->
 
 				<script>
@@ -432,19 +432,19 @@
 				<div
 					onclick="document.getElementById('jumunReady').style.display='none'"
 					class="w3-button w3-display w3-right">닫기</div>
-				주문번호:<span id="jumunNo"></span><br><input id="shop" type="hidden" />
-				배달 소요 시간:<span id="time">0</span>분<br>
+				주문번호:<span id="jumunNo"></span><br>
+				<input id="shop" type="hidden" /> 배달 소요 시간:<span id="time">0</span>분<br>
 				<!-- 주문 접수시간 -->
 				<!-- 배달 도착시간입력 -->
-						<button class="w3-button w3-yellow h100" onClick="time(this)"
-							value="15">15분</button>
-						<button class="w3-button w3-yellow h100" onClick="time(this)"
-							value="30">30분</button>
-						<button class="w3-button w3-yellow h100" onClick="time(this)"
-							value="45">45분</button>
-						<button class="w3-button w3-yellow h100" onClick="time(this)"
-							value="60">60분</button>
-							<br>
+				<button class="w3-button w3-yellow h100" onClick="time(this)"
+					value="15">15분</button>
+				<button class="w3-button w3-yellow h100" onClick="time(this)"
+					value="30">30분</button>
+				<button class="w3-button w3-yellow h100" onClick="time(this)"
+					value="45">45분</button>
+				<button class="w3-button w3-yellow h100" onClick="time(this)"
+					value="60">60분</button>
+				<br>
 				<!-- 배달 도착시간입력 -->
 				<button class="w3-label w3-green" onClick="CookOk(this)">조리시작</button>
 			</div>
@@ -478,7 +478,8 @@
 			var minute = e.parentNode.children[4].innerText;
 			console.log(no);
 			console.log(minute);
-			$.ajax({
+			$
+					.ajax({
 						type : "post",
 						url : "CheckOrderPro.jsp",
 						data : {
@@ -503,22 +504,22 @@
 	<!--주문 취소 Modal시작 -->
 	<div class="w3-modal" id="jumunCancel">
 		<div class="w3-modal-content">
-		<span	onclick="document.getElementById('jumunCancel').style.display='none'"
+			<span
+				onclick="document.getElementById('jumunCancel').style.display='none'"
 				class="w3-button w3-display w3-right">닫기</span>
 			<div class="w3-container">
-			취소번호: <span id="cancelNo"></span><br>
-			 <input id="shop" type="hidden" />
-			취소사유: <span id="CancelWhy"></span>
-				  
+				취소번호: <span id="cancelNo"></span><br> <input id="shop"
+					type="hidden" /> 취소사유: <span id="CancelWhy"></span>
+
 				<div class="cancelText">
-				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-							value="영업종료">영업종료</button>
-				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-							value="재료 소진">재료 소진</button>
-				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-							value="배달불가지역">배달불가지역</button>
-				<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-							value="고객요청">고객요청</button>
+					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+						value="영업종료">영업종료</button>
+					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+						value="재료 소진">재료 소진</button>
+					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+						value="배달불가지역">배달불가지역</button>
+					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
+						value="고객요청">고객요청</button>
 				</div>
 				<button class="w3-label w3-green" onClick="CancelOk(this)">주문취소</button>
 			</div>
@@ -527,40 +528,49 @@
 	</div>
 	<%--주문 취소 Modal끝 --%>
 	<script>
-	function CancelWhy(e){
-		var e = e.value;
-		console.log(e);
-		document.getElementById("CancelWhy").innerText = e;
-	}
-	
-	function cancelBtn(e) {
-		var cancelNo = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(cancelNo);
-		//모달창에 값넣기
-		document.getElementById("cancelNo").innerText=cancelNo;
-		document.getElementById("jumunCancel").style.display = "block";
-	}//cancelBtn
-	function CancelOk(e){
-		var no = e.parentNode.children[0].innerText;
-		var whyCancel = e.parentNode.children[2].innerText;
-		$.ajax({
-			type : "post",
-			url : "CancelOrderPro.jsp",
-			data : {
-				"no" : no,
-				"whyCancel" : whyCancel
-			},
-			success : function(result) {
-				console.log(result);
-				if (result == 1) {
-					document.getElementById("jumunCancel").style.display = "none";
-				} else {
-					alert("취소를취소");
-				}//else
-			}//success
-		});//ajax
-	}
-	
+		function CancelWhy(e) {
+			var e = e.value;
+			console.log(e);
+			document.getElementById("CancelWhy").innerText = e;
+		}
+
+		function cancelBtn(e) {
+			var cancelNo = e.parentNode.parentNode.children[0].children[1].value;
+			console.log(cancelNo);
+			//모달창에 값넣기
+			document.getElementById("cancelNo").innerText = cancelNo;
+			document.getElementById("jumunCancel").style.display = "block";
+		}//cancelBtn
+		function CancelOk(e) {
+			var no = e.parentNode.children[0].innerText;
+			//var whyCancel = e.parentNode.children[2].innerText;
+ var whyCancel = e.parentNode.children[3].innerText;
+			console.log(no);
+			console.log(no);
+			console.log(no);
+			console.log(no);
+			console.log(whyCancel);
+			console.log(whyCancel);
+			console.log(whyCancel);
+
+			$
+					.ajax({
+						type : "post",
+						url : "CancelOrderPro.jsp",
+						data : {
+							"no" : no,
+							"whyCancel" : whyCancel
+						},
+						success : function(result) {
+							console.log(result);
+							if (result == 1) {
+								document.getElementById("jumunCancel").style.display = "none";
+							} else {
+								alert("취소를취소");
+							}//else
+						}//success
+					});//ajax
+		}
 	</script>
 
 </body>

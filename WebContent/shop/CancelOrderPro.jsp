@@ -8,7 +8,9 @@ request.setCharacterEncoding("UTF-8");
 System.out.println("------CancelOrderPro.jsp");
 int no = Integer.parseInt(request.getParameter("no"));
 String whyCancel = request.getParameter("whyCancel");
+System.out.println("no: "+no+" why : "+whyCancel);
 OrderListDAO dao = OrderListDAO.getInstance();
 int result = dao.orderCancel(no, whyCancel);
+System.out.println(" result :"+result);
 %>
 <%=result  %>

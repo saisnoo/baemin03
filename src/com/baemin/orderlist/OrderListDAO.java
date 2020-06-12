@@ -193,8 +193,10 @@ public class OrderListDAO {
         int result2 = -1;
         System.out.println("---OrderListDAO orderCancle");
         try {
+        	System.out.println("---OrderListDAO orderCancle");
             // 1+2
             con = getConnection();
+            System.out.println("---OrderListDAO orderCancle");
             // 3. sql
             String sql = "insert into Order_cancel (whyCancel, orderlist_No) values ( ?, ? ) ";
             // 4. 실행객체
@@ -203,12 +205,14 @@ public class OrderListDAO {
             pstmt.setInt(2, no);
             // 5. 실행
             result1 = pstmt.executeUpdate();
+            System.out.println(result1);
             // 3. sql
-            sql = "update orderList set status = -1 WHERE no = " + no;
+            sql = "update orderlist set status = -1 WHERE no = " + no;
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             // 5. 실행
             result2 = pstmt.executeUpdate();
+            System.out.println(result2);
         } catch (Exception e) {
             e.getStackTrace();
             throw new Exception(" orderCancle() 예외  ");
