@@ -25,7 +25,7 @@
 
 	if (no > 0) {
 		System.out.println(" !!! member id=" + id);
-		session.setAttribute("memberNo", no);
+		session.setAttribute("no", no);
 		session.setAttribute("id", dto.getId());
 		session.setAttribute("grade", dto.getGrade());
 		session.setAttribute("memberX", dto.getMemberX());

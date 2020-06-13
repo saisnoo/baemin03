@@ -16,5 +16,6 @@ public class Order_MenuDTO {
     //// NOT IN DB -- NOT IN DB -- NOT IN DB --
     // FOR JOIN
     private String menu_Name;
+    private int price;
 
 }

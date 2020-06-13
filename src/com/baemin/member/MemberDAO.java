@@ -159,15 +159,11 @@ public class MemberDAO {
 	} // getDTO_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// changePW_start-----------------------------------------------------------------------------
-	public int changePW(int no, String pw) throws Exception {
-		return changePW(pw, no);
-	}
-
 	public int changePW(String pw, int no) throws Exception {
 		// 출력객체
 		int result = -1;
 		System.out.println("---MemberDAO changePW");
-
+			System.out.println("no:"+no+"pw:"+pw);
 		try {
 			// 1+2
 			con = getConnection();
@@ -285,6 +281,8 @@ public class MemberDAO {
 		} // finally end
 		return list;
 	} // getListAll_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	
+	
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////

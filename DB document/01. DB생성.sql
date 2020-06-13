@@ -7,7 +7,6 @@ use baemindb;
 
 
 
-
         
 CREATE TABLE member
 (
@@ -76,13 +75,13 @@ CREATE TABLE orderlist
   name         varchar(30) NOT NULL,
   orderDate    DATETIME    NOT NULL,
   status       INT         NULL     DEFAULT 0,
-  orderList    TEXT        NULL    ,
   completeTime DATETIME    NULL    ,
   addr         VARCHAR(90) NOT NULL,
   addr2        VARCHAR(90) NOT NULL,
   comment      varchar(90) NULL    ,
   shop_no      INT         NOT NULL,
   member_no    INT         NOT NULL,
+  no2          INT         NULL    ,
   PRIMARY KEY (no)
 );
 
@@ -161,11 +160,6 @@ ALTER TABLE order_menu
 
       
 
-
-
-
-
-
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
 values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로동 589-7','구로역 3번 승강장','2000-01-01'
 ,3 ,126.881396281118,37.5029205056812);
@@ -182,7 +176,8 @@ desc menu;
 desc orderlist;
 desc notice;
 desc review;
-
+desc order_menu;
+desc Order_cancel;
 
 show tables;
 ;

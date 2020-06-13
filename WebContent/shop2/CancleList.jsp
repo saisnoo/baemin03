@@ -36,7 +36,7 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
 				<h1><big><strong><%=orderListDTO.getOrderDate()%></strong></big></h1>
 				<input type="hidden" value="<%=orderListDTO.getNo()%>">
-			<div class="count3" style="display:none;"><%=orderListDTO.getStatus() %></div>
+			<div class="count4" style="display:none;"><%=orderListDTO.getStatus() %></div>
 			</div>
 			<!-- 왼쪽 끝 -->
 
@@ -61,7 +61,7 @@ for(int i=0;i<list.size();i++)
 		<!-- 상단 컨테이너 끝 -->
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding"><%=orderListDTO.getMenu_String() %></div>
+			<div class="w3-row w3-padding"><%=k %></div>
 			<div class="w3-row w3-padding"><%=orderListDTO.getComment() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->

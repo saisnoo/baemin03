@@ -9,7 +9,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-	session.setAttribute("shop_No", "1");
+	session.setAttribute("shop_No", "2");
 	int jumooncount=0;
 	int joricount=0;
 	int deliverycount=0;
@@ -32,8 +32,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- CDN OFFLINE- sw_topNav.css -->
 <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <style>
 /* Style the tab */
@@ -80,8 +80,28 @@
                     		$("#tab1").load("NewOrderList.jsp?shopNo=1");
                     		$("#tab2").load("BaesongList.jsp?shopNo=1");
                     		$("#tab3").load("EndList.jsp?shopNo=1");
+                    		$("#tab4").load("CancleList.jsp?shopNo=1");
                     		$("#SM").load("ShopManage.jsp");
                     	}
+</script>
+<script type="text/javascript">
+$(function(){
+	//$("#take_overbtn").click(function(){
+		//$('input[name="estimated_time"]').removeAttr('checked');
+		//$(".estimated_time").arrt(checked,false);
+		//$("#take_over").modal("hide");
+
+//	})
+	function clear(){
+		$("#content").val("");
+		$("#writer").val("");
+		$("#pw").val("");
+		$("#deletePw").val("");
+	}
+
+
+
+});
 </script>
 </head>
 <body>
@@ -111,6 +131,11 @@
                             <h4>매장관리</h4>
                         </button>
                     </div>
+                     <div class="w3-quarter tablink2">
+                        <button onclick="openTab2(event, 'tabtab3')" id="defaultOpen3" class="w3-button w3-block w3-black w3-border">
+                            <h4>매장리뷰</h4>
+                        </button>
+                    </div>
                 </div>
               <div id="tabtab1" class="w3-row w3-gray tabcontent2">         
                 <div class="tab w3-col" style="width: 100px;">
@@ -123,24 +148,33 @@
                         <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab3')">
                             완료<br /><strong id="EndCount"></strong>
                         </button>
+                          <button class="w3-button w3-block w3-border tablinks" onclick="openTab(event, 'tab4')">
+              	취소내역<br /><strong id="CancleCount"></strong>
+                        </button>
                     </div>
 			   
                 
                <div class="w3-rest w3-white scroll-box">
                <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-               <div id="tab1" class="tabcontent">    
+               <div id="tab1" class="tabcontent scroll-box">    
 			            
 			   </div>
-			    <div id="tab2" class="tabcontent">
+			    <div id="tab2" class="tabcontent scroll-box">
 			    
 			    </div>
-			    <div id="tab3" class="tabcontent">
+			    <div id="tab3" class="tabcontent scroll-box">
+			    
+			    </div>
+			    <div id="tab4" class="tabcontent scroll-box">
 			    
 			    </div>
 				</div>
 				</div>
 				<div id="SM">
-				<jsp:include page="ShopManage.jsp"></jsp:include>
+				<jsp:include page="ShopManage.jsp"/>
+				</div>
+				<div id="tabtab3" class="w3-cyan tabcontent2">
+				<%@include file="../notice/NoticeList.jsp" %>
 				</div>
 				</div>
 				</div>
@@ -185,9 +219,9 @@
         </div>
         <div class="modal-footer">
 			<div class="btn-group">
-			  <button class="btn btn-default" id="take_overbtn">접수</button>
+			  <button class="btn btn-default" id="take_overbtn" data-dismiss="modal">접수</button>
 			  <button type="reset" class="btn btn-default">새로입력</button>
-			  <button type="button" class="btn btn-default cancelBtn recan"data-dismiss="modal"  >취소</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal"  id="take_cancle">취소</button>
 			</div>
         </div>
       </div>
@@ -257,12 +291,15 @@
 
 	
 	      <script>
+	      
                     function openTab(evt, tabName) {
                        if(tabName=="tab2"){
                     	   $("#tab2").load("BaesongList.jsp");
                    		
                        }else if(tabName=="tab3"){
                     	   $("#tab3").load("EndList.jsp"); 
+                       }else if(tabName=="tab4"){
+                    	   $("#tab4").load("CancleList.jsp"); 
                        }
                     	
                     	var i, tabcontent, tablinks;
@@ -331,10 +368,12 @@
                 		var a1 = document.getElementsByClassName("count1").length;
                 		var b = document.getElementsByClassName("count2").length;
                 		var c = document.getElementsByClassName("count3").length;
+                		var d = document.getElementsByClassName("count4").length;
                 		//console.log(a +"/"+ a1);
                 		document.getElementById("NewOrderCount").innerText=(a+"/"+a1);
                 		document.getElementById("BaeSongCount").innerText=(b);
                 		document.getElementById("EndCount").innerText=(c);
+                		document.getElementById("CancleCount").innerText=(d);
                     }
    					                 
                     
