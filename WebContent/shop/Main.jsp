@@ -116,6 +116,7 @@
 <script>
 	window.onload = function() {
 		refresh();
+		countcount();
 	}
 
 	function refresh() {
@@ -143,6 +144,17 @@
 		document.getElementById("EndListCount").innerText = (a3);
 		document.getElementById("CancelCount").innerText = (a4);
 	}
+	
+	function reviewLoad(){
+		$("#reviewList").load("reviewList.jsp?shopNo=2");
+		setTimeout(countSum,1000);
+	}
+		
+	function countSum(){
+			var r=document.getElementById("EndListCount").innerText;
+			document.getElementById("countSum").innerText=r;
+		}
+
 </script>
 </head>
 <body>
@@ -180,7 +192,7 @@
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab3')"
+						<button onclick="openTab2(event, 'tabtab3');reviewLoad();"
 							class="w3-button w3-block w3-black w3-border">
 							<h4>리뷰</h4>
 						</button>
@@ -189,7 +201,7 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab1" class="w3-row w3-gray tabcontent2">
+				<div id="tabtab1" class="w3-row w3-gray tabcontent2" onClick="refresh()">
 					<div class="tab w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="defaultOpen">
@@ -379,8 +391,12 @@
 				</div>
 				<!-- 매장관리탭 끝 -->
 				<!-- 리뷰탭 -->
-				<div id="tabtab3" class="w3-border tabcontent2"></div>
-				<!-- 리뷰탭 -->
+				<div id="tabtab3" class="w3-border tabcontent2">
+					<div id="reviewList">
+					
+					</div>
+				</div>
+				<!-- 리뷰탭 끝 -->
 
 				<script>
 					function openTab(evt, tabName) {
@@ -466,7 +482,8 @@
 				<div>
 					<b class="w3-xxlarge">주문번호:</b><span id="jumunNo"
 						class="w3-xxlarge"></span><br> <input id="shop" type="hidden" /><b
-						class="w3-xlarge">배달 소요 시간:</b> <span id="time" class="w3-xlarge">0</span> <b class="w3-xlarge">분</b><br>
+						class="w3-xlarge">배달 소요 시간:</b> <span id="time" class="w3-xlarge">0</span>
+					<b class="w3-xlarge">분</b><br>
 					<!-- 주문 접수시간 -->
 				</div>
 				<!-- 배달 도착시간입력 -->
@@ -497,7 +514,8 @@
 				</div>
 				<!-- 배달 도착시간입력 -->
 				<div class="w3-row">
-					<button class="w3-panel w3-cyan w3-text-white w3-xlarge w3-col CookOkBtn"
+					<button
+						class="w3-panel w3-cyan w3-text-white w3-xlarge w3-col CookOkBtn"
 						onClick="CookOk(this)">조리시작</button>
 				</div>
 			</div>
@@ -583,17 +601,20 @@
 					</button>
 				</div>
 				<div class="w3-row w3-margin-top">
-					<button class="w3-button w3-col w3-half w3-white w3-section CancelWhyBtn"
+					<button
+						class="w3-button w3-col w3-half w3-white w3-section CancelWhyBtn"
 						onClick="CancelWhy(this)" value="배달불가지역">
 						<b class="w3-xlarge">배달불가지역</b>
 					</button>
-					<button class="w3-button w3-col w3-half w3-white w3-section CancelWhyBtn"
+					<button
+						class="w3-button w3-col w3-half w3-white w3-section CancelWhyBtn"
 						onClick="CancelWhy(this)" value="고객요청">
 						<b class="w3-xlarge">고객요청</b>
 					</button>
 				</div>
 				<div class="w3-row">
-					<button class="w3-panel w3-dark-grey w3-col w3-xlarge w3-wide CancelOkBtn "
+					<button
+						class="w3-panel w3-dark-grey w3-col w3-xlarge w3-wide CancelOkBtn "
 						onClick="CancelOk(this)">주문취소</button>
 				</div>
 			</div>
