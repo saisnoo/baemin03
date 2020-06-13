@@ -238,6 +238,8 @@ public class OrderListDAO {
             // 5. 실행
             result1 = pstmt.executeUpdate();
             System.out.println(result1);
+            System.out.println(whyCancel);
+            System.out.println(no);
             // 3. sql
             sql = "update orderlist set status = -1 WHERE no = " + no;
             // 4. 실행객체

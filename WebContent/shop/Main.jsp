@@ -7,6 +7,7 @@
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
 
+	session.setAttribute("shopNo", "2");
 	//int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
 %>
 <!DOCTYPE html>
@@ -85,19 +86,44 @@
 #menuEx {
 	resize: none;
 }
+
+.timeBtn {
+	border-style: outset;
+	width: 180px;
+	height: 130px;
+	margin: 0px;
+}
+
+.CookOkBtn {
+	height: 60px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.CancelWhyBtn {
+	border-style: outset;
+	width: 180px;
+	height: 130px;
+	margin: 0px;
+}
+
+.CancelOkBtn {
+	height: 60px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
 </style>
 <script>
 	window.onload = function() {
 		refresh();
 	}
 
-
 	function refresh() {
 		$("#tab1").load("NewOrderList.jsp?shopNo=2");
 		$("#tab2").load("BaesongList.jsp?shopNo=2");
 		$("#tab3").load("EndList.jsp?shopNo=2");
+		$("#tab4").load("CancelList.jsp?shopNo=2");
 		setTimeout(countcount, 1000);
-		setTimeout(countcount, 2000);
 	}
 	// 스크립트
 
@@ -110,10 +136,12 @@
 		var a1 = document.getElementsByClassName("count1").length;
 		var a2 = document.getElementsByClassName("count2").length;
 		var a3 = document.getElementsByClassName("count3").length;
+		var a4 = document.getElementsByClassName("count4").length;
 		//console.log(a +"/"+ a1);
 		document.getElementById("NewOrderCount").innerText = (a + "/" + a1);
 		document.getElementById("BaesongCount").innerText = (a2);
 		document.getElementById("EndListCount").innerText = (a3);
+		document.getElementById("CancelCount").innerText = (a4);
 	}
 </script>
 </head>
@@ -168,15 +196,15 @@
 							접수대기<br /> <strong id="NewOrderCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab2')">
+							onclick="openTab(event, 'tab2')" id="tab2Btn">
 							배달중<br /> <strong id="BaesongCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab3')">
+							onclick="openTab(event, 'tab3')" id="tab3Btn">
 							완료<br /> <strong id="EndListCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab4')">
+							onclick="openTab(event, 'tab4')" id="tab4Btn">
 							취소<br /> <strong id="CancelCount"></strong>
 						</button>
 					</div>
@@ -427,26 +455,51 @@
 
 	<!-- 배달시작 Modal시작 -->
 	<div class="w3-modal" id="jumunReady">
-		<div class="w3-modal-content" style="width: 400px; height: 500px;">
-			<div class="w3-container">
-				<div
+		<div class="w3-modal-content" style="width: 400px; height: 560px;">
+			<div class="w3-panel w3-black w3-display-container">
+				<span
 					onclick="document.getElementById('jumunReady').style.display='none'"
-					class="w3-button w3-display w3-right">닫기</div>
-				주문번호:<span id="jumunNo"></span><br>
-				<input id="shop" type="hidden" /> 배달 소요 시간:<span id="time">0</span>분<br>
-				<!-- 주문 접수시간 -->
+					class="w3-button w3-black w3-large w3-display-topright"><font>X</font></span>
+				<p class="w3-wide w3-xlarge" style="height: 41px;">접수대기</p>
+			</div>
+			<div class="w3-container w3-section" style="height: 560px;">
+				<div>
+					<b class="w3-xxlarge">주문번호:</b><span id="jumunNo"
+						class="w3-xxlarge"></span><br> <input id="shop" type="hidden" /><b
+						class="w3-xlarge">배달 소요 시간:</b> <span id="time" class="w3-xlarge">0</span> <b class="w3-xlarge">분</b><br>
+					<!-- 주문 접수시간 -->
+				</div>
 				<!-- 배달 도착시간입력 -->
-				<button class="w3-button w3-yellow h100" onClick="time(this)"
-					value="15">15분</button>
-				<button class="w3-button w3-yellow h100" onClick="time(this)"
-					value="30">30분</button>
-				<button class="w3-button w3-yellow h100" onClick="time(this)"
-					value="45">45분</button>
-				<button class="w3-button w3-yellow h100" onClick="time(this)"
-					value="60">60분</button>
-				<br>
+				<div class="w3-row w3-margin-top">
+					<button
+						class="w3-button  w3-light-grey w3-text-grey w3-col w3-half w3-section timeBtn"
+						onClick="time(this)" value="15">
+						<b class="w3-xxxlarge">15분</b>
+					</button>
+					<button
+						class="w3-button  w3-light-grey w3-text-grey w3-col w3-half w3-section timeBtn"
+						onClick="time(this)" value="30">
+						<b class="w3-xxxlarge">30분</b>
+					</button>
+				</div>
+				<div class="w3-row">
+					<button
+						class="w3-button  w3-light-grey w3-text-grey w3-col w3-half w3-section timeBtn"
+						onClick="time(this)" value="45">
+						<b class="w3-xxxlarge">45분</b>
+					</button>
+					<button
+						class="w3-button w3-light-grey w3-text-grey w3-col w3-half w3-section timeBtn"
+						onClick="time(this)" value="60">
+						<b class="w3-xxxlarge">60분</b>
+					</button>
+					<br>
+				</div>
 				<!-- 배달 도착시간입력 -->
-				<button class="w3-label w3-green" onClick="CookOk(this)">조리시작</button>
+				<div class="w3-row">
+					<button class="w3-panel w3-cyan w3-text-white w3-xlarge w3-col CookOkBtn"
+						onClick="CookOk(this)">조리시작</button>
+				</div>
 			</div>
 			<!-- w3-container 끝-->
 		</div>
@@ -470,12 +523,12 @@
 			document.getElementById("shop").value = shop;
 			//모달창띄우기
 			document.getElementById("jumunReady").style.display = "block";
-			document.getElementById("time").innerText = 0;
+			document.getElementById("time").innerText = "---";
 		}//baesongBtn
 
 		function CookOk(e) {
-			var no = e.parentNode.children[1].innerText;
-			var minute = e.parentNode.children[4].innerText;
+			var no = e.parentNode.parentNode.children[0].children[1].innerText;
+			var minute = e.parentNode.parentNode.children[0].children[5].innerText;
 			console.log(no);
 			console.log(minute);
 			$
@@ -489,10 +542,10 @@
 						success : function(result) {
 							console.log(result);
 							if (result == 1) {
-								//alert("조리시작");
+								alert("조리시작");
 								document.getElementById("jumunReady").style.display = "none";
 							} else {
-								alert("조리X");
+								alert("배달 실패X");
 							}//else
 						}//success
 					});//ajax
@@ -503,26 +556,48 @@
 
 	<!--주문 취소 Modal시작 -->
 	<div class="w3-modal" id="jumunCancel">
-		<div class="w3-modal-content">
-			<span
-				onclick="document.getElementById('jumunCancel').style.display='none'"
-				class="w3-button w3-display w3-right">닫기</span>
-			<div class="w3-container">
-				취소번호: <span id="cancelNo"></span><br> <input id="shop"
-					type="hidden" /> 취소사유: <span id="CancelWhy"></span>
-
-				<div class="cancelText">
-					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-						value="영업종료">영업종료</button>
-					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-						value="재료 소진">재료 소진</button>
-					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-						value="배달불가지역">배달불가지역</button>
-					<button class="w3-button w3-yellow h100" onClick="CancelWhy(this)"
-						value="고객요청">고객요청</button>
-				</div>
-				<button class="w3-label w3-green" onClick="CancelOk(this)">주문취소</button>
+		<div class="w3-modal-content" style="width: 400px; height: 540px;">
+			<!-- 위에 패널 -->
+			<div class="w3-panel w3-black w3-display-container">
+				<span
+					onclick="document.getElementById('jumunCancel').style.display='none'"
+					class="w3-button w3-black w3-large w3-display-topright"><font>X</font></span>
+				<p class="w3-wide w3-xlarge" style="height: 41px;">주문거부사유</p>
 			</div>
+			<!-- 위에 패널 -->
+			<!-- 밑에 버튼칸 -->
+			<div class="w3-container">
+				<div>
+					<b class="w3-xxlarge">취소번호:</b><span id="cancelNo"
+						class="w3-xxlarge"></span><br> <input id="shop" type="hidden" /><b
+						class="w3-xlarge">취소사유:</b><span id="CancelWhy" class="w3-xlarge"></span>
+				</div>
+				<div class="w3-row w3-margin-top">
+					<button class="w3-button w3-col w3-half w3-white CancelWhyBtn"
+						onClick="CancelWhy(this)" value="영업종료">
+						<b class="w3-xlarge">영업종료</b>
+					</button>
+					<button class="w3-button w3-col w3-half w3-white CancelWhyBtn"
+						onClick="CancelWhy(this)" value="재료 소진">
+						<b class="w3-xlarge">재료 소진</b>
+					</button>
+				</div>
+				<div class="w3-row w3-margin-top">
+					<button class="w3-button w3-col w3-half w3-white w3-section CancelWhyBtn"
+						onClick="CancelWhy(this)" value="배달불가지역">
+						<b class="w3-xlarge">배달불가지역</b>
+					</button>
+					<button class="w3-button w3-col w3-half w3-white w3-section CancelWhyBtn"
+						onClick="CancelWhy(this)" value="고객요청">
+						<b class="w3-xlarge">고객요청</b>
+					</button>
+				</div>
+				<div class="w3-row">
+					<button class="w3-panel w3-dark-grey w3-col w3-xlarge w3-wide CancelOkBtn "
+						onClick="CancelOk(this)">주문취소</button>
+				</div>
+			</div>
+			<!-- 밑에 버튼칸 -->
 			<!-- w3-container 끝-->
 		</div>
 	</div>
@@ -540,19 +615,13 @@
 			//모달창에 값넣기
 			document.getElementById("cancelNo").innerText = cancelNo;
 			document.getElementById("jumunCancel").style.display = "block";
+			document.getElementById("CancelWhy").innerText = "[주문취소 사유 입력칸]"
 		}//cancelBtn
 		function CancelOk(e) {
-			var no = e.parentNode.children[0].innerText;
-			//var whyCancel = e.parentNode.children[2].innerText;
- var whyCancel = e.parentNode.children[3].innerText;
-			console.log(no);
-			console.log(no);
-			console.log(no);
+			var no = e.parentNode.parentNode.children[0].children[1].innerText;
+			var whyCancel = e.parentNode.parentNode.children[0].children[5].innerText;
 			console.log(no);
 			console.log(whyCancel);
-			console.log(whyCancel);
-			console.log(whyCancel);
-
 			$
 					.ajax({
 						type : "post",
@@ -570,6 +639,7 @@
 							}//else
 						}//success
 					});//ajax
+			refresh();
 		}
 	</script>
 
