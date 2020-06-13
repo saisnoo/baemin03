@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="java.sql.*"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -65,9 +64,8 @@
 
 		<script>
 			window.onload = function() {
-				listReload();
-				setInterval(listReload, 1500);
 				category_first_select();
+				setTimeout(listReload, 700);
 			}
 
 			function listReload() {
@@ -87,14 +85,15 @@
 				var selec = document.getElementById("category");
 				console.log(selec);
 				var selec_val = "<%=category%>";
-				console.log(selec_val);
-				console.log(selec.value);
+				console.log("selec_val "+selec_val);
+				console.log("selec.value "+selec.value);
 
 				for (var i = 0; i < 8; i++) {
-						console.log(i+" "+selec[i].value + "  " + selec_val);
+					console.log(i + " " + selec[i].value + "  " + selec_val);
 					if (selec[i].value == selec_val) {
 						selec.selectedIndex = i;
-						console.log(i+""+i+""+i+""+i+""+i+""+i)
+						console.log(i + "" + i + "" + i + "" + i + "" + i + ""
+								+ i)
 						break;
 					}
 				}

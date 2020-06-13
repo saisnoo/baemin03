@@ -27,7 +27,7 @@ System.out.println("------memberTopNav.jsp");
 				<i class="material-icons" style="font-size: 48px; color: #45c1bf;">home</i>
 			</a>
 			<!-- ----------------------------------------------------------------------------------------------------------- -->
-			<a href="../notice/NoticeList.jsp" class="w3-button w3-col s3 w3-center"
+			<a href="../baemin/NoticeList.jsp" class="w3-button w3-col s3 w3-center"
 				style="padding: 0px;"> <!-- ----------------------------------------------------------------------------------------------------------- -->
 				<i class="material-icons" style="font-size: 48px; color: #45c1bf;">notifications</i>
 			</a>
