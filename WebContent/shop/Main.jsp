@@ -128,9 +128,18 @@
 	}
 	// 스크립트
 
-	setInterval(function() {
-		//refresh();
-	}, 15000)
+	function tab2Refresh(){
+		console.log("배달중 새로고침");
+		$("#tab2").load("BaesongList.jsp?shopNo=2");	
+	}
+	function tab3Refresh(){
+		console.log("완료 새로고침");
+		$("#tab3").load("EndList.jsp?shopNo=2");
+	}
+	function tab4Refresh(){
+		console.log("취소 새로고침");
+		$("#tab4").load("CancelList.jsp?shopNo=2");
+	}
 
 	function countcount() {
 		var a = document.getElementsByClassName("count0").length;
@@ -208,15 +217,15 @@
 							접수대기<br /> <strong id="NewOrderCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab2')" id="tab2Btn">
+							onclick="openTab(event, 'tab2');tab2Refresh();" id="tab2Btn">
 							배달중<br /> <strong id="BaesongCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab3')" id="tab3Btn">
+							onclick="openTab(event, 'tab3');tab3Refresh();" id="tab3Btn">
 							완료<br /> <strong id="EndListCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab4')" id="tab4Btn">
+							onclick="openTab(event, 'tab4');tab4Refresh();" id="tab4Btn">
 							취소<br /> <strong id="CancelCount"></strong>
 						</button>
 					</div>
