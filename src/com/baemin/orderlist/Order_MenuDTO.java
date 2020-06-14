@@ -17,5 +17,6 @@ public class Order_MenuDTO {
     // FOR JOIN
     private String menu_Name;
     private int price;
+    private String menuEx;
 
 }

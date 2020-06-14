@@ -37,7 +37,6 @@ System.out.println("------ Order.jsp --- ");
 </head>
 <body>
 <!-- 내용 -->
-<h2> Order.jsp </h2><br>
 <%
  // 최종 주문 전  확인 및 수량 조절, 항목 삭제 페이지
  // 생략할수도 있고,  탭으로 구분할수도 있고....
@@ -68,10 +67,22 @@ System.out.println("------ Order.jsp --- ");
 </div>
 <!-- main content end----------------------------------------------------------------------- -->
 
-<!-- 모든페이지 공통 -->
-<!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
-<jsp:include page="../sw_css/topnav.jsp" />  
-  
+
+
+<script>
+
+
+</script>
+
+
+	<!-- responsive template by SW ----------------------------------------------------------- -->
+	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
+	<div class="sw-topnav-margin">&nbsp;</div>
+	<div class="sw-topnav-margin">&nbsp;</div>
+	<%-- 사이트 공통 부분 Include - topnav --%>
+	<jsp:include page="../sw_css/memberTopNav.jsp" />
+
+
  
 </body>
 </html>
