@@ -18,6 +18,67 @@ public class OrderListDAO {
     DataSource ds = null;
     Statement stmt = null;
 
+    // getMaxNoOfShop_No_start-----------------------------------------------------------------------------
+    public int getMaxNoOfShop_No(int shop_No) throws Exception {
+        // 출력객체
+        int result = -1;
+        System.out.println("---OrderListDAO getMaxNoOfShop_No");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select max(no) from orderlist WHERE shop_NO = ?";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shop_No);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            if (rs != null) {
+                while (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" getMaxNoOfShop_No() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // getMaxNoOfShop_No_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
+    // hasNewOrder_start-----------------------------------------------------------------------------
+    public boolean hasNewOrder(int shop_No) throws Exception {
+        // 출력객체
+        boolean result = false;
+        System.out.println("---OrderListDAO hasNewOrder");
+        try {
+            // 1+2
+            con = getConnection();
+            // 3. sql
+            String sql = "select count(*) from orderlist WHERE  shop_NO = ? AND status = 0 ";
+            // 4. 실행객체
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, shop_No);
+            // 5. 실행
+            rs = pstmt.executeQuery();
+            // 6. 표시 --- select 때만 표시
+            while (rs.next()) {
+                int cnt = rs.getInt(1);
+                if (cnt > 0) {
+                    result = true;
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+            throw new Exception(" hasNewOrder() 예외  ");
+        } finally {
+            close(con, pstmt, rs);
+        } // finally end
+        return result;
+    } // hasNewOrder_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+
     // testTransaction_start-----------------------------------------------------------------------------
     public int testTransaction(OrderListDTO dto) throws Exception {
         // 출력객체
@@ -225,7 +286,7 @@ public class OrderListDAO {
         int result2 = -1;
         System.out.println("---OrderListDAO orderCancle");
         try {
-        	System.out.println("---OrderListDAO orderCancle");
+            System.out.println("---OrderListDAO orderCancle");
             // 1+2
             con = getConnection();
             System.out.println("---OrderListDAO orderCancle");
@@ -533,7 +594,7 @@ public class OrderListDAO {
                     + " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
                     + " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member "
                     + "  WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
-                    + " AND order_menu.menu_No = menu.no" + " AND orderlist.completeTime < NOW() "
+                    + " AND order_menu.menu_No = menu.no" + " AND status = 2" + " AND orderlist.completeTime < NOW() "
                     + " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and now() "
                     + " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
                     + " ) CNT" + " )CNT" + " GROUP BY no;";
