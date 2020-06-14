@@ -75,6 +75,8 @@
         }
 </style>
 <script>
+
+
 	// 스크립트
 	window.onload = function() {
                     		$("#tab1").load("NewOrderList.jsp");
@@ -83,6 +85,9 @@
                     		$("#tab4").load("CancleList.jsp");
                     		$("#SM").load("ShopManage.jsp");
                     	}
+	
+	
+	
 </script>
 <script type="text/javascript">
 $(function(){
@@ -379,7 +384,7 @@ $(function(){
                     	
                     	
                     });
-                    /* function reload2(){
+                     function reload2(){
                     	
                     	$.ajax({
                 			type : "post",
@@ -402,7 +407,7 @@ $(function(){
                 			
                 		});//ajax의 끝
 
-                    }*/
+                    }
                     function countcount(){
                 		var a = document.getElementsByClassName("count0").length;
                 		var a1 = document.getElementsByClassName("count1").length;
@@ -425,21 +430,63 @@ $(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3 class="modal-title">주문 취소</h3>
+          <h3 class="modal-title">주문 메뉴 표시 유무</h3>
         </div>
         <div class="modal-body">
 			 <div class="form-group">
 			 <!-- 글번호입력 -->
-			    <label for="writer">메뉴표시유무</label><br>
-			    <!-- <input type="hidden" id="status" value=""> -->
+			    <label for="writer">주문 메뉴 표시 유무</label><br>
+			    <input type="text" id="no5" name="no5" value="">
+			    <input type="text" id="status5" name="status5" value="">
 			    
 			    <span id="status_check">123</span>
 			    </div>
         </div>
         <div class="modal-footer">
 			<div class="btn-group">
-			  <button class="btn btn-default" id="check_viewmenu_btn1" data-dismiss="modal">변경</button>
-			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle3" >완료</button>
+			  <button class="btn btn-default" id="check_viewmenu_btn" data-dismiss="modal">변경</button>
+			</div> 
+        </div>
+      </div>
+      <!-- Modal content end-->
+    </div>
+  </div>
+    <div class="modal fade add_menu" id="add_menu" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content 시작-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">주문 메뉴 표시 유무</h3>
+        </div>
+        <div class="modal-body">
+			 <div class="form-group">
+			 <!-- 글번호입력 -->
+			    <table>
+			    <tr>
+			    <td>메뉴이름</td>
+			    <td><input type="text" name="menuName"></td>
+			    </tr>
+			    <tr>
+			    <td>메뉴카테고리</td>
+			    <td><input type="text" name="menuCategory"></td>
+			    </tr>
+			    <tr>
+			    <td>메뉴설명</td>
+			    <td><input type="text" name="menuEx"></td>
+			    </tr>
+			    <tr>
+			    <td>메뉴가격</td>
+			    <td><input type="text" name="menuPrice"></td>
+			    </tr>
+			    </table>
+			    </div>
+        </div>
+        <div class="modal-footer">
+			<div class="btn-group">
+			  <button class="btn btn-default" id="add_menu_btn">추가</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle3" >닫기</button>
 			</div> 
         </div>
       </div>
@@ -451,7 +498,42 @@ $(function(){
 
 	// 스크립트
 	//데이터를 변경하는 함수 -update	
-	
+	 $("#add_menu_btn").click(function(){
+		 var menuName = $(":input:text[name=menuName]").val();
+		 var menuCategory = $(":input:text[name=menuCategory]").val();
+		 var menuEx = $(":input:text[name=menuEx]").val();
+		 var menuPrice = $(":input:text[name=menuPrice]").val();
+		 console.log(menuName+"/"+menuCategory+"/"+menuEx+"/"+menuPrice);
+		 var data={
+				 menuName:menuName,
+				 menuCategory:menuCategory,
+				 menuEx:menuEx,
+				 menuPrice:menuPrice
+			}
+		 $.ajax({
+				type : "post",
+				url : "AddMenuPro.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				async : false,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("메뉴추가 완료");
+					$(":input:text[name=menuName]").val("");
+					 $(":input:text[name=menuCategory]").val("");
+					 $(":input:text[name=menuEx]").val("");
+					 $(":input:text[name=menuPrice]").val("");
+				},
+				error : function(xhr,status,error){
+					console.log("메뉴추가 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+	 });
+	 
 	
 	 $("#take_overbtn").click(function(){
 
@@ -563,7 +645,36 @@ $(function(){
 				
 			});//ajax의 끝*/
 		});
-	 
+	 $("#check_viewmenu_btn").click(function(){
+		 var menu_no = $(":input:text[name=no5]").val();
+		 var menu_status = $(":input:text[name=status5]").val();
+		 console.log("check_viewmenu2 = "+menu_no + "/"+ menu_status);
+			var data={
+					menuno:menu_no,
+					menustatus:menu_status
+			}
+			$.ajax({
+				type : "post",
+				url : "MenuStatusPro.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("menuStatus 변경 완료");
+					 $("#SM").load("ShopManage.jsp");
+					openTab2(event, 'tabtab2'); 
+					
+					
+				},
+				error : function(xhr,status,error){
+					console.log("menuStatus 변경 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+		});	
 	
 
 </script>
