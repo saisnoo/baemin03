@@ -27,6 +27,7 @@
 	
 	MenuDAO menudao = MenuDAO.getInstance();
 	List<MenuDTO> menu_list = menudao.getListByShopActive(no);
+	System.out.println("menu_list.size="+menu_list.size());
 	request.setAttribute("menuList",menu_list); 
 	
 	ReviewDAO reviewdao = ReviewDAO.getInstance();
@@ -64,22 +65,15 @@
 	background: #45c1bf;
 	font-weight: 500;
 }
-
-.starRow {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.star {
-	box-shadow: 5px;
-	cursor: pointer;
-}
 </style>
 <script>
 	// 스크립트
 </script>
 </head>
 <body>
+
+
+
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin">&nbsp;</div>
@@ -94,39 +88,27 @@
 				<p>&nbsp;</p>
 				<h2>
 					<strong><%=shopdto.getShopName()%></strong>
+					<div id="shop_No" style="display: none"><%=shopdto.getNo()%></div>
 				</h2>
 
-
-
 				<div class="sw-center" style="text-align: center;">
-					<div class="starRow">
-						<a></a>
+					<div class="w3-row w3-center">
+
+						<div class="w3-col s2">&nbsp;</div>
 
 						<!-- ............................................................... -->
-						<customtag:starRank rank="<%=shopdto.getRank()%>" width="260" />
+						<div class="w3-col s8">
+							<customtag:starRank rank="<%=shopdto.getRank()%>" width="210" />
+						</div>
 						<!-- ............................................................... -->
 
-						<div class="w3-container w3-cell w3-cell-middle"
+						<div class="w3-col s2 w3-cell w3-cell-middle w3-right"
 							style="padding: 16px;">
 							<strong><%=shopdto.getRank()%></strong>
 						</div>
 					</div>
 				</div>
 
-
-
-
-				<!-- <div class="w3-row-padding w3-section">
-					<div class="w3-col w3-left" style="width: 150px;">
-						<button class="w3-button w3-gray w3-block w3-round-xlarge" type="button"
-							onclick="aa()">전화</button>
-					</div>
-					<div class="w3-rest">
-						<strong>010-1234-4567</strong>
-					</div>
-				</div>
-				<div class="w3-row">가게주소가여기에들어간다</div>
-				<div class="w3-row">상세주소가여기세들어간다</div> -->
 
 				<input type="hidden" name="x1" id="x1" value="좌표값이들어가는데hidden 예정">
 				<input type="hidden" name="y1" id="y1" value="좌표값이들어가는데hidden 예정">
@@ -175,17 +157,17 @@
 
 			<div class="w3-border">
 				<div class="w3-row">
-					<div class="w3-third w3-center">
+					<div class="w3-col s4 w3-center">
 						<!-- ................................... -->
 						<button type="button" id="btn1" onclick="btn1click()"
 							class="w3-button w3-block">메뉴</button>
 					</div>
-					<div class="w3-third w3-center">
+					<div class="w3-col s4 w3-center">
 						<!-- ................................... -->
 						<button type="button" id="btn2" onclick="btn2click()"
 							class="w3-button w3-block">정보</button>
 					</div>
-					<div class="w3-third w3-center">
+					<div class="w3-col s4 w3-center">
 						<!-- ................................... -->
 						<button type="button" id="btn3" onclick="btn3click()"
 							class="w3-button w3-block">리뷰</button>
@@ -199,45 +181,62 @@
 						</p>
 					</div>
 
-
-
-
-
-
-
-
-					<td>${dto.title }</td>
-
-					<!-- 반복의 시작 -->
+					<!-- 반복의 시작 ---------------------------------------------->
 					<c:forEach items="${ menuList }" var="menudto">
-						<!-- 반복 시작-->
-						<div class="w3-row-padding w3-border-bottom">
-
-							<div class="w3-col w3-right" style="">
-								<div class="w3-button w3-circle w3-gray">
-									<i class="material-icons"
-										style="font-size: 36px; color: white;">local_grocery_store</i>
-								</div>
+						<div class="w3-row-padding w3-border-bottom w3-margin-top">
+							<div class="w3-col w3-right w3-padding" style="width: 60px;">
+								<button onclick="addCart(this)" type="button" class="w3-button"
+									style="height: 100%">+</button>
 							</div>
-
-							<div class="w3-rest">
-								<div>아부찌 부대찌개3인분(비조리)</div>
-								<div class="w3-small w3-text-gray">기본 3인분</div>
-								<div>13900원</div>
+							<div class="w3-rest" style="padding-left: 10px;">
+								<input type="hidden" value="${menudto.no}" />
+								<div>${menudto.menuName }</div>
+								<div class="w3-small w3-text-gray">${menudto.menuEx }</div>
+								<div>${menudto.menuPrice }원</div>
 							</div>
-
-
 						</div>
-						<!-- 반복 끝-->
 					</c:forEach>
-					<!-- 반복의 끝 -->
+					<!-- 반복의 끝 ------------------------------------------------->
 
+					<script>
+						function addCart(e) {
+							console.log(e);
+							var select_no = e.parentNode.parentNode.children[1].children[0].value;
+							console.log(select_no);
+							var shop_No = document.getElementById("shop_No").innerText;
 
-
-
-
-
+							// form data >>  JSON 
+							var data = {
+								// 항목이름 : 값(변수)
+								shop_No : shop_No,
+								menu_No : select_no,
+								count : 1
+							}
+							// ajax +  post >> to SERVER
+							$.ajax({
+								type : "post",
+								url : "AddCartPro.jsp",
+								//dateType : "json",
+								//contentType : "application/json; charset=utf-8",
+								data : data,
+								success : function(result) {
+									//alert("성공적으로 댓글 등록이 되었습니다.");
+									console.log("success");
+									console.log(result);
+									//console.log(status);
+								},
+								error : function(data) {
+									//alert("댓글을 등록하는 중 오류가 발생되었습니다.");
+									console.log("error");
+									console.log(data);
+								}
+							});
+						}
+					</script>
 				</div>
+				<!-- tab 1 end------------------------------------------------ -->
+
+
 				<div id="tab2" class="w3-row" style="display: none;">
 					<div class="w3-container w3-border-bottom w3-border-top w3-padding"
 						style="background-color: #EAEAEA;">
@@ -274,6 +273,8 @@
 							<%=shopdto.getShopTel()%></p>
 					</div>
 				</div>
+				<!-- tab 2 end------------------------------------------------ -->
+
 				<div id="tab3" class="w3-row" style="display: none;">
 					<div class="w3-container w3-border-bottom w3-border-top w3-padding"
 						style="background-color: #EAEAEA;">
@@ -361,6 +362,7 @@
 
 
 				</div>
+				<!-- tab 3 end------------------------------------------------ -->
 			</div>
 		</div>
 

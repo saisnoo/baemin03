@@ -46,6 +46,7 @@
 
 				<!--사용자 마이 페이지-->
 				<div class="w3-container w3-card">
+				<div style="margin-top:15px;"><h2>공지사항</h2></div>
 
 					
 

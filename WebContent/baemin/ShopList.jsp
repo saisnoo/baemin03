@@ -72,6 +72,7 @@
 				var a1 = document.getElementById("category").value;
 				console.log(a1);
 				$("#shopListHere").load("ShopListContent.jsp?category=" + a1);
+				window.scroll(0, 0);
 			}
 
 			function go2Shop(e) {
@@ -85,8 +86,8 @@
 				var selec = document.getElementById("category");
 				console.log(selec);
 				var selec_val = "<%=category%>";
-				console.log("selec_val "+selec_val);
-				console.log("selec.value "+selec.value);
+				console.log("selec_val " + selec_val);
+				console.log("selec.value " + selec.value);
 
 				for (var i = 0; i < 8; i++) {
 					console.log(i + " " + selec[i].value + "  " + selec_val);
