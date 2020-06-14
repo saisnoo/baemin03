@@ -93,11 +93,14 @@ public class ShopDAO {
 		ShopDTO dto = new ShopDTO();
 		System.out.println("---ShopDAO getShopInfo");
 		try {
-			con = getConnection();
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select * from shop where no = ?";
+			String sql = " SELECT shop.no NO, shop.shopName shopName, shop.shopCategory shopCategory ,"
+					+ " shop.shopAddr shopAddr, shop.shopAddr2 shopAddr2 , shop.shopTel shopTel ,"
+					+ " shop.shopStatus shopStatus ,  shop.shopEx shopEx,"
+					+ " AVG(rank) rank   from    shop LEFT JOIN review    on shop.no = review.shop_no "
+					+ " where shop.no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
@@ -107,8 +110,6 @@ public class ShopDAO {
 			if (rs != null) {
 				while (rs.next()) {
 					dto.setNo(rs.getInt("no"));
-					dto.setId(rs.getString("id"));
-					dto.setPw(rs.getString("pw"));
 					dto.setShopName(rs.getString("shopName"));
 					dto.setShopCategory(rs.getString("shopCategory"));
 					dto.setShopEx(rs.getString("shopEx"));
@@ -116,9 +117,11 @@ public class ShopDAO {
 					dto.setShopAddr2(rs.getString("shopAddr2"));
 					dto.setShopTel(rs.getString("shopTel"));
 					dto.setShopStatus(rs.getInt("shopStatus"));
-					dto.setShopX(rs.getDouble("shopX"));
-					dto.setShopY(rs.getDouble("shopY"));
+					double temp_rank = rs.getDouble("rank");
+					temp_rank = ((double) Math.round(temp_rank * 10)) / 10;
+					dto.setRank(temp_rank);
 				}
+				System.out.println(dto.toString());
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -130,7 +133,8 @@ public class ShopDAO {
 	} // getShopInfo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getListByCategory_start-----------------------------------------------------------------------------
-	public List<ShopDTO> getListByCategory(String category, double memberX, double memberY) throws Exception {
+	public List<ShopDTO> getListByCategory(String category, double memberX,
+			double memberY) throws Exception {
 		// 출력객체
 		List<ShopDTO> list = new ArrayList<>();
 		System.out.println("---ShopDAO getListByCategory");
@@ -147,10 +151,15 @@ public class ShopDAO {
 			// 3. sql
 			String sql = "select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank) "
 					+ "    from shop LEFT JOIN review on shop.no = review.shop_no "
-					+ "    WHERE (shopX  BETWEEN ? AND ?) " + "     AND (shopY  BETWEEN ? AND ?)"
-					+ "     AND shopCategory  like '%" + category + "%' " + "  GROUP BY shop.no   "
+					+ "    WHERE (shopX  BETWEEN ? AND ?) "
+					+ "     AND (shopY  BETWEEN ? AND ?)"
+					+ "     AND shopCategory  like '%"
+					+ category
+					+ "%' "
+					+ "  GROUP BY shop.no   "
 					+ "   ORDER BY avg(rank) DESC      ";
-			// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
+			// select shop.no no, shopName, shopCategory, shopAddr, shopX,
+			// shopY, avg(rank)
 			// from shop LEFT JOIN review on shop.no = review.shop_no
 			// WHERE (shopX BETWEEN 126.859660819027 AND 126.90966081902701)
 			// AND (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)
@@ -173,7 +182,8 @@ public class ShopDAO {
 					// 좌표 먼저 겟
 					double shopX = rs.getDouble("shopX");
 					double shopY = rs.getDouble("shopY");
-					double distance = CoordDistance.getDistance(shopX, shopY, memberX, memberY);
+					double distance = CoordDistance.getDistance(shopX, shopY,
+							memberX, memberY);
 					// 거리 계산해서, BaeDalLimit 보다 작을때만 리스트 add
 					if (distance < CoordDistance.BaeDalLimit) {
 						double temp_rank = rs.getDouble("avg(rank)");
@@ -243,7 +253,7 @@ public class ShopDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "insert into shop ( id, pw,  shopName, shopCategory, shopEx, shopAddr, shopAddr2, "
-					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ? ,now() )";
+					+ " shopTel, shopX , shopY, regDate)  values( ?, ?, ?, ?, ?, ?, ?, ?,?,? ,now() )";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -260,7 +270,7 @@ public class ShopDAO {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" joinShop() 예외  ");
+			throw new Exception(" insertShop() 예외  " + e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
@@ -268,20 +278,19 @@ public class ShopDAO {
 	} // insertShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// updateShop_start-----------------------------------------------------------------------------
-	public int updateShop(ShopDTO dto) throws Exception {
+	public int changePw(String pw, int no) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---ShopDAO updateShop");
+		System.out.println("---ShopDAO changePw");
 		try {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update shop set shopEx = ? , shopTel = ? where no = ?";
+			String sql = "update shop set pw = ? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dto.getShopEx());
-			pstmt.setString(2, dto.getShopTel());
-			pstmt.setInt(3, dto.getNo());
+			pstmt.setString(1, pw);
+			pstmt.setInt(2, no);
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -367,7 +376,8 @@ public class ShopDAO {
 	}
 
 	// close 1
-	static final void close(Connection con, PreparedStatement pstmt, ResultSet rs) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt,
+			ResultSet rs) throws Exception {
 		close(con, pstmt);
 		if (rs != null) {
 			rs.close();
@@ -375,7 +385,8 @@ public class ShopDAO {
 	} // close () end
 
 	// close 2
-	static final void close(Connection con, PreparedStatement pstmt) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt)
+			throws Exception {
 		if (con != null) {
 			con.close();
 		}
@@ -386,7 +397,8 @@ public class ShopDAO {
 
 	public static void main(String[] args) {
 
-		// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank)
+		// select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY,
+		// avg(rank)
 		// from shop LEFT JOIN review on shop.no = review.shop_no
 		// WHERE (shopX BETWEEN 126.859660819027 AND 126.90966081902701)
 		// AND (shopY BETWEEN 37.4759565732326 AND 37.5259565732326)

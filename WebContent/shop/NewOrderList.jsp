@@ -1,3 +1,5 @@
+<%@page import="com.baemin.orderlist.cart.Order2Cart"%>
+<%@page import="com.baemin.orderlist.cart.CartDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,12 +11,15 @@
 request.setCharacterEncoding("UTF-8");
 System.out.println("------NewOrderList.jsp");
 
+int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
+//int shopNo=Integer.parseInt(request.getParameter("shopNo"));
 System.out.println(request.getParameter("shopNo"));
-int shopNo=Integer.parseInt(request.getParameter("shopNo"));
 OrderListDAO dao= OrderListDAO.getInstance();
 
 List<OrderListDTO> orderList = dao.getListOfCurrent(shopNo);
 System.out.println(shopNo);
+CartDTO cart = new CartDTO();
+
 int NewOrderCount =orderList.size();
 for(int i=0;i<NewOrderCount;i++){
 	OrderListDTO dto =orderList.get(i);
@@ -27,7 +32,7 @@ for(int i=0;i<NewOrderCount;i++){
 		<div class="w3-row">
 			<!-- 왼쪽 -->
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
-				<div><%=dto.getOrderDate()%></div>
+				<strong><font size="10"><%=dto.getOrderDate()%></font></strong>
 				<input type="hidden" value="<%=dto.getNo()%>">
 				<input id="shopNo" type="hidden" value="<%=dto.getShop_NO()%>">
 			</div>
@@ -59,6 +64,7 @@ for(int i=0;i<NewOrderCount;i++){
 						<strong>[메뉴 4개]</strong> &nbsp;<%=dto.getName()%>
 					</div>
 					<div class="w3-col">주문번호: <%=dto.getNo() %></div>
+					<div class="w3-col">전화번호: <%=dto.getTel() %></div>
 				</div>
 				<div class="w3-row"><%=dto.getAddr() %> <%=dto.getAddr2() %> </div>
 			</div>
@@ -67,9 +73,9 @@ for(int i=0;i<NewOrderCount;i++){
 		<!-- 상단 컨테이너 끝 -->
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 /
-				양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 / 된장찌개 2김치찌개 2
-				/ 된장찌개 2 / 후라이드치킨2 / 양념치킨 반마리 1 된장찌개 2</div>
+			<div class="w3-row w3-padding">
+			<%=dto.getMenu_String()%>
+			</div>
 			<div class="w3-row w3-padding"><%=dto.getComment() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->
@@ -84,9 +90,9 @@ for(int i=0;i<NewOrderCount;i++){
 	// 스크립트
 
 	function baesongBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].innerText;
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
 		console.log(jumunNo);
-		document.getElementById("jumunNo").value = jumunNo;
+		document.getElementById("jumunNo").innerText = jumunNo;
 		$.ajax({
 			type: "post",
 			url : "BaesongSelect.jsp",
@@ -96,16 +102,11 @@ for(int i=0;i<NewOrderCount;i++){
 				if(result==1){
 					alert("배달시작");
 				}else{
-					alert("조리X");
+					alert("배달안됨")
 				}//else
 			}//success
 		});//ajax
 		refresh(); // 새로고침
 	}//CookBtn
-	
-	function cancelBtn(e) {
-		var a1 = e.parentNode.parentNode.children[0].children[0].value;
-		console.log(a1);
-		document.getElementById("jumunCancel").style.display = "block";
-	}//cancelBtn
+
 </script>

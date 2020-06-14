@@ -9,8 +9,9 @@
 request.setCharacterEncoding("UTF-8");
 System.out.println("------EndList.jsp");
 
+int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
+//int shopNo=Integer.parseInt(request.getParameter("shopNo"));
 System.out.println(request.getParameter("shopNo"));
-int shopNo=Integer.parseInt(request.getParameter("shopNo"));
 OrderListDAO dao= OrderListDAO.getInstance();
 
 List<OrderListDTO> orderList = dao.getListFinishToday(shopNo);
@@ -26,7 +27,7 @@ for(int i=0;i<EndListCount;i++){
 		<div class="w3-row">
 			<!-- 왼쪽 -->
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
-				<%=dto.getOrderDate()%>
+				<strong><font size="10"><%=dto.getOrderDate()%></font></strong>
 				<input type="hidden" value="<%=dto.getNo()%>">
 			</div>
 			<!-- 왼쪽 끝 -->
@@ -45,6 +46,7 @@ for(int i=0;i<EndListCount;i++){
 						<strong>[메뉴 4개]</strong> &nbsp;<%=dto.getName() %>
 					</div>
 					<div class="w3-col">주문번호: <%=dto.getNo() %></div>
+					<div class="w3-col">전화번호: <%=dto.getTel() %></div>
 				</div>
 				<div class="w3-row"><%=dto.getAddr() %> <%=dto.getAddr2() %></div>
 			</div>
@@ -54,9 +56,7 @@ for(int i=0;i<EndListCount;i++){
 		
 		<!-- 하단 컨테이너 -->
 		<div>
-			<div class="w3-row w3-padding">김치찌개 2 / 된장찌개 2 / 후라이드치킨 2 /
-				양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5김치찌개 2 / 된장찌개 2 /
-				후라이드치킨 2 / 양념치킨 반마리 1 / 호떡 7 / 감자튀김 10 / 스테이크 10 / 고등어자반 5</div>
+			<div class="w3-row w3-padding"><%=dto.getMenu_String() %></div>
 		</div>
 		<!-- 하단 컨테이너 끝-->
 	</div>

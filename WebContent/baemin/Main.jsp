@@ -3,8 +3,6 @@
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.sql.*"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -14,21 +12,21 @@
 <%
 	Object grade_ob = session.getAttribute("grade");
 	Object id_ob = session.getAttribute("id");
-	Object memberNo_ob = session.getAttribute("memberNo");
+	Object no_ob = session.getAttribute("no");
 	//Object memberX_ob = session.getAttribute("memberX");
 	//Object memberY_ob = session.getAttribute("memberY");
 
 	System.out.println(grade_ob);
 	System.out.println(id_ob);
-	System.out.println(memberNo_ob);
+	System.out.println(no_ob);
 	if (grade_ob == null) {
 		grade_ob = 0;
 	}
 	if (id_ob == null) {
 		id_ob = 0;
 	}
-	if (memberNo_ob == null) {
-		memberNo_ob = 0;
+	if (no_ob == null) {
+		no_ob = 0;
 	}
 
 	int grade = Integer.parseInt(grade_ob + "");
@@ -40,7 +38,7 @@
 		response.sendRedirect("../index.html");
 	}
 
-	int memberNo = Integer.parseInt(memberNo_ob + "");
+	int memberNo = Integer.parseInt(no_ob + "");
 	//double memberX = Double.parseDouble(memberNo_ob + "");
 	//double memberY = Double.parseDouble(memberNo_ob + "");
 

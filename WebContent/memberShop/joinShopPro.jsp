@@ -8,11 +8,16 @@
 	//자바 구문
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------joinShopPro.jsp");
+	
+	ShopDAO dao = ShopDAO.getInstance();
+	
+	ShopDTO dto = new ShopDTO();
 %>
 
 <%
-	String shopID = request.getParameter("shopID");
-	String shopPW = request.getParameter("shopPW");
+	String id = request.getParameter("shopID");
+	System.out.println(id);
+	String pw = request.getParameter("shopPW");
 	String shopName = request.getParameter("shopName");
 	String shopEx = request.getParameter("shopEx");
 
@@ -33,6 +38,10 @@
 
 	String[] shopCategory_ = request.getParameterValues("shopCategory");
 	String shopCategory = "";
+	
+	System.out.println(" shopCategory_.length="+ shopCategory_.length);
+	System.out.println(" shopCategory_.length="+ shopCategory_.length);
+	System.out.println(" shopCategory_.length="+ shopCategory_.length);
 
 	for (int i = 0; i < shopCategory_.length; i++) {
 		shopCategory += shopCategory_[i] + ", ";
@@ -41,4 +50,19 @@
 	shopCategory += ",";
 	shopCategory = shopCategory.replaceAll(", ,", "");
 	System.out.println(shopCategory);
+	
+	dto.setId(id);
+	dto.setPw(pw);
+	dto.setShopName(shopName);
+	dto.setShopCategory(shopCategory);
+	dto.setShopEx(shopEx);
+	dto.setShopAddr(shopAddr);
+	dto.setShopAddr2(shopAddr2);
+	dto.setShopTel(shopTel);
+	dto.setShopX(shopX);
+	dto.setShopY(shopY);
+	
+	dao.insertShop(dto);
+	
+	response.sendRedirect("../index.html");
 %>
