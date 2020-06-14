@@ -1,5 +1,3 @@
-<%@page import="com.baemin.orderlist.cart.Order2Cart"%>
-<%@page import="com.baemin.orderlist.cart.CartDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -18,7 +16,6 @@ OrderListDAO dao= OrderListDAO.getInstance();
 
 List<OrderListDTO> orderList = dao.getListOfCurrent(shopNo);
 System.out.println(shopNo);
-CartDTO cart = new CartDTO();
 
 int NewOrderCount =orderList.size();
 for(int i=0;i<NewOrderCount;i++){

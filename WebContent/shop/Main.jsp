@@ -112,6 +112,11 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
+#reviewCell {
+	height: 370px;
+	overflow-y: auto;
+}
+
 </style>
 <script>
 	window.onload = function() {
@@ -322,6 +327,24 @@
 										<td>8000</td>
 										<td>주메뉴</td>
 										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
 									</tr>
 									<tr>
 										<td>된장찌개</td>
