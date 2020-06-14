@@ -49,7 +49,7 @@ public class MenuDAO {
         // 출력객체
         int result = -1;
         System.out.println("---MenuDAO updateStatus");
-        menuStatus = (menuStatus + 1) / 2; // 0을 1로, 1을 0으로
+        menuStatus = (menuStatus + 1) % 2; // 0을 1로, 1을 0으로
         try {
             // 1+2
             con = getConnection();
