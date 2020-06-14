@@ -12,7 +12,8 @@ System.out.println("------EndList.jsp");
 
 
 //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-int shop_No=Integer.parseInt((String)session.getAttribute("shop_No"));
+Object no=session.getAttribute("no");
+	 int shop_No=Integer.parseInt(no+""); 
 System.out.println(shop_No);
 OrderListDAO orderListDAO = OrderListDAO.getInstance();
 List<OrderListDTO> list = orderListDAO.getListDone(shop_No);
@@ -23,8 +24,8 @@ CartDTO cartDTO=new CartDTO();
 for(int i=0;i<list.size();i++)
 {	
 	OrderListDTO orderListDTO=list.get(i);
-	String k="";
-	k=Order2Cart.toMsg(orderListDTO.getOrderList());
+	/* String k="";
+	k=Order2Cart.toMsg(orderListDTO.getOrderList()); */
 	
 	%>
 	    <!-- load  new order  -->

@@ -527,7 +527,7 @@ public class OrderListDAO {
                     + " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
                     + " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member "
                     + "  WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
-                    + " AND order_menu.menu_No = menu.no" + " AND orderlist.completeTime < NOW() "
+                    + " AND order_menu.menu_No = menu.no" + " AND orderlist.completeTime < NOW() "+"AND STATUS = 2"
                     + " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and now() "
                     + " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
                     + " ) CNT" + " )CNT" + " GROUP BY no;";
@@ -590,7 +590,8 @@ public class OrderListDAO {
     } // getListFinishToday_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
     // getListOfCancel_start-----------------------------------------------------------------------------
-    public List<OrderListDTO> getListOfCancel(int shopNo, int INTERVAL_HOUR) throws Exception {
+//    public List<OrderListDTO> getListOfCancel(int shopNo, int INTERVAL_HOUR) throws Exception {
+    	public List<OrderListDTO> getListOfCancel(int shopNo) throws Exception {
         // 출력객체
         List<OrderListDTO> list = new ArrayList<>();
         System.out.println("---OrderListDAO getListOfCancel");

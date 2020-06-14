@@ -1,21 +1,22 @@
+<%@page import="com.baemin.shop.ShopDTO"%>
+<%@page import="com.baemin.shop.ShopDAO"%>
+<%@page import="com.baemin.menu.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
-
-
-
-
 <%
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-	session.setAttribute("shop_No", "2");
-	int jumooncount=0;
-	int joricount=0;
-	int deliverycount=0;
-	int completecount=0;
+	System.out.println(session.getAttribute("no"));
+	Object no=session.getAttribute("no");
+	 int shop_No=Integer.parseInt(no+""); 
+	 MenuDAO menudao=MenuDAO.getInstance();
+	 ShopDAO shopdao=ShopDAO.getInstance();
+	 ShopDTO shopdto=shopdao.getShopInfo(shop_No);
+	 
 %>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -26,8 +27,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- CDN - jquery 3.4.1 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- CDN - W3CSS -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- CDN OFFLINE- sw_topNav.css -->
@@ -77,29 +77,21 @@
 <script>
 	// 스크립트
 	window.onload = function() {
-                    		$("#tab1").load("NewOrderList.jsp?shopNo=1");
-                    		$("#tab2").load("BaesongList.jsp?shopNo=1");
-                    		$("#tab3").load("EndList.jsp?shopNo=1");
-                    		$("#tab4").load("CancleList.jsp?shopNo=1");
+                    		$("#tab1").load("NewOrderList.jsp");
+                    		$("#tab2").load("BaesongList.jsp");
+                    		$("#tab3").load("EndList.jsp");
+                    		$("#tab4").load("CancleList.jsp");
                     		$("#SM").load("ShopManage.jsp");
                     	}
 </script>
 <script type="text/javascript">
 $(function(){
+	
 	//$("#take_overbtn").click(function(){
 		//$('input[name="estimated_time"]').removeAttr('checked');
 		//$(".estimated_time").arrt(checked,false);
 		//$("#take_over").modal("hide");
-
 //	})
-	function clear(){
-		$("#content").val("");
-		$("#writer").val("");
-		$("#pw").val("");
-		$("#deletePw").val("");
-	}
-
-
 
 });
 </script>
@@ -190,11 +182,10 @@ $(function(){
           <h3 class="modal-title">주문 접수</h3>
         </div>
         <div class="modal-body">
-          	<form id="take_over_Form">
-			 <div class="form-group">
+        
 			 <!-- 글번호입력 -->
 			    <label for="writer">예상시간</label><hr>
-			 
+			 <input type="text" id="order_no1" name="order_no1">
 			 <input type="radio" class="estimated_time" name="estimated_time" value="30" >30분<br>
 			 <input type="radio" class="estimated_time" name="estimated_time" value="40" >40분<br>
 			 <input type="radio" class="estimated_time" name="estimated_time" value="50" >50분<br>
@@ -214,8 +205,6 @@ $(function(){
 			    <option value="80">80분후</option>
 			    </select>
 			     -->
-			    </div>
-			</form>
         </div>
         <div class="modal-footer">
 			<div class="btn-group">
@@ -239,10 +228,11 @@ $(function(){
           <h3 class="modal-title">주문 취소</h3>
         </div>
         <div class="modal-body">
-          	<form id="jumoon_calcel_Form">
-			 <div class="form-group">
+        
 			 <!-- 글번호입력 -->
 			    <label for="writer">취소사유</label><br>
+			    <input type="text" id="order_no2" name="order_no2">
+			    
 			    <input type="radio" class="whyCancel" name="whyCancel" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
 			    <input type="radio" class="whyCancel" name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
 			    <input type="radio" class="whyCancel" name="whyCancel" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소<br>
@@ -258,13 +248,51 @@ $(function(){
 			    </select>
 			     -->
 	
-			    </div>
-			</form>
         </div>
         <div class="modal-footer">
 			<div class="btn-group">
-			  <button class="btn btn-default" id="jumoon_calcel_btn">접수</button>
-			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal"  >취소</button>
+			  <button class="btn btn-default" id="jumoon_calcel_btn" data-dismiss="modal">접수</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle2" >취소</button>
+			</div> 
+        </div>
+      </div>
+      <!-- Modal content end-->
+    </div>
+  </div>
+
+<div class="modal fade jumoon_calcel" id="jumoon_calcel1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content 시작-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">주문 취소</h3>
+        </div>
+        <div class="modal-body">
+      
+			 <!-- 글번호입력 -->
+			    <label for="writer">취소사유</label><br>
+			    <input type="radio" class="whyCancel" name="whyCancel2" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel2" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel2" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소<br>
+			    <input type="radio" class="whyCancel" name="whyCancel2" value="거리에 따른 취소">거리에 따른 취소<br>
+				
+				<!-- 			    
+			    <select>
+			    <option name="whyCancel" value="" selected disabled hidden>취소사유</option>
+			    <option name="whyCancel" value="재료소진으로 인한 취소">재료소진으로 인한 취소</option>
+			    <option name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소</option>
+			    <option name="whyCancel" value="배달원부족으로 인한 취소">배달원부족으로 인한 취소</option>
+			    <option name="whyCancel" value="거리에 따른 취소">거리에 따른 취소</option>
+			    </select>
+			     -->
+	
+        </div>
+        <div class="modal-footer">
+			<div class="btn-group">
+			  <button class="btn btn-default" id="jumoon_calcel_btn2" data-dismiss="modal">접수</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle3" >취소</button>
 			</div> 
         </div>
       </div>
@@ -274,20 +302,7 @@ $(function(){
 
 
 
-
-      <div class="topnav w3-card-4" id="topNav">
-            <a href="#" class="w3-baemint active">배달의 인종 </a>
-            <!-- -------------------------------------------------------------------------- -->
-            <a> <strong>(주)경영반점</strong> </a>
-            <!-- -------------------------------------------------------------------------- -->
-            <a href="#">내 정보</a>
-            <!-- -------------------------------------------------------------------------- -->
-            <a href="#">주문내역</a>
-            <!-- -------------------------------------------------------------------------- -->
-            <a href="#">로그아웃</a>
-            <!-- -------------------------------------------------------------------------- -->
-        
-        </div>
+      <jsp:include page="../sw_css/topnav.jsp" />
 
 	
 	      <script>
@@ -319,6 +334,7 @@ $(function(){
                     }
 
                     function openTab2(evt, tab2Name) {
+                    	
                         // Declare all variables
                         var i, tabcontent2, tablink2;
 
@@ -363,6 +379,30 @@ $(function(){
                     	
                     	
                     });
+                    /* function reload2(){
+                    	
+                    	$.ajax({
+                			type : "post",
+                			url : "CheckOrderPro.jsp",
+                			//data : JSON.stringify(reply),
+                			 data : , 
+                			async : false,
+                			//리턴 되어 돌려 받는 데이터의 타입
+                			dataType: "text" ,
+                			//기본값이므로 삭제 가능
+                			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+                			success : function(result,status,xhr){
+                				console.log("주문접수 완료");
+                				
+
+                			},
+                			error : function(xhr,status,error){
+                				console.log("주문접수 실패");
+                			}//error의 끝
+                			
+                		});//ajax의 끝
+
+                    }*/
                     function countcount(){
                 		var a = document.getElementsByClassName("count0").length;
                 		var a1 = document.getElementsByClassName("count1").length;
@@ -378,10 +418,156 @@ $(function(){
    					                 
                     
                 </script>
+  <div class="modal fade check_viewmenu" id="check_viewmenu" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content 시작-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">주문 취소</h3>
+        </div>
+        <div class="modal-body">
+			 <div class="form-group">
+			 <!-- 글번호입력 -->
+			    <label for="writer">메뉴표시유무</label><br>
+			    <!-- <input type="hidden" id="status" value=""> -->
+			    
+			    <span id="status_check">123</span>
+			    </div>
+        </div>
+        <div class="modal-footer">
+			<div class="btn-group">
+			  <button class="btn btn-default" id="check_viewmenu_btn1" data-dismiss="modal">변경</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle3" >완료</button>
+			</div> 
+        </div>
+      </div>
+      <!-- Modal content end-->
+    </div>
+  </div>
+  <script>
+
+
+	// 스크립트
+	//데이터를 변경하는 함수 -update	
+	
+	
+	 $("#take_overbtn").click(function(){
+
+		 var estimated_time = $(":input:radio[name=estimated_time]:checked").val();
+		 var orderList_No = $(":input:text[name=order_no1]").val();
+			console.log("주문접수버튼 클릭 ="+orderList_No);
+		 
+		 var data={
+				orderList_No:orderList_No,
+				estimated_time:estimated_time
+		}
+		//alert(JSON.stringify(reply));
+		//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
+		$.ajax({
+			type : "post",
+			url : "CheckOrderPro.jsp",
+			//data : JSON.stringify(reply),
+			data : data,
+			async : false,
+			//리턴 되어 돌려 받는 데이터의 타입
+			dataType: "text" ,
+			//기본값이므로 삭제 가능
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			success : function(result,status,xhr){
+				console.log("주문접수 완료");
+				
+
+			},
+			error : function(xhr,status,error){
+				console.log("주문접수 실패");
+			}//error의 끝
+			
+		});//ajax의 끝*/
+		// $("#take_over").modal("hide");
+		
+	}); 
+
 	
 	
 	
+	 $("#jumoon_calcel_btn").click(function(){
+		 console.log("주문접수버튼 클릭 ="+orderList_No);
+		 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
+		 var orderList_No = $(":input:text[name=order_no2]").val();
+		 var data={
+				//항목이름: 값(변수)
+			//	no:no,
+				//rno:rno,
+			
+				orderList_No:orderList_No,
+				whyCancel:whyCancel
+		}
+		//alert(JSON.stringify(reply));
+		//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
+		$.ajax({
+			type : "post",
+			url : "CancelOrderPro.jsp",
+			//data : JSON.stringify(reply),
+			data : data,
+			//리턴 되어 돌려 받는 데이터의 타입
+			dataType: "text" ,
+			//기본값이므로 삭제 가능
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			success : function(result,status,xhr){
+				console.log("취소접수 완료");
+				$("#tab1").load("NewOrderList.jsp");
+			},
+			error : function(xhr,status,error){
+				console.log("취소접수 실패");
+			}//error의 끝
+			
+		});//ajax의 끝*/
+		 
+	}); 
+	 $("#jumoon_calcel_btn2").click(function(){
+		 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
+		 var orderList_No = $(":input:text[name=order_no2]").val();
+		 
+			console.log("이유=" + whyCancel);
+			
+			 
+			 var data={
+					//항목이름: 값(변수)
+				//	no:no,
+					//rno:rno,
+				
+					orderList_No:orderList_No,
+					whyCancel:whyCancel
+			}
+			//alert(JSON.stringify(reply));
+			//ajax(비동기 통신)를 통해서 post방식의 입력한 데이터를 서버에 넘기기.
+			$.ajax({
+				type : "post",
+				url : "CancelOrderPro.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				async : false,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("취소접수 완료");
+					$("#tab2").load("BaesongList.jsp");
+				},
+				error : function(xhr,status,error){
+					console.log("취소접수 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+		});
+	 
 	
+
+</script>
+  
 
 </body>
 </html>
