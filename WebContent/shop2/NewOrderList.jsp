@@ -16,10 +16,9 @@ System.out.println(shop_No+shop_No);
 OrderListDAO orderListDAO = OrderListDAO.getInstance();
 List<OrderListDTO> list = orderListDAO.getListOfCurrent(shop_No);
 
-CartDTO cartDTO=new CartDTO();
 %>
 <script type="text/javascript">
-console.log("------NewOrderList.jsp");
+console.log("------NewOrderList.jsp----" +list.size());
 </script>
 <%
 

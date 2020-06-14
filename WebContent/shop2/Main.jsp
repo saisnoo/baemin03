@@ -1,3 +1,4 @@
+<%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@page import="com.baemin.shop.ShopDTO"%>
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@page import="com.baemin.menu.MenuDAO"%>
@@ -6,14 +7,25 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%
-	request.setCharacterEncoding("UTF-8");
+
+request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
+	
+	if(session.getAttribute("id")==null){
+		response.sendRedirect("../index.jsp");
+	}else{
+	
+	
+	
 	System.out.println(session.getAttribute("no"));
 	Object no=session.getAttribute("no");
 	 int shop_No=Integer.parseInt(no+""); 
 	 MenuDAO menudao=MenuDAO.getInstance();
 	 ShopDAO shopdao=ShopDAO.getInstance();
 	 ShopDTO shopdto=shopdao.getShopInfo(shop_No);
+	 OrderListDAO orderlistdao=OrderListDAO.getInstance();
+	 int max_no = orderlistdao.getMaxNoOfShop_No(shop_No);
+	 
 	 
 %>
  <!DOCTYPE html>
@@ -102,6 +114,10 @@ $(function(){
 </script>
 </head>
 <body>
+
+
+<input type="hidden" name="max_no" value="<%=max_no %>">
+<input type="hidden" name="max_no2" value="0">
  <div class="sw-topnav-margin">
         &nbsp;
     </div>
@@ -311,7 +327,8 @@ $(function(){
 
 	
 	      <script>
-	      
+          var	max_no2=0;                    	
+          var max_no= $(":input:hidden[name=max_no]").val();
                     function openTab(evt, tabName) {
                        if(tabName=="tab2"){
                     	   $("#tab2").load("BaesongList.jsp");
@@ -371,7 +388,8 @@ $(function(){
                     	
                     	
                     	function reload(){
-                    		$("#tab1").load("NewOrderList.jsp");
+                    		reload2();
+                    		//$("#tab1").load("NewOrderList.jsp");
                     		//$("#tab2").load("BaesongList.jsp");
                     		//$("#tab3").load("EndList.jsp");
                     		countcount();
@@ -380,33 +398,50 @@ $(function(){
                      		//document.getElementById("defaultOpen").click();
                     		//document.getElementById("jumoontab").click(); 
                     	}
-                    	setInterval(reload, 3000);
+                    	function load(){
+                    		$("#tab1").load("NewOrderList.jsp");
+                    	}
                     	
-                    	
+                    	setInterval(reload, 1000);
+                    	setTimeout(load,1000);
+                    	setTimeout(load,2000);
+                    	setTimeout(load,3000);
+                    	setTimeout(load,4000);
                     });
-                     function reload2(){
+                    
+                    
+                    function reload2(){
                     	
+                    	console.log("reload2 = > "+max_no+"/"+max_no2);
+                    	
+                    	var data={
+                    			max_no:max_no
+                    	}
                     	$.ajax({
                 			type : "post",
-                			url : "CheckOrderPro.jsp",
+                			url : "Reload.jsp",
                 			//data : JSON.stringify(reply),
-                			 data : , 
+                			 data : data, 
                 			async : false,
                 			//리턴 되어 돌려 받는 데이터의 타입
-                			dataType: "text" ,
+                			dataType: "json" ,
                 			//기본값이므로 삭제 가능
                 			contentType : "application/x-www-form-urlencoded; charset=utf-8",
-                			success : function(result,status,xhr){
-                				console.log("주문접수 완료");
-                				
+                			
+                			success : function(result){
+                				max_no2=result;
+                				if(max_no!=max_no2){
+                					max_no=max_no2;
+                				$("#tab1").load("NewOrderList.jsp");
+                				}
 
                 			},
                 			error : function(xhr,status,error){
-                				console.log("주문접수 실패");
+                				console.log("주문리스트창 리로드 실패");
                 			}//error의 끝
                 			
                 		});//ajax의 끝
-
+                		
                     }
                     function countcount(){
                 		var a = document.getElementsByClassName("count0").length;
@@ -678,7 +713,7 @@ $(function(){
 	
 
 </script>
-  
+  <%}%>
 
 </body>
 </html>

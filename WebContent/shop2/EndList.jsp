@@ -17,7 +17,6 @@ Object no=session.getAttribute("no");
 System.out.println(shop_No);
 OrderListDAO orderListDAO = OrderListDAO.getInstance();
 List<OrderListDTO> list = orderListDAO.getListDone(shop_No);
-CartDTO cartDTO=new CartDTO();
 %>
 <%
 

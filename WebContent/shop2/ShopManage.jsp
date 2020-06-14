@@ -9,6 +9,8 @@
 //자바 구문
 request.setCharacterEncoding("UTF-8");
 System.out.println("------ShopManage.jsp");
+
+
 Object no=session.getAttribute("no");
 int shop_No=Integer.parseInt(no+""); 
 System.out.println("shopmanage = " + shop_No);
