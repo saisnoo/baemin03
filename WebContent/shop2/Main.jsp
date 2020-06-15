@@ -111,6 +111,13 @@ $(function(){
 //	})
 
 });
+function tabtab2load(){
+	$("#SM").load("ShopManage.jsp");
+	openTab2(event, 'tabtab2');
+	setTimeout(function() {
+		document.getElementById("defaultOpen2").click();
+		}, 800);
+}
 </script>
 </head>
 <body>
@@ -384,6 +391,7 @@ $(function(){
                     document.getElementById("defaultOpen").click();
                     document.getElementById("jumoontab").click();
                     
+                    
                     $(function(){
                     	
                     	
@@ -408,12 +416,12 @@ $(function(){
                     	setTimeout(load,3000);
                     	setTimeout(load,4000);
                     });
-                    
+                    var audio = new Audio();
+                    audio.src = "./baeminAlarm.mp3";
                     
                     function reload2(){
                     	
                     	console.log("reload2 = > "+max_no+"/"+max_no2);
-                    	
                     	var data={
                     			max_no:max_no
                     	}
@@ -433,6 +441,7 @@ $(function(){
                 				if(max_no!=max_no2){
                 					max_no=max_no2;
                 				$("#tab1").load("NewOrderList.jsp");
+                				audio.play();
                 				}
 
                 			},
@@ -521,7 +530,7 @@ $(function(){
         <div class="modal-footer">
 			<div class="btn-group">
 			  <button class="btn btn-default" id="add_menu_btn">추가</button>
-			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle3" >닫기</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle4" >닫기</button>
 			</div> 
         </div>
       </div>
@@ -529,8 +538,9 @@ $(function(){
     </div>
   </div>
   <script>
-
-
+  $("#take_cancle4").click(function(){
+  	작성해야된다.
+  });
 	// 스크립트
 	//데이터를 변경하는 함수 -update	
 	 $("#add_menu_btn").click(function(){
@@ -699,8 +709,7 @@ $(function(){
 				contentType : "application/x-www-form-urlencoded; charset=utf-8",
 				success : function(result,status,xhr){
 					console.log("menuStatus 변경 완료");
-					 $("#SM").load("ShopManage.jsp");
-					openTab2(event, 'tabtab2'); 
+					tabtab2load();
 					
 					
 				},

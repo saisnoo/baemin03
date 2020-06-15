@@ -75,7 +75,7 @@ for(int i=0;i<list.size();i++)
 
 <script>
 	// 스크립트
-console.log("------EndList.jsp");
+console.log("------CancleList.jsp");
 	function jumunBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 	
