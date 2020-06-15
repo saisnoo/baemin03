@@ -12,6 +12,17 @@ System.out.println("------ShopManage.jsp");
 
 
 Object no=session.getAttribute("no");
+<<<<<<< HEAD
+int shop_No=Integer.parseInt(no+""); 
+System.out.println("shopmanage = " + shop_No);
+MenuDAO menudao=MenuDAO.getInstance();
+ShopDAO shopdao=ShopDAO.getInstance();
+ShopDTO shopdto=shopdao.getShopInfo(shop_No);
+List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shop_No); 
+
+
+ShopDTO shopdto2=shopdao.getShopInfo(shop_No);
+=======
 int shopNo=Integer.parseInt(no+""); 
 System.out.println("shopmanage = " + shopNo);
 MenuDAO menudao=MenuDAO.getInstance();
@@ -21,6 +32,7 @@ List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shopNo);
 
 
 ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
+>>>>>>> master
 
 
 
@@ -44,13 +56,21 @@ if(<%=shopdto.getShopStatus()==1%>){
 });
 </script>   
    
+<<<<<<< HEAD
+<div id="tabtab2" class="w3-cyan tabcontent2">
+=======
 <div id="tabtab2" class="w3-baemint tabcontent2">
+>>>>>>> master
        
                        <div class="container">
   <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
   <button type="button" class="btn btn-success" id="magam">영업종료</button>
   <button type="button" class="btn btn-success" id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
+<<<<<<< HEAD
+  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">
+=======
   <input type="hidden" name="addmenu_no" value="<%=shopNo %>">
+>>>>>>> master
 </div>     
 
 
@@ -58,12 +78,20 @@ if(<%=shopdto.getShopStatus()==1%>){
                     
                         
                        <button id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가
+<<<<<<< HEAD
+  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">                     
+=======
   <input type="hidden" name="addmenu_no" value="<%=shopNo %>">                     
+>>>>>>> master
                        </button>
                         
                     </div> --%>
                     
+<<<<<<< HEAD
+<div class="w3-container searchmenu" style="width:100%;height:70%;float:right;">
+=======
 <div class="w3-container w3-text-black searchmenu" style="width:100%;height:70%;float:right;">
+>>>>>>> master
 <select style="width:25%;height:38px;float:left" id="selectval">
 <option value="0">메뉴이름</option>
 <option value="1">메뉴카테고리</option>

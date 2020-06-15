@@ -38,7 +38,7 @@ for(int i=0;i<NewOrderCount;i++){
 		<div class="w3-row">
 			<!-- 왼쪽 -->
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
-				<strong><font size="10"><%=dto.getOrderDate()%></font></strong>
+				<strong><font size="6"><%=dto.getOrderDate()%></font></strong>
 				<input type="hidden" value="<%=dto.getNo()%>">
 				<input id="shopNo" type="hidden" value="<%=dto.getShop_NO()%>">
 			</div>
