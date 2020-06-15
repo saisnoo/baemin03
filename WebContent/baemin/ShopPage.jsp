@@ -346,6 +346,7 @@ request.setAttribute("review_list", review_list);
 										onkeydown="whenInputReview()" name="content" id="content"></textarea>
 								</div>
 								<input type="text" id="bbb" name="rank" />
+								<input type="text" name="shop_No" value="<%=no %>" />
 							</form>
 						</div>
 					</div>
