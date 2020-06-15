@@ -3,11 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 System.out.println("------CancelOrderPro.jsp");
-<<<<<<< HEAD
-int no = Integer.parseInt(request.getParameter("shop_no"));
-=======
 int no = Integer.parseInt(request.getParameter("shopNo"));
->>>>>>> master
 int status = Integer.parseInt(request.getParameter("shopstatus"));
 System.out.println("openpro_no = " + no);
 System.out.println("openpro_status = " + status);

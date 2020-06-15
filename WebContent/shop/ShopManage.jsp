@@ -12,17 +12,8 @@ System.out.println("------ShopManage.jsp");
 
 
 Object no=session.getAttribute("no");
-<<<<<<< HEAD
-int shop_No=Integer.parseInt(no+""); 
-System.out.println("shopmanage = " + shop_No);
-MenuDAO menudao=MenuDAO.getInstance();
-ShopDAO shopdao=ShopDAO.getInstance();
-ShopDTO shopdto=shopdao.getShopInfo(shop_No);
-List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shop_No); 
 
 
-ShopDTO shopdto2=shopdao.getShopInfo(shop_No);
-=======
 int shopNo=Integer.parseInt(no+""); 
 System.out.println("shopmanage = " + shopNo);
 MenuDAO menudao=MenuDAO.getInstance();
@@ -32,7 +23,6 @@ List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shopNo);
 
 
 ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
->>>>>>> master
 
 
 
@@ -66,11 +56,7 @@ if(<%=shopdto.getShopStatus()==1%>){
   <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
   <button type="button" class="btn btn-success" id="magam">영업종료</button>
   <button type="button" class="btn btn-success" id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
-<<<<<<< HEAD
-  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">
-=======
   <input type="hidden" name="addmenu_no" value="<%=shopNo %>">
->>>>>>> master
 </div>     
 
 
