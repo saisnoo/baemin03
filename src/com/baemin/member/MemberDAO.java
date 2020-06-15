@@ -158,32 +158,6 @@ public class MemberDAO {
 		return dto;
 	} // getDTO_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// changePW_start-----------------------------------------------------------------------------
-	public int changePW(String pw, int no) throws Exception {
-		// 출력객체
-		int result = -1;
-		System.out.println("---MemberDAO changePW");
-			System.out.println("no:"+no+"pw:"+pw);
-		try {
-			// 1+2
-			con = getConnection();
-			// 3. sql
-			String sql = "update member set pw = ? where no = ?";
-			// 4. 실행객체
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, pw);
-			pstmt.setInt(2, no);
-			// 5. 실행
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.getStackTrace();
-			throw new Exception(" changePW() 예외  ");
-		} finally {
-			close(con, pstmt, rs);
-		} // finally end
-		return result;
-	} // changePW_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-
 	// changeAddr_start-----------------------------------------------------------------------------
 	public int changeAddr(MemberDTO dto) throws Exception {
 		// 출력객체
@@ -212,34 +186,32 @@ public class MemberDAO {
 		return result;
 	} // changeAddr_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// changeTel_start-----------------------------------------------------------------------------
-	public int changeTel(String tel, int no) throws Exception {
-		return changeTel(no, tel);
-	}
-
-	public int changeTel(int no, String tel) throws Exception {
+	// changeInfo_start-----------------------------------------------------------------------------
+	public int changeInfo(MemberDTO dto) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---MemberDAO changeTel");
+		System.out.println("---MemberDAO changeInfo");
+
 		try {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update membet set tel = ? where memberNo = ?";
+			String sql = "update member set tel = ? , pw = ? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, tel);
-			pstmt.setInt(2, no);
+			pstmt.setString(1, dto.getTel());
+			pstmt.setString(2, dto.getPw());
+			pstmt.setInt(3, dto.getNo());
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" changeTel() 예외  ");
+			throw new Exception(" changeInfo() 예외  ");
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
 		return result;
-	} // changeTel_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	} // changeInfo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getListAll_start-----------------------------------------------------------------------------
 	public List<MemberDTO> getListAll() throws Exception {
@@ -275,14 +247,12 @@ public class MemberDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" getListAll() 예외  "+e);
+			throw new Exception(" getListAll() 예외  " + e);
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
 		return list;
 	} // getListAll_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
-	
-	
 
 	// ///////////////////////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////////////////////////////
