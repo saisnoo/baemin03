@@ -26,7 +26,6 @@ request.setCharacterEncoding("UTF-8");
 	 OrderListDAO orderlistdao=OrderListDAO.getInstance();
 	 int max_no = orderlistdao.getMaxNoOfShop_No(shop_No);
 	 
-	 
 %>
  <!DOCTYPE html>
 <html lang="en">

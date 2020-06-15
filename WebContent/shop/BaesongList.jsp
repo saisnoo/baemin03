@@ -19,6 +19,15 @@ System.out.println(shopNo);
 int BaesongCount =orderList.size();
 for(int i=0;i<BaesongCount;i++){
 	OrderListDTO dto =orderList.get(i);
+	int count=1;
+	StringTokenizer str=new StringTokenizer(dto.getMenu_String(),"/",true);
+	while(str.hasMoreTokens()){
+		String data=str.nextToken();
+		//System.out.println(data);
+		if(data.equals("/")){ count++;}
+		//System.out.println(count);
+		
+	}
 %>
 
 <div class="w3-section">
@@ -45,7 +54,7 @@ for(int i=0;i<BaesongCount;i++){
 			<div class="w3-rest w3-container">
 				<div class="w3-row">
 					<div class="w3-col">
-						<strong>[메뉴 4개]</strong> &nbsp;<%=dto.getName() %>
+						<strong>[메뉴 <%=count %>개]</strong> &nbsp;<%=dto.getName() %>
 					</div>
 					<div class="w3-col">
 						주문번호:
