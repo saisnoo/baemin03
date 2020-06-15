@@ -28,7 +28,7 @@
 		session.setAttribute("grade", 2);
 		session.setAttribute("name", dto.getShopName());
 		System.out.println(session.getAttribute("no"));
-		response.sendRedirect("../shop2/Main.jsp");
+		response.sendRedirect("../shop/Main.jsp");
 	} else {
 		System.out.println(" !!! shop null");
 %>

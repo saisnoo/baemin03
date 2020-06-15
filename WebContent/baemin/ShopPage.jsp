@@ -32,6 +32,7 @@
 	
 	ReviewDAO reviewdao = ReviewDAO.getInstance();
 	List<ReviewDTO> review_list = reviewdao.getListByShop(no, 10);
+request.setAttribute("review_list", review_list);
 %>
 
 <!DOCTYPE html>
@@ -318,7 +319,7 @@
 								console.log("star " + e + "  click!!!");
 
 								var rank = e + 1;
-								document.getElementById("bbb").innerText = rank;
+								document.getElementById("bbb").value = rank;
 
 								for (var i = 0; i < 5; i++) {
 
@@ -332,44 +333,55 @@
 							}
 						</script>
 						<div class=" w3-row" style="margin-top: 5px;">
-							<div class="w3-col w3-right"
-								style="width: 10%; margin-right: 3%; margin-left: 2%; margin-top: 3%;">
-								<input type="button"
-									class="w3-btn w3-border w3-round-large w3-large"
-									style="background-color: white;" value="등록">
-							</div>
+							<form method="post" action="ReviewWritePro.jsp">
+								<div class="w3-col w3-right"
+									style="width: 10%; margin-right: 3%; margin-left: 2%; margin-top: 3%;">
+									<input type="submit" id="reviewWriteBtn"
+										class="w3-btn w3-border w3-round-large w3-large"
+										style="background-color: white;" value="등록" disabled>
+								</div>
 
-							<div class="w3-rest">
-								<textarea rows="3" style="width: 100%; resize: none"
-									id="content"></textarea>
-							</div>
-						</div>
-						<input type="hidden" id="bbb" />
-					</div>
-
-					<%
-						for (int i = 0; i < review_list.size(); i++) {
-							ReviewDTO reviewDTO = review_list.get(i);
-					%>
-					<div class="w3-row w3-section">
-						<div class="w3-col" style="margin-left: 2%;">
-							<label>익명의 사용자</label><br>
-							<customtag:starRank rank="<%=(double) reviewDTO.getRank()%>"
-								width="105" />
-
-							<label style="font-size: 12px;"><%=reviewDTO.getRegDate()%></label>
-						</div>
-						<div class="w3-container">
-							<p style="margin-top: 5px;">
-								<%=reviewDTO.getContent()%>
-							</p>
+								<div class="w3-rest">
+									<textarea rows="3" style="width: 100%; resize: none"
+										onkeydown="whenInputReview()" name="content" id="content"></textarea>
+								</div>
+								<input type="text" id="bbb" name="rank" />
+								<input type="text" name="shop_No" value="<%=no %>" />
+							</form>
 						</div>
 					</div>
-					<%
+
+					<script>
+						function whenInputReview() {
+							var leng = document.getElementById("content").value.length;
+							console.log("leng=" + leng);
+							var star = document.getElementById("bbb").value;
+							console.log("star=" + star);
+							
+							if (leng > 5) {
+								document.getElementById("reviewWriteBtn").disabled = false;
+							} else {
+								document.getElementById("reviewWriteBtn").disabled = true;
+							}
+
 						}
-					%>
+					</script>
 
+					<!-- 반복의 시작 -->
+					<c:forEach items="${ review_list }" var="review_dto">
+						<div class="w3-row w3-section">
+							<div class="w3-col" style="margin-left: 2%;">
+								<label>******</label><br>
+								<customtag:starRank rank="${review_dto.rank+0.0001}" width="105" />
 
+								<label style="font-size: 12px;">${ review_dto.regDate}</label>
+							</div>
+							<div class="w3-container">
+								<p style="margin-top: 5px;">${ review_dto.content}</p>
+							</div>
+						</div>
+					</c:forEach>
+					<!-- 반복의 끝 -->
 
 				</div>
 				<!-- tab 3 end------------------------------------------------ -->
@@ -377,9 +389,6 @@
 		</div>
 
 	</div>
-
-
-
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
