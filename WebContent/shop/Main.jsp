@@ -207,7 +207,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
 		}
 	
 	//-------------------------------------------------
-   var max_no2=0;                    	
+   var max_no2=$(":input:hidden[name=max_no]").val();                   	
    var max_no= $(":input:hidden[name=max_no]").val();
 	 
    $(function(){	

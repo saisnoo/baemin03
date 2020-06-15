@@ -159,14 +159,14 @@ function myFunction() {
 
 $("#shopOpen").click(function(){
 	console.log("shopopen이 눌러졌다");
-	var shop_no=<%=shopdto.getNo()%>;
+	var shopNo=<%=shopdto.getNo()%>;
 	var shopstatus=<%=shopdto.getShopStatus()%>;
 	$.ajax({
 		type : "post",
 		url : "ShopOpenPro.jsp",
 		//data : JSON.stringify(reply),
 		data : {
-			shop_no:shop_no,
+			shopNo:shopNo,
 			shopstatus:shopstatus
 			},
 		async : false,
@@ -188,14 +188,14 @@ $("#shopOpen").click(function(){
 });
 	$("#magam").click(function(){
 		console.log("shopmagam이 눌러졌다");
-		var shop_no=<%=shopdto.getNo()%>;
+		var shopNo=<%=shopdto.getNo()%>;
 		var shopstatus=<%=shopdto.getShopStatus()%>;
 		$.ajax({
 			type : "post",
 			url : "ShopOpenPro.jsp",
 			//data : JSON.stringify(reply),
 			data : {
-				shop_no:shop_no,
+				shopNo:shopNo,
 				shopstatus:shopstatus
 				},
 			async : false,
