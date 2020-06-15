@@ -60,6 +60,8 @@
 	System.out.println();
 	System.out.println("result=" + result);
 	System.out.println();
+	
+	cartmgr.emptyCart();
 
-	response.sendRedirect("Main.jsp");
+	response.sendRedirect("OrderDone.jsp");
 %>

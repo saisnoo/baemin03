@@ -59,5 +59,9 @@ public class CartMgr {
 	public void deleteCart(int menu_No) {
 		cartTable.remove(menu_No);
 	}
+	
+	public void emptyCart(){
+		cartTable.clear();
+	}
 
 }
