@@ -138,9 +138,12 @@ if(session.getAttribute("id")==null){	//id가 없을때
 
 </style>	
 <script>
+var max_no2=0;                   	
+var max_no= 0;
 	window.onload = function() {
 		refresh();
 		countcount();
+		
 	}
 
 	function refresh() {
@@ -207,8 +210,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
 		}
 	
 	//-------------------------------------------------
-   var max_no2=$(":input:hidden[name=max_no]").val();                   	
-   var max_no= $(":input:hidden[name=max_no]").val();
+   
 	 
    $(function(){	
    	function reload(){
@@ -233,6 +235,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
    });
    
    var audio = new Audio();
+   var audio_start = 0;
    audio.src = "./baeminAlarm.mp3";
    
    function reload2(){
@@ -254,8 +257,10 @@ if(session.getAttribute("id")==null){	//id가 없을때
 				max_no2=result;
 				if(max_no!=max_no2){
 					max_no=max_no2;
+					
 				$("#tab1").load("NewOrderList.jsp");
-				audio.play();
+				if(audio_start!=0){audio.play();}
+				audio_start++;
 				}
 			},
 			error : function(xhr,status,error){
@@ -270,7 +275,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
 <body>
 
 <input type="hidden" name="max_no" value="<%=max_no %>">
-<input type="hidden" name="max_no2" value="0">
+<input type="hidden" name="max_no2" value="<%=max_no %>">
 	<!-- 내용 -->
 	<!-- 배달 주문 처리하는 메인 페이지-->
 
