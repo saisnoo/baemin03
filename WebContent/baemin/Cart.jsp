@@ -112,11 +112,13 @@
 	<script>
 		window.onload = function() {
 			loadCartContent();
+			setTimeout(loadCartContent, 300);
 		}
 
 		function comfirmOrder() {
 			console.log("주문 완료");
-			location.href = "OrderPro.jsp";
+			//location.href = "OrderPro.jsp";
+			document.getElementById("commentInputModal").style.display = 'block';
 		}
 
 		function back2shop() {
@@ -140,13 +142,20 @@
 			}, 200)
 		}
 	</script>
-	
-	<div class="w3-modal w3-border">
-	aaa
-	
-	
+
+	<div id="commentInputModal" class="w3-modal w3-border">
+		<div class="w3-modal-content">
+			<div class="w3-container">
+				<form action="OrderPro.jsp" method="post">
+					<input type="text" name="comment" id="comment" class="w3-input" />
+					<input type="submit" id="go2OrderPro" class="w3-input"
+						value="진짜주문하자" />
+
+				</form>
+			</div>
+		</div>
 	</div>
-	
+
 
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
