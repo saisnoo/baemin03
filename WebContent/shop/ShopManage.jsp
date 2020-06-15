@@ -46,11 +46,8 @@ if(<%=shopdto.getShopStatus()==1%>){
 });
 </script>   
    
-<<<<<<< HEAD
 <div id="tabtab2" class="w3-cyan tabcontent2">
-=======
-<div id="tabtab2" class="w3-baemint tabcontent2">
->>>>>>> master
+
        
                        <div class="container">
   <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
@@ -72,12 +69,7 @@ if(<%=shopdto.getShopStatus()==1%>){
                        </button>
                         
                     </div> --%>
-                    
-<<<<<<< HEAD
 <div class="w3-container searchmenu" style="width:100%;height:70%;float:right;">
-=======
-<div class="w3-container w3-text-black searchmenu" style="width:100%;height:70%;float:right;">
->>>>>>> master
 <select style="width:25%;height:38px;float:left" id="selectval">
 <option value="0">메뉴이름</option>
 <option value="1">메뉴카테고리</option>
