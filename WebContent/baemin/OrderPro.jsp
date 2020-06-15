@@ -19,6 +19,8 @@
 
 	List<Order_MenuDTO> list = Ht2List.ht2List(cartmgr.getCartList());
 
+	String comment = request.getParameter("comment");
+
 	System.out.println("list.size()");
 	System.out.println(list.size());
 
@@ -46,7 +48,7 @@
 	dto.setName(memberdto.getName());
 	dto.setAddr(memberdto.getAddr());
 	dto.setAddr2(memberdto.getAddr2());
-	dto.setComment("");
+	dto.setComment(comment);
 	dto.setMember_No(memberdto.getNo());
 	dto.setShop_NO(shopNo);
 
@@ -60,8 +62,8 @@
 	System.out.println();
 	System.out.println("result=" + result);
 	System.out.println();
-	
+
 	cartmgr.emptyCart();
 
-	response.sendRedirect("OrderDone.jsp");
+	response.sendRedirect("Main.jsp");
 %>
