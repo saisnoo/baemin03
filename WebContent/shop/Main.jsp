@@ -123,6 +123,18 @@ if(session.getAttribute("id")==null){	//id가 없을때
 	height: 370px;
 	overflow-y: auto;
 }
+#reviewCell td{
+	vertical-align:middle;
+	text-align:center;
+	padding: 0px 5px 0px 5px;
+}
+#reviewCell #reviewHead td{
+	height:30px;
+	vertical-align:middle;
+	text-align:center;
+}
+
+
 
 </style>	
 <script>
@@ -147,7 +159,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
 			document.getElementById("defaultOpen2").click();
 			}, 1500);
 	}
-<<<<<<< HEAD
+
 	
 	function noticeload(no){
 		$("#noticeList").load("NoticeView.jsp?no=" + no);
@@ -155,10 +167,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
 	function noticeload2(){
 		$("#noticeList").load("NoticeList.jsp");
 	}
-	
-	
-=======
->>>>>>> master
+
 	// 스크립트
 
 	function tab2Refresh(){
@@ -290,11 +299,8 @@ if(session.getAttribute("id")==null){	//id가 없을때
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-<<<<<<< HEAD
 						<button onclick="openTab2(event, 'tabtab2')"id="defaultOpen2"
-=======
-						<button onclick="openTab2(event, 'tabtab2')" id="defaultOpen2"
->>>>>>> master
+
 							class="w3-button w3-block w3-black w3-border">
 							<h4>메뉴관리</h4>
 						</button>
@@ -306,11 +312,8 @@ if(session.getAttribute("id")==null){	//id가 없을때
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-<<<<<<< HEAD
 						<button onclick="openTab2(event, 'tabtab4');"
-=======
-						<button onclick="openTab2(event, 'tabtab3');"
->>>>>>> master
+
 							class="w3-button w3-block w3-black w3-border">
 							<h4>공지사항</h4>
 						</button>
@@ -381,11 +384,8 @@ if(session.getAttribute("id")==null){	//id가 없을때
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- 매장관리탭 -->
-<<<<<<< HEAD
-				<div id="SM">
-=======
+
 				<div id="SM" >
->>>>>>> master
 						<jsp:include page="ShopManage.jsp"/>	
 				</div>
 				<!-- 매장관리탭 끝 -->
@@ -395,14 +395,12 @@ if(session.getAttribute("id")==null){	//id가 없을때
 					
 					</div>
 				</div>
-<<<<<<< HEAD
 				<div id="tabtab4" class="w3-border tabcontent2">
 					<div id="noticeList">
 					<jsp:include page="NoticeList.jsp"/>
 					</div>
 				</div>
-=======
->>>>>>> master
+
 				
 				<!-- 리뷰탭 끝 -->
 
@@ -840,13 +838,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
  </script>
  
 <!-- 두번째 메뉴관리 -->
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> master
 <%
 }//else 메인 불러오기
 %>

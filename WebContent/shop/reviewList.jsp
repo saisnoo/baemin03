@@ -23,22 +23,11 @@
 <div class="w3-section">
 	<!-- 왼쪽 half -->
 	<div class="w3-half">
-		<!-- 평균별점 -->
-
-		<!-- 별표시 -->
-		<div></div>
-		<!-- 별표시 -->
-		<!-- 평균별점 -->
-
-
-
-
-
 		<table class="w3-table">
 			<tr>
 				<td colspan="2">
-					<div class="w3-panel w3-xlarge w3-baemint"
-						style="padding: 5px 0px 5px 5px;">평균별점</div>
+					<div class="w3-panel w3-xlarge w3-baemint" style="margin-top:0px;"
+						>평균별점</div>
 				</td>
 			</tr>
 			<tr>
@@ -61,40 +50,27 @@
 			</tr>
 
 		</table>
-
-
-
-
-
 	</div>
 	<!-- 왼쪽 half 끝 -->
 	<!-- 오른쪽 half -->
 	<div class="w3-half w3-padding">
-		<div class="w3-row">
-			<div
-				class="w3-panel w3-black w3-text-white w3-large w3-display-container">
-				<span class="w3-quarter">번호</span> <span class="w3-quarter">별점</span>
-				<span class="w3-quarter">등록일</span> <span class="w3-quarter">내용</span>
-			</div>
-		</div>
-		<div id="reviewCell">
-			<table class="w3-table-all w3-margin-bottom">
-				<tr>
-					<td></td>
+			<table id="reviewCell" class="w3-table">
+				<tr id="reviewHead" class="w3-baemint">
+					<td>회원번호</td>
+					<td>별점</td>
+					<td>등록일</td>
+					<td>내용</td>
 				</tr>
-
-
-
 				<%
-					for(int i=0;i<reviewList.size();i++){
-					ReviewDTO dto=reviewList.get(i);
-					System.out.println(dto.toString());
+					for (int i = 0; i < reviewList.size(); i++) {
+						ReviewDTO dto = reviewList.get(i);
+						System.out.println(dto.toString());
 				%>
-				<tr>
-					<td style="width: 10%"><%=dto.getMember_no()%></td>
-					<td style="width: 30%">
+				<tr style="border:1px solid black;">
+					<td style="width: 15%"><%=dto.getMember_no()%></td>
+					<td style="width: 25%">
 						<!-- 별점 이미지 --> <span width="100px"> <customtag:starRank
-								rank="<%=(double)dto.getRank()%>" width="100" />
+								rank="<%=(double) dto.getRank()%>" width="100" />
 					</span>
 					</td>
 					<!-- 별점 이미지 -->
@@ -105,7 +81,6 @@
 					}//for end
 				%>
 			</table>
-		</div>
 	</div>
 	<!-- 오른쪽 half -->
 </div>
