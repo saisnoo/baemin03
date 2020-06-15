@@ -20,6 +20,15 @@ System.out.println(shopNo);
 int NewOrderCount =orderList.size();
 for(int i=0;i<NewOrderCount;i++){
 	OrderListDTO dto =orderList.get(i);
+	int count=1;
+	StringTokenizer str=new StringTokenizer(dto.getMenu_String(),"/",true);
+	while(str.hasMoreTokens()){
+		String data=str.nextToken();
+		//System.out.println(data);
+		if(data.equals("/")){ count++;}
+		//System.out.println(count);
+		
+	}
 %>
 
 <!-- 접수대기 리스트 -->
@@ -58,7 +67,7 @@ for(int i=0;i<NewOrderCount;i++){
 			<div class="w3-rest w3-container">
 				<div class="w3-row">
 					<div class="w3-col">
-						<strong>[메뉴 4개]</strong> &nbsp;<%=dto.getName()%>
+						<strong>[메뉴 <%=count %>개]</strong> &nbsp;<%=dto.getName()%>
 					</div>
 					<div class="w3-col">주문번호: <%=dto.getNo() %></div>
 					<div class="w3-col">전화번호: <%=dto.getTel() %></div>
