@@ -1,3 +1,4 @@
+<%@page import="com.baemin.member.MemberDTO"%>
 <%@page import="com.baemin.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,13 +7,21 @@
 
 <%
 MemberDAO dao = MemberDAO.getInstance();
+MemberDTO dto = new MemberDTO();
 
+int no = Integer.parseInt(session.getAttribute("no")+"");
+String tel = request.getParameter("tel");
 String pw = request.getParameter("password");
-String pw2 = request.getParameter("password2");
 
-int no = Integer.parseInt(request.getParameter("no"));
+System.out.println("no :" + no);
+System.out.println("tel :" + tel);
+System.out.println("pw :" + pw);
 
-int c = dao.changePW(pw, no);
+dto.setNo(no);
+dto.setTel(tel);
+dto.setPw(pw);
+
+int c = dao.changeInfo(dto);
 
 if(c == 1){
 	%>

@@ -75,7 +75,7 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
-	<form method="post" action="/baemin03/WebContent/memberClient/UpdateClientPro.jsp">
+	<form method="post" action="UpdateClientPro.jsp">
 	<div class="sw-center" style="margin-top: 2%">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
@@ -100,7 +100,7 @@
 					  
 						  <p>
 						  	<label><b>전화번호</b></label>
-							  <input type="text" class="w3-input w3-border" value="<%=dto.getTel() %>">
+							  <input type="text" class="w3-input w3-border" name="tel" id="tel" value="<%=dto.getTel() %>">
 						  </p>
 					  
 						  <p>
