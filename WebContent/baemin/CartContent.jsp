@@ -31,6 +31,8 @@ System.out.println("------CartContent.jsp");
 		System.out.println("list.size()");
 		System.out.println(list.size());
 		
+		//int list_length = list.size();
+		
 		int totalPrice = 0;
 		
 		for(int i=0; i<list.size(); i++){
@@ -40,45 +42,60 @@ System.out.println("------CartContent.jsp");
 		}
 %>
 
+<p>&nbsp;</p>
+<p></p>
 <!-- 반복의 시작 -->
 <!-- 3 main content start here!!!----------------------------------------------------------- -->
-<c:forEach items="${list}" var="dto">
-	<div class="w3-section cartRow">
-		<div class="w3-row">
-			<div class="w3-col w3-right" style="width: 60px;">
-				<button type="button" class="w3-button"
-					onclick="deleteFromCart(this)">삭제</button>
+<c:if test="${list.size()<1}">
+
+장바구니가 비었구나
+
+</c:if>
+
+
+
+<!-- ------------------------------------------------------------------- -->
+<c:if test="${list.size()>=1}">
+	<c:forEach items="${list}" var="dto">
+		<div class="w3-section cartRow">
+			<div class="w3-row">
+				<div class="w3-col w3-right" style="width: 60px;">
+					<button type="button" class="w3-button"
+						onclick="deleteFromCart(this)">삭제</button>
+				</div>
+				<strong class="w3-rest w3-left" style="margin: 8px;">${dto.menu_Name }</strong>
 			</div>
-			<strong class="w3-rest w3-left" style="margin: 8px;">${dto.menu_Name }</strong>
-		</div>
-		<div class="w3-cyan" style="display: none;">${dto.menu_No }</div>
-		<div class="w3-left w3-margin-left w3-margin-right">
-			<div class="w3-small" style="color: #8C8C8C; text-align: justify;">기본3인분
-				들어있는 세트메뉴인데 아이들한테는 매울수도 있으니까 조심해서 먹이는게 좋을겁니다 경고했는데 맵다고 항의하면 니네집변기
-				막힌다 ㅋㅋ</div>
-		</div>
-		<div class="w3-row">
-			<div class="w3-col s6">
-				<span class="w3-left" style="margin-top: 12px; margin-left: 10px;">${dto.price }</span>
-				<span class="w3-left" style="margin-top: 12px; margin-left: 5px;">원</span>
+			<div class="w3-cyan" style="display: none;">${dto.menu_No }</div>
+			<div class="w3-left w3-margin-left w3-margin-right">
+				<div class="w3-small" style="color: #8C8C8C; text-align: justify;">기본3인분
+					들어있는 세트메뉴인데 아이들한테는 매울수도 있으니까 조심해서 먹이는게 좋을겁니다 경고했는데 맵다고 항의하면 니네집변기
+					막힌다 ㅋㅋ</div>
 			</div>
-			<div class="w3-col s6 w3-margin-bottom">
-				<div class="w3-bar w3-border w3-right"
-					style="margin-top: 5px; margin-right: 5px; width: 140px;">
-					<div class="w3-bar-item w3-button w3-left"
-						onclick="countMinus(this)">-</div>
-					<div class="w3-bar-item">${dto.count }</div>
-					<div class="w3-bar-item w3-button w3-right"
-						onclick="countPlus(this)">+</div>
+			<div class="w3-row">
+				<div class="w3-col s6">
+					<span class="w3-left" style="margin-top: 12px; margin-left: 10px;">${dto.price }</span>
+					<span class="w3-left" style="margin-top: 12px; margin-left: 5px;">원</span>
+				</div>
+				<div class="w3-col s6 w3-margin-bottom">
+					<div class="w3-bar w3-border w3-right"
+						style="margin-top: 5px; margin-right: 5px; width: 140px;">
+						<div class="w3-bar-item w3-button w3-left"
+							onclick="countMinus(this)">-</div>
+						<div class="w3-bar-item">${dto.count }</div>
+						<div class="w3-bar-item w3-button w3-right"
+							onclick="countPlus(this)">+</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</c:forEach>
-<!-- 3 main content start here!!!----------------------------------------------------------- -->
-<!-- 반복의 끝 -->
-<div id="cart_shop_no"><%=cart_shop_no%></div>
-<div id="cart_total"><%=totalPrice%></div>
+	</c:forEach>
+	<!-- 3 main content start here!!!----------------------------------------------------------- -->
+	<!-- 반복의 끝 -->
+	<div id="cart_shop_no"><%=cart_shop_no%></div>
+	<div id="cart_total"><%=totalPrice%></div>
+</c:if>
+
+
 
 <script>
 	function countMinus(e) {
@@ -117,7 +134,7 @@ System.out.println("------CartContent.jsp");
 	}
 	function deleteFromCart(e) {
 		console.log("****** delete *******");
-		var a2 = e.parentNode.parentNode.parentNode.parentNode.children[0].children[1].innerText;
+		var a2 = e.parentNode.parentNode.parentNode.children[1].innerText;
 		console.log(a2);
 
 		var data = {

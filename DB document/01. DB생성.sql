@@ -1,8 +1,8 @@
 drop database  baemindb;
-
 create database baemindb;
-
 use baemindb;
+
+
 
 
 
@@ -49,7 +49,7 @@ CREATE TABLE notice
   PRIMARY KEY (no)
 );
 
-CREATE TABLE Order_cancel
+CREATE TABLE order_cancel
 (
   no           INT         NOT NULL AUTO_INCREMENT,
   whyCancel    VARCHAR(60) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE Order_cancel
   PRIMARY KEY (no)
 );
 
-ALTER TABLE Order_cancel
+ALTER TABLE order_cancel
   ADD CONSTRAINT UQ_orderlist_no UNIQUE (orderlist_no);
 
 CREATE TABLE order_menu
@@ -133,8 +133,8 @@ ALTER TABLE orderlist
     FOREIGN KEY (shop_no)
     REFERENCES shop (no);
 
-ALTER TABLE Order_cancel
-  ADD CONSTRAINT FK_orderlist_TO_Order_cancel
+ALTER TABLE order_cancel
+  ADD CONSTRAINT FK_orderlist_TO_order_cancel
     FOREIGN KEY (orderlist_no)
     REFERENCES orderlist (no);
 
@@ -159,6 +159,7 @@ ALTER TABLE order_menu
     REFERENCES menu (no);
 
       
+      
 
 insert into member (id, pw, name, tel, addr, addr2, regdate, grade, memberX, memberY)
 values ('admin','admin','관리자', '010-1234-1234' ,'서울 구로구 구로동 589-7','구로역 3번 승강장','2000-01-01'
@@ -177,7 +178,7 @@ desc orderlist;
 desc notice;
 desc review;
 desc order_menu;
-desc Order_cancel;
+desc order_cancel;
 
 show tables;
 ;
