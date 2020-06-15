@@ -33,7 +33,7 @@
 <!-- CDN - jquery 3.4.1 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
+
 <style>
 * {
 	margin: 0px;
@@ -42,7 +42,7 @@
 
 #buttonbar {
 	position: fixed;
-	bottom: 87px;
+	bottom: 90px;
 }
 </style>
 <script>
@@ -56,7 +56,15 @@
 		String cart_shop_no_ = cart_shop_no_ob + "";
 		cart_shop_no_ = cart_shop_no_.trim();
 		System.out.println("cart_shop_no_=" + cart_shop_no_);
-		int cart_shop_no = Integer.parseInt(cart_shop_no_);
+		int cart_shop_no = -1;
+
+		if (cart_shop_no_ob == null) {
+			CartMgr cart = new CartMgr();
+			session.setAttribute("cart", cart);
+			session.setAttribute("cart_shop_no", -1);
+		} else {
+			cart_shop_no = Integer.parseInt(cart_shop_no_);
+		}
 	%>
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -83,17 +91,19 @@
 	<!--  buttonbar position fix-->
 	<div id="buttonbar" class="w3-row w3-center" style="width: 100%;">
 		<div class="w3-row-padding sw-container-500">
-			<div class="w3-col s6">
-				<button class="w3-button w3-baemint w3-block" type="button"
-					onclick="comfirmOrder()">
-					<span id="totalPrice">---</span> <span>원 결제</span>
-				</button>
-			</div>
-			<div class="w3-col s6">
-				<button class="w3-button w3-baemint w3-block" type="button"
-					onclick="back2shop()">+ 더 주문하기</button>
-				<input type="hidden" id="shop_no" value="" />
-			</div>
+			<c:if test="${cart.getCartList().size()>0}">
+				<div class="w3-col s6">
+					<button class="w3-button w3-baemint w3-block w3-card" type="button"
+						onclick="comfirmOrder()">
+						<span id="totalPrice">---</span> <span>원 결제</span>
+					</button>
+				</div>
+				<div class="w3-col s6">
+					<button class="w3-button w3-baemint w3-block w3-card" type="button"
+						onclick="back2shop()">+ 더 주문하기</button>
+					<input type="hidden" id="shop_no" value="" />
+				</div>
+			</c:if>
 		</div>
 	</div>
 	<!--  buttonbar position fix-->
@@ -106,11 +116,18 @@
 
 		function comfirmOrder() {
 			console.log("주문 완료");
-			locatioin.href = "";
+			location.href = "OrderPro.jsp";
 		}
+
 		function back2shop() {
 			var shop_No = document.getElementById("shop_no").value;
-			location.href = "ShopPage.jsp?shopNo=" + shop_No;
+
+			if (shop_No.trim().length < 1) {
+				location.href = "Main.jsp";
+			} else {
+				location.href = "ShopPage.jsp?shopNo=" + shop_No;
+			}
+
 		}
 
 		function loadCartContent() {
@@ -123,6 +140,13 @@
 			}, 200)
 		}
 	</script>
+	
+	<div class="w3-modal w3-border">
+	aaa
+	
+	
+	</div>
+	
 
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
