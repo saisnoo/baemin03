@@ -39,15 +39,32 @@
 </style>
 <script>
 	// 스크립트
+	function pwCheck() {
+		var pw = document.modalForm.pw.value;
+		var pwc = document.modalForm.pwc.value;
+		if (pw == pwc && pw.length > 3) {
+			console.log("비밀번호 일치");
+			document.getElementById("btn").disabled = false;
+			pwCk = 1;
+		} else {
+			console.log("비밀번호 틀림");
+			document.getElementById("btn").disabled = true;
+			pwCk = 0;
+		}
+	} //  pwCheck() end
+
+	function rePwCheck() {
+		document.getElementById("btn").disabled = true;
+	}
 </script>
 </head>
 <body>
 	<!-- 내용 -->
 	<%
-		Object memberNo_ob = session.getAttribute("memberNo");
-		int memberNo = Integer.parseInt(memberNo_ob + "");
+		Object no_ob = session.getAttribute("no");
+		int no = Integer.parseInt(no_ob + "");
 		MemberDAO dao = MemberDAO.getInstance();
-		MemberDTO dto = dao.getDTO(memberNo);
+		MemberDTO dto = dao.getDTO(no);
 	%>
 
 
@@ -102,7 +119,7 @@
 
 					</table>
 
-					<p>
+					<div class="w3-center">
 						<!-- 변경창을 이용할때는 모달을 이용하자 -->
 						<script>
 							function modalOn() {
@@ -115,8 +132,9 @@
 						<button onClick="modalOn()" class="w3-button w3-black">개인정보
 							수정</button>
 						<!-- ------------------------------------------------------------------------------------------------ -->
-						<button onClick="location = '../util/logout.jsp'" class="w3-button w3-black">로그아웃</button>
-					</p>
+						<button onClick="location = '../util/logout.jsp'"
+							class="w3-button w3-black">로그아웃</button>
+					</div>
 				</div>
 				<!-- ------------------------------------------------------------------------------------------------ -->
 				<!-- 모달창 시작 -->
@@ -124,27 +142,27 @@
 					<div class="w3-modal-content">
 						<div class="w3-container">
 							<span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
-							<form method="post" action="UpdateClientPro.jsp">
+							<form method="post" action="UpdateClientPro.jsp" name="modalForm">
+								<input type="hidden" value="<%=dto.getNo()%>" name="no">
 								<p>비밀번호 변경</p>
 								<p>
-									<input type="password" name="pw">
+									<input type="password" name="pw" id="pw"
+										onkeydown="rePwCheck()">
 								</p>
 
 								<!-- Ajax 처리로 비밀번호 체크 -->
 								<p>비밀번호 확인</p>
 								<p>
-									<input type="password" name="pwc">
+									<input type="password" name="pwc" id="pwc"
+										onkeydown="rePwCheck()">
 								</p>
-
-								<!-- 기존의 전화번호를 value값에 집어넣어 수정하고싶으면 하고 아니면 원래값 그대로 넘기기 -->
-								<p>전화번호 변경</p>
 								<p>
-									<input type="text" name="tel" value="010-5252-8282">
+									<input type="button" value="비밀번호 확인" onClick="pwCheck()">
 								</p>
-
 								<p>
-									<input class="w3-button w3-border" type="submit" value="변경">
-									<input class="w3-button w3-border" type="button" value="취소"
+									<input class="w3-button w3-border" type="submit" value="변경"
+										disabled="disabled" name="btn" id="btn"> <input
+										class="w3-button w3-border" type="button" value="취소"
 										onclick="modalOff()">
 								</p>
 							</form>

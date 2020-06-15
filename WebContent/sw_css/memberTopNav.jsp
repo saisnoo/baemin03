@@ -14,7 +14,6 @@ System.out.println("------memberTopNav.jsp");
 			<h3 style="font-family: baemin_font;">배다른 민족</h3>
 		</div>
 	</div>
-
 	<script>
 		/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 	</script>
@@ -28,12 +27,12 @@ System.out.println("------memberTopNav.jsp");
 				<i class="material-icons" style="font-size: 48px; color: #45c1bf;">home</i>
 			</a>
 			<!-- ----------------------------------------------------------------------------------------------------------- -->
-			<a href="../notice/NoticeList.jsp" class="w3-button w3-col s3 w3-center"
+			<a href="../baemin/NoticeList.jsp" class="w3-button w3-col s3 w3-center"
 				style="padding: 0px;"> <!-- ----------------------------------------------------------------------------------------------------------- -->
 				<i class="material-icons" style="font-size: 48px; color: #45c1bf;">notifications</i>
 			</a>
 			<!-- ----------------------------------------------------------------------------------------------------------- -->
-			<a href="#" class="w3-button w3-col s3 w3-center"
+			<a href="../baemin/Cart.jsp" class="w3-button w3-col s3 w3-center"
 				style="padding: 0px;"> <!-- ----------------------------------------------------------------------------------------------------------- -->
 				<i class="material-icons" style="font-size: 48px; color: #45c1bf;">local_grocery_store</i>
 			</a>

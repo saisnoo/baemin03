@@ -1,6 +1,5 @@
 package com.baemin.orderlist;
 
-import java.util.Hashtable;
 import java.util.List;
 
 import lombok.*;
@@ -29,8 +28,10 @@ public class OrderListDTO {
     // NOT IN DB ------------------------------
     /// JOIN
     private String whyCancel;
+    private String tel;
     /// JOIN
-    private List<Order_MenuDTO> menuList; // ????
+    private String menu_String; // 리스트 불러올때
+    private List<Order_MenuDTO> menuList; // 주문 넣을때 전달 객체
 
     //// 삭제 예정
     private String orderList; // 메뉴, 수량

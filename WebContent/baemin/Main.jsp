@@ -3,8 +3,6 @@
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.sql.*"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -14,21 +12,21 @@
 <%
 	Object grade_ob = session.getAttribute("grade");
 	Object id_ob = session.getAttribute("id");
-	Object memberNo_ob = session.getAttribute("memberNo");
+	Object no_ob = session.getAttribute("no");
 	//Object memberX_ob = session.getAttribute("memberX");
 	//Object memberY_ob = session.getAttribute("memberY");
 
 	System.out.println(grade_ob);
 	System.out.println(id_ob);
-	System.out.println(memberNo_ob);
+	System.out.println(no_ob);
 	if (grade_ob == null) {
 		grade_ob = 0;
 	}
 	if (id_ob == null) {
 		id_ob = 0;
 	}
-	if (memberNo_ob == null) {
-		memberNo_ob = 0;
+	if (no_ob == null) {
+		no_ob = 0;
 	}
 
 	int grade = Integer.parseInt(grade_ob + "");
@@ -40,7 +38,7 @@
 		response.sendRedirect("../index.html");
 	}
 
-	int memberNo = Integer.parseInt(memberNo_ob + "");
+	int memberNo = Integer.parseInt(no_ob + "");
 	//double memberX = Double.parseDouble(memberNo_ob + "");
 	//double memberY = Double.parseDouble(memberNo_ob + "");
 
@@ -133,7 +131,7 @@ img {
                     1. div로 표기. 버튼 따로없이 주소를 클릭하면 모달창 열기??
                 </div>
             </div> -->
-			<div class="w3-row w3-center">
+			<div class="w3-row w3-center" style="margin-top: 3%">
 				<button type="button" class="w3-button w3-white w3-center"
 					onclick="jusoModalOpen()">
 					<!-- ------------------------------------------------------- -->
@@ -150,7 +148,7 @@ img {
                 <img src="../source//ad_sample.jpg" alt="" width="100%">
             </div>
         </div> -->
-		<div class="sw-container-500">
+		<div class="sw-container-500" style="margin-top: 1%">
 			<div class="w3-content" style="width: 100%">
 				<!-- ------------------------------------------------------------ -->
 				<img class="w3-round mySlides" src="../source/img/1.png"
@@ -216,7 +214,7 @@ img {
 		<!-- shopList.jsp?category=hansik -->
 
 		<!--단락 구분선-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-->
-		<div class="sw-container-500 w3-section">
+		<div class="sw-container-500" style="margin-top: 2%;">
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
 				<div class="w3-row">
