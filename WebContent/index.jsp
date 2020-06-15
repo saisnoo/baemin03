@@ -95,7 +95,7 @@
 						<!-- ------------------------------------------------------------- -->
 						<label class="w3-left w3-section">비밀번호</label>
 						<!-- ------------------------------------------------------------- -->
-						<input type="password" class="w3-input" name="pw" id="pw" />
+						<input type="password" class="w3-input" style="font-family: Arial, Helvetica, sans-serif;" name="pw" id="pw" />
 						<!-- ------------------------------------------------------------- -->
 
 						<div class="grid w3-section">
@@ -116,7 +116,7 @@
 						<!-- ------------------------------------------------------------- -->
 						<label class="w3-left w3-section">비밀번호</label>
 						<!-- ------------------------------------------------------------- -->
-						<input type="password" class="w3-input" name="shopPW" id="shopPW" />
+						<input type="password" class="w3-input" style="font-family: Arial, Helvetica, sans-serif;" name="shopPW" id="shopPW" />
 						<!-- ------------------------------------------------------------- -->
 						<div class="grid w3-section">
 							<button class="w3-button w3-baemint w3-border" type="submit">

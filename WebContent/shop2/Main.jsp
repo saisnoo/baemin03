@@ -111,6 +111,13 @@ $(function(){
 //	})
 
 });
+function tabtab2load(){
+	$("#SM").load("ShopManage.jsp");
+	openTab2(event, 'tabtab2');
+	setTimeout(function() {
+		document.getElementById("defaultOpen2").click();
+		}, 1500);
+}
 </script>
 </head>
 <body>
@@ -206,7 +213,7 @@ $(function(){
         
 			 <!-- 글번호입력 -->
 			    <label for="writer">예상시간</label><hr>
-			 <input type="text" id="order_no1" name="order_no1">
+			 <input type="hidden" id="order_no1" name="order_no1">
 			 <input type="radio" class="estimated_time" name="estimated_time" value="30" >30분<br>
 			 <input type="radio" class="estimated_time" name="estimated_time" value="40" >40분<br>
 			 <input type="radio" class="estimated_time" name="estimated_time" value="50" >50분<br>
@@ -239,7 +246,7 @@ $(function(){
     </div>
   </div>
 
-<div class="modal fade jumoon_calcel" id="jumoon_calcel" role="dialog">
+<div class="modal fade jumoon_cancel" id="jumoon_cancel" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content 시작-->
@@ -252,7 +259,7 @@ $(function(){
         
 			 <!-- 글번호입력 -->
 			    <label for="writer">취소사유</label><br>
-			    <input type="text" id="order_no2" name="order_no2">
+			    <input type="hidden" id="order_no2" name="order_no2">
 			    
 			    <input type="radio" class="whyCancel" name="whyCancel" value="재료소진으로 인한 취소" checked>재료소진으로 인한 취소<br>
 			    <input type="radio" class="whyCancel" name="whyCancel" value="마감시간으로 인한 취소">마감시간으로 인한 취소<br>
@@ -281,7 +288,7 @@ $(function(){
     </div>
   </div>
 
-<div class="modal fade jumoon_calcel" id="jumoon_calcel1" role="dialog">
+<div class="modal fade jumoon_calcel" id="jumoon_cancel1" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content 시작-->
@@ -384,6 +391,7 @@ $(function(){
                     document.getElementById("defaultOpen").click();
                     document.getElementById("jumoontab").click();
                     
+                    
                     $(function(){
                     	
                     	
@@ -408,12 +416,12 @@ $(function(){
                     	setTimeout(load,3000);
                     	setTimeout(load,4000);
                     });
-                    
+                    var audio = new Audio();
+                    audio.src = "./baeminAlarm.mp3";
                     
                     function reload2(){
                     	
                     	console.log("reload2 = > "+max_no+"/"+max_no2);
-                    	
                     	var data={
                     			max_no:max_no
                     	}
@@ -433,6 +441,7 @@ $(function(){
                 				if(max_no!=max_no2){
                 					max_no=max_no2;
                 				$("#tab1").load("NewOrderList.jsp");
+                				audio.play();
                 				}
 
                 			},
@@ -471,8 +480,8 @@ $(function(){
 			 <div class="form-group">
 			 <!-- 글번호입력 -->
 			    <label for="writer">주문 메뉴 표시 유무</label><br>
-			    <input type="text" id="no5" name="no5" value="">
-			    <input type="text" id="status5" name="status5" value="">
+			    <input type="hidden" id="no5" name="no5" value="">
+			    <input type="hidden" id="status5" name="status5" value="">
 			    
 			    <span id="status_check">123</span>
 			    </div>
@@ -521,7 +530,7 @@ $(function(){
         <div class="modal-footer">
 			<div class="btn-group">
 			  <button class="btn btn-default" id="add_menu_btn">추가</button>
-			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle3" >닫기</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle4" >닫기</button>
 			</div> 
         </div>
       </div>
@@ -529,8 +538,9 @@ $(function(){
     </div>
   </div>
   <script>
-
-
+   $("#take_cancle4").click(function(){
+	   tabtab2load();
+  }); 
 	// 스크립트
 	//데이터를 변경하는 함수 -update	
 	 $("#add_menu_btn").click(function(){
@@ -573,7 +583,7 @@ $(function(){
 	 $("#take_overbtn").click(function(){
 
 		 var estimated_time = $(":input:radio[name=estimated_time]:checked").val();
-		 var orderList_No = $(":input:text[name=order_no1]").val();
+		 var orderList_No = $(":input:hidden[name=order_no1]").val();
 			console.log("주문접수버튼 클릭 ="+orderList_No);
 		 
 		 var data={
@@ -612,7 +622,7 @@ $(function(){
 	 $("#jumoon_calcel_btn").click(function(){
 		 console.log("주문접수버튼 클릭 ="+orderList_No);
 		 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
-		 var orderList_No = $(":input:text[name=order_no2]").val();
+		 var orderList_No = $(":input:hidden[name=order_no2]").val();
 		 var data={
 				//항목이름: 값(변수)
 			//	no:no,
@@ -645,7 +655,7 @@ $(function(){
 	}); 
 	 $("#jumoon_calcel_btn2").click(function(){
 		 var whyCancel = $(":input:radio[name=whyCancel]:checked").val();
-		 var orderList_No = $(":input:text[name=order_no2]").val();
+		 var orderList_No = $(":input:hidden[name=order_no2]").val();
 		 
 			console.log("이유=" + whyCancel);
 			
@@ -681,8 +691,8 @@ $(function(){
 			});//ajax의 끝*/
 		});
 	 $("#check_viewmenu_btn").click(function(){
-		 var menu_no = $(":input:text[name=no5]").val();
-		 var menu_status = $(":input:text[name=status5]").val();
+		 var menu_no = $(":input:hidden[name=no5]").val();
+		 var menu_status = $(":input:hidden[name=status5]").val();
 		 console.log("check_viewmenu2 = "+menu_no + "/"+ menu_status);
 			var data={
 					menuno:menu_no,
@@ -699,8 +709,7 @@ $(function(){
 				contentType : "application/x-www-form-urlencoded; charset=utf-8",
 				success : function(result,status,xhr){
 					console.log("menuStatus 변경 완료");
-					 $("#SM").load("ShopManage.jsp");
-					openTab2(event, 'tabtab2'); 
+					tabtab2load();
 					
 					
 				},
