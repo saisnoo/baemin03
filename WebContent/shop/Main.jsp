@@ -4,10 +4,12 @@
 <%@ page import="java.sql.*"%>
 
 <%
+	Object no=session.getAttribute("no");
+	int shopNo=Integer.parseInt(no+""); 
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-
-	session.setAttribute("shopNo", "2");
+	
+	//session.setAttribute("shopNo", "2");
 	//int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
 %>
 <!DOCTYPE html>
@@ -117,7 +119,7 @@
 	overflow-y: auto;
 }
 
-</style>
+</style>	
 <script>
 	window.onload = function() {
 		refresh();
@@ -125,25 +127,25 @@
 	}
 
 	function refresh() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=2");
-		$("#tab2").load("BaesongList.jsp?shopNo=2");
-		$("#tab3").load("EndList.jsp?shopNo=2");
-		$("#tab4").load("CancelList.jsp?shopNo=2");
+		$("#tab1").load("NewOrderList.jsp");
+		$("#tab2").load("BaesongList.jsp");
+		$("#tab3").load("EndList.jsp");
+		$("#tab4").load("CancelList.jsp");
 		setTimeout(countcount, 1000);
 	}
 	// 스크립트
 
 	function tab2Refresh(){
 		console.log("배달중 새로고침");
-		$("#tab2").load("BaesongList.jsp?shopNo=2");	
+		$("#tab2").load("BaesongList.jsp?shopNo="+shopNo);	
 	}
 	function tab3Refresh(){
 		console.log("완료 새로고침");
-		$("#tab3").load("EndList.jsp?shopNo=2");
+		$("#tab3").load("EndList.jsp?shopNo="+shopNo);
 	}
 	function tab4Refresh(){
 		console.log("취소 새로고침");
-		$("#tab4").load("CancelList.jsp?shopNo=2");
+		$("#tab4").load("CancelList.jsp?shopNo=2"+shopNo);
 	}
 
 	function countcount() {

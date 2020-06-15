@@ -9,12 +9,12 @@
 request.setCharacterEncoding("UTF-8");
 System.out.println("------CancelList.jsp");
 
-int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
-//int shopNo=Integer.parseInt(request.getParameter("shopNo"));
+Object no=session.getAttribute("no");
+int shopNo=Integer.parseInt(no+""); 
 System.out.println(request.getParameter("shopNo"));
 OrderListDAO dao= OrderListDAO.getInstance();
 
-List<OrderListDTO> orderList = dao.getListOfCancel(shopNo, 1);
+List<OrderListDTO> orderList = dao.getListOfCancel(shopNo);
 System.out.println(shopNo);
 int CancelListCount =orderList.size();
 for(int i=0;i<CancelListCount;i++){
