@@ -672,7 +672,7 @@ public class OrderListDAO {
 	} // getListFinishToday_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getListOfCancel_start-----------------------------------------------------------------------------
-	public List<OrderListDTO> getListOfCancel(int shopNo, int INTERVAL_HOUR) throws Exception {
+	public List<OrderListDTO> getListOfCancel(int shopNo) throws Exception {
 		// 출력객체
 		List<OrderListDTO> list = new ArrayList<>();
 		System.out.println("---OrderListDAO getListOfCancel");
