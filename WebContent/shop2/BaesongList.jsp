@@ -41,7 +41,7 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-col w3-container w3-right"
 				style="width: 200px; padding: 0px;">
 			
-				<button class="w3-button w3-yellow h100"  onClick="cancelBtn2(this)" data-toggle="modal" data-target="#jumoon_calcel1">주문취소</button>
+				<button class="w3-button w3-yellow h100"  onClick="cancelBtn2(this)" data-toggle="modal" data-target="#jumoon_cancel1">주문취소</button>
 				<div class="count2" style="display:none;"><%=orderListDTO.getStatus() %></div>
 			</div>
 			<!-- 오른쪽-->
