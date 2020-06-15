@@ -113,6 +113,10 @@
 					  <div class="w3-section w3-center">
 	   				  	<input class="w3-button w3-border w3-baemint" type="button" value="회원정보수정" onclick="location='UpdateClientForm.jsp'">
 					  	<input class="w3-button w3-border w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
+					  <!-- ------------------------------------------------------------------------------------------------ -->
+						<button onClick="location = '../util/logout.jsp'"
+							class="w3-button w3-border w3-baemint">로그아웃</button>
+					  
 					  </div>
 				</div>
 				<!-- main content end----------------------------------------------------------------------- -->
