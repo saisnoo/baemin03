@@ -12,15 +12,17 @@ System.out.println("------ShopManage.jsp");
 
 
 Object no=session.getAttribute("no");
-int shop_No=Integer.parseInt(no+""); 
-System.out.println("shopmanage = " + shop_No);
+
+
+int shopNo=Integer.parseInt(no+""); 
+System.out.println("shopmanage = " + shopNo);
 MenuDAO menudao=MenuDAO.getInstance();
 ShopDAO shopdao=ShopDAO.getInstance();
-ShopDTO shopdto=shopdao.getShopInfo(shop_No);
-List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shop_No); 
+ShopDTO shopdto=shopdao.getShopInfo(shopNo);
+List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shopNo); 
 
 
-ShopDTO shopdto2=shopdao.getShopInfo(shop_No);
+ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 
 
 
@@ -45,12 +47,13 @@ if(<%=shopdto.getShopStatus()==1%>){
 </script>   
    
 <div id="tabtab2" class="w3-cyan tabcontent2">
+
        
                        <div class="container">
   <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
   <button type="button" class="btn btn-success" id="magam">영업종료</button>
   <button type="button" class="btn btn-success" id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
-  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">
+  <input type="hidden" name="addmenu_no" value="<%=shopNo %>">
 </div>     
 
 
@@ -58,11 +61,14 @@ if(<%=shopdto.getShopStatus()==1%>){
                     
                         
                        <button id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가
+<<<<<<< HEAD
   <input type="hidden" name="addmenu_no" value="<%=shop_No %>">                     
+=======
+  <input type="hidden" name="addmenu_no" value="<%=shopNo %>">                     
+>>>>>>> master
                        </button>
                         
                     </div> --%>
-                    
 <div class="w3-container searchmenu" style="width:100%;height:70%;float:right;">
 <select style="width:25%;height:38px;float:left" id="selectval">
 <option value="0">메뉴이름</option>
@@ -153,14 +159,14 @@ function myFunction() {
 
 $("#shopOpen").click(function(){
 	console.log("shopopen이 눌러졌다");
-	var shop_no=<%=shopdto.getNo()%>;
+	var shopNo=<%=shopdto.getNo()%>;
 	var shopstatus=<%=shopdto.getShopStatus()%>;
 	$.ajax({
 		type : "post",
 		url : "ShopOpenPro.jsp",
 		//data : JSON.stringify(reply),
 		data : {
-			shop_no:shop_no,
+			shopNo:shopNo,
 			shopstatus:shopstatus
 			},
 		async : false,
@@ -182,14 +188,14 @@ $("#shopOpen").click(function(){
 });
 	$("#magam").click(function(){
 		console.log("shopmagam이 눌러졌다");
-		var shop_no=<%=shopdto.getNo()%>;
+		var shopNo=<%=shopdto.getNo()%>;
 		var shopstatus=<%=shopdto.getShopStatus()%>;
 		$.ajax({
 			type : "post",
 			url : "ShopOpenPro.jsp",
 			//data : JSON.stringify(reply),
 			data : {
-				shop_no:shop_no,
+				shopNo:shopNo,
 				shopstatus:shopstatus
 				},
 			async : false,

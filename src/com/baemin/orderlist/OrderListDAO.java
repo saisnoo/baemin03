@@ -168,6 +168,7 @@ public class OrderListDAO {
 			// TODO: 트랜잭션 트랜잭션 트랜잭션 트랜잭션 트랜잭션 트랜잭션
 			// 1+2
 			con = getConnection();
+			con.setAutoCommit(false);
 			// ---------------------------------------------------------------------------------------
 			// 3. sql
 			System.out.println("-- 1 -- ");
@@ -212,10 +213,12 @@ public class OrderListDAO {
 			// 5. 실행
 			result2 = stmt.executeUpdate(sql);
 			// ---------------------------------------------------------------------------------------
+			con.commit();
 		} catch (Exception e) {
 			e.getStackTrace();
 			throw new Exception(" insertOrder() 예외  ");
 		} finally {
+			con.setAutoCommit(true);
 			close(con, pstmt, rs);
 		} // finally end
 		System.out.println(result1 + ":" + result2);
@@ -672,7 +675,7 @@ public class OrderListDAO {
 	} // getListFinishToday_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getListOfCancel_start-----------------------------------------------------------------------------
-	public List<OrderListDTO> getListOfCancel(int shopNo, int INTERVAL_HOUR) throws Exception {
+	public List<OrderListDTO> getListOfCancel(int shopNo) throws Exception {
 		// 출력객체
 		List<OrderListDTO> list = new ArrayList<>();
 		System.out.println("---OrderListDAO getListOfCancel");

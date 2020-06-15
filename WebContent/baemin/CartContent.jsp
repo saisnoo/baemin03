@@ -162,32 +162,4 @@ System.out.println("------CartContent.jsp");
 			}
 		});
 	}
-
-	//ajax로 댓글 보내는 함수
-	function reply_write() {
-		// form data >>  JSON 
-		var data = {
-			// 항목이름 : 값(변수)
-			no : $("#no").val(),
-			content : $("#content").val(),
-			writer : $("#writer").val(),
-			pw : $("#pw").val()
-		}
-		console.log(reply.no);
-		// ajax +  post >> to SERVER
-		$.ajax({
-			type : "post",
-			url : "replyWrite.jsp",
-			//dateType : "json",
-			//contentType : "application/json; charset=utf-8",
-			data : data,
-			success : function(result, status, xhr) {
-				console.log("result");
-				console.log(result);
-			},
-			error : function(data) {
-				console.log(data);
-			}
-		});
-	}
 </script>

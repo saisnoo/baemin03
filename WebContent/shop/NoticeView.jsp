@@ -87,7 +87,7 @@
   &nbsp;
     
   <p align="center">          
-    <button class="w3-button w3-blue" onclick="location='NoticeList.jsp'">글목록</button>   
+    <button class="w3-button w3-blue" onclick="noticeload2()">글목록</button>   
   </p>
   
 </div>

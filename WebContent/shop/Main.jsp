@@ -1,14 +1,21 @@
+<%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 
 <%
+
+if(session.getAttribute("id")==null){	//id가 없을때
+	response.sendRedirect("../index.jsp");
+}else{//id가 있을때
+
+	Object no=session.getAttribute("no");
+	int shopNo=Integer.parseInt(no+""); 
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-
-	session.setAttribute("shopNo", "2");
-	//int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
+	OrderListDAO orderlistdao=OrderListDAO.getInstance();
+	int max_no = orderlistdao.getMaxNoOfShop_No(shopNo);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,33 +119,71 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
-</style>
+#reviewCell {
+	height: 370px;
+	overflow-y: auto;
+}
+#reviewCell td{
+	vertical-align:middle;
+	text-align:center;
+	padding: 0px 5px 0px 5px;
+}
+#reviewCell #reviewHead td{
+	height:30px;
+	vertical-align:middle;
+	text-align:center;
+}
+
+
+
+</style>	
 <script>
+var max_no2=0;                   	
+var max_no= 0;
 	window.onload = function() {
 		refresh();
 		countcount();
+		
 	}
 
 	function refresh() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=2");
-		$("#tab2").load("BaesongList.jsp?shopNo=2");
-		$("#tab3").load("EndList.jsp?shopNo=2");
-		$("#tab4").load("CancelList.jsp?shopNo=2");
+		$("#tab1").load("NewOrderList.jsp");
+		$("#tab2").load("BaesongList.jsp");
+		$("#tab3").load("EndList.jsp");
+		$("#tab4").load("CancelList.jsp");
+		$("#SM").load("ShopManage.jsp");
 		setTimeout(countcount, 1000);
 	}
+	
+	function tabtab2load(){
+		$("#SM").load("ShopManage.jsp");
+		openTab2(event, 'tabtab2');
+		setTimeout(function() {
+			document.getElementById("defaultOpen2").click();
+			}, 1500);
+	}
+
+	
+	function noticeload(no){
+		$("#noticeList").load("NoticeView.jsp?no=" + no);
+	}
+	function noticeload2(){
+		$("#noticeList").load("NoticeList.jsp");
+	}
+
 	// 스크립트
 
 	function tab2Refresh(){
 		console.log("배달중 새로고침");
-		$("#tab2").load("BaesongList.jsp?shopNo=2");	
+		$("#tab2").load("BaesongList.jsp");	
 	}
 	function tab3Refresh(){
 		console.log("완료 새로고침");
-		$("#tab3").load("EndList.jsp?shopNo=2");
+		$("#tab3").load("EndList.jsp");
 	}
 	function tab4Refresh(){
 		console.log("취소 새로고침");
-		$("#tab4").load("CancelList.jsp?shopNo=2");
+		$("#tab4").load("CancelList.jsp");
 	}
 
 	function countcount() {
@@ -155,7 +200,7 @@
 	}
 	
 	function reviewLoad(){
-		$("#reviewList").load("reviewList.jsp?shopNo=2");
+		$("#reviewList").load("reviewList.jsp");
 		setTimeout(countSum,1000);
 	}
 		
@@ -163,10 +208,74 @@
 			var r=document.getElementById("EndListCount").innerText;
 			document.getElementById("countSum").innerText=r;
 		}
+	
+	//-------------------------------------------------
+   
+	 
+   $(function(){	
+   	function reload(){
+   		reload2();
+   		//$("#tab1").load("NewOrderList.jsp");
+   		//$("#tab2").load("BaesongList.jsp");
+   		//$("#tab3").load("EndList.jsp");
+   		countcount();
+   		//$("#tabtab2").load("ShopManage.jsp");
+    		//document.getElementById("defaultOpen").click();
+   		//document.getElementById("jumoontab").click(); 
+   	}
+   	function load(){
+   		$("#tab1").load("NewOrderList.jsp");
+   	}
+   	
+   	setInterval(reload, 1000);
+   	setTimeout(load,1000);
+   	setTimeout(load,2000);
+   	setTimeout(load,3000);
+   	setTimeout(load,4000);
+   });
+   
+   var audio = new Audio();
+   var audio_start = 0;
+   audio.src = "./baeminAlarm.mp3";
+   
+   function reload2(){
+   	console.log("reload2 = > "+max_no+"/"+max_no2);
+   	var data={
+   			max_no:max_no
+   	}
+   	$.ajax({
+			type : "post",
+			url : "Reload.jsp",
+			//data : JSON.stringify(reply),
+			 data : data, 
+			async : false,
+			//리턴 되어 돌려 받는 데이터의 타입
+			dataType: "json" ,
+			//기본값이므로 삭제 가능
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			success : function(result){
+				max_no2=result;
+				if(max_no!=max_no2){
+					max_no=max_no2;
+					
+				$("#tab1").load("NewOrderList.jsp");
+				if(audio_start!=0){audio.play();}
+				audio_start++;
+				}
+			},
+			error : function(xhr,status,error){
+				console.log("주문리스트창 리로드 실패");
+			}//error의 끝
+		});//ajax의 끝
+   }
 
+//-------------------------------------------------
 </script>
 </head>
 <body>
+
+<input type="hidden" name="max_no" value="<%=max_no %>">
+<input type="hidden" name="max_no2" value="<%=max_no %>">
 	<!-- 내용 -->
 	<!-- 배달 주문 처리하는 메인 페이지-->
 
@@ -189,21 +298,29 @@
 				</div>
 				<div class="w3-row w3-gray">
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab1')" id="defaultOpen2"
+						<button onclick="openTab2(event, 'tabtab1')" id="defaultOpen"
 							class="w3-button w3-block w3-baemint w3-border">
 							<h4>주문접수</h4>
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab2')"
+						<button onclick="openTab2(event, 'tabtab2')"id="defaultOpen2"
+
 							class="w3-button w3-block w3-black w3-border">
-							<h4>매장관리</h4>
+							<h4>메뉴관리</h4>
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
 						<button onclick="openTab2(event, 'tabtab3');reviewLoad();"
 							class="w3-button w3-block w3-black w3-border">
 							<h4>리뷰</h4>
+						</button>
+					</div>
+					<div class="w3-quarter tablink2">
+						<button onclick="openTab2(event, 'tabtab4');"
+
+							class="w3-button w3-block w3-black w3-border">
+							<h4>공지사항</h4>
 						</button>
 					</div>
 				</div>
@@ -213,7 +330,7 @@
 				<div id="tabtab1" class="w3-row w3-gray tabcontent2" onClick="refresh()">
 					<div class="tab w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
-							onclick="openTab(event, 'tab1')" id="defaultOpen">
+							onclick="openTab(event, 'tab1')" id="jumoontab">
 							접수대기<br /> <strong id="NewOrderCount"></strong>
 						</button>
 						<button class="w3-button w3-block w3-border tablinks"
@@ -272,131 +389,9 @@
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- 매장관리탭 -->
-				<div id="tabtab2" class="w3-border tabcontent2">
 
-					<div class="w3-row-padding w3-section">
-						<!-- 왼쪽 half -->
-						<div class="w3-half">
-							<div class="w3-row">
-								<div class="w3-col w3-left" style="width: 150px">
-									<h2>메뉴구성</h2>
-								</div>
-							</div>
-							<input class="w3-input w3-border w3-round-large" type="text"
-								placeholder="Search for names.." id="myInput"
-								onkeyup="myFunction()" style="width: 70%;">
-							<div id="menucell">
-								<table class="w3-table-all w3-margin-top" id="myTable">
-									<tr>
-										<th style="width: 20%;">이름</th>
-										<th style="width: 20%;">가격</th>
-										<th style="width: 20%;">카테고리</th>
-										<th style="width: 40%;">설명</th>
-									</tr>
-									<tr>
-										<td>김치찌개</td>
-										<td>8000</td>
-										<td>주메뉴</td>
-										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
-									</tr>
-									<tr>
-										<td>된장찌개</td>
-										<td>4000</td>
-										<td>부메뉴</td>
-										<td>두부두부두부두부두부두부두부</td>
-									</tr>
-									<tr>
-										<td>고기</td>
-										<td>11000</td>
-										<td>부메뉴</td>
-										<td>고기고기고기고기고기고기고기고기</td>
-									</tr>
-									<tr>
-										<td>동그랑땡</td>
-										<td>8000</td>
-										<td>부메뉴</td>
-										<td>두부두부두부두부두부두부두부</td>
-									</tr>
-									<tr>
-										<td>김치찌개</td>
-										<td>8000</td>
-										<td>주메뉴</td>
-										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
-									</tr>
-									<tr>
-										<td>된장찌개</td>
-										<td>4000</td>
-										<td>부메뉴</td>
-										<td>두부두부두부두부두부두부두부</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-
-						<script>
-							function myFunction() {
-								var input, filter, table, tr, td, i;
-								input = document.getElementById("myInput");
-								filter = input.value.toUpperCase();
-								table = document.getElementById("myTable");
-								tr = table.getElementsByTagName("tr");
-								for (i = 0; i < tr.length; i++) {
-									td = tr[i].getElementsByTagName("td")[0];
-									if (td) {
-										txtValue = td.textContent
-												|| td.innerText;
-										if (txtValue.toUpperCase().indexOf(
-												filter) > -1) {
-											tr[i].style.display = "";
-										} else {
-											tr[i].style.display = "none";
-										}
-									}
-								}
-							}
-						</script>
-
-						<!-- 오른쪽 half -->
-						<div class="w3-half">
-							<!-- 메뉴입력창 -->
-							<div class="w3-row">
-								<table class="w3-table" border="1">
-									<tr>
-										<th>목록</th>
-										<th>입력창</th>
-									</tr>
-									<tr>
-										<td>가격</td>
-										<td><input type="text"></td>
-									</tr>
-									<tr>
-										<td>이름</td>
-										<td><input type="text"></td>
-									</tr>
-									<tr>
-										<td>카테고리</td>
-										<td><input type="text"></td>
-									</tr>
-									<tr>
-										<td colspan="2">설명</td>
-									</tr>
-									<tr>
-										<td colspan="2"><textarea name="menuEx" id="menuEx"
-												class="w3-input w3-border" rows="10"></textarea></td>
-									</tr>
-								</table>
-							</div>
-							<!-- 메뉴입력창  끝-->
-							<!-- 메뉴입력 추가버튼-->
-							<div class="w3-row w3-right">
-								<input type="button" value="메뉴추가"> <input type="reset"
-									value="지우기">
-							</div>
-							<!-- 메뉴입력 버튼 끝 -->
-						</div>
-						<!-- 오른쪽 half 끝 -->
-					</div>
-
+				<div id="SM" >
+						<jsp:include page="ShopManage.jsp"/>	
 				</div>
 				<!-- 매장관리탭 끝 -->
 				<!-- 리뷰탭 -->
@@ -405,6 +400,13 @@
 					
 					</div>
 				</div>
+				<div id="tabtab4" class="w3-border tabcontent2">
+					<div id="noticeList">
+					<jsp:include page="NoticeList.jsp"/>
+					</div>
+				</div>
+
+				
 				<!-- 리뷰탭 끝 -->
 
 				<script>
@@ -449,7 +451,7 @@
 
 					// Get the element with id="defaultOpen" and click on it
 					document.getElementById("defaultOpen").click();
-					document.getElementById("defaultOpen2").click();
+					document.getElementById("jumoontab").click();
 				</script>
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
@@ -569,14 +571,14 @@
 						success : function(result) {
 							console.log(result);
 							if (result == 1) {
-								alert("조리시작");
 								document.getElementById("jumunReady").style.display = "none";
 							} else {
 								alert("배달 실패X");
 							}//else
 						}//success
 					});//ajax
-			refresh(); // 새로고침
+			setTimeout(refresh,1200); // 새로고침
+			setTimeout(refresh,1200); // 새로고침
 		}//CookOk
 	</script>
 
@@ -669,9 +671,185 @@
 							}//else
 						}//success
 					});//ajax
-			refresh();
+					setTimeout(refresh,1200); // 새로고침
+					setTimeout(refresh,1200); // 새로고침
 		}
 	</script>
+	<script>
+	function baesongBtn(e) {
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(jumunNo);
+		document.getElementById("jumunNo").innerText = jumunNo;
+		$.ajax({
+			type: "post",
+			url : "BaesongSelect.jsp",
+			data: {"no" : jumunNo},
+			success : function(result){
+				console.log(result);
+				if(result==1){
+				}else{
+					alert("배달안됨")
+				}//else
+			}//success
+		});//ajax
+		refresh(); // 새로고침
+	}//CookBtn
+	</script>
+
+ <!-- 두번째 메뉴관리 -->
+   <div class="modal fade check_viewmenu" id="check_viewmenu" role="dialog">
+   <div class="modal-dialog">
+   
+     <!-- Modal content 시작-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h3 class="modal-title">주문 메뉴 표시 유무</h3>
+       </div>
+       <div class="modal-body">
+			 <div class="form-group">
+			 <!-- 글번호입력 -->
+			    <label for="writer">주문 메뉴 표시 유무</label><br>
+			    <input type="hidden" id="no5" name="no5" value="">
+			    <input type="hidden" id="status5" name="status5" value="">
+			    
+			    <span id="status_check">123</span>
+			    </div>
+       </div>
+       <div class="modal-footer">
+			<div class="btn-group">
+			  <button class="btn btn-default" id="check_viewmenu_btn" data-dismiss="modal">변경</button>
+			</div> 
+       </div>
+     </div>
+     <!-- Modal content end-->
+   </div>
+ </div>
+   <div class="modal fade add_menu" id="add_menu" role="dialog">
+   <div class="modal-dialog">
+   
+     <!-- Modal content 시작-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h3 class="modal-title">주문 메뉴 표시 유무</h3>
+       </div>
+       <div class="modal-body">
+			 <div class="form-group">
+			 <!-- 글번호입력 -->
+			    <table>
+			    <tr>
+			    <td>메뉴이름</td>
+			    <td><input type="text" name="menuName"></td>
+			    </tr>
+			    <tr>
+			    <td>메뉴카테고리</td>
+			    <td><input type="text" name="menuCategory"></td>
+			    </tr>
+			    <tr>
+			    <td>메뉴설명</td>
+			    <td><input type="text" name="menuEx"></td>
+			    </tr>
+			    <tr>
+			    <td>메뉴가격</td>
+			    <td><input type="text" name="menuPrice"></td>
+			    </tr>
+			    </table>
+			    </div>
+       </div>
+       <div class="modal-footer">
+			<div class="btn-group">
+			  <button class="btn btn-default" id="add_menu_btn">추가</button>
+			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle4" >닫기</button>
+			</div> 
+       </div>
+     </div>
+     <!-- Modal content end-->
+   </div>
+ </div>
+ <script>
+  $("#take_cancle4").click(function(){
+	   tabtab2load();
+ }); 
+	// 스크립트
+	//데이터를 변경하는 함수 -update	
+	 $("#add_menu_btn").click(function(){
+		 var menuName = $(":input:text[name=menuName]").val();
+		 var menuCategory = $(":input:text[name=menuCategory]").val();
+		 var menuEx = $(":input:text[name=menuEx]").val();
+		 var menuPrice = $(":input:text[name=menuPrice]").val();
+		 console.log(menuName+"/"+menuCategory+"/"+menuEx+"/"+menuPrice);
+		 var data={
+				 menuName:menuName,
+				 menuCategory:menuCategory,
+				 menuEx:menuEx,
+				 menuPrice:menuPrice
+			}
+		 $.ajax({
+				type : "post",
+				url : "AddMenuPro.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				async : false,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("메뉴추가 완료");
+					$(":input:text[name=menuName]").val("");
+					 $(":input:text[name=menuCategory]").val("");
+					 $(":input:text[name=menuEx]").val("");
+					 $(":input:text[name=menuPrice]").val("");
+				},
+				error : function(xhr,status,error){
+					console.log("메뉴추가 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+	 });
+	 
+	
+	 $("#check_viewmenu_btn").click(function(){
+		 var menu_no = $(":input:hidden[name=no5]").val();
+		 var menu_status = $(":input:hidden[name=status5]").val();
+		 console.log("check_viewmenu2 = "+menu_no + "/"+ menu_status);
+			var data={
+					menuno:menu_no,
+					menustatus:menu_status
+			}
+			$.ajax({
+				type : "post",
+				url : "MenuStatusPro.jsp",
+				//data : JSON.stringify(reply),
+				data : data,
+				//리턴 되어 돌려 받는 데이터의 타입
+				dataType: "text" ,
+				//기본값이므로 삭제 가능
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				success : function(result,status,xhr){
+					console.log("menuStatus 변경 완료");
+					tabtab2load();
+					
+					
+				},
+				error : function(xhr,status,error){
+					console.log("menuStatus 변경 실패");
+				}//error의 끝
+				
+			});//ajax의 끝*/
+		});	
+   
+ </script>
+ 
+<!-- 두번째 메뉴관리 -->
+
+<%
+}//else 메인 불러오기
+%>
+
+
+
 
 </body>
 </html>
