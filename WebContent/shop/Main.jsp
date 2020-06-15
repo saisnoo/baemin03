@@ -123,6 +123,16 @@ if(session.getAttribute("id")==null){	//id가 없을때
 	height: 370px;
 	overflow-y: auto;
 }
+#reviewCell td{
+	vertical-align:middle;
+	text-align:center;
+	padding: 0px 5px 0px 5px;
+}
+#reviewCell #reviewHead td{
+	height:30px;
+	vertical-align:middle;
+	text-align:center;
+}
 
 </style>	
 <script>
