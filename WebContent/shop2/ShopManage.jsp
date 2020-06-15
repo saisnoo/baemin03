@@ -30,13 +30,13 @@ ShopDTO shopdto2=shopdao.getShopInfo(shop_No);
 $(function(){
 if(<%=shopdto.getShopStatus()==0%>){
 	$("#magam").hide();
-	$("#addmenu").hide();
+	$("#addmenu").show();
 	$("#shopOpen").show();
 	
 }
 if(<%=shopdto.getShopStatus()==1%>){
 	$("#magam").show();
-	$("#addmenu").show();
+	$("#addmenu").hide();
 	$("#shopOpen").hide();
 }
 
@@ -49,19 +49,21 @@ if(<%=shopdto.getShopStatus()==1%>){
                        <div class="container">
   <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
   <button type="button" class="btn btn-success" id="magam">영업종료</button>
+  <button type="button" class="btn btn-success" id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
+  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">
 </div>     
 
 
-                    <div class="w3-border" style="width:30%;float:left">
+                    <%-- <div class="w3-border" style="width:30%;float:left">
                     
                         
-                       <button onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가
-                       <input type="hidden" name="addmenu_no" value="<%=shop_No %>">
+                       <button id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가
+  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">                     
                        </button>
                         
-                    </div>
+                    </div> --%>
                     
-<div class="w3-container searchmenu" style="width:70%;float:right;">
+<div class="w3-container searchmenu" style="width:100%;float:right;">
 <select style="width:25%;height:38px;float:left" id="selectval">
 <option value="0">메뉴이름</option>
 <option value="1">메뉴카테고리</option>
@@ -165,7 +167,9 @@ $("#shopOpen").click(function(){
 		contentType : "application/x-www-form-urlencoded; charset=utf-8",
 		success : function(result,status,xhr){
 			console.log(" 오픈 완료");
-	$("#SM").load("ShopManage.jsp");
+		//$("#SM").load("ShopManage.jsp");
+			tabtab2load();
+		
 		},
 		error : function(xhr,status,error){
 			console.log("오픈 실패");
@@ -192,7 +196,9 @@ $("#shopOpen").click(function(){
 			contentType : "application/x-www-form-urlencoded; charset=utf-8",
 			success : function(result,status,xhr){
 				console.log("마감 완료");
-		$("#SM").load("ShopManage.jsp");
+				//$("#SM").load("ShopManage.jsp");
+				tabtab2load();
+			
 			},
 			error : function(xhr,status,error){
 				console.log("마감 실패");

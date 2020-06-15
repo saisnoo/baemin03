@@ -18,16 +18,24 @@ List<OrderListDTO> list = orderListDAO.getListOfCurrent(shop_No);
 
 %>
 <script type="text/javascript">
-console.log("------NewOrderList.jsp----" +list.size());
+console.log("------NewOrderList.jsp----");
 </script>
 <%
 
 for(int i=0;i<list.size();i++)
 {	
 	OrderListDTO orderListDTO=list.get(i);
-	/* String k="";
-	k=Order2Cart.toMsg(orderListDTO.getOrderList());
-	System.out.println(k); */
+	int count=1;
+	StringTokenizer str=new StringTokenizer(orderListDTO.getMenu_String(),"/",true);
+	while(str.hasMoreTokens()){
+		String data=str.nextToken();
+		System.out.println(data);
+		if(data.equals("/")){ count++;}
+		System.out.println(count);
+		
+	}
+		System.out.println("메뉴하나 완료");
+	
 	%>
 	    <!-- load  new order  -->
 	<div class="w3-section">
@@ -66,7 +74,8 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-rest w3-container">
 				<div class="w3-row">
 					<div class="w3-col">
-						<strong>[메뉴 4개]</strong> &nbsp;<%=orderListDTO.getName()%>
+						<strong>[메뉴 <%=count %>개]</strong> &nbsp;<%=orderListDTO.getName()%><br>
+						주문번호 :<%=orderListDTO.getNo() %>
 					</div>
 					<div class="w3-col">전화번호 :<%=orderListDTO.getTel() %></div>
 				</div>
