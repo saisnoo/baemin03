@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- CDN - Font Awesome 4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CDN OFFLINE- sw_topNav.css -->
+    <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
+    <!-- CDN - W3CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- CDN - Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+
+    <!-- responsive template by SW ----------------------------------------------------------- -->
+    <!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
+    <div class="sw-topnav-margin">&nbsp;</div>
+
+    <!-- CONTENT ------------------------------------------------------------------------------------ -->
+    <div class="sw-center">
+
+        <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
+        <div class="sw-container-500">
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <div class="w3-card w3-center w3-margin w3-round-large">
+                <div class="w3-row">
+                    <div class="w3-col w3-right" style="width: 60px;">
+                        <button type="button" class="w3-button" onclick="deleteFromCart(this)">삭제</button>
+                    </div>
+                    <strong class="w3-rest w3-left" style="margin: 8px;">후르츠베리 쿠페 5인분 세트메뉴</strong>
+                </div>
+
+                <div class="w3-left w3-margin-left w3-margin-right">
+                    <div class="w3-small" style="color: #8C8C8C;text-align: justify;"> 기본3인분 들어있는 세트메뉴인데 아이들한테는 매울수도 있으니까 조심해서 먹이는게
+                        좋을겁니다
+                        경고했는데 맵다고 항의하면
+                        니네집변기
+                        막힌다 ㅋㅋ
+                    </div>
+                </div>
+                <div class="w3-row">
+                    <div class="w3-col s6">
+                        <span class="w3-left" style="margin-top: 12px; margin-left: 10px;">7500</span>
+                        <span class="w3-left" style="margin-top: 12px; margin-left: 5px;">원</span>
+                    </div>
+                    <div class="w3-col s6 w3-margin-bottom">
+                        <div class="w3-bar w3-border w3-right" style="margin-top: 5px; margin-right: 5px;">
+                            <div class="w3-button" onclick="countMinus(this)">-</div>
+                            <span style="width: 38px;"><strong>3</strong></span>
+                            <div class="w3-button" onclick="countPlus(this)">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <div class="w3-card w3-center w3-margin w3-round-large">
+                <div class="w3-row">
+                    <div class="w3-col w3-right" style="width: 60px;">
+                        <button type="button" class="w3-button" onclick="deleteFromCart(this)">삭제</button>
+                    </div>
+                    <strong class="w3-rest w3-left" style="margin: 8px;">후르츠베리 쿠페 5인분 세트메뉴</strong>
+                </div>
+
+                <div class="w3-left w3-margin-left w3-margin-right">
+                    <div class="w3-small" style="color: #8C8C8C;text-align: justify;"> 기본3인분 들어있는 세트메뉴인데 아이들한테는 매울수도 있으니까 조심해서 먹이는게
+                        좋을겁니다
+                        경고했는데 맵다고 항의하면
+                        니네집변기
+                        막힌다 ㅋㅋ
+                    </div>
+                </div>
+                <div class="w3-row">
+                    <div class="w3-col s6">
+                        <span class="w3-left" style="margin-top: 12px; margin-left: 10px;">7500</span>
+                        <span class="w3-left" style="margin-top: 12px; margin-left: 5px;">원</span>
+                    </div>
+                    <div class="w3-col s6 w3-margin-bottom">
+                        <div class="w3-bar w3-border w3-right" style="margin-top: 5px; margin-right: 5px;">
+                            <div class="w3-button" onclick="countMinus(this)">-</div>
+                            <span style="width: 38px;"><strong>3</strong></span>
+                            <div class="w3-button" onclick="countPlus(this)">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+
+
+
+
+
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+
+
+
+
+
+            <div class="w3-row-padding w3-center">
+                <span id="totalPrice">---</span> <span>원</span>
+
+
+            </div>
+
+            <div class="w3-section w3-center">
+                <button class="w3-button w3-baemint" type="button" onclick="back2shop()">샵으로 돌아가기</button>
+                <input type="hidden" id="shop_No" value="-" />
+            </div>
+
+
+
+        </div>
+
+
+        <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
+        <div class="sw-container-500">
+            <!-- 3 main content start here!!!----------------------------------------------------------- -->
+            <div class="w3-card-4 w3-center w3-margin w3-round-large"></div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>

@@ -202,14 +202,24 @@
 						function addCart(e) {
 							console.log(e);
 							var select_no = e.parentNode.parentNode.children[1].children[0].value;
-							console.log(select_no);
+							console.log("select_no " + select_no);
+							var menu_Name = e.parentNode.parentNode.children[1].children[1].innerText;
+							console.log("menu_Name " + menu_Name);
+							var menuEx = e.parentNode.parentNode.children[1].children[2].innerText;
+							console.log("menuEx " + menuEx);
+							var price = e.parentNode.parentNode.children[1].children[3].innerText;
+							console.log("price " + price);
 							var shop_No = document.getElementById("shop_No").innerText;
+							console.log("shop_No " + shop_No);
 
 							// form data >>  JSON 
 							var data = {
 								// 항목이름 : 값(변수)
 								shop_No : shop_No,
 								menu_No : select_no,
+								menu_Name : menu_Name,
+								price : price,
+								menuEx : menuEx,
 								count : 1
 							}
 							// ajax +  post >> to SERVER
