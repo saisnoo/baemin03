@@ -5,7 +5,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ MyPageClient.jsp --- ");
+	System.out.println("------ UpdateClientForm.jsp --- ");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>MyPageClient.jsp</title>
+<title>UpdateClientForm.jsp</title>
 
 
 <!-- CDN - Google Icons -->
@@ -39,23 +39,25 @@
 } */
 </style>
 <script>
-	function pwCheck() {
-		var pw = document.modalForm.pw.value;
-		var pwc = document.modalForm.pwc.value;
-		if (pw == pwc && pw.length > 3) {
-			console.log("비밀번호 일치");
-			document.getElementById("btn").disabled = false;
-			pwCk = 1;
-		} else {
-			console.log("비밀번호 틀림");
-			document.getElementById("btn").disabled = true;
-			pwCk = 0;
-		}
-	} //  pwCheck() end
-
-	function rePwCheck() {
-		document.getElementById("btn").disabled = true;
-	}
+	function checkIt(){
+		  if($("#password").val()==''){
+			  alert("비밀번호를 입력하세요");
+			  $("#password").focus();
+			  return false;
+		  }
+		  if($("#password2").val()==""){
+		  	  alert("비밀번호 확인을 입력하세요.");
+			  $("#password2").focus();
+			  return false;
+		  }
+			
+		  if($("#password").val() != $("#password2").val()){
+			  alert("비밀번호 확인을 잘못입력하였습니다.");
+			  $("#password").val('').focus();
+			  $("#password2").val('');
+			  return false;
+		  }
+	}//checkIt() end
 </script>
 </head>
 <body>
@@ -73,45 +75,50 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
+	<form method="post" action="/baemin03/WebContent/memberClient/UpdateClientPro.jsp">
 	<div class="sw-center" style="margin-top: 2%">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-		<div class="sw-container-400">
+		<div class="sw-container-500">
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
 
 				<!--사용자 마이 페이지-->
 				<div class="w3-container w3-card">
 					<div class="w3-section w3-center">
-					  <h2>회원정보</h2>
+					  <h2>회원정보수정</h2>
 					</div>
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>이름 :</b></label>
-						  <p><%=dto.getName() %></p>
-					  </div>
+						  <p>
+						  	<label><b>이름</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getName() %>">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>아이디 :</b></label>
-						  <p><%=dto.getId() %></p>
-					  </div>
+						  <p>
+						  	<label><b>아이디</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getId() %>">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>전화번호 :</b></label>
-						  <p><%=dto.getTel() %></p>
-					  </div>
+						  <p>
+						  	<label><b>전화번호</b></label>
+							  <input type="text" class="w3-input w3-border" value="<%=dto.getTel() %>">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>주소 :</b></label>
-						  <p><%=dto.getAddr() %></p>
-						  <p><%=dto.getAddr2() %></p>
-					  </div>
+						  <p>
+						  	<label><b>주소</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getAddr() %>">
+							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getAddr2() %>">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>가입일 :</b></label>
-						  <p><%=dto.getRegDate() %></p>
-					  </div>
+						  <p>
+						  	<label><b>비밀번호</b></label>
+							  <input type="password" class="w3-input w3-border" size="10" id="password" name="password">
+							  <input type="password" class="w3-input w3-border" size="10" id="password2" name="password2">
+						  </p>
+					  
+						  <input type="hidden" value="<%=dto.getRegDate() %>">
 					  <div class="w3-section w3-center">
-	   				  	<input class="w3-button w3-border w3-baemint" type="button" value="회원정보수정" onclick="location='UpdateClientForm.jsp'">
+	   				  	<input class="w3-button w3-border w3-baemint" type="submit" value="회원정보수정">
+	   				  	<input class="w3-button w3-border w3-baemint" type="reset" value="다시쓰기">
 					  	<input class="w3-button w3-border w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
 					  </div>
 				</div>
@@ -119,6 +126,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 	<!-- main content end----------------------------------------------------------------------- -->
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
@@ -127,6 +135,7 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 	<%-- 사이트 공통 부분 Include - topnav --%>
 	<jsp:include page="../sw_css/memberTopNav.jsp" />
+
 
 </body>
 </html>

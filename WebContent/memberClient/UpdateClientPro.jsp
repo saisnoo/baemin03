@@ -7,8 +7,8 @@
 <%
 MemberDAO dao = MemberDAO.getInstance();
 
-String pw = request.getParameter("pw");
-String pwc = request.getParameter("pwc");
+String pw = request.getParameter("password");
+String pw2 = request.getParameter("password2");
 
 int no = Integer.parseInt(request.getParameter("no"));
 
