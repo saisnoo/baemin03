@@ -49,7 +49,7 @@ public class MenuDAO {
         // 출력객체
         int result = -1;
         System.out.println("---MenuDAO updateStatus");
-        menuStatus = (menuStatus + 1) / 2; // 0을 1로, 1을 0으로
+        menuStatus = (menuStatus + 1) % 2; // 0을 1로, 1을 0으로
         try {
             // 1+2
             con = getConnection();
@@ -115,8 +115,8 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where (shop_no = ? AND menuStatus = 1)"
-                    + " order by menuName desc, menuCategory asc ";
+            String sql = "select * from menu where (shop_no = ? AND menuStatus = 1)"
+                    + " order by menuName asc, menuCategory asc ";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, menuShopNo);
@@ -154,8 +154,8 @@ public class MenuDAO {
             // 1+2
             con = getConnection();
             // 3. sql
-            String sql = "select * from member where shop_No = ? "
-                    + " order by menuName desc, menuCategory asc, menuStatus desc";
+            String sql = "select * from menu where shop_No = ? "
+                    + " order by menuName asc, menuCategory asc, menuStatus desc";
             // 4. 실행객체
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, menuShopNo);

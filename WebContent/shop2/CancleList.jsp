@@ -8,15 +8,15 @@
 <%
 //자바 구문
 request.setCharacterEncoding("UTF-8");
-System.out.println("------EndList.jsp");
+System.out.println("------CancleList.jsp");
 
 
 //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-Object no=session.getAttribute("no");
+	Object no=session.getAttribute("no");
 	 int shop_No=Integer.parseInt(no+""); 
 System.out.println(shop_No);
 OrderListDAO orderListDAO = OrderListDAO.getInstance();
-List<OrderListDTO> list = orderListDAO.getListDone(shop_No);
+List<OrderListDTO> list = orderListDAO.getListOfCancel(shop_No);
 %>
 <%
 
@@ -36,7 +36,7 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-col w3-container w3-left" style="width: 150px;">
 				<h1><big><strong><%=orderListDTO.getOrderDate()%></strong></big></h1>
 				<input type="hidden" value="<%=orderListDTO.getNo()%>">
-			<div class="count3" style="display:none;"><%=orderListDTO.getStatus() %></div>
+			<div class="count4" style="display:none;"><%=orderListDTO.getStatus() %></div>
 			</div>
 			<!-- 왼쪽 끝 -->
 
@@ -75,7 +75,7 @@ for(int i=0;i<list.size();i++)
 
 <script>
 	// 스크립트
-console.log("------EndList.jsp");
+console.log("------CancleList.jsp");
 	function jumunBtn(e) {
 		var a1 = e.parentNode.parentNode.children[0].children[0].value;
 	
