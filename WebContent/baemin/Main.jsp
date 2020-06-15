@@ -133,7 +133,7 @@ img {
             </div> -->
 			<div class="w3-row w3-center" style="margin-top: 3%">
 				<button type="button" class="w3-button w3-white w3-center"
-					onclick="jusoModalOpen()">
+					onclick="location.href = '../memberClient/AddrChangeForm.jsp';">
 					<!-- ------------------------------------------------------- -->
 					<span id="addr_result"> <%=dto.getAddr()%>
 					</span> &nbsp;<span id="addr2_result"> <%=dto.getAddr2()%>
