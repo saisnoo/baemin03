@@ -37,6 +37,11 @@
 
 	int result = dao.changeAddr(dto);
 
+	if (result == 1) {
+		session.setAttribute("memberX", memberX);
+		session.setAttribute("memberY", memberY);
+	}
+
 	System.out.println("result" + result);
 
 	response.sendRedirect("../baemin/Main.jsp");
