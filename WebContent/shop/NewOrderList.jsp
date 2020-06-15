@@ -86,24 +86,4 @@ for(int i=0;i<NewOrderCount;i++){
 <script>
 	// 스크립트
 
-	function baesongBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(jumunNo);
-		document.getElementById("jumunNo").innerText = jumunNo;
-		$.ajax({
-			type: "post",
-			url : "BaesongSelect.jsp",
-			data: {"no" : jumunNo},
-			success : function(result){
-				console.log(result);
-				if(result==1){
-					alert("배달시작");
-				}else{
-					alert("배달안됨")
-				}//else
-			}//success
-		});//ajax
-		refresh(); // 새로고침
-	}//CookBtn
-
 </script>
