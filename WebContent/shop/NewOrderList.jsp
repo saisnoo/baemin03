@@ -1,5 +1,3 @@
-<%@page import="com.baemin.orderlist.cart.Order2Cart"%>
-<%@page import="com.baemin.orderlist.cart.CartDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDTO"%>
 <%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,14 +9,13 @@
 request.setCharacterEncoding("UTF-8");
 System.out.println("------NewOrderList.jsp");
 
-int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
-//int shopNo=Integer.parseInt(request.getParameter("shopNo"));
+Object no=session.getAttribute("no");
+int shopNo=Integer.parseInt(no+""); 
 System.out.println(request.getParameter("shopNo"));
 OrderListDAO dao= OrderListDAO.getInstance();
 
 List<OrderListDTO> orderList = dao.getListOfCurrent(shopNo);
 System.out.println(shopNo);
-CartDTO cart = new CartDTO();
 
 int NewOrderCount =orderList.size();
 for(int i=0;i<NewOrderCount;i++){
@@ -88,25 +85,5 @@ for(int i=0;i<NewOrderCount;i++){
 
 <script>
 	// 스크립트
-
-	function baesongBtn(e) {
-		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
-		console.log(jumunNo);
-		document.getElementById("jumunNo").innerText = jumunNo;
-		$.ajax({
-			type: "post",
-			url : "BaesongSelect.jsp",
-			data: {"no" : jumunNo},
-			success : function(result){
-				console.log(result);
-				if(result==1){
-					alert("배달시작");
-				}else{
-					alert("배달안됨")
-				}//else
-			}//success
-		});//ajax
-		refresh(); // 새로고침
-	}//CookBtn
 
 </script>

@@ -29,12 +29,12 @@ for(int i=0;i<list.size();i++)
 	StringTokenizer str=new StringTokenizer(orderListDTO.getMenu_String(),"/",true);
 	while(str.hasMoreTokens()){
 		String data=str.nextToken();
-		System.out.println(data);
+		//System.out.println(data);
 		if(data.equals("/")){ count++;}
-		System.out.println(count);
+		//System.out.println(count);
 		
 	}
-		System.out.println("메뉴하나 완료");
+		//System.out.println("메뉴하나 완료");
 	
 	%>
 	    <!-- load  new order  -->
@@ -67,7 +67,7 @@ for(int i=0;i<list.size();i++)
 				<%
 					}
 				%>
-				<button class="w3-button w3-yellow h100"  onClick="cancelBtn(this)" data-toggle="modal" data-target="#jumoon_calcel">주문취소</button>
+				<button class="w3-button w3-yellow h100"  onClick="cancelBtn(this)" data-toggle="modal" data-target="#jumoon_cancel">주문취소</button>
 			</div>
 			<!-- 오른쪽-->
 			<!-- 가운데 -->

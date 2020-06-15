@@ -9,8 +9,8 @@
 request.setCharacterEncoding("UTF-8");
 System.out.println("------EndList.jsp");
 
-int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
-//int shopNo=Integer.parseInt(request.getParameter("shopNo"));
+Object no=session.getAttribute("no");
+int shopNo=Integer.parseInt(no+""); 
 System.out.println(request.getParameter("shopNo"));
 OrderListDAO dao= OrderListDAO.getInstance();
 

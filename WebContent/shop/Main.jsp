@@ -1,14 +1,21 @@
+<%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 
 <%
+
+if(session.getAttribute("id")==null){	//id가 없을때
+	response.sendRedirect("../index.jsp");
+}else{//id가 있을때
+
+	Object no=session.getAttribute("no");
+	int shopNo=Integer.parseInt(no+""); 
 	request.setCharacterEncoding("UTF-8");
 	System.out.println("------ Main.jsp --- ");
-
-	session.setAttribute("shopNo", "2");
-	//int shopNo=Integer.parseInt((String)session.getAttribute("shopNo"));
+	OrderListDAO orderlistdao=OrderListDAO.getInstance();
+	int max_no = orderlistdao.getMaxNoOfShop_No(shopNo);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +119,12 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
-</style>
+#reviewCell {
+	height: 370px;
+	overflow-y: auto;
+}
+
+</style>	
 <script>
 	window.onload = function() {
 		refresh();
@@ -120,25 +132,25 @@
 	}
 
 	function refresh() {
-		$("#tab1").load("NewOrderList.jsp?shopNo=2");
-		$("#tab2").load("BaesongList.jsp?shopNo=2");
-		$("#tab3").load("EndList.jsp?shopNo=2");
-		$("#tab4").load("CancelList.jsp?shopNo=2");
+		$("#tab1").load("NewOrderList.jsp");
+		$("#tab2").load("BaesongList.jsp");
+		$("#tab3").load("EndList.jsp");
+		$("#tab4").load("CancelList.jsp");
 		setTimeout(countcount, 1000);
 	}
 	// 스크립트
 
 	function tab2Refresh(){
 		console.log("배달중 새로고침");
-		$("#tab2").load("BaesongList.jsp?shopNo=2");	
+		$("#tab2").load("BaesongList.jsp");	
 	}
 	function tab3Refresh(){
 		console.log("완료 새로고침");
-		$("#tab3").load("EndList.jsp?shopNo=2");
+		$("#tab3").load("EndList.jsp");
 	}
 	function tab4Refresh(){
 		console.log("취소 새로고침");
-		$("#tab4").load("CancelList.jsp?shopNo=2");
+		$("#tab4").load("CancelList.jsp");
 	}
 
 	function countcount() {
@@ -155,7 +167,7 @@
 	}
 	
 	function reviewLoad(){
-		$("#reviewList").load("reviewList.jsp?shopNo=2");
+		$("#reviewList").load("reviewList.jsp");
 		setTimeout(countSum,1000);
 	}
 		
@@ -163,10 +175,66 @@
 			var r=document.getElementById("EndListCount").innerText;
 			document.getElementById("countSum").innerText=r;
 		}
-
+	
+	//-------------------------------------------------
+   var max_no2=0;                    	
+   var max_no= $(":input:hidden[name=max_no]").val();
+	 
+   $(function(){	
+   	function reload(){
+   		reload2();
+   		//$("#tab1").load("NewOrderList.jsp");
+   		//$("#tab2").load("BaesongList.jsp");
+   		//$("#tab3").load("EndList.jsp");
+   		countcount();
+   		//$("#tabtab2").load("ShopManage.jsp");
+    		//document.getElementById("defaultOpen").click();
+   		//document.getElementById("jumoontab").click(); 
+   	}
+   	function load(){
+   		$("#tab1").load("NewOrderList.jsp");
+   	}
+   	
+   	setInterval(reload, 1000);
+   	setTimeout(load,1000);
+   	setTimeout(load,2000);
+   	setTimeout(load,3000);
+   	setTimeout(load,4000);
+   });
+   function reload2(){
+   	console.log("reload2 = > "+max_no+"/"+max_no2);
+   	var data={
+   			max_no:max_no
+   	}
+   	$.ajax({
+			type : "post",
+			url : "Reload.jsp",
+			//data : JSON.stringify(reply),
+			 data : data, 
+			async : false,
+			//리턴 되어 돌려 받는 데이터의 타입
+			dataType: "json" ,
+			//기본값이므로 삭제 가능
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			success : function(result){
+				max_no2=result;
+				if(max_no!=max_no2){
+					max_no=max_no2;
+				$("#tab1").load("NewOrderList.jsp");
+				}
+			},
+			error : function(xhr,status,error){
+				console.log("주문리스트창 리로드 실패");
+			}//error의 끝
+		});//ajax의 끝
+   }
+//-------------------------------------------------
 </script>
 </head>
 <body>
+
+<input type="hidden" name="max_no" value="<%=max_no %>">
+<input type="hidden" name="max_no2" value="0">
 	<!-- 내용 -->
 	<!-- 배달 주문 처리하는 메인 페이지-->
 
@@ -322,6 +390,24 @@
 										<td>8000</td>
 										<td>주메뉴</td>
 										<td>돼지고기돼지고기돼지고기돼지고기돼지고기돼지고기</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
+									</tr>
+									<tr>
+										<td>된장찌개</td>
+										<td>4000</td>
+										<td>부메뉴</td>
+										<td>두부두부두부두부두부두부두부</td>
 									</tr>
 									<tr>
 										<td>된장찌개</td>
@@ -672,6 +758,29 @@
 			refresh();
 		}
 	</script>
-
+	<script>
+	function baesongBtn(e) {
+		var jumunNo = e.parentNode.parentNode.children[0].children[1].value;
+		console.log(jumunNo);
+		document.getElementById("jumunNo").innerText = jumunNo;
+		$.ajax({
+			type: "post",
+			url : "BaesongSelect.jsp",
+			data: {"no" : jumunNo},
+			success : function(result){
+				console.log(result);
+				if(result==1){
+					alert("배달시작");
+				}else{
+					alert("배달안됨")
+				}//else
+			}//success
+		});//ajax
+		refresh(); // 새로고침
+	}//CookBtn
+	</script>
+<%
+}//else 메인 불러오기
+%>
 </body>
 </html>
