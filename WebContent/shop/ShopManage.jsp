@@ -12,6 +12,8 @@ System.out.println("------ShopManage.jsp");
 
 
 Object no=session.getAttribute("no");
+
+
 int shopNo=Integer.parseInt(no+""); 
 System.out.println("shopmanage = " + shopNo);
 MenuDAO menudao=MenuDAO.getInstance();
@@ -44,7 +46,8 @@ if(<%=shopdto.getShopStatus()==1%>){
 });
 </script>   
    
-<div id="tabtab2" class="w3-baemint tabcontent2">
+<div id="tabtab2" class="w3-cyan tabcontent2">
+
        
                        <div class="container">
   <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
@@ -58,12 +61,15 @@ if(<%=shopdto.getShopStatus()==1%>){
                     
                         
                        <button id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가
+<<<<<<< HEAD
+  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">                     
+=======
   <input type="hidden" name="addmenu_no" value="<%=shopNo %>">                     
+>>>>>>> master
                        </button>
                         
                     </div> --%>
-                    
-<div class="w3-container w3-text-black searchmenu" style="width:100%;height:70%;float:right;">
+<div class="w3-container searchmenu" style="width:100%;height:70%;float:right;">
 <select style="width:25%;height:38px;float:left" id="selectval">
 <option value="0">메뉴이름</option>
 <option value="1">메뉴카테고리</option>

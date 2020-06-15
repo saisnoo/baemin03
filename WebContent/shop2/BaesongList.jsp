@@ -20,7 +20,15 @@ List<OrderListDTO> list = orderListDAO.getListOfGoing(shop_No);
 for(int i=0;i<list.size();i++)
 {	
 	OrderListDTO orderListDTO=list.get(i);
-
+	int count=1;
+	StringTokenizer str=new StringTokenizer(orderListDTO.getMenu_String(),"/",true);
+	while(str.hasMoreTokens()){
+		String data=str.nextToken();
+		//System.out.println(data);
+		if(data.equals("/")){ count++;}
+		//System.out.println(count);
+		
+	}
 	
 	%>
 	    <!-- load  new order  -->
@@ -49,7 +57,7 @@ for(int i=0;i<list.size();i++)
 			<div class="w3-rest w3-container">
 				<div class="w3-row">
 					<div class="w3-col">
-						<strong>[메뉴 4개]</strong> &nbsp;<%=orderListDTO.getName()%>
+						<strong>[메뉴 <%=count %>개]</strong> &nbsp;<%=orderListDTO.getName()%>
 					</div>
 					<div class="w3-col"></div>
 				</div>

@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 Object no=session.getAttribute("no");
+
 int shopNo=Integer.parseInt(no+""); 
 String menuName=request.getParameter("menuName");
 String menuCategory= request.getParameter("menuCategory");
