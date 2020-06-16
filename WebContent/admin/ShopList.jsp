@@ -56,11 +56,6 @@ List<ShopDTO> list = dao.getListAll();
 	top: 135px;
 }
 
-  .btn {
-    background-color: #45c1bf;
-    color: white;
-  }
-  
 </style>
 
 <script>
