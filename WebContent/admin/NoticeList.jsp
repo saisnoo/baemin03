@@ -2,13 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "java.sql.*"%>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 request.setCharacterEncoding("utf-8");
 System.out.println("------ Notice.jsp --- ");
 
 NoticeDAO dao=NoticeDAO.getInstance();
 List<NoticeDTO> list = dao.getList();
+request.setAttribute("list", list);
 %>
 
 <!DOCTYPE html>
@@ -105,19 +107,14 @@ List<NoticeDTO> list = dao.getList();
     <th width="50%"><div class="th-text">제목</div></th>
     <th width="35%"><div class="th-text">공지일</div></th>    
   </tr>
-  
-    <%
-    for(int i=0; i<list.size(); i++){
-    	%>
-      <tr class="contentLine" onclick="click(this)">
-    	<td class="noticeNo" width="5%"><%=list.get(i).getNo() %></td>
-    	<td width="55%"><%=list.get(i).getTitle() %></td>
-    	<td width="40%"><%=list.get(i).getStartDate() %>~<br><%=list.get(i).getEndDate() %></td>    	
-      </tr>
-    	<%    	
-    }       
-    %> 
- 
+
+    <c:forEach var="list" items="${list }">
+       <tr class="contentLine" onclick="click(this)">
+		  <td class="noticeNo">${list.no}</td>
+		  <td>${list.title}</td>
+		  <td>${list.startDate }~<br>${list.endDate }</td>							
+	   </tr>   
+    </c:forEach>
 
 </table>
 </div>
