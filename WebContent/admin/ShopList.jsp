@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
 System.out.println("------ ShopListAll.jsp --- ");
@@ -12,6 +12,7 @@ System.out.println("------ ShopListAll.jsp --- ");
 
 ShopDAO dao=ShopDAO.getInstance();
 List<ShopDTO> list = dao.getListAll();
+request.setAttribute("list", list);
 %>
 
 <!DOCTYPE html>
@@ -124,18 +125,15 @@ List<ShopDTO> list = dao.getListAll();
 						</tr>
 						<div>&nbsp;</div>
 
-						<%
-							for (int i = 0; i < list.size(); i++) {
-						%>
-						<tr class="contentLine" onclick="click(this)">
-							<td class="shopNoNo" width="15%"><%=list.get(i).getNo()%></td>
-							<td width="20%"><%=list.get(i).getShopName()%></td>
-							<td width="15%"><%=list.get(i).getShopCategory()%></td>
-							<td width="50%"><%=list.get(i).getShopAddr()%>&nbsp;<%=list.get(i).getShopAddr2()%></td>
-						</tr>
-						<%
-							}
-						%>
+						
+	                    <c:forEach var="list" items="${list }">
+                           <tr class="contentLine" onclick="click(this)">
+		                        <td class="shopNoNo">${list.no }</td>
+		                        <td>${list.shopName }</td>
+		                        <td>${list.shopCategory }</td>							
+		                        <td>${list.shopAddr}&nbsp;${list.shopAddr2 }</td>							
+	                       </tr>   
+                        </c:forEach>
 
 
 
