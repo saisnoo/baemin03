@@ -37,6 +37,10 @@
 	margin: 0px;
 	padding: 0px;
 }
+  .btn {
+    background-color: #45c1bf;
+    color: white;
+  }
 </style>
 <script>
 	// 스크립트
@@ -72,12 +76,12 @@
 <div class="main w3-padding">
 
  <p>      
-    <label class="w3-text-blue"><b>글번호</b></label>
+    <label class="w3-text"><b>글번호</b></label>
     <input class="w3-input w3-border" name="no" id="no" type="text" value="<%=dto.getNo() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>글제목</b></label>
+    <label class="w3-text"><b>글제목</b></label>
     <input class="w3-input w3-border" name="title" name="title" type="text" value="<%=dto.getTitle() %>" readonly>
   </p>
   
@@ -87,20 +91,20 @@
   </p>
   
    <p>      
-    <label class="w3-text-blue"><b>작성일</b></label>
+    <label class="w3-text"><b>작성일</b></label>
     <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="<%=dto.getStartDate() %>" readonly>
   </p>
   
    <p>      
-    <label class="w3-text-blue"><b>종료일</b></label>
+    <label class="w3-text"><b>종료일</b></label>
     <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="<%=dto.getEndDate() %>" readonly>
   </p>  
   &nbsp;
     
   <p align="center">          
-    <button class="w3-button w3-blue" onclick="location='NoticeList.jsp'">글목록</button>
-    <button class="w3-button w3-blue" onclick="location='NoticeUpdateForm.jsp?no=<%=no %>'">글수정</button>
-    <button class="w3-button w3-blue" onclick="location='NoticeDeletePro.jsp?no=<%=no %>'">글삭제</button>    
+    <button class="w3-button btn" onclick="location='NoticeList.jsp'">글목록</button>
+    <button class="w3-button btn" onclick="location='NoticeUpdateForm.jsp?no=<%=no %>'">글수정</button>
+    <button class="w3-button btn" onclick="location='NoticeDeletePro.jsp?no=<%=no %>'">글삭제</button>    
   </p>
   
 </div>
@@ -115,7 +119,7 @@
 
 	<!-- 모든페이지 공통 -->
 	<!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
-	<jsp:include page="../sw_css/topnav.jsp" />
+	<jsp:include page="../sw_css/admintopnav.jsp" />  
 
 </body>
 </html>
