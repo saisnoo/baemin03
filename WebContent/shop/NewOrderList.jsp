@@ -6,7 +6,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:forEach var="dto" items="orderList">
-<!-- 접수대기 리스트 -->
+
+aaa:${dto.OrderDate}<br>
+</c:forEach>
+<%-- <!-- 접수대기 리스트 -->
 <div class="w3-section">
 	<div class="w3-card w3-padding">
 		<!-- 상단 컨테이너 끝 -->
@@ -64,4 +67,4 @@
 <script>
 	// 스크립트
 
-</script>
+</script> --%>

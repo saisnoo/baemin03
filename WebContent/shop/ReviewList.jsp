@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td colspan="2"><customtag:starRank
-						rank="${shopdto.Rank()}" width="210" />&nbsp;&nbsp;<strong><font style="vertical-align:middle;" size="5">${shopdto.Rank()}</font></strong></td>
+						rank="${shopdto.Rank}" width="210" />&nbsp;&nbsp;<strong><font style="vertical-align:middle;" size="5">${shopdto.Rank}</font></strong></td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -55,15 +55,15 @@
 			<table id="reviewCell" class="w3-table">
 				<c:forEach var="dto" items="reviewList">
 				<tr style="border:1px solid black;">
-					<td style="width: 15%">${dto.Member_no()}</td>
+					<td style="width: 15%">${dto.Member_no}</td>
 					<td style="width: 25%">
 						<!-- 별점 이미지 --> <span width="100px"> <customtag:starRank
-								rank="${(double) dto.Rank()}" width="100" />
+								rank="${(double) dto.Rank}" width="100" />
 					</span>
 					</td>
 					<!-- 별점 이미지 -->
-					<td style="width: 30%">${dto.RegDate()}</td>
-					<td style="width: 30%">${dto.Content()}</td>
+					<td style="width: 30%">${dto.RegDate}</td>
+					<td style="width: 30%">${dto.Content}</td>
 				</tr>
 				</c:forEach>
 			</table>

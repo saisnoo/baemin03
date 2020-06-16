@@ -11,14 +11,14 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		alert(${shopdto.shopStatus});
-		if (${shopdto.shopStatus} == 0) {
+		alert(${shopdto.ShopStatus});
+		if (${shopdto.ShopStatus} == 0) {
 			$("#magam").hide();
 			$("#addmenu").show();
 			$("#shopOpen").show();
 
 		}
-		if (${shopdto.shopStatus} == 1) {
+		if (${shopdto.ShopStatus} == 1) {
 			$("#magam").show();
 			$("#addmenu").hide();
 			$("#shopOpen").hide();
@@ -82,24 +82,24 @@
 		<div class="scroll-box" style="height: 380px;">
 			<table class="w3-table" id="myTable">
 				<c:forEach var="menudto" items="${list}">
-				<c:if test="${shopdto.ShopStatus()==0 }">
+				<c:if test="${shopdto.ShopStatus==0 }">
 				<tr class="w3-hover-black check_view" data-toggle="modal"
 					data-tar="#check_viewmenu" style="cursor: pointer;">
 					</c:if>
 				
-				<c:if test="${shopdto.ShopStatus()==1 }">
+				<c:if test="${shopdto.ShopStatus==1 }">
 				
 				<tr class="scroll-box check_view">
 				</c:if>
-					<td style="width: 30%">${menudto.MenuName()}
-					<input type="hidden" value="${menudto.No()}" id="menu_no">
-					<input type="hidden" value="${menudto.MenuStatus()}" id="menu_status"></td>
-					<td style="width: 30%">${menudto.MenuCategory()}</td>
-					<td style="width: 25%">${menudto.MenuPrice()}</td>
-				<c:if test="${menudto.MenuStatus()==1 }">
+					<td style="width: 30%">${menudto.MenuName}
+					<input type="hidden" value="${menudto.No}" id="menu_no">
+					<input type="hidden" value="${menudto.MenuStatus}" id="menu_status"></td>
+					<td style="width: 30%">${menudto.MenuCategory}</td>
+					<td style="width: 25%">${menudto.MenuPrice}</td>
+				<c:if test="${menudto.MenuStatus==1 }">
 					<td	style="text-align:center; width: 15%">O</td>
 				</c:if>
-				<c:if test="${menudto.MenuStatus()==0 }">
+				<c:if test="${menudto.MenuStatus==0 }">
 					<td	style="text-align:center; color:red; width: 15%">X</td>
 				</c:if>
 				</tr>
@@ -114,15 +114,14 @@
 
 
 <script>
-	if (${shopdto.ShopStatus()==0}) {
+	if (${shopdto.ShopStatus}==0) {
 		$(function() {
 			$(".check_view")
 					.click(
 							function() {
 
 								var menu_no = $(this).find("#menu_no").val();
-								var menu_status = $(this).find("#menu_status")
-										.val();
+								var menu_status = $(this).find("#menu_status").val();
 								//document.getElementById("status").value = menu_status;
 								document.getElementById("no5").value = menu_no;
 								document.getElementById("status5").value = menu_status;
@@ -164,8 +163,8 @@
 
 	$("#shopOpen").click(function() {
 		console.log("shopopen이 눌러졌다");
-		var shopNo =${shopdto.No()};
-		var shopstatus =${shopdto.ShopStatus()};
+		var shopNo =${shopdto.No};
+		var shopstatus =${shopdto.ShopStatus};
 		$.ajax({
 			type : "post",
 			url : "ShopOpenPro.jsp",
@@ -193,9 +192,9 @@
 	});
 	$("#magam").click(function() {
 		console.log("shopmagam이 눌러졌다");
-		var shopNo =${shopdto.No()}
+		var shopNo =${shopdto.No}
 	;
-		var shopstatus =${shopdto.ShopStatus()}
+		var shopstatus =${shopdto.ShopStatus}
 	;
 		$.ajax({
 			type : "post",

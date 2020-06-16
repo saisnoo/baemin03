@@ -94,9 +94,9 @@
 
 						<c:forEach var="list" items="${list}">
 						<tr class="contentLine" onclick="click(this)">
-							<td class="noticeNo">${list.No()}</td>
-							<td>${list.Title()}</td>
-							<td>${list.StartDate()}~<br>${list.EndDate()}</td>							
+							<td class="noticeNo">${list.No}</td>
+							<td>${list.Title}</td>
+							<td>${list.StartDate}~<br>${list.EndDate}</td>							
 						</tr>
 						</c:forEach>
 
