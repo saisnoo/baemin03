@@ -1,6 +1,11 @@
 package com.mvc.action.shop;
 
+import java.util.List;
+
 import javax.servlet.http.*;
+
+import com.baemin.orderlist.OrderListDAO;
+import com.baemin.orderlist.OrderListDTO;
 import com.mvc.action.CommandAction;
 
 public class NewOrderListAction implements CommandAction {
@@ -12,10 +17,24 @@ public class NewOrderListAction implements CommandAction {
         System.out.println("- - - - NewOrderListAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
-        //
 
+        //자바 구문
+        request.setCharacterEncoding("UTF-8");
+        System.out.println("------NewOrderList.jsp");
+
+        HttpSession session = ((HttpServletRequest) request).getSession();
+        Object no=session.getAttribute("no");
+        int shopNo=Integer.parseInt(no+""); 
+        System.out.println(request.getParameter("shopNo"));
+        OrderListDAO dao= OrderListDAO.getInstance();
+
+        List<OrderListDTO> orderList = dao.getListOfCurrent(shopNo);
+        System.out.println(shopNo);
+        
+        request.setAttribute("orderList", orderList);
+        request.setAttribute("shopNo",new Integer(shopNo));
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return " aaaaa ";
+        return "/shop/NewOrderList.jsp";
     }
 
 }

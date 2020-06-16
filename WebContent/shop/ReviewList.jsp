@@ -8,18 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="customtag" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------reviewList.jsp");
-	Object no=session.getAttribute("no");
-	int shopNo=Integer.parseInt(no+""); 
-	
-	ReviewDAO dao = ReviewDAO.getInstance();
-	List<ReviewDTO> reviewList=dao.getListByShop(shopNo,100);
-	
-	ShopDAO shopdao = ShopDAO.getInstance();
-	ShopDTO shopdto = shopdao.getShopInfo(shopNo);
-%>
+
 
 <div class="w3-section">
 	<!-- 왼쪽 half -->
@@ -33,7 +22,7 @@
 			</tr>
 			<tr>
 				<td colspan="2"><customtag:starRank
-						rank="${shopdto.getRank()}" width="210" />&nbsp;&nbsp;<strong><font style="vertical-align:middle;" size="5">${shopdto.getRank()}</font></strong></td>
+						rank="${shopdto.Rank}" width="210" />&nbsp;&nbsp;<strong><font style="vertical-align:middle;" size="5">${shopdto.Rank}</font></strong></td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -66,15 +55,15 @@
 			<table id="reviewCell" class="w3-table">
 				<c:forEach var="dto" items="reviewList">
 				<tr style="border:1px solid black;">
-					<td style="width: 15%">${dto.getMember_no()}</td>
+					<td style="width: 15%">${dto.Member_no}</td>
 					<td style="width: 25%">
 						<!-- 별점 이미지 --> <span width="100px"> <customtag:starRank
-								rank="${(double) dto.getRank()}" width="100" />
+								rank="${(double) dto.Rank}" width="100" />
 					</span>
 					</td>
 					<!-- 별점 이미지 -->
-					<td style="width: 30%">${dto.getRegDate()}</td>
-					<td style="width: 30%">${dto.getContent()}</td>
+					<td style="width: 30%">${dto.RegDate}</td>
+					<td style="width: 30%">${dto.Content}</td>
 				</tr>
 				</c:forEach>
 			</table>

@@ -5,14 +5,6 @@
 <%@ page import="java.sql.*"%>
 <%@ taglib	prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-	Object no = session.getAttribute("no");
-	int shopNo = Integer.parseInt(no + "");
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ Main.jsp --- ");
-	OrderListDAO orderlistdao = OrderListDAO.getInstance();
-	int max_no = orderlistdao.getMaxNoOfShop_No(shopNo);
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

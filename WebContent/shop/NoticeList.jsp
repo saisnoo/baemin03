@@ -4,13 +4,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	request.setCharacterEncoding("utf-8");
-System.out.println("------ Notice.jsp --- ");
-
-NoticeDAO dao=NoticeDAO.getInstance();
-List<NoticeDTO> list = dao.getList();
-%>
 
 <!-- CDN - Font Awesome 4 -->
 <link rel="stylesheet"
@@ -99,20 +92,13 @@ List<NoticeDTO> list = dao.getList();
 							<th width="30%">공지일</th>							
 						</tr>
 
-						<%
-							for (int i = 0; i < list.size(); i++) {
-						%>
 						<c:forEach var="list" items="${list}">
 						<tr class="contentLine" onclick="click(this)">
-							<td class="noticeNo">${list.getNo()}</td>
-							<td>${list.getTitle()}</td>
-							<td>${list.getStartDate()}~<br>${list.getEndDate()}</td>							
+							<td class="noticeNo">${list.No}</td>
+							<td>${list.Title}</td>
+							<td>${list.StartDate}~<br>${list.EndDate}</td>							
 						</tr>
 						</c:forEach>
-						<%
-							}
-						%>
-
 
 					</table>
 				</div>
