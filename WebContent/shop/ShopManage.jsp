@@ -5,6 +5,7 @@
 <%@page import="com.baemin.menu.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	//자바 구문
 request.setCharacterEncoding("UTF-8");
@@ -97,36 +98,30 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 		</table>
 		<div class="scroll-box" style="height: 380px;">
 			<table class="w3-table" id="myTable">
-				<%
-					for(int i=0;i<list.size();i++){
-										MenuDTO menudto=list.get(i);     	
-								    if(shopdto.getShopStatus()==0){
-				%>
+				<c:forEach var="menudto" items="${list}">
+				<c:if test="${shopdto.getShopStatus()==0 }">
 				<tr class="w3-hover-black check_view" data-toggle="modal"
 					data-target="#check_viewmenu" style="cursor: pointer;">
-					<%
-						}else{
-					%>
+					</c:if>
+				
+				<c:if test="${shopdto.getShopStatus()==1 }">
 				
 				<tr class="scroll-box check_view">
-					<%
-						}
-					%>
-					<td style="width: 30%"><%=menudto.getMenuName()%>
-					<input type="hidden" value="<%=menudto.getNo()%>" id="menu_no">
-					<input type="hidden" value="<%=menudto.getMenuStatus()%>" id="menu_status"></td>
-					<td style="width: 30%"><%=menudto.getMenuCategory()%></td>
-					<td style="width: 25%"><%=menudto.getMenuPrice()%></td>
-					<%if(menudto.getMenuStatus()==1) {%>
+				</c:if>
+					<td style="width: 30%">${menudto.getMenuName()}
+					<input type="hidden" value="${menudto.getNo()}" id="menu_no">
+					<input type="hidden" value="${menudto.getMenuStatus()}" id="menu_status"></td>
+					<td style="width: 30%">${menudto.getMenuCategory()}</td>
+					<td style="width: 25%">${menudto.getMenuPrice()}</td>
+				<c:if test="${menudto.getMenuStatus()==1 }">
 					<td	style="text-align:center; width: 15%">O</td>
-					<% }else{
-					%>
+				</c:if>
+				<c:if test="${menudto.getMenuStatus()==0 }">
 					<td	style="text-align:center; color:red; width: 15%">X</td>
-					<%} %>
+				</c:if>
 				</tr>
-				<%
-					}
-				%>
+				
+					</c:forEach>
 				<!-- 검색 리스트 끝 -->
 			</table>
 		</div>

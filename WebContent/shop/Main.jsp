@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
+<%@ taglib	prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
 	Object no = session.getAttribute("no");
@@ -265,8 +266,8 @@
 </head>
 <body>
 
-	<input type="hidden" name="max_no" value="<%=max_no%>">
-	<input type="hidden" name="max_no2" value="<%=max_no%>">
+	<input type="hidden" name="max_no" value="${max_no}">
+	<input type="hidden" name="max_no2" value="${max_no}">
 	<!-- 내용 -->
 	<!-- 배달 주문 처리하는 메인 페이지-->
 
