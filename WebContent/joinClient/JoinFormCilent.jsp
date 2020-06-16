@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="java.sql.*"%>
+ 
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -237,7 +237,7 @@
 					.ajax({
 						type : "get",
 						//dataType : "text",
-						url : "idCheck.jsp",
+						url : "IdCheck.jsp",
 						data : data1,
 						success : function(result) {
 							console.log("result=" + result);

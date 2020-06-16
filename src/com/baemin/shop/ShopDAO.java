@@ -57,11 +57,11 @@ public class ShopDAO {
 		return dto;
 	} // login_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// idCheck_start-----------------------------------------------------------------------------
+	// IdCheck_start-----------------------------------------------------------------------------
 	public int idCheck(String id) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---ShopDAO idCheck");
+		System.out.println("---ShopDAO IdCheck");
 		try {
 			// 1+2
 			con = getConnection();
@@ -80,12 +80,12 @@ public class ShopDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" idCheck() 예외  ");
+			throw new Exception(" IdCheck() 예외  ");
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
 		return result;
-	} // idCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	} // IdCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getShopInfo_start-----------------------------------------------------------------------------
 	public ShopDTO getShopInfo(int no) throws Exception {

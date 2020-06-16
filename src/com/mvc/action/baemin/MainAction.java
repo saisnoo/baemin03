@@ -1,6 +1,7 @@
 package com.mvc.action.baemin;
 
 import javax.servlet.http.*;
+import com.baemin.member.*;
 import com.mvc.action.CommandAction;
 
 public class MainAction implements CommandAction {
@@ -12,10 +13,18 @@ public class MainAction implements CommandAction {
         System.out.println("- - - - MainAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
-        //
+        HttpSession session = ((HttpServletRequest) request).getSession();
+        Object no_ob = session.getAttribute("no");
+
+        int memberNo = Integer.parseInt(no_ob + "");
+
+        MemberDAO dao = MemberDAO.getInstance();
+        MemberDTO dto = dao.getDTO(memberNo);
+
+        request.setAttribute("dto", dto);
 
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return " aaaaa ";
+        return "/baemin/Main.jsp";
     }
 
 }

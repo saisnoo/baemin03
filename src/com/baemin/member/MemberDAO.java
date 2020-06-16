@@ -90,11 +90,11 @@ public class MemberDAO {
 		return dto;
 	} // login_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// idCheck_start-----------------------------------------------------------------------------
+	// IdCheck_start-----------------------------------------------------------------------------
 	public int idCheck(String id) throws Exception {
 		// 출력객체
 		int result = -1;
-		System.out.println("---MemberDAO idCheck");
+		System.out.println("---MemberDAO IdCheck");
 		try {
 			// 1+2
 			con = getConnection();
@@ -113,12 +113,12 @@ public class MemberDAO {
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
-			throw new Exception(" idCheck() 예외  ");
+			throw new Exception(" IdCheck() 예외  ");
 		} finally {
 			close(con, pstmt, rs);
 		} // finally end
 		return result;
-	} // idCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	} // IdCheck_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getDTO_start-----------------------------------------------------------------------------
 	public MemberDTO getDTO(int no) throws Exception {

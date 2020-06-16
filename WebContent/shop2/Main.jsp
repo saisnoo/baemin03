@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="java.sql.*"%>
+ 
 <%
 
 request.setCharacterEncoding("UTF-8");
@@ -136,7 +136,7 @@ function tabtab2load(){
 
                 <div class="w3-row w3-black">
                     <a href="#" class="w3-button">
-                        <h3>배달의 민족</h3>
+                        <h3>배달의 인종</h3>
                     </a>
                 </div>
                 <div class="w3-row w3-gray">

@@ -5,7 +5,7 @@
 <%
 	//자바 구문
 	request.setCharacterEncoding("UTF-8");
-	System.out.println("------logout.jsp");
+	System.out.println("------Logout.jsp");
 %>
 
 <%

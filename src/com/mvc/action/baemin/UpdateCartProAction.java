@@ -15,7 +15,7 @@ public class UpdateCartProAction implements CommandAction {
         //
 
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return " aaaaa ";
+        return "aaaa";
     }
 
 }

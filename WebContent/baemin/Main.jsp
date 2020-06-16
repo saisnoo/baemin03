@@ -3,48 +3,6 @@
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ main.jsp --- ");
-%>
-
-<%
-	Object grade_ob = session.getAttribute("grade");
-	Object id_ob = session.getAttribute("id");
-	Object no_ob = session.getAttribute("no");
-	//Object memberX_ob = session.getAttribute("memberX");
-	//Object memberY_ob = session.getAttribute("memberY");
-
-	System.out.println(grade_ob);
-	System.out.println(id_ob);
-	System.out.println(no_ob);
-	if (grade_ob == null) {
-		grade_ob = 0;
-	}
-	if (id_ob == null) {
-		id_ob = 0;
-	}
-	if (no_ob == null) {
-		no_ob = 0;
-	}
-
-	int grade = Integer.parseInt(grade_ob + "");
-
-	System.out.println("session grade=" + grade);
-
-	if (grade < 1) {
-		System.out.println("session grade=" + grade);
-		response.sendRedirect("../index.html");
-	}
-
-	int memberNo = Integer.parseInt(no_ob + "");
-	//double memberX = Double.parseDouble(memberNo_ob + "");
-	//double memberY = Double.parseDouble(memberNo_ob + "");
-
-	MemberDAO dao = MemberDAO.getInstance();
-	MemberDTO dto = dao.getDTO(memberNo);
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,6 +68,7 @@ img {
 
 
 <body>
+<%@ include file="../util/ContextPath.jsp" %>
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -135,8 +94,8 @@ img {
 				<button type="button" class="w3-button w3-white w3-center"
 					onclick="location.href = '../memberClient/AddrChangeForm.jsp';">
 					<!-- ------------------------------------------------------- -->
-					<span id="addr_result"> <%=dto.getAddr()%>
-					</span> &nbsp;<span id="addr2_result"> <%=dto.getAddr2()%>
+					<span id="addr_result"> ${dto.addr }
+					</span> &nbsp;<span id="addr2_result">  ${dto.addr2 }
 					</span>
 				</button>
 			</div>
@@ -359,9 +318,9 @@ img {
 					var isIDOK = result.trim() + "";
 					console.log("isIDOK=" + isIDOK);
 					if (isIDOK == "yes") {
-						hasIDCheck = 1;
+						hasIdCheck = 1;
 					} else {
-						hasIDCheck = 0;
+						hasIdCheck = 0;
 					}
 				},
 				error : function(xhr, status, error) {

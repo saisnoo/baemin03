@@ -8,7 +8,7 @@
 <%
 	//자바 구문
 	request.setCharacterEncoding("UTF-8");
-	System.out.println("------idCheck.jsp");
+	System.out.println("------IdCheck.jsp");
 %>
 
 

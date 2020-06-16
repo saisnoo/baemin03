@@ -27,10 +27,13 @@
 <!-- CDN OFFLINE- sw_topNav.css -->
 <link rel="stylesheet" href="../sw_css/sw-1.0.0.css">
 <!-- CDN - jquery 3.4.1 -->
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- CDN - bootstrap 3.4.1 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
 /* *{
@@ -84,41 +87,63 @@
 				<!--사용자 마이 페이지-->
 				<div class="w3-container w3-card">
 					<div class="w3-section w3-center">
-					  <h2>회원정보수정</h2>
+						<h2>회원정보수정</h2>
 					</div>
-						  <p>
-						  	<label><b>이름</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.name }">
-						  </p>
-					  
-						  <p>
-						  	<label><b>아이디</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.id }">
-						  </p>
-					  
-						  <p>
-						  	<label><b>전화번호</b></label>
-							  <input type="text" class="w3-input w3-border" readonly name="tel" id="tel" value="${dto.tel }">
-						  </p>
-					  
-						  <p>
-						  	<label><b>주소</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr }">
-							  
-						  	<label><b>상세주소</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr2 }">
-						  </p>
-					  
-					      <p>
-						  	<label><b>가입일</b></label>
-						      <input type="text" class="w3-input w3-border" readonly value="${dto.regDate }">
-						  </p>
-					  <div class="w3-section w3-center">
-	   				  	<input class="w3-button w3-baemint" type="submit" value="정보수정">
-					  	<input class="w3-button w3-baemint" type="button" value="뒤로가기" onclick="javascript:history.back()">
-					  	<input class="w3-button w3-baemint" type="button" value="주문내역" onclick="location = '../baemin/OrderList.jsp'">
-	   				  	<input class="w3-button w3-baemint" type="button" value="로그아웃" onClick="location = '../util/logout.jsp'">
-					  </div>
+					<p>
+						<label><b>이름</b></label> <input type="text"
+							class="w3-input w3-border" readonly value="${dto.name }">
+					</p>
+
+					<p>
+						<label><b>아이디</b></label> <input type="text"
+							class="w3-input w3-border" readonly value="${dto.id }">
+					</p>
+
+					<p>
+						<label><b>전화번호</b></label> <input type="text"
+							class="w3-input w3-border" readonly name="tel" id="tel"
+							value="${dto.tel }">
+					</p>
+
+					<p>
+						<label><b>주소</b></label> <input type="text"
+							class="w3-input w3-border" readonly value="${dto.addr }">
+
+						<label><b>상세주소</b></label> <input type="text"
+							class="w3-input w3-border" readonly value="${dto.addr2 }">
+					</p>
+
+					<p>
+						<label><b>가입일</b></label> <input type="text"
+							class="w3-input w3-border" readonly value="${dto.regDate }">
+					</p>
+
+					<div class="w3-row-padding w3-section">
+						<div class="w3-col s6">
+							<input class="w3-button w3-baemint w3-block" type="submit"
+								value="정보수정">
+						</div>
+
+						<div class="w3-col s6">
+							<input class="w3-button w3-baemint w3-block" type="button"
+								value="뒤로가기" onclick="javascript:history.back()">
+						</div>
+					</div>
+					<div class="w3-row-padding w3-section">
+						<div class="w3-col s6">
+							<input class="w3-button w3-baemint w3-block" type="button"
+								value="주문내역" onclick="location = '../baemin/OrderList.jsp'">
+						</div>
+						<div class="w3-col s6">
+							<input class="w3-button w3-baemint w3-block" type="button"
+								value="로그아웃" onClick="location = '../util/Logout.jsp'">
+						</div>
+					</div>
+
+
+
+
+
 				</div>
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
