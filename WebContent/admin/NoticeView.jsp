@@ -32,16 +32,6 @@
 <!-- CDN - W3CSS -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<style>
-* {
-	margin: 0px;
-	padding: 0px;
-}
-  .btn {
-    background-color: #45c1bf;
-    color: white;
-  }
-</style>
 <script>
 	// 스크립트
 </script>
@@ -54,12 +44,6 @@
 		
 	%>
 
-
-
-
-
-
-
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin">&nbsp;</div>
@@ -68,11 +52,11 @@
 	<div class="sw-center">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-		<div class="sw-container-900">
+		<div class="sw-container-500">
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
   
-<div class="w3-card-4 w3-light-gray">
+<div class="w3-card-4 w3-border">
 <div class="main w3-padding">
 
  <p>      
@@ -86,7 +70,7 @@
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>글내용</b></label>
+    <label class="w3-text"><b>글내용</b></label>
     <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly><%=dto.getContent() %></textarea>
   </p>
   
@@ -102,9 +86,9 @@
   &nbsp;
     
   <p align="center">          
-    <button class="w3-button btn" onclick="location='NoticeList.jsp'">글목록</button>
-    <button class="w3-button btn" onclick="location='NoticeUpdateForm.jsp?no=<%=no %>'">글수정</button>
-    <button class="w3-button btn" onclick="location='NoticeDeletePro.jsp?no=<%=no %>'">글삭제</button>    
+    <button class="w3-button w3-baemint" onclick="location='NoticeList.jsp'">글목록</button>
+    <button class="w3-button w3-baemint" onclick="location='NoticeUpdateForm.jsp?no=<%=no %>'">글수정</button>
+    <button class="w3-button w3-baemint" onclick="location='NoticeDeletePro.jsp?no=<%=no %>'">글삭제</button>    
   </p>
   
 </div>

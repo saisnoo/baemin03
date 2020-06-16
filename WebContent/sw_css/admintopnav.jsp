@@ -11,15 +11,15 @@
 <%
 	Object no_ = session.getAttribute("no");
 	Object grade_ = session.getAttribute("grade");
-	Object name_ = session.getAttribute("name");
+	Object id_ = session.getAttribute("id");
 	System.out.println("no=" + no_);
 	System.out.println("grade_=" + grade_);
-	System.out.println("name_=" + name_);
+	System.out.println("id_=" + id_);
 	int grade = -1;
 	String name = "";
 
-	if (name_ != null) {
-		name = name_ + "";
+	if (id_ != null) {
+		name = id_ + "";
 	}
 %>
 
@@ -30,13 +30,13 @@
 <div class="topnav w3-card" id="topNav">
 	<a href="Main.jsp" class="w3-baemint active"> 베달의 민족 </a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a> <strong><%=name_%></strong> </a>
+	<a> <strong><%=id_%></strong> </a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="NoticeList.jsp">공지사항</a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a href="ShopList.jsp">매장목록</a>
+	<a href="ShopList.jsp">매장관리</a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a href="MemberList.jsp">회원목록</a>
+	<a href="MemberList.jsp">회원관리</a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="../util/logout.jsp">로그아웃</a>
 	<!-- -------------------------------------------------------------------------- -->
