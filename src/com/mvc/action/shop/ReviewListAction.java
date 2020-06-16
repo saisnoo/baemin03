@@ -1,5 +1,5 @@
 package com.mvc.action.shop;
 
-public class reviewListAction {
+public class ReviewListAction {
 
 }
