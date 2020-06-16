@@ -62,7 +62,6 @@ List<ShopDTO> list = dao.getListAll();
   }
 
 
-
 </style>
 
 

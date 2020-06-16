@@ -35,32 +35,32 @@ MemberDTO dto=dao.getDTO(memberNo);
 
 
   <p>      
-    <label class="w3-text-blue"><b>회원ID</b></label>
+    <label class="w3-text"><b>회원ID</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getId() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>회원이름</b></label>
+    <label class="w3-text"><b>회원이름</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getName() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>전화번호</b></label>
+    <label class="w3-text"><b>전화번호</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getTel() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>주소</b></label>
+    <label class="w3-text"><b>주소</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getAddr() %>&nbsp;<%=dto.getAddr2() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>가입일</b></label>
+    <label class="w3-text"><b>가입일</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getRegDate() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>회원등급</b></label>
+    <label class="w3-text"><b>회원등급</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getGrade() %>" readonly>
   </p>
 

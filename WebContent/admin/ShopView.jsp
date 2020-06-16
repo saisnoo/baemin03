@@ -39,32 +39,32 @@ System.out.println(dto.toString());
 
 
   <p>      
-    <label class="w3-text-blue"><b>매장번호</b></label>
+    <label class="w3-text"><b>매장번호</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getNo() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>매장이름</b></label>
+    <label class="w3-text"><b>매장이름</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getShopName() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>매장분류</b></label>
+    <label class="w3-text"><b>매장분류</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getShopCategory() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>매장주소</b></label>
+    <label class="w3-text"><b>매장주소</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getShopAddr() %>&nbsp;<%=dto.getShopAddr2() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>매장전화번호</b></label>
+    <label class="w3-text"><b>매장전화번호</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getShopTel() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>매장상태</b></label>
+    <label class="w3-text"><b>매장상태</b></label>
     <input class="w3-input w3-border" name="shopNo" id="shopNo" type="text" value="<%=dto.getShopStatus() %>" readonly>
   </p>
 
