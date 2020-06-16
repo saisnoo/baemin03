@@ -186,14 +186,15 @@ List<MemberDTO> list = dao.getListAll();
       
       <!-- Modal -->
 				<div id="id01" class="w3-modal">
-					<div class="w3-modal-content">
-						<div class="w3-container">
+					<div class="w3-modal-content sw-container-500">
+						<header class="w3-container"> 
 							<span
 								onclick="document.getElementById('id01').style.display='none'"
 								class="w3-button w3-display-topright">&times;</span>
-
+						    <h3 align="center">회원정보</h3>
+						</header>
+                        <div class="w3-container" id="con">
 							<div id="swsw"></div>
-
 						</div>
 					</div>
 				</div>

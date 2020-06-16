@@ -98,7 +98,7 @@ public class ShopDAO {
 			// 3. sql
 			String sql = " SELECT shop.no NO, shop.shopName shopName, shop.shopCategory shopCategory ,"
 					+ " shop.shopAddr shopAddr, shop.shopAddr2 shopAddr2 , shop.shopTel shopTel ,"
-					+ " shop.shopStatus shopStatus ,  shop.shopEx shopEx,"
+					+ " shop.shopStatus shopStatus ,  shop.shopEx shopEx, shop.id id, "
 					+ " AVG(rank) rank   from    shop LEFT JOIN review    on shop.no = review.shop_no "
 					+ " where shop.no = ?";
 			// 4. 실행객체
@@ -110,6 +110,7 @@ public class ShopDAO {
 			if (rs != null) {
 				while (rs.next()) {
 					dto.setNo(rs.getInt("no"));
+					dto.setId(rs.getString("id"));
 					dto.setShopName(rs.getString("shopName"));
 					dto.setShopCategory(rs.getString("shopCategory"));
 					dto.setShopEx(rs.getString("shopEx"));

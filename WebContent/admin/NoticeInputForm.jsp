@@ -23,15 +23,6 @@ System.out.println("------ NoticeInputForm.jsp --- ");
  
 <style>
  * { margin: 0px;   padding: 0px;  } 
- textarea {
-  width: 100%;
-  height: 150px;
-  padding: 10px 7px;
-  box-sizing: border-box;  
-  border-radius: 4px;  
-  font-size: 16px;
-  resize: none;
-}
 </style>
 <script>
 // 스크립트
@@ -41,16 +32,6 @@ System.out.println("------ NoticeInputForm.jsp --- ");
 <body>
 <!-- 내용 -->
 <h2> NoticeInputForm.jsp </h2><br>
-<%
- 
-%>
- 
-  
-
-
-
-
-
   
 <!-- responsive template by SW ----------------------------------------------------------- -->
 <!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -62,43 +43,42 @@ System.out.println("------ NoticeInputForm.jsp --- ");
 <div class="sw-center">
 <!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 <!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-<div class="sw-container-900">
+<div class="sw-container-500">
 <div class="w3-container">
 <!--  main content start here!!!----------------------------------------------------------- -->
 
 <div class="w3-card-4">
   <div class="w3-container w3-baemint">
-    <h2>공지사항쓰기</h2>    
+    <h2 align="center">공지사항쓰기</h2>    
   </div>
   
   <div class="w3-container w3-padding">
   <form class="w3-container" action="NoticeInputPro.jsp" name="noticeForm">
     
     <p>      
-      <label class="w3-text-cyan"><b>공지글제목</b></label>
-      <input class="w3-input w3-border w3-sand" name="title" id="title" type="text" required>
+      <label class="w3-text"><b>공지글제목</b></label>
+      <input class="w3-input w3-border" name="title" id="title" type="text" required>
     </p>
-    
+    <br>
     <p>        
-      <label class="w3-text-cyan"><b>공지글내용</b></label>
-      <textarea class="form-control w3-sand" rows="5" id="content" name="content"></textarea>    
+      <label class="w3-text"><b>공지글내용</b></label>
+      <textarea class="w3-input w3-border" rows="5" id="content" name="content"></textarea>    
     </p>
-    
+    <br>
     <p>
-      <label class="w3-text-cyan"><b>공지시작일</b></label>
-      <input class="w3-input w3-border w3-sand" name="startDate" id="startDate" type="date" required>
+      <label class="w3-text"><b>공지시작일</b></label>
+      <input class="w3-input w3-border" name="startDate" id="startDate" type="date" required>
     </p>
-    
+    <br>
      <p>
-      <label class="w3-text-cyan"><b>공지시작일</b></label>
-      <input class="w3-input w3-border w3-sand" name="endDate" id="endDate" type="date" required>
+      <label class="w3-text"><b>공지종료일</b></label>
+      <input class="w3-input w3-border" name="endDate" id="endDate" type="date" required>
     </p>
-    &nbsp;
     
-    <p>
-      <input type="submit" class="w3-button w3-cyan" value="확인">
-      <input type="button" class="w3-button w3-cyan" value="취소" onclick="history.back()">
-    </p>
+    <div class="w3-section w3-center">
+      <input type="submit" class="w3-button w3-baemint" value="확인">
+      <input type="button" class="w3-button w3-baemint" value="취소" onclick="history.back()">
+    </div>
     
   </form>
   </div>
