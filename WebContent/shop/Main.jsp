@@ -156,6 +156,10 @@ var max_no= 0;
 	}
 	
 	function tabtab2load(){
+		if($(".check_view").find("#menu_status").val()==1){
+			$(".check_view").attr("bgcolor","red");
+			
+		}
 		$("#SM").load("ShopManage.jsp");
 		openTab2(event, 'tabtab2');
 		setTimeout(function() {
@@ -291,12 +295,7 @@ var max_no= 0;
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
 
-				<div class="w3-row w3-black">
-					<a href="#" class="w3-button">
-						<h3>배달의 인종</h3>
-					</a>
-				</div>
-				<div class="w3-row w3-gray">
+				<div class="w3-row">
 					<div class="w3-quarter tablink2">
 						<button onclick="openTab2(event, 'tabtab1')" id="defaultOpen"
 							class="w3-button w3-block w3-border tablink2">
@@ -327,8 +326,8 @@ var max_no= 0;
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab1" class="w3-row w3-gray tabcontent2" onClick="refresh()">
-					<div class="tab w3-col" style="width: 100px;">
+				<div id="tabtab1" class="w3-row tabcontent2" onClick="refresh()">
+					<div class="w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="jumoontab">
 							접수대기<br /> <strong id="NewOrderCount"></strong>
@@ -346,9 +345,9 @@ var max_no= 0;
 							취소<br /> <strong id="CancelCount"></strong>
 						</button>
 					</div>
-					<div class="w3-rest w3-white scroll-box">
+					<div class="w3-rest w3-white">
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-						<div id="tab1" class="tabcontent">
+						<div id="tab1" class="tabcontent scroll-box">
 
 							<!-- 신규, 조리중 주문 목록  -->
 							<!-- 신규, 조리중 주문 목록  -->
@@ -360,7 +359,7 @@ var max_no= 0;
 
 						</div>
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-						<div id="tab2" class="tabcontent">
+						<div id="tab2" class="tabcontent scroll-box">
 
 
 							<!-- 배달중 목록 --//--/--/--/--/--/--/--/--/--/--/--/--/--/--/--/ -->
@@ -368,14 +367,14 @@ var max_no= 0;
 							<!-- 배달중 목록 끝  -->
 						</div>
 						<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-						<div id="tab3" class="tabcontent">
+						<div id="tab3" class="tabcontent scroll-box">
 							<!-- load  new order -/-/-/-/-/-/--/-/-/-/-/-/-/-/-/- -->
 
 
 							<!-- load  new order /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ -->
 
 						</div>
-						<div id="tab4" class="tabcontent">
+						<div id="tab4" class="tabcontent scroll-box">
 							<!-- cancel order -/-/-/-/-/-/--/-/-/-/-/-/-/-/-/- -->
 
 
@@ -446,7 +445,7 @@ var max_no= 0;
 
 						// Show the current tab, and add an "active" class to the button that opened the tab
 						document.getElementById(tab2Name).style.display = "block";
-						evt.currentTarget.className += " w3-baemint";
+						evt.currentTarget.className += "";
 					}
 
 					// Get the element with id="defaultOpen" and click on it
@@ -482,7 +481,7 @@ var max_no= 0;
 
 	<!-- 배달시작 Modal시작 -->
 	<div class="w3-modal" id="jumunReady">
-		<div class="w3-modal-content" style="width: 400px; height: 560px;">
+		<div class="w3-modal-content" style="width: 450px; height: 600px;">
 			<div class="w3-panel w3-black w3-display-container">
 				<span
 					onclick="document.getElementById('jumunReady').style.display='none'"
@@ -585,7 +584,7 @@ var max_no= 0;
 
 	<!--주문 취소 Modal시작 -->
 	<div class="w3-modal" id="jumunCancel">
-		<div class="w3-modal-content" style="width: 400px; height: 540px;">
+		<div class="w3-modal-content" style="width: 450px; height: 600px;">
 			<!-- 위에 패널 -->
 			<div class="w3-panel w3-black w3-display-container">
 				<span
@@ -730,39 +729,41 @@ var max_no= 0;
    
      <!-- Modal content 시작-->
      <div class="modal-content">
+			 <div class="w3-container w3-card">
        <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal">&times;</button>
-         <h3 class="modal-title">주문 메뉴 표시 유무</h3>
-       </div>
+			 <!-- 모달창 내용 -->
+					<div class="w3-section w3-center">
+					  <h2>메뉴추가</h2>
+					</div>
+       		
+       		     </div>
        <div class="modal-body">
-			 <div class="form-group">
-			 <!-- 글번호입력 -->
-			    <table>
-			    <tr>
-			    <td>메뉴이름</td>
-			    <td><input type="text" name="menuName"></td>
-			    </tr>
-			    <tr>
-			    <td>메뉴카테고리</td>
-			    <td><input type="text" name="menuCategory"></td>
-			    </tr>
-			    <tr>
-			    <td>메뉴설명</td>
-			    <td><input type="text" name="menuEx"></td>
-			    </tr>
-			    <tr>
-			    <td>메뉴가격</td>
-			    <td><input type="text" name="menuPrice"></td>
-			    </tr>
-			    </table>
-			    </div>
-       </div>
+						  <p>
+						  	<label><b>메뉴이름</b></label>
+							  <input type="text" class="w3-input w3-border" name="menuName">
+						  </p>
+						  <p>
+						  	<label><b>메뉴카테고리</b></label>
+							  <input type="text" class="w3-input w3-border" name="menuCategory">
+						  </p>
+						  <p>
+						  	<label><b>메뉴설명</b></label>
+						  	<textarea id="menuEx2" rows="5" class="w3-input w3-border" name="menuEx"></textarea>
+						  </p>
+						  <p>
+						  	<label><b>메뉴가격</b></label>
+							  <input type="text" class="w3-input w3-border" name="menuPrice">
+						  </p>
+			</div>
+
+		<!-- 모달창 내용 end -->
+  
        <div class="modal-footer">
-			<div class="btn-group">
-			  <button class="btn btn-default" id="add_menu_btn">추가</button>
-			  <button type="button" class="btn btn-default cancelBtn recan" data-dismiss="modal" id="take_cancle4" >닫기</button>
-			</div> 
+			  <button class="w3-button w3-baemint" id="add_menu_btn">추가</button>
+			  <button type="button" class="w3-button w3-baemint" data-dismiss="modal" id="take_cancle4" >닫기</button>
        </div>
+      </div>
      </div>
      <!-- Modal content end-->
    </div>
@@ -776,7 +777,8 @@ var max_no= 0;
 	 $("#add_menu_btn").click(function(){
 		 var menuName = $(":input:text[name=menuName]").val();
 		 var menuCategory = $(":input:text[name=menuCategory]").val();
-		 var menuEx = $(":input:text[name=menuEx]").val();
+		 //var menuEx = $(":input:text[name=menuEx]").val();
+		 var menuEx = $("#menuEx2").val();
 		 var menuPrice = $(":input:text[name=menuPrice]").val();
 		 console.log(menuName+"/"+menuCategory+"/"+menuEx+"/"+menuPrice);
 		 var data={
@@ -799,7 +801,7 @@ var max_no= 0;
 					console.log("메뉴추가 완료");
 					$(":input:text[name=menuName]").val("");
 					 $(":input:text[name=menuCategory]").val("");
-					 $(":input:text[name=menuEx]").val("");
+					 $("#menuEx2").val("");
 					 $(":input:text[name=menuPrice]").val("");
 				},
 				error : function(xhr,status,error){

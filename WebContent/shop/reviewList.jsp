@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td colspan="2"><customtag:starRank
-						rank="<%=shopdto.getRank()%>" width="210" /></td>
+						rank="<%=shopdto.getRank()%>" width="210" />&nbsp;&nbsp;<strong><font style="vertical-align:middle;" size="5"><%=shopdto.getRank()%></font></strong></td>
 			</tr>
 			<tr>
 				<td colspan="2">
