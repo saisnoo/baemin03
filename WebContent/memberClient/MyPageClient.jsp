@@ -65,6 +65,7 @@
 		int no = Integer.parseInt(no_ob + "");
 		MemberDAO dao = MemberDAO.getInstance();
 		MemberDTO dto = dao.getDTO(no);
+		request.setAttribute("dto", dto);
 	%>
 
 
@@ -87,28 +88,28 @@
 					</div>
 					  <div class="w3-panel w3-border-bottom">
 						  <label><b>이름 :</b></label>
-						  <p><%=dto.getName() %></p>
+						  <p>${dto.name }</p>
 					  </div>
 					  
 					  <div class="w3-panel w3-border-bottom">
 						  <label><b>아이디 :</b></label>
-						  <p><%=dto.getId() %></p>
+						  <p>${dto.id }</p>
 					  </div>
 					  
 					  <div class="w3-panel w3-border-bottom">
 						  <label><b>전화번호 :</b></label>
-						  <p><%=dto.getTel() %></p>
+						  <p>${dto.tel}</p>
 					  </div>
 					  
 					  <div class="w3-panel w3-border-bottom">
 						  <label><b>주소 :</b></label>
-						  <p><%=dto.getAddr() %></p>
-						  <p><%=dto.getAddr2() %></p>
+						  <p>${dto.addr }</p>
+						  <p>${dto.addr }</p>
 					  </div>
 					  
 					  <div class="w3-panel w3-border-bottom">
 						  <label><b>가입일 :</b></label>
-						  <p><%=dto.getRegDate() %></p>
+						  <p>${dto.regDate }</p>
 					  </div>
 					  <div class="w3-section w3-center">
 	   				  	<input class="w3-button w3-border w3-baemint" type="button" value="회원정보수정" onclick="location='UpdateClientForm.jsp'">
