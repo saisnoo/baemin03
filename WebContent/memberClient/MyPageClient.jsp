@@ -84,40 +84,39 @@
 				<!--사용자 마이 페이지-->
 				<div class="w3-container w3-card">
 					<div class="w3-section w3-center">
-					  <h2>회원정보</h2>
+					  <h2>회원정보수정</h2>
 					</div>
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>이름 :</b></label>
-						  <p>${dto.name }</p>
-					  </div>
+						  <p>
+						  	<label><b>이름</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.name }">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>아이디 :</b></label>
-						  <p>${dto.id }</p>
-					  </div>
+						  <p>
+						  	<label><b>아이디</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.id }">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>전화번호 :</b></label>
-						  <p>${dto.tel}</p>
-					  </div>
+						  <p>
+						  	<label><b>전화번호</b></label>
+							  <input type="text" class="w3-input w3-border" readonly name="tel" id="tel" value="${dto.tel }">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>주소 :</b></label>
-						  <p>${dto.addr }</p>
-						  <p>${dto.addr }</p>
-					  </div>
+						  <p>
+						  	<label><b>주소</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr }">
+							  
+						  	<label><b>상세주소</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr2 }">
+						  </p>
 					  
-					  <div class="w3-panel w3-border-bottom">
-						  <label><b>가입일 :</b></label>
-						  <p>${dto.regDate }</p>
-					  </div>
+					      <p>
+						  	<label><b>가입일</b></label>
+						      <input type="text" class="w3-input w3-border" readonly value="${dto.regDate }">
+						  </p>
 					  <div class="w3-section w3-center">
-	   				  	<input class="w3-button w3-border w3-baemint" type="button" value="회원정보수정">
-					  	<input class="w3-button w3-border w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
-					  <!-- ------------------------------------------------------------------------------------------------ -->
-						<button onClick="location = '../util/logout.jsp'"
-							class="w3-button w3-border w3-baemint">로그아웃</button>
-					  
+	   				  	<input class="w3-button w3-baemint" type="submit" value="회원정보수정">
+					  	<input class="w3-button w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
+	   				  	<input class="w3-button w3-baemint" type="button" value="로그아웃" onClick="location = '../util/logout.jsp'">
 					  </div>
 				</div>
 				<!-- main content end----------------------------------------------------------------------- -->

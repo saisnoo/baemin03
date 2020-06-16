@@ -140,7 +140,7 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 	<div class="sw-topnav-margin">&nbsp;</div>
 	<%-- 사이트 공통 부분 Include - topnav --%>
-	<jsp:include page="../sw_css/memberTopNav.jsp" />
+	<jsp:include page="../sw_css/topnav.jsp" />
 
 
 </body>
