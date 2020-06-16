@@ -90,7 +90,8 @@ request.setAttribute("review_list", review_list);
 				<p>&nbsp;</p>
 				<h2>
 					<strong> ${shopdto.shopName}</strong>
-					<div id="shop_No" style="display: none">${shopdto.no }</div>
+					<!-- ----------------------------------------------------- -->
+					<span id="shop_No" style="display: none">${shopdto.no }</span>
 				</h2>
 
 				<div class="sw-center" style="text-align: center;">
@@ -266,7 +267,7 @@ request.setAttribute("review_list", review_list);
 						</p>
 					</div>
 					<div class="w3-panel">
-						<p>${shopdto.shopAddr } &nbsp; ${shopdto.shopAddr2 }</p>
+						<p>${shopdto.shopAddr }&nbsp;${shopdto.shopAddr2 }</p>
 					</div>
 					<div class="w3-container w3-border-bottom w3-border-top w3-padding"
 						style="background-color: #EAEAEA;">
