@@ -50,17 +50,17 @@ for(int i=0;i<NewOrderCount;i++){
 				<%
 					if(dto.getStatus()==0){
 				%>
-				<button class="w3-button w3-blue h100" onclick="CookBtn(this)">주문접수<br>조리시작</button>
+				<button class="w3-button w3-baemint h100" onclick="CookBtn(this)">주문접수<br>조리시작</button>
 				<div class="count0" style="display:none;"><%=dto.getStatus() %></div>
 				<%
 					}else if(dto.getStatus()==1){
 				%>
-				<button class="w3-button w3-blue h100" onclick="baesongBtn(this)">배달출발</button>
+				<button class="w3-button w3-baemint h100" onclick="baesongBtn(this)">배달출발</button>
 				<div class="count1" style="display:none;"><%=dto.getStatus() %></div>
 				<%
 					}
 				%>
-				<button class="w3-button w3-yellow h100" onClick="cancelBtn(this)">주문취소</button>
+				<button class="w3-button w3-red h100" onClick="cancelBtn(this)">주문취소</button>
 			</div>
 			<!-- 오른쪽-->
 			<!-- 가운데 -->
