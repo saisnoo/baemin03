@@ -67,6 +67,7 @@
 		int no = Integer.parseInt(no_ob + "");
 		MemberDAO dao = MemberDAO.getInstance();
 		MemberDTO dto = dao.getDTO(no);
+		request.setAttribute("dto", dto);
 	%>
 
 
@@ -90,23 +91,23 @@
 					</div>
 						  <p>
 						  	<label><b>이름</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getName() %>">
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.name }">
 						  </p>
 					  
 						  <p>
 						  	<label><b>아이디</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getId() %>">
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.id }">
 						  </p>
 					  
 						  <p>
 						  	<label><b>전화번호</b></label>
-							  <input type="text" class="w3-input w3-border" name="tel" id="tel" value="<%=dto.getTel() %>">
+							  <input type="text" class="w3-input w3-border" name="tel" id="tel" value="${dto.tel }">
 						  </p>
 					  
 						  <p>
 						  	<label><b>주소</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getAddr() %>">
-							  <input type="text" class="w3-input w3-border" readonly value="<%=dto.getAddr2() %>">
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr }">
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr2 }">
 						  </p>
 					  
 						  <p>
@@ -115,7 +116,7 @@
 							  <input type="password" class="w3-input w3-border" size="10" id="password2" name="password2">
 						  </p>
 					  
-						  <input type="hidden" value="<%=dto.getRegDate() %>">
+						  <input type="hidden" value="${dto.regDate }">
 					  <div class="w3-section w3-center">
 	   				  	<input class="w3-button w3-border w3-baemint" type="submit" value="회원정보수정">
 	   				  	<input class="w3-button w3-border w3-baemint" type="reset" value="다시쓰기">

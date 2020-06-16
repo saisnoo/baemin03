@@ -62,6 +62,7 @@ function rePwCheck(){
 		int no = Integer.parseInt(no_ob + "");
 		ShopDAO dao = ShopDAO.getInstance();
 		ShopDTO dto = dao.getShopInfo(no);
+		request.setAttribute("dto", dto);
 	%>
 
 
@@ -90,43 +91,43 @@ function rePwCheck(){
 						name="clientMyPage">
 
 						<!--  -->
-						<label><b>아이디</b></label> <input class="w3-input w3-border" name="shopId" id="shopId" readonly="readonly" type="text" value="<%=dto.getId()%>">
+						<label><b>아이디</b></label> <input class="w3-input w3-border" name="shopId" id="shopId" readonly="readonly" type="text" value="${dto.id }">
 						<!--  -->
 						<br>
 						<!--  -->
 						<label><b>비밀번호</b></label>
 						<!--  -->
-						<input class="w3-input w3-border" name="shopPw" id="shopPw" readonly="readonly" type="password" value="<%=dto.getPw()%>">
+						<input class="w3-input w3-border" name="shopPw" id="shopPw" readonly="readonly" type="password" value="${dto.pw}">
 						<!--  -->
 						<br>
 						<!--  -->
 						<label><b>분류</b></label>
 						<!--  -->
-						<input class="w3-input w3-border" name="shopCategory" id="shopCategory" readonly="readonly" type="text" value="<%=dto.getShopCategory()%>">
+						<input class="w3-input w3-border" name="shopCategory" id="shopCategory" readonly="readonly" type="text" value="${dto.shopCategory}">
 						<!--  -->
 						<br>
 						<!--  -->
 						<label><b>매장명</b></label>
 						<!--  -->
-						<input class="w3-input w3-border" name="shopName" id="shopName" readonly="readonly" type="text" value="<%=dto.getShopName()%>">
+						<input class="w3-input w3-border" name="shopName" id="shopName" readonly="readonly" type="text" value="${dto.shopName}">
 						<!--  -->
 						<br>
 						<!--  -->
 						<label><b>전화번호</b></label>
 						<!--  -->
-						<input class="w3-input w3-border" name="shopTel" id="shopTel" readonly="readonly" type="text" value="<%=dto.getShopTel()%>">
+						<input class="w3-input w3-border" name="shopTel" id="shopTel" readonly="readonly" type="text" value="${dto.shopTel}">
 						<!--  -->
 						<br>
 						<!--  -->
 						<label><b>주소</b></label>
 						<!--  -->
-						<input class="w3-input w3-border" name="shopAddr" id="shopAddr" readonly="readonly" type="text" value="<%=dto.getShopAddr()%>">
+						<input class="w3-input w3-border" name="shopAddr" id="shopAddr" readonly="readonly" type="text" value="${dto.shopAddr}">
 						<!--  -->
 						<br>
 						<!--  -->
 						<label><b>상세주소</b></label>
 						<!--  -->
-						<input class="w3-input w3-border" name="shopAddr1" id="shopAddr1" readonly="readonly" type="text" value="<%=dto.getShopAddr2()%>">
+						<input class="w3-input w3-border" name="shopAddr1" id="shopAddr1" readonly="readonly" type="text" value="${dto.shopAddr2}">
 						<!--  -->
 						<br>
 						<div align="center">
@@ -156,7 +157,7 @@ function rePwCheck(){
 						<div class="w3-container">
 							<span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
 							<form method="post" action="UpdateShopPro.jsp" name="modalForm">
-								<input type="hidden" value="<%=dto.getNo()%>" name="no">
+								<input type="hidden" value="${dto.no }" name="no">
 								<p>비밀번호 변경</p>
 								<p>
 									<input type="password" name="pw" id="pw" onkeydown="rePwCheck()">
