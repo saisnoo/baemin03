@@ -1,27 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-
-<%
-	//자바 구문
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------admintopnav.jsp");
-%>
-
-<%
-	Object no_ = session.getAttribute("no");
-	Object grade_ = session.getAttribute("grade");
-	Object id_ = session.getAttribute("id");
-	System.out.println("no=" + no_);
-	System.out.println("grade_=" + grade_);
-	System.out.println("id_=" + id_);
-	int grade = -1;
-	String name = "";
-
-	if (id_ != null) {
-		name = id_ + "";
-	}
-%>
 
 
 
@@ -30,7 +8,7 @@
 <div class="topnav w3-card" id="topNav">
 	<a href="Main.jsp" class="w3-baemint active"> 베달의 민족 </a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a> <strong><%=id_%></strong> </a>
+	<a> <strong>${sessionScope.id }</strong> </a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="NoticeList.jsp">공지사항</a>
 	<!-- -------------------------------------------------------------------------- -->
