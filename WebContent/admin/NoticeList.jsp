@@ -114,10 +114,9 @@ List<NoticeDTO> list = dao.getList();
 
 <div id="ys">
 <table class="w3-table w3-bordered" id="myTable">
-
   <tr>
-    <th width="15%"><div class="th-text">#</div></th>
-    <th width="50%"><div class="th-text">공지글제목</div></th>
+    <th width="15%"><div class="th-text">NO</div></th>
+    <th width="50%"><div class="th-text">제목</div></th>
     <th width="35%"><div class="th-text">공지일</div></th>    
   </tr>
   
