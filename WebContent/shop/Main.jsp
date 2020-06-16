@@ -156,10 +156,6 @@ var max_no= 0;
 	}
 	
 	function tabtab2load(){
-		if($(".check_view").find("#menu_status").val()==1){
-			$(".check_view").attr("bgcolor","red");
-			
-		}
 		$("#SM").load("ShopManage.jsp");
 		openTab2(event, 'tabtab2');
 		setTimeout(function() {
