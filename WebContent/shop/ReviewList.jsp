@@ -53,7 +53,7 @@
 				</tr>
 			</table>
 			<table id="reviewCell" class="w3-table">
-				<c:forEach var="dto" items="reviewList">
+				<c:forEach var="dto" items="${reviewList}">
 				<tr style="border:1px solid black;">
 					<td style="width: 15%">${dto.Member_no}</td>
 					<td style="width: 25%">
