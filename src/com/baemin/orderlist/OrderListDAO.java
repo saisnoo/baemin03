@@ -402,16 +402,38 @@ public class OrderListDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, member_no, completeTime, Group_concat( aaa SEPARATOR  ' / ') menuString"
-					+ " FROM(" + " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ("
+			String sql = "SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, member_no, completeTime, whyCancel, Group_concat( aaa SEPARATOR  ' / ') menuString"
+					+ "  FROM(" + "  SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ("
 					+ "  SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
-					+ " orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT, orderlist.shop_no shop_no, orderlist.member_no member_No,"
-					+ " orderlist.completeTime completeTime , member.tel , "
-					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, menu.menuPrice menuPrice"
-					+ " FROM orderlist, order_menu, menu , member" + " WHERE member.no = 2"
-					+ " AND orderlist.no  = order_menu.orderlist_No" + " AND order_menu.menu_No = menu.no"
-					+ " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
-					+ " ) CNT )CNT GROUP BY NO;";
+					+ "  orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT, orderlist.shop_no shop_no, orderlist.member_no member_No,"
+					+ "orderlist.completeTime completeTime , member.tel , order_cancel.whyCancel ,"
+					+ "  order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, menu.menuPrice menuPrice"
+					+ "  FROM orderlist, order_menu, menu , member, order_cancel" + "  WHERE member.no = ?"
+					+ "AND orderlist.no = order_cancel.orderlist_No" + "AND orderlist.no  = order_menu.orderlist_No "
+					+ "AND order_menu.menu_No = menu.no" + "  AND member.no = orderlist.member_no"
+					+ "  ORDER BY orderlist.orderdate ASC , orderlist.no asc" + "  ) CNT )CNT GROUP BY NO;";
+
+			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no,
+			// member_no, completeTime, whyCancel, Group_concat( aaa SEPARATOR ' / ')
+			// menuString
+			// FROM(
+			// SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM (
+			// SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT(
+			// orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS,
+			// orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT,
+			// orderlist.shop_no shop_no, orderlist.member_no member_No,
+			// orderlist.completeTime completeTime , member.tel , order_cancel.whyCancel ,
+			// order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName,
+			// menu.menuPrice menuPrice
+			// FROM orderlist, order_menu, menu , member, order_cancel
+			// WHERE member.no = 2
+			// AND orderlist.no = order_cancel.orderlist_No
+			// AND orderlist.no = order_menu.orderlist_No
+			// AND order_menu.menu_No = menu.no
+			// AND member.no = orderlist.member_no
+			// ORDER BY orderlist.orderdate ASC , orderlist.no asc
+			// ) CNT )CNT GROUP BY NO;
+
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
@@ -574,7 +596,7 @@ public class OrderListDAO {
 					+ " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
 					+ "AND order_menu.menu_No = menu.no " + "  AND orderlist.STATUS = 2 "
 					+ " AND orderlist.completeTime > NOW() " + " AND member.no = orderlist.member_no "
-					+ "ORDER BY orderlist.orderdate ASC , orderlist.no asc " + " ) CNT " + ")CNT " + " GROUP BY no; ";
+					+ "ORDER BY orderlist.orderdate ASC , orderlist.no asc " + " ) CNT " + ")CNT " + " GROUP BY no ";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
 			// shop_no,
@@ -676,7 +698,7 @@ public class OrderListDAO {
 					+ " AND order_menu.menu_No = menu.no" + " AND status = 2" + " AND orderlist.completeTime < NOW() "
 					+ " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and now() "
 					+ " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
-					+ " ) CNT" + " )CNT" + " GROUP BY no;";
+					+ " ) CNT" + " )CNT" + " GROUP BY no";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
 			// shop_no,
@@ -761,25 +783,25 @@ public class OrderListDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, "
-					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + " FROM( "
-					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
-					+ " SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
-					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
-					+ " orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT, "
-					+ " orderlist.shop_no shop_no, orderlist.member_no member_No, "
-					+ " orderlist.completeTime completeTime , member.tel , "
-					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice " + " FROM orderlist, order_menu, menu , member "
-					+ " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
-					+ " AND order_menu.menu_No = menu.no " + " AND STATUS = -1 "
-					+ " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24 HOUR)) and now() "
-					+ " AND member.no = orderlist.member_no " + " ORDER BY orderlist.orderdate ASC , orderlist.no asc "
-					+ " ) CNT  )CNT GROUP BY no; ";
+			String sql = "SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT," + " shop_no, "
+					+ " member_no, whycancel, completeTime, Group_concat( aaa SEPARATOR ' / ')" + " menuString"
+					+ " FROM(" + " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ("
+					+ " SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT("
+					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS,"
+					+ " orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment"
+					+ " COMMENT, orderlist.shop_no shop_no, orderlist.member_no member_No,"
+					+ " orderlist.completeTime completeTime , member.tel ,"
+					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName"
+					+ " menuName, order_cancel.whycancel whycancel, menu.menuPrice menuPrice"
+					+ " FROM orderlist, order_menu, menu , member, order_cancel" + " WHERE orderlist.shop_no = 1"
+					+ " AND orderlist.no = order_menu.orderlist_No" + " AND order_menu.menu_No = menu.no"
+					+ " AND STATUS = -1" + " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24"
+					+ " HOUR)) and	now()" + " AND member.no = orderlist.member_no"
+					+ " ORDER BY orderlist.orderdate ASC , orderlist.no asc" + " ) CNT )CNT GROUP BY no";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
 			// shop_no,
-			// member_no, completeTime, Group_concat( aaa SEPARATOR ' / ')
+			// member_no, whycancel, completeTime, Group_concat( aaa SEPARATOR ' / ')
 			// menuString
 			// FROM(
 			// SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM (
@@ -790,9 +812,9 @@ public class OrderListDAO {
 			// orderlist.shop_no shop_no, orderlist.member_no member_No,
 			// orderlist.completeTime completeTime , member.tel ,
 			// order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName
-			// menuName,
+			// menuName, order_cancel.whycancel whycancel,
 			// menu.menuPrice menuPrice
-			// FROM orderlist, order_menu, menu , member
+			// FROM orderlist, order_menu, menu , member, order_cancel
 			// WHERE orderlist.shop_no = 1
 			// AND orderlist.no = order_menu.orderlist_No
 			// AND order_menu.menu_No = menu.no
@@ -803,6 +825,7 @@ public class OrderListDAO {
 			// AND member.no = orderlist.member_no
 			// ORDER BY orderlist.orderdate ASC , orderlist.no asc
 			// ) CNT )CNT GROUP BY no;
+
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
