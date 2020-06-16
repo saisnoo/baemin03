@@ -5,8 +5,8 @@ import javax.sql.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class OrderListDAO {
 
@@ -132,8 +132,7 @@ public class OrderListDAO {
 			// 여러개 입력 문 만들기
 			for (int i = 0; i < menuList.size(); i++) {
 				Order_MenuDTO o = menuList.get(i);
-				sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , "
-						+ o.getCount() + " ) ,";
+				sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
 				System.out.println(sql);
 			}
 			sql += ",,,";
@@ -174,8 +173,7 @@ public class OrderListDAO {
 			con.setAutoCommit(false);
 			// ---------------------------------------------------------------------------------------
 			// 3. sql
-			String sql = "select shopstatus from shop WHERE no ="
-					+ dto.getShop_NO();
+			String sql = "select shopstatus from shop WHERE no =" + dto.getShop_NO();
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
 			System.out.println(sql);
@@ -227,8 +225,7 @@ public class OrderListDAO {
 				// 여러개 입력 문 만들기
 				for (int i = 0; i < menuList.size(); i++) {
 					Order_MenuDTO o = menuList.get(i);
-					sql += " ( " + orderList_No + " , " + o.getMenu_No()
-							+ " , " + o.getCount() + " ) ,";
+					sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
 					System.out.println(sql);
 				}
 				sql += ",,,";
@@ -264,8 +261,8 @@ public class OrderListDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update orderlist set  status = 1 , completeTime = DATE_ADD( NOW() , Interval "
-					+ minute + " minute) where no = ? ";
+			String sql = "update orderlist set  status = 1 , completeTime = DATE_ADD( NOW() , Interval " + minute
+					+ " minute) where no = ? ";
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
@@ -406,7 +403,7 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "select orderlist.no no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-					+ " status, orderList, completeTime, whyCancel, addr, addr2, comment "
+					+ " status,  completeTime, whyCancel, addr, addr2, comment "
 					+ " from orderlist LEFT JOIN order_cancel ON  orderlist.no = order_cancel.orderlist_no WHERE "
 					+ " member_No = ? order by status asc, orderdate desc ";
 			System.out.println(sql);
@@ -425,7 +422,6 @@ public class OrderListDAO {
 					dto.setMember_No(rs.getInt("member_no"));
 					dto.setOrderDate(rs.getString("orderdate"));
 					dto.setStatus(rs.getInt("status"));
-					dto.setOrderList(rs.getString("orderlist"));
 					dto.setCompleteTime(rs.getString("completeTime"));
 					dto.setWhyCancel(rs.getString("whyCancel"));
 					dto.setAddr(rs.getString("addr"));
@@ -453,8 +449,7 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no,"
-					+ "  member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString"
-					+ " FROM("
+					+ "  member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString" + " FROM("
 					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ("
 					+ "SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT("
 					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS,"
@@ -462,14 +457,10 @@ public class OrderListDAO {
 					+ " orderlist.shop_no shop_no, orderlist.member_no member_No,"
 					+ " orderlist.completeTime completeTime , member.tel ,"
 					+ "  order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName,"
-					+ " menu.menuPrice menuPrice"
-					+ " FROM orderlist, order_menu, menu , member"
-					+ "  WHERE orderlist.shop_no = ?"
-					+ " AND orderlist.no = order_menu.orderlist_No"
-					+ " AND order_menu.menu_No = menu.no"
-					+ " AND orderlist.STATUS BETWEEN 0 AND 1"
-					+ " AND member.no = orderlist.member_no"
-					+ "   ORDER BY orderlist.orderdate ASC , orderlist.no asc"
+					+ " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member"
+					+ "  WHERE orderlist.shop_no = ?" + " AND orderlist.no = order_menu.orderlist_No"
+					+ " AND order_menu.menu_No = menu.no" + " AND orderlist.STATUS BETWEEN 0 AND 1"
+					+ " AND member.no = orderlist.member_no" + "   ORDER BY orderlist.orderdate ASC , orderlist.no asc"
 					+ "   ) CNT" + " )CNT" + " GROUP BY NO";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
@@ -520,6 +511,17 @@ public class OrderListDAO {
 					dto.setMember_No(rs.getInt("member_no"));
 					dto.setCompleteTime(rs.getString("completeTime"));
 					dto.setMenu_String(rs.getString("menuString"));
+
+					int count = 1;
+					StringTokenizer str = new StringTokenizer(dto.getMenu_String(), "/", true);
+					while (str.hasMoreTokens()) {
+						String data = str.nextToken();
+						if (data.equals("/")) {
+							count++;
+						}
+					}
+					dto.setCount(count);
+
 					list.add(dto);
 				}
 			}
@@ -542,8 +544,7 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, "
-					+ "member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString "
-					+ "FROM( "
+					+ "member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + "FROM( "
 					+ "SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
 					+ "SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
 					+ "orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
@@ -551,16 +552,11 @@ public class OrderListDAO {
 					+ "  orderlist.shop_no shop_no, orderlist.member_no member_No, "
 					+ "  orderlist.completeTime completeTime , member.tel , "
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice "
-					+ "FROM orderlist, order_menu, menu , member "
-					+ " WHERE orderlist.shop_no = ? "
-					+ " AND orderlist.no = order_menu.orderlist_No "
-					+ "AND order_menu.menu_No = menu.no "
-					+ "  AND orderlist.STATUS = 2 "
-					+ " AND orderlist.completeTime > NOW() "
-					+ " AND member.no = orderlist.member_no "
-					+ "ORDER BY orderlist.orderdate ASC , orderlist.no asc "
-					+ " ) CNT " + ")CNT " + " GROUP BY no; ";
+					+ " menu.menuPrice menuPrice " + "FROM orderlist, order_menu, menu , member "
+					+ " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
+					+ "AND order_menu.menu_No = menu.no " + "  AND orderlist.STATUS = 2 "
+					+ " AND orderlist.completeTime > NOW() " + " AND member.no = orderlist.member_no "
+					+ "ORDER BY orderlist.orderdate ASC , orderlist.no asc " + " ) CNT " + ")CNT " + " GROUP BY no; ";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
 			// shop_no,
@@ -611,6 +607,17 @@ public class OrderListDAO {
 					dto.setMember_No(rs.getInt("member_no"));
 					dto.setCompleteTime(rs.getString("completeTime"));
 					dto.setMenu_String(rs.getString("menuString"));
+
+					int count = 1;
+					StringTokenizer str = new StringTokenizer(dto.getMenu_String(), "/", true);
+					while (str.hasMoreTokens()) {
+						String data = str.nextToken();
+						if (data.equals("/")) {
+							count++;
+						}
+					}
+					dto.setCount(count);
+
 					list.add(dto);
 				}
 			}
@@ -638,8 +645,7 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no,"
-					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString "
-					+ "  FROM("
+					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + "  FROM("
 					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
 					+ "  SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
 					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
@@ -647,16 +653,11 @@ public class OrderListDAO {
 					+ "  orderlist.shop_no shop_no, orderlist.member_no member_No, "
 					+ " orderlist.completeTime completeTime , member.tel , "
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice"
-					+ " FROM orderlist, order_menu, menu , member "
-					+ "  WHERE orderlist.shop_no = ? "
-					+ " AND orderlist.no = order_menu.orderlist_No "
-					+ " AND order_menu.menu_No = menu.no"
-					+ " AND status = 2"
-					+ " AND orderlist.completeTime < NOW() "
+					+ " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member "
+					+ "  WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
+					+ " AND order_menu.menu_No = menu.no" + " AND status = 2" + " AND orderlist.completeTime < NOW() "
 					+ " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and now() "
-					+ " AND member.no = orderlist.member_no"
-					+ " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
+					+ " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
 					+ " ) CNT" + " )CNT" + " GROUP BY no;";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
@@ -709,6 +710,17 @@ public class OrderListDAO {
 					dto.setMember_No(rs.getInt("member_no"));
 					dto.setCompleteTime(rs.getString("completeTime"));
 					dto.setMenu_String(rs.getString("menuString"));
+
+					int count = 1;
+					StringTokenizer str = new StringTokenizer(dto.getMenu_String(), "/", true);
+					while (str.hasMoreTokens()) {
+						String data = str.nextToken();
+						if (data.equals("/")) {
+							count++;
+						}
+					}
+					dto.setCount(count);
+
 					list.add(dto);
 				}
 			}
@@ -732,8 +744,7 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, "
-					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString "
-					+ " FROM( "
+					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + " FROM( "
 					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
 					+ " SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
 					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
@@ -741,15 +752,11 @@ public class OrderListDAO {
 					+ " orderlist.shop_no shop_no, orderlist.member_no member_No, "
 					+ " orderlist.completeTime completeTime , member.tel , "
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice "
-					+ " FROM orderlist, order_menu, menu , member "
-					+ " WHERE orderlist.shop_no = ? "
-					+ " AND orderlist.no = order_menu.orderlist_No "
-					+ " AND order_menu.menu_No = menu.no "
-					+ " AND STATUS = -1 "
+					+ " menu.menuPrice menuPrice " + " FROM orderlist, order_menu, menu , member "
+					+ " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
+					+ " AND order_menu.menu_No = menu.no " + " AND STATUS = -1 "
 					+ " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24 HOUR)) and now() "
-					+ " AND member.no = orderlist.member_no "
-					+ " ORDER BY orderlist.orderdate ASC , orderlist.no asc "
+					+ " AND member.no = orderlist.member_no " + " ORDER BY orderlist.orderdate ASC , orderlist.no asc "
 					+ " ) CNT  )CNT GROUP BY no; ";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
@@ -800,6 +807,17 @@ public class OrderListDAO {
 					dto.setMember_No(rs.getInt("member_no"));
 					dto.setCompleteTime(rs.getString("completeTime"));
 					dto.setMenu_String(rs.getString("menuString"));
+
+					int count = 1;
+					StringTokenizer str = new StringTokenizer(dto.getMenu_String(), "/", true);
+					while (str.hasMoreTokens()) {
+						String data = str.nextToken();
+						if (data.equals("/")) {
+							count++;
+						}
+					}
+					dto.setCount(count);
+
 					list.add(dto);
 				}
 			}
@@ -836,8 +854,7 @@ public class OrderListDAO {
 	}
 
 	// close 1
-	static final void close(Connection con, PreparedStatement pstmt,
-			ResultSet rs) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt, ResultSet rs) throws Exception {
 		close(con, pstmt);
 		if (rs != null) {
 			rs.close();
@@ -845,8 +862,7 @@ public class OrderListDAO {
 	} // close () end
 
 	// close 2
-	static final void close(Connection con, PreparedStatement pstmt)
-			throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt) throws Exception {
 		if (con != null) {
 			con.close();
 		}
