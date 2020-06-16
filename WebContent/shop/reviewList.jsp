@@ -26,17 +26,18 @@
 		<table class="w3-table">
 			<tr>
 				<td colspan="2">
-					<div class="w3-panel w3-xlarge w3-baemint" style="margin-top: 0px;">평균별점</div>
+					<div class="w3-panel w3-xlarge w3-baemint" style="margin-top:0px; padding: 5px 0px 5px 5px;"
+						>평균별점</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2"><customtag:starRank
-						rank="<%=shopdto.getRank()%>" width="210" /></td>
+						rank="<%=shopdto.getRank()%>" width="210" />&nbsp;&nbsp;<strong><font style="vertical-align:middle;" size="5"><%=shopdto.getRank()%></font></strong></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<div class="w3-panel w3-xlarge w3-baemint" style="margin-top: 0px;">지난
-						24시간 판매정보</div>
+					<div class="w3-panel w3-xlarge w3-baemint"
+						style="padding: 5px 0px 5px 5px;">지난 24시간 판매정보</div>
 				</td>
 			</tr>
 			<tr>
@@ -53,33 +54,33 @@
 	<!-- 왼쪽 half 끝 -->
 	<!-- 오른쪽 half -->
 	<div class="w3-half w3-padding">
-		<table id="reviewCell" class="w3-table">
-			<tr id="reviewHead" class="w3-baemint">
-				<td>회원번호</td>
-				<td>별점</td>
-				<td>등록일</td>
-				<td>내용</td>
-			</tr>
-			<%
-				for (int i = 0; i < reviewList.size(); i++) {
-							ReviewDTO dto = reviewList.get(i);
-							System.out.println(dto.toString());
-			%>
-			<tr style="border: 1px solid black;">
-				<td style="width: 15%"><%=dto.getMember_no()%></td>
-				<td style="width: 25%">
-					<!-- 별점 이미지 --> <span width="100px"> <customtag:starRank
-							rank="<%=(double) dto.getRank()%>" width="100" />
-				</span>
-				</td>
-				<!-- 별점 이미지 -->
-				<td style="width: 30%"><%=dto.getRegDate()%></td>
-				<td style="width: 30%"><%=dto.getContent()%></td>
-			</tr>
-			<%
-				}//for end
-			%>
-		</table>
+			<table id="reviewCell" class="w3-table">
+				<tr id="reviewHead" class="w3-baemint">
+					<td>회원번호</td>
+					<td>별점</td>
+					<td>등록일</td>
+					<td>내용</td>
+				</tr>
+				<%
+					for (int i = 0; i < reviewList.size(); i++) {
+						ReviewDTO dto = reviewList.get(i);
+						System.out.println(dto.toString());
+				%>
+				<tr style="border:1px solid black;">
+					<td style="width: 15%"><%=dto.getMember_no()%></td>
+					<td style="width: 25%">
+						<!-- 별점 이미지 --> <span width="100px"> <customtag:starRank
+								rank="<%=(double) dto.getRank()%>" width="100" />
+					</span>
+					</td>
+					<!-- 별점 이미지 -->
+					<td style="width: 30%"><%=dto.getRegDate()%></td>
+					<td style="width: 30%"><%=dto.getContent()%></td>
+				</tr>
+				<%
+					}//for end
+				%>
+			</table>
 	</div>
 	<!-- 오른쪽 half -->
 </div>
