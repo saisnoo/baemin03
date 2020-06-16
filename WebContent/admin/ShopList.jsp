@@ -173,12 +173,12 @@ List<ShopDTO> list = dao.getListAll();
 
 				<!-- Modal -->
 				<div id="id01" class="w3-modal">
-					<div class="w3-modal-content">
-						<header class="w3-container w3-light-gray"> 
+					<div class="w3-modal-content sw-container-500">
+						<header class="w3-container"> 
 							<span
 								onclick="document.getElementById('id01').style.display='none'"
 								class="w3-button w3-display-topright">&times;</span>
-						    <h4 align="center">매장정보</h4>
+						    <h3 align="center">매장정보</h3>
 						</header>
                         <div class="w3-container" id="con">
 							<div id="swsw"></div>

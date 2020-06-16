@@ -66,9 +66,11 @@
 	System.out.println();
 
 	cartmgr.emptyCart();
+	
+	request.setAttribute("result", result);
 %>
 
-<div id="result" style="display: none"><%=result%></div>
+<div id="result" style="display: none">${result }</div>
 
 
 <script>
