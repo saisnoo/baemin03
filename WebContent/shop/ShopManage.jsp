@@ -6,36 +6,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	//자바 구문
-request.setCharacterEncoding("UTF-8");
-System.out.println("------ShopManage.jsp");
 
-
-Object no=session.getAttribute("no");
-
-
-int shopNo=Integer.parseInt(no+""); 
-System.out.println("shopmanage = " + shopNo);
-MenuDAO menudao=MenuDAO.getInstance();
-ShopDAO shopdao=ShopDAO.getInstance();
-ShopDTO shopdto=shopdao.getShopInfo(shopNo);
-List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shopNo); 
-
-
-ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
-%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		if (<%=shopdto.getShopStatus()==0%>) {
+		alert(${shopdto.shopStatus});
+		if (${shopdto.shopStatus} == 0) {
 			$("#magam").hide();
 			$("#addmenu").show();
 			$("#shopOpen").show();
 
 		}
-		if (<%=shopdto.getShopStatus()==1%>) {
+		if (${shopdto.shopStatus} == 1) {
 			$("#magam").show();
 			$("#addmenu").hide();
 			$("#shopOpen").hide();
@@ -58,7 +41,7 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 				<button type="button" class="w3-button w3-red" id="magam">영업종료</button>
 				<button type="button" class="w3-button w3-baemint" id="addmenu"
 					onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
-				<input type="hidden" name="addmenu_no" value="<%=shopNo%>">
+				<input type="hidden" name="addmenu_no" value="${shopNo}">
 			</div>
 		</div>
 
@@ -99,24 +82,24 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 		<div class="scroll-box" style="height: 380px;">
 			<table class="w3-table" id="myTable">
 				<c:forEach var="menudto" items="${list}">
-				<c:if test="${shopdto.getShopStatus()==0 }">
+				<c:if test="${shopdto.ShopStatus()==0 }">
 				<tr class="w3-hover-black check_view" data-toggle="modal"
-					data-target="#check_viewmenu" style="cursor: pointer;">
+					data-tar="#check_viewmenu" style="cursor: pointer;">
 					</c:if>
 				
-				<c:if test="${shopdto.getShopStatus()==1 }">
+				<c:if test="${shopdto.ShopStatus()==1 }">
 				
 				<tr class="scroll-box check_view">
 				</c:if>
-					<td style="width: 30%">${menudto.getMenuName()}
-					<input type="hidden" value="${menudto.getNo()}" id="menu_no">
-					<input type="hidden" value="${menudto.getMenuStatus()}" id="menu_status"></td>
-					<td style="width: 30%">${menudto.getMenuCategory()}</td>
-					<td style="width: 25%">${menudto.getMenuPrice()}</td>
-				<c:if test="${menudto.getMenuStatus()==1 }">
+					<td style="width: 30%">${menudto.MenuName()}
+					<input type="hidden" value="${menudto.No()}" id="menu_no">
+					<input type="hidden" value="${menudto.MenuStatus()}" id="menu_status"></td>
+					<td style="width: 30%">${menudto.MenuCategory()}</td>
+					<td style="width: 25%">${menudto.MenuPrice()}</td>
+				<c:if test="${menudto.MenuStatus()==1 }">
 					<td	style="text-align:center; width: 15%">O</td>
 				</c:if>
-				<c:if test="${menudto.getMenuStatus()==0 }">
+				<c:if test="${menudto.MenuStatus()==0 }">
 					<td	style="text-align:center; color:red; width: 15%">X</td>
 				</c:if>
 				</tr>
@@ -131,9 +114,7 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 
 
 <script>
-	if (
-<%=shopdto.getShopStatus()==0%>
-	) {
+	if (${shopdto.ShopStatus()==0}) {
 		$(function() {
 			$(".check_view")
 					.click(
@@ -183,12 +164,8 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 
 	$("#shopOpen").click(function() {
 		console.log("shopopen이 눌러졌다");
-		var shopNo =
-<%=shopdto.getNo()%>
-	;
-		var shopstatus =
-<%=shopdto.getShopStatus()%>
-	;
+		var shopNo =${shopdto.No()};
+		var shopstatus =${shopdto.ShopStatus()};
 		$.ajax({
 			type : "post",
 			url : "ShopOpenPro.jsp",
@@ -216,11 +193,9 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 	});
 	$("#magam").click(function() {
 		console.log("shopmagam이 눌러졌다");
-		var shopNo =
-<%=shopdto.getNo()%>
+		var shopNo =${shopdto.No()}
 	;
-		var shopstatus =
-<%=shopdto.getShopStatus()%>
+		var shopstatus =${shopdto.ShopStatus()}
 	;
 		$.ajax({
 			type : "post",

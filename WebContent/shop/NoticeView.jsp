@@ -4,16 +4,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ NoticeView.jsp --- ");
-
-	int no = Integer.parseInt(request.getParameter("no"));
-	NoticeDAO dao = NoticeDAO.getInstance();
-	NoticeDTO dto = dao.viewNotice(no);
-	System.out.println(dto.toString());
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,27 +54,27 @@
 
  <p>      
     <label class="w3-text-blue"><b>글번호</b></label>
-    <input class="w3-input w3-border" name="no" id="no" type="text" value="${dto.getNo()}" readonly>
+    <input class="w3-input w3-border" name="no" id="no" type="text" value="${dto.No()}" readonly>
   </p>
   
   <p>      
     <label class="w3-text-blue"><b>글제목</b></label>
-    <input class="w3-input w3-border" name="title" name="title" type="text" value="${dto.getTitle()}" readonly>
+    <input class="w3-input w3-border" name="title" name="title" type="text" value="${dto.Title()}" readonly>
   </p>
   
   <p>      
     <label class="w3-text-blue"><b>글내용</b></label>
-    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly>${dto.getContent()}</textarea>
+    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly>${dto.Content()}</textarea>
   </p>
   
    <p>      
     <label class="w3-text-blue"><b>작성일</b></label>
-    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="${dto.getStartDate()}" readonly>
+    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="${dto.StartDate()}" readonly>
   </p>
   
    <p>      
     <label class="w3-text-blue"><b>종료일</b></label>
-    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="${dto.getEndDate()}" readonly>
+    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="${dto.EndDate()}" readonly>
   </p>  
   &nbsp;
     
