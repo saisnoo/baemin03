@@ -32,8 +32,9 @@ public class OrderListDTO {
     /// JOIN
     private String menu_String; // 리스트 불러올때
     private List<Order_MenuDTO> menuList; // 주문 넣을때 전달 객체
+    private int count;
 
     //// 삭제 예정
-    private String orderList; // 메뉴, 수량
+    // private String orderList; // 메뉴, 수량
 
 }
