@@ -39,7 +39,10 @@
 	if (list.size() < 1) {
 %>
 <div class="w3-container w3-center">
-<i class="fa fa-ban" style="font-size:70px;color:red"></i>
+<%-- 칸 띄우기 --%>
+<br><br><br><br><br><br>
+
+<i class="fa fa-ban" style="font-size:70px;color:red" ></i>
 <p> 죄송합니다 </p>
 <p> 근처에 가까운 매장이 없습니다. </p>
 </div>

@@ -104,8 +104,8 @@ List<NoticeDTO> list = dao.getList();
 
 						<tr>
 							<th><div class="th-text">#</div></th>
-							<th width="50%"><div class="th-text">공지글제목</div></th>
-							<th width="30%"><div class="th-text">공지일</div></th>							
+							<th width="55%"><div class="th-text">공지글제목</div></th>
+							<th width="45%"><div class="th-text">공지일</div></th>							
 						</tr>
 
 						<%
