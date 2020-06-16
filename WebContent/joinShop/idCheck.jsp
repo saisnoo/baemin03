@@ -13,11 +13,9 @@
 
 
 <%
-	String shopID = request.getParameter("shopID");
-	String shopPW = request.getParameter("shopPW");
+	String shopID = request.getParameter("id");
 
 	System.out.println("shopID=" + shopID);
-	System.out.println("shopPW=" + shopPW);
 
 	ShopDAO dao = ShopDAO.getInstance();
 int result = dao.idCheck(shopID);
