@@ -32,18 +32,12 @@
 <!-- CDN - W3CSS -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<style>
-* {
-	margin: 0px;
-	padding: 0px;
-}
-</style>
 <script>
 	// 스크립트
 </script>
 </head>
 <body>
-
+	<!-- 내용 -->
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -53,46 +47,40 @@
 	<div class="sw-center">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-		<div class="sw-container-900">
+		<div class="sw-container-500">
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
   
-<div class="w3-card-4 w3-light-gray">
+<div class="w3-card-4 w3-border">
 <div class="main w3-padding">
 
  <p>      
-    <label class="w3-text-blue"><b>글번호</b></label>
+    <label class="w3-text"><b>글번호</b></label>
     <input class="w3-input w3-border" name="no" id="no" type="text" value="<%=dto.getNo() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>글제목</b></label>
+    <label class="w3-text"><b>글제목</b></label>
     <input class="w3-input w3-border" name="title" name="title" type="text" value="<%=dto.getTitle() %>" readonly>
   </p>
   
   <p>      
-    <label class="w3-text-blue"><b>글내용</b></label>
+    <label class="w3-text"><b>글내용</b></label>
     <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly><%=dto.getContent() %></textarea>
   </p>
   
    <p>      
-    <label class="w3-text-blue"><b>작성일</b></label>
+    <label class="w3-text"><b>작성일</b></label>
     <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="<%=dto.getStartDate() %>" readonly>
   </p>
   
    <p>      
-    <label class="w3-text-blue"><b>종료일</b></label>
+    <label class="w3-text"><b>종료일</b></label>
     <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="<%=dto.getEndDate() %>" readonly>
   </p>  
-  &nbsp;
-    
-  <p align="center">          
-    <button class="w3-button w3-blue" onclick="location='NoticeList.jsp'">글목록</button>   
-  </p>
-  
+ 
 </div>
 </div>
-
 
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>

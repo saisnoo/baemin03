@@ -1,5 +1,5 @@
 package com.mvc.action.membershop;
 
-public class MyPageShopAction {
+public class UpdateShopProAction {
 
 }
