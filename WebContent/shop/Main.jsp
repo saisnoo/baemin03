@@ -119,10 +119,6 @@ if(session.getAttribute("id")==null){	//id가 없을때
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
-#reviewCell {
-	height: 370px;
-	overflow-y: auto;
-}
 #reviewCell td{
 	vertical-align:middle;
 	text-align:center;
