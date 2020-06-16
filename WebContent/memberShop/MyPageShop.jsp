@@ -33,27 +33,6 @@
 	padding: 0px;
 }
 </style>
-<script>
-	// 스크립트
-			function pwCheck() {
-			var pw = document.modalForm.pw.value;
-			var pwc = document.modalForm.pwc.value;
-			if (pw == pwc && pw.length > 3) {
-				console.log("비밀번호 일치");
-				document.getElementById("btn").disabled = false;
-				pwCk = 1;
-			} else {
-				console.log("비밀번호 틀림");
-				document.getElementById("btn").disabled = true;
-				pwCk = 0;
-			}
-		} //  pwCheck() end
-		
-function rePwCheck(){
-	document.getElementById("btn").disabled = true;
-		}
-		
-</script>
 </head>
 <body>
 	<!-- 내용 -->
@@ -79,25 +58,19 @@ function rePwCheck(){
 	<div class="sw-center">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
-		<div class="sw-container-400">
+		<div class="sw-container-500">
 			<div class="w3-container">
 				<!--  main content start here!!!----------------------------------------------------------- -->
 
 				<!--사업자 마이 페이지-->
 				<div class="w3-container w3-card">
 
-					<h2 align="center">개인정보</h2>
-					<form class="w3-container" method="post" action="#"
+					<h2 align="center">회원정보</h2>
+					<form class="w3-container" method="post" action="UpdateShopForm.jsp"
 						name="clientMyPage">
 
 						<!--  -->
 						<label><b>아이디</b></label> <input class="w3-input w3-border" name="shopId" id="shopId" readonly="readonly" type="text" value="${dto.id }">
-						<!--  -->
-						<br>
-						<!--  -->
-						<label><b>비밀번호</b></label>
-						<!--  -->
-						<input class="w3-input w3-border" name="shopPw" id="shopPw" readonly="readonly" type="password" value="${dto.pw}">
 						<!--  -->
 						<br>
 						<!--  -->
@@ -130,57 +103,14 @@ function rePwCheck(){
 						<input class="w3-input w3-border" name="shopAddr1" id="shopAddr1" readonly="readonly" type="text" value="${dto.shopAddr2}">
 						<!--  -->
 						<br>
-						<div align="center">
-							<input type="button" class="w3-btn"
-								style="background-color: #45c1bf; color: white;" value="개인정보수정"
-								onclick="modalOn()"> <input type="button" class="w3-btn"
-								style="background-color: #45c1bf; color: white;" value="뒤로가기"
-								onclick="location='#'">
+						<div class="w3-section w3-center">
+							<input type="submit" class="w3-button w3-baemint" value="회원정보수정">
+						    <input type="button" class="w3-button w3-baemint" value="뒤로가기" onclick="javascript:history.back()'">
+						    <input type="button" onClick="location = '../util/logout.jsp'" class="w3-button w3-baemint" value="로그아웃">
 						</div>
 						<br>
-
-						<!-- 변경창을 이용할때는 모달을 이용하자 -->
-						<script>
-							function modalOn() {
-								document.getElementById('update').style.display = 'block'
-							}
-							function modalOff() {
-								document.getElementById('update').style.display = 'none'
-							}
-						</script>
 					</form>
 				</div>
-				<!-- ------------------------------------------------------------------------------------------- -->
-				<!-- 모달창 시작 -->
-				<div id="update" class="w3-modal">
-					<div class="w3-modal-content">
-						<div class="w3-container">
-							<span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
-							<form method="post" action="UpdateShopPro.jsp" name="modalForm">
-								<input type="hidden" value="${dto.no }" name="no">
-								<p>비밀번호 변경</p>
-								<p>
-									<input type="password" name="pw" id="pw" onkeydown="rePwCheck()">
-								</p>
-
-								<!-- Ajax 처리로 비밀번호 체크 -->
-								<p>비밀번호 확인</p>
-								<p>
-									<input type="password" name="pwc" id="pwc" onkeydown="rePwCheck()">
-								</p>
-																<p>
-									<input type="button" value="비밀번호 확인" onClick="pwCheck()">
-								</p>
-								<p>
-									<input class="w3-button w3-border" type="submit" value="변경" disabled="disabled" name="btn" id="btn">
-									<input class="w3-button w3-border" type="button" value="취소"
-										onclick="modalOff()">
-								</p>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- 모달창 끝 -->
 				<!-- ------------------------------------------------------------------------------------------- -->
 
 
