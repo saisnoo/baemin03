@@ -36,38 +36,28 @@ List<MemberDTO> list = dao.getListAll();
   .contentLine:HOVER {
   background-color: #eeeeee;
   cursor: pointer;
- }
+  }
 
 #ys {
   height: 400px;
   overflow-y:auto;
-}
-
-
+  }
 
 .th-text {
         position: absolute;        
         width: inherit;
         top:135px;             
         
-    }
+  }
 
   .btn {
     background-color: #45c1bf;
     color: white;
   }
-
  
 </style>
 <script>
 // 스크립트
-/*   $(function(){
-	  $(".contentLine").click(function(){
-		 var memberNo=$(this).find(".memberNo").text().trim();
-		 console.log(memberNo);
-		 location.href="MemberView.jsp?memberNo="+memberNo;		  
-	  });  
-  }); */
   
   $(function() {
 		$(".contentLine").click(function() {
@@ -79,9 +69,7 @@ List<MemberDTO> list = dao.getListAll();
 
 		});
 	});
-  
 
-  
   function myFunction() {
 	  var input, filter, table, tr, td, i;
 	  
@@ -103,21 +91,14 @@ List<MemberDTO> list = dao.getListAll();
 	      }
 	    }
 	  }
-	}
-  
-  
+	}  
 
 </script>
 </head>
 <body>
 <!-- 내용 -->
 <h2> MemberListAll.jsp </h2><br>
-<%
 
-%>
-
-
-  
 <!-- responsive template by SW ----------------------------------------------------------- -->
 <!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 <div class="sw-topnav-margin">
@@ -157,12 +138,13 @@ List<MemberDTO> list = dao.getListAll();
       </tr>
     	<%    	
     }       
-    %>  
- 
+    %>   
 
 </table>
 </div>
+
 <div>&nbsp;</div>
+
       <div class="w3-row">
               
         <div class="w3-bar w3-col m2">
@@ -175,8 +157,7 @@ List<MemberDTO> list = dao.getListAll();
   			 <option value="2">회원ID</option> 			 
  		  </select>
        
-        </div>       
-
+        </div>
         
          <div class="w3-col m6">
           <input class="w3-input w3-border w3-padding" type="text" placeholder="search" id="myInput" onkeyup="myFunction()">

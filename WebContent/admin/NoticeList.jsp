@@ -39,24 +39,15 @@ List<NoticeDTO> list = dao.getList();
  #ys {
   height: 400px;
   overflow-y:auto;
-}
-
+  }
 
 .th-text {
         position: absolute;        
         width: inherit;
         top:135px;             
         
-    }
-    
-  .btn {
-    background-color: #45c1bf;
-    color: white;
   }
 
-
-
- 
 </style>
 <script>
 // 스크립트
@@ -85,18 +76,13 @@ List<NoticeDTO> list = dao.getList();
 	      }
 	    }
 	  }
-	}
-  
+	}  
 
 </script>
 </head>
 <body>
 <!-- 내용 -->
 <h2> Notice.jsp </h2><br>
-<%
-
-%>
-
   
 <!-- responsive template by SW ----------------------------------------------------------- -->
 <!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -140,7 +126,7 @@ List<NoticeDTO> list = dao.getList();
  <div class="w3-row">
               
         <div class="w3-bar w3-col m2">
-          <button class="w3-bar-item w3-button btn" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>        
+          <button class="w3-bar-item w3-button w3-baemint" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>        
         </div>
         
         <div class="w3-col m8">
