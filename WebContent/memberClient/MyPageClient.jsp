@@ -114,8 +114,9 @@
 						      <input type="text" class="w3-input w3-border" readonly value="${dto.regDate }">
 						  </p>
 					  <div class="w3-section w3-center">
-	   				  	<input class="w3-button w3-baemint" type="submit" value="회원정보수정">
-					  	<input class="w3-button w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
+	   				  	<input class="w3-button w3-baemint" type="submit" value="정보수정">
+					  	<input class="w3-button w3-baemint" type="button" value="뒤로가기" onclick="javascript:history.back()">
+					  	<input class="w3-button w3-baemint" type="button" value="주문내역" onclick="location = '../baemin/OrderList.jsp'">
 	   				  	<input class="w3-button w3-baemint" type="button" value="로그아웃" onClick="location = '../util/logout.jsp'">
 					  </div>
 				</div>
