@@ -133,8 +133,7 @@ public class ShopDAO {
 	} // getShopInfo_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// getListByCategory_start-----------------------------------------------------------------------------
-	public List<ShopDTO> getListByCategory(String category, double memberX,
-			double memberY) throws Exception {
+	public List<ShopDTO> getListByCategory(String category, double memberX, double memberY) throws Exception {
 		// 출력객체
 		List<ShopDTO> list = new ArrayList<>();
 		System.out.println("---ShopDAO getListByCategory");
@@ -151,12 +150,8 @@ public class ShopDAO {
 			// 3. sql
 			String sql = "select shop.no no, shopName, shopCategory, shopAddr, shopX, shopY, avg(rank) "
 					+ "    from shop LEFT JOIN review on shop.no = review.shop_no "
-					+ "    WHERE (shopX  BETWEEN ? AND ?) "
-					+ "     AND (shopY  BETWEEN ? AND ?)"
-					+ "     AND shopCategory  like '%"
-					+ category
-					+ "%' "
-					+ "  GROUP BY shop.no   "
+					+ "    WHERE (shopX  BETWEEN ? AND ?) " + "     AND (shopY  BETWEEN ? AND ?)"
+					+ "     AND shopCategory  like '%" + category + "%' " + "  GROUP BY shop.no   "
 					+ "   ORDER BY avg(rank) DESC      ";
 			// select shop.no no, shopName, shopCategory, shopAddr, shopX,
 			// shopY, avg(rank)
@@ -182,8 +177,7 @@ public class ShopDAO {
 					// 좌표 먼저 겟
 					double shopX = rs.getDouble("shopX");
 					double shopY = rs.getDouble("shopY");
-					double distance = CoordDistance.getDistance(shopX, shopY,
-							memberX, memberY);
+					double distance = CoordDistance.getDistance(shopX, shopY, memberX, memberY);
 					// 거리 계산해서, BaeDalLimit 보다 작을때만 리스트 add
 					if (distance < CoordDistance.BaeDalLimit) {
 						double temp_rank = rs.getDouble("avg(rank)");
@@ -277,8 +271,8 @@ public class ShopDAO {
 		return result;
 	} // insertShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
-	// updateShop_start-----------------------------------------------------------------------------
-	public int changePw(String pw, int no) throws Exception {
+	// changeShopInfo-----------------------------------------------------------------------------
+	public int changeShopInfo(ShopDTO dto) throws Exception {
 		// 출력객체
 		int result = -1;
 		System.out.println("---ShopDAO changePw");
@@ -286,11 +280,12 @@ public class ShopDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update shop set pw = ? where no = ?";
+			String sql = "update shop set pw = ? , shoptel = ? where no = ?";
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, pw);
-			pstmt.setInt(2, no);
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getShopTel());
+			pstmt.setInt(3, dto.getNo());
 			// 5. 실행
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -300,7 +295,7 @@ public class ShopDAO {
 			close(con, pstmt, rs);
 		} // finally end
 		return result;
-	} // updateShop_end-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
+	} // changeShopInfo-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-
 
 	// magam_start-----------------------------------------------------------------------------
 	public int magam(int no) throws Exception {
@@ -376,8 +371,7 @@ public class ShopDAO {
 	}
 
 	// close 1
-	static final void close(Connection con, PreparedStatement pstmt,
-			ResultSet rs) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt, ResultSet rs) throws Exception {
 		close(con, pstmt);
 		if (rs != null) {
 			rs.close();
@@ -385,8 +379,7 @@ public class ShopDAO {
 	} // close () end
 
 	// close 2
-	static final void close(Connection con, PreparedStatement pstmt)
-			throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt) throws Exception {
 		if (con != null) {
 			con.close();
 		}
