@@ -116,20 +116,18 @@ List<NoticeDTO> list = dao.getList();
 <table class="w3-table w3-bordered" id="myTable">
 
   <tr>
-    <th width="15%"><div class="th-text">공지번호</div></th>
-    <th width="55%"><div class="th-text">공지글제목</div></th>
-    <th width="15%"><div class="th-text">공지시작일</div></th>
-    <th width="15%"><div class="th-text">공지종료일</div></th>
+    <th width="15%"><div class="th-text">#</div></th>
+    <th width="50%"><div class="th-text">공지글제목</div></th>
+    <th width="35%"><div class="th-text">공지일</div></th>    
   </tr>
   
     <%
     for(int i=0; i<list.size(); i++){
     	%>
       <tr class="contentLine" onclick="click(this)">
-    	<td class="noticeNo" width="15%"><%=list.get(i).getNo() %></td>
+    	<td class="noticeNo" width="5%"><%=list.get(i).getNo() %></td>
     	<td width="55%"><%=list.get(i).getTitle() %></td>
-    	<td width="15%"><%=list.get(i).getStartDate() %></td>
-    	<td width="15%"><%=list.get(i).getEndDate() %></td>   	
+    	<td width="40%"><%=list.get(i).getStartDate() %>~<br><%=list.get(i).getEndDate() %></td>    	
       </tr>
     	<%    	
     }       

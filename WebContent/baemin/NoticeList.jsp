@@ -86,7 +86,7 @@
 
 				<!-- ------------------------------------------------------------------------------------------------ -->
 				<!-- 모달창 시작 -->
-				<div id="update" class="w3-modal">
+				<div id="noticeView" class="w3-modal">
 					<div class="w3-modal-content">
 						<div class="w3-container">
 							<span onClick="modalOff()" class="w3-button w3-display-topright">X</span>
