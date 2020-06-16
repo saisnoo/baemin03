@@ -12,6 +12,7 @@ int no = Integer.parseInt(request.getParameter("no"));
 
 NoticeDAO dao = NoticeDAO.getInstance();
 NoticeDTO dto = dao.viewNotice(no);
+request.setAttribute("dto", dto);
 
 %>
 <!DOCTYPE html>
@@ -63,25 +64,25 @@ NoticeDTO dto = dao.viewNotice(no);
   
   <div class="w3-container w3-padding">
   
-    <form class="w3-container" action="NoticeUpdatePro.jsp?no=<%=no %>" name="noticeUpdateForm" method="post">
+    <form class="w3-container" action="NoticeUpdatePro.jsp?no=${dto.no }" name="noticeUpdateForm" method="post">
     <p>      
       <label class="w3-text"><b>공지글제목</b></label>
-      <input class="w3-input w3-border" name="title" id="title" type="text" value="<%=dto.getTitle() %>" required>
+      <input class="w3-input w3-border" name="title" id="title" type="text" value="${dto.title }" required>
     </p>
     <br>
     <p>        
       <label class="w3-text"><b>공지글내용</b></label>
-      <textarea class="w3-input w3-border" rows="5" id="content" name="content"><%=dto.getContent() %></textarea>    
+      <textarea class="w3-input w3-border" rows="5" id="content" name="content">${dto.content }</textarea>    
     </p>
     <br>
     <p>
       <label class="w3-text"><b>공지시작일</b></label>
-      <input class="w3-input w3-border" name="startDate" id="startDate" type="date" value="<%=dto.getStartDate() %>" required>
+      <input class="w3-input w3-border" name="startDate" id="startDate" type="date" value="${dto.startDate }" required>
     </p>
     <br>
      <p>
       <label class="w3-text"><b>공지시작일</b></label>
-      <input class="w3-input w3-border" name="endDate" id="endDate" type="date" value="<%=dto.getEndDate() %>" required>
+      <input class="w3-input w3-border" name="endDate" id="endDate" type="date" value="${dto.endDate }" required>
     </p>
       <div class="w3-center w3-section">
       <input type="submit" class="w3-button w3-baemint" value="확인">

@@ -12,6 +12,7 @@
 	int no = Integer.parseInt(request.getParameter("no"));
 	NoticeDAO dao = NoticeDAO.getInstance();
 	NoticeDTO dto = dao.viewNotice(no);
+	request.setAttribute("dto", dto);
 	System.out.println(dto.toString());
 %>
 <!DOCTYPE html>
@@ -58,34 +59,34 @@
 
  <p>      
     <label class="w3-text"><b>글번호</b></label>
-    <input class="w3-input w3-border" name="no" id="no" type="text" value="<%=dto.getNo() %>" readonly>
+    <input class="w3-input w3-border" name="no" id="no" type="text" value="${dto.no }" readonly>
   </p>
   
   <p>      
     <label class="w3-text"><b>글제목</b></label>
-    <input class="w3-input w3-border" name="title" name="title" type="text" value="<%=dto.getTitle() %>" readonly>
+    <input class="w3-input w3-border" name="title" name="title" type="text" value="${dto.title }" readonly>
   </p>
   
   <p>      
     <label class="w3-text"><b>글내용</b></label>
-    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly><%=dto.getContent() %></textarea>
+    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly>${dto.content }</textarea>
   </p>
   
    <p>      
     <label class="w3-text"><b>작성일</b></label>
-    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="<%=dto.getStartDate() %>" readonly>
+    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="${dto.startDate }" readonly>
   </p>
   
    <p>      
     <label class="w3-text"><b>종료일</b></label>
-    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="<%=dto.getEndDate() %>" readonly>
+    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="${dto.endDate }" readonly>
   </p>  
   &nbsp;
     
   <p align="center">          
     <button class="w3-button w3-baemint" onclick="location='NoticeList.jsp'">글목록</button>
-    <button class="w3-button w3-baemint" onclick="location='NoticeUpdateForm.jsp?no=<%=no %>'">글수정</button>
-    <button class="w3-button w3-baemint" onclick="location='NoticeDeletePro.jsp?no=<%=no %>'">글삭제</button>    
+    <button class="w3-button w3-baemint" onclick="location='NoticeUpdateForm.jsp?no=${dto.no}'">글수정</button>
+    <button class="w3-button w3-baemint" onclick="location='NoticeDeletePro.jsp?no=${dto.no}'">글삭제</button>    
   </p>
   
 </div>

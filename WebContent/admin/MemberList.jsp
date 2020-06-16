@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ page import = "java.sql.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  
 <%
 request.setCharacterEncoding("utf-8");
@@ -10,7 +11,7 @@ System.out.println("------ MemberListAll.jsp --- ");
 
 MemberDAO dao=MemberDAO.getInstance();
 List<MemberDTO> list = dao.getListAll();
-
+request.setAttribute("list", list);
 %>
 
 <!DOCTYPE html>
@@ -125,20 +126,16 @@ List<MemberDTO> list = dao.getListAll();
     <th width="20%"><div class="th-text">회원전화번호</div></th>    
   </tr>
   <div>&nbsp;</div>
-    
-    <%
-    for(int i=0; i<list.size(); i++){
-    	%>
-      <tr class="contentLine" onclick="click(this)">
-    	<td class="memberNo" width="10%"><%=list.get(i).getNo() %></td>
-    	<td width="25%"><%=list.get(i).getName() %></td>
-    	<td width="15%"><%=list.get(i).getId() %></td>
-    	<td width="35%"><%=list.get(i).getAddr() %>&nbsp;<%=list.get(i).getAddr2() %></td>   	
-    	<td width="20%"><%=list.get(i).getTel() %></td>
-      </tr>
-    	<%    	
-    }       
-    %>   
+ 
+    <c:forEach var="list" items="${list }">
+       <tr class="contentLine" onclick="click(this)">
+		  <td class="memberNo">${list.no }</td>
+		  <td>${list.name }</td>
+		  <td>${list.id }</td>
+		  <td>${list.addr }&nbsp;${list.addr2 }</td>							
+		  <td>${list.tel }</td>							
+	   </tr>   
+    </c:forEach>
 
 </table>
 </div>
