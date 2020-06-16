@@ -45,7 +45,7 @@ for(int i=0;i<BaesongCount;i++){
 			<!-- 오른쪽-->
 			<div class="w3-col w3-container w3-right"
 				style="width: 100px; padding: 0px;">
-				<button class="w3-button w3-orange w90 h100"
+				<button class="w3-button w3-red w90 h100"
 					onClick="cancelBtn(this)">주문취소</button>
 				<div class="count2" style="display: none;"><%=dto.getStatus() %></div>
 			</div>
