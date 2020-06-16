@@ -53,6 +53,8 @@
 		}
 
 		System.out.println("category=" + category + "----");
+
+		request.setAttribute("category", category);
 	%>
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
@@ -85,7 +87,7 @@
 			function category_first_select() {
 				var selec = document.getElementById("category");
 				console.log(selec);
-				var selec_val = "<%=category%>";
+				var selec_val = "${category}";
 				console.log("selec_val " + selec_val);
 				console.log("selec.value " + selec.value);
 
