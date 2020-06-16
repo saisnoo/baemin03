@@ -1,11 +1,11 @@
-<%@page import="com.baemin.member.MemberDTO"%>
-<%@page import="com.baemin.member.MemberDAO"%>
+<%@page import="com.baemin.shop.ShopDTO"%>
+<%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ MyPageClient.jsp --- ");
+	System.out.println("------ UpdateShopForm.jsp --- ");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>MyPageClient.jsp</title>
+<title>UpdateShopForm.jsp</title>
 
 
 <!-- CDN - Google Icons -->
@@ -39,23 +39,25 @@
 } */
 </style>
 <script>
-	function pwCheck() {
-		var pw = document.modalForm.pw.value;
-		var pwc = document.modalForm.pwc.value;
-		if (pw == pwc && pw.length > 3) {
-			console.log("비밀번호 일치");
-			document.getElementById("btn").disabled = false;
-			pwCk = 1;
-		} else {
-			console.log("비밀번호 틀림");
-			document.getElementById("btn").disabled = true;
-			pwCk = 0;
-		}
-	} //  pwCheck() end
-
-	function rePwCheck() {
-		document.getElementById("btn").disabled = true;
-	}
+	function checkIt(){
+		  if($("#password").val()==''){
+			  alert("비밀번호를 입력하세요");
+			  $("#password").focus();
+			  return false;
+		  }
+		  if($("#password2").val()==""){
+		  	  alert("비밀번호 확인을 입력하세요.");
+			  $("#password2").focus();
+			  return false;
+		  }
+			
+		  if($("#password").val() != $("#password2").val()){
+			  alert("비밀번호 확인을 잘못입력하였습니다.");
+			  $("#password").val('').focus();
+			  $("#password2").val('');
+			  return false;
+		  }
+	}//checkIt() end
 </script>
 </head>
 <body>
@@ -63,8 +65,8 @@
 	<%
 		Object no_ob = session.getAttribute("no");
 		int no = Integer.parseInt(no_ob + "");
-		MemberDAO dao = MemberDAO.getInstance();
-		MemberDTO dto = dao.getDTO(no);
+		ShopDAO dao = ShopDAO.getInstance();
+		ShopDTO dto = dao.getShopInfo(no);
 		request.setAttribute("dto", dto);
 	%>
 
@@ -74,6 +76,7 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
+	<form method="post" action="UpdateShopPro.jsp">
 	<div class="sw-center" style="margin-top: 2%">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
@@ -87,42 +90,49 @@
 					  <h2>회원정보수정</h2>
 					</div>
 						  <p>
-						  	<label><b>이름</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.name }">
-						  </p>
-					  
-						  <p>
 						  	<label><b>아이디</b></label>
 							  <input type="text" class="w3-input w3-border" readonly value="${dto.id }">
 						  </p>
+						  
+						  <p>
+						  	<label><b>분류</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.shopCategory }">
+						  </p>
+						  
+						  <p>
+						  	<label><b>이름</b></label>
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.shopName }">
+						  </p>
+					  
 					  
 						  <p>
 						  	<label><b>전화번호</b></label>
-							  <input type="text" class="w3-input w3-border" readonly name="tel" id="tel" value="${dto.tel }">
+							  <input type="text" class="w3-input w3-border" name="shopTel" id="shopTel" value="${dto.shopTel }">
 						  </p>
 					  
 						  <p>
 						  	<label><b>주소</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr }">
-							  
-						  	<label><b>상세주소</b></label>
-							  <input type="text" class="w3-input w3-border" readonly value="${dto.addr2 }">
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.shopAddr }">
+							  <input type="text" class="w3-input w3-border" readonly value="${dto.shopAddr2 }">
 						  </p>
 					  
-					      <p>
-						  	<label><b>가입일</b></label>
-						      <input type="text" class="w3-input w3-border" readonly value="${dto.regDate }">
+						  <p>
+						  	<label><b>비밀번호</b></label>
+							  <input type="password" class="w3-input w3-border" size="10" id="password" name="password">
+							  <input type="password" class="w3-input w3-border" size="10" id="password2" name="password2">
 						  </p>
+					  
 					  <div class="w3-section w3-center">
-	   				  	<input class="w3-button w3-baemint" type="submit" value="회원정보수정">
-					  	<input class="w3-button w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
-	   				  	<input class="w3-button w3-baemint" type="button" value="로그아웃" onClick="location = '../util/logout.jsp'">
+	   				  	<input class="w3-button w3-border w3-baemint" type="submit" value="회원정보수정">
+	   				  	<input class="w3-button w3-border w3-baemint" type="reset" value="다시쓰기">
+					  	<input class="w3-button w3-border w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
 					  </div>
 				</div>
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
 		</div>
 	</div>
+	</form>
 	<!-- main content end----------------------------------------------------------------------- -->
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
@@ -130,7 +140,8 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 	<div class="sw-topnav-margin">&nbsp;</div>
 	<%-- 사이트 공통 부분 Include - topnav --%>
-	<jsp:include page="../sw_css/memberTopNav.jsp" />
+	<jsp:include page="../sw_css/topnav.jsp" />
+
 
 </body>
 </html>

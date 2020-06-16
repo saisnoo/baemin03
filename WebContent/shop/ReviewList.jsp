@@ -54,13 +54,15 @@
 	<!-- 왼쪽 half 끝 -->
 	<!-- 오른쪽 half -->
 	<div class="w3-half w3-padding">
-			<table id="reviewCell" class="w3-table">
+			<table class="w3-table-all">
 				<tr id="reviewHead" class="w3-baemint">
 					<td>회원번호</td>
 					<td>별점</td>
 					<td>등록일</td>
 					<td>내용</td>
 				</tr>
+			</table>
+			<table id="reviewCell" class="w3-table">
 				<%
 					for (int i = 0; i < reviewList.size(); i++) {
 						ReviewDTO dto = reviewList.get(i);

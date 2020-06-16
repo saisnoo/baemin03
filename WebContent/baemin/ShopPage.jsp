@@ -24,6 +24,7 @@
 	
 	ShopDAO shopdao = ShopDAO.getInstance();
 	ShopDTO shopdto = shopdao.getShopInfo(no);
+	request.setAttribute("shopdto", shopdto);
 	
 	MenuDAO menudao = MenuDAO.getInstance();
 	List<MenuDTO> menu_list = menudao.getListByShopActive(no);
@@ -88,8 +89,9 @@ request.setAttribute("review_list", review_list);
 			<div class="w3-card-4 w3-center w3-margin w3-round-large">
 				<p>&nbsp;</p>
 				<h2>
-					<strong><%=shopdto.getShopName()%></strong>
-					<div id="shop_No" style="display: none"><%=shopdto.getNo()%></div>
+					<strong> ${shopdto.shopName}</strong>
+					<!-- ----------------------------------------------------- -->
+					<span id="shop_No" style="display: none">${shopdto.no }</span>
 				</h2>
 
 				<div class="sw-center" style="text-align: center;">
@@ -99,13 +101,13 @@ request.setAttribute("review_list", review_list);
 
 						<!-- ............................................................... -->
 						<div class="w3-col s8">
-							<customtag:starRank rank="<%=shopdto.getRank()%>" width="210" />
+							<customtag:starRank rank="${shopdto.rank }" width="210" />
 						</div>
 						<!-- ............................................................... -->
 
 						<div class="w3-col s2 w3-cell w3-cell-middle w3-right"
 							style="padding: 16px;">
-							<strong><%=shopdto.getRank()%></strong>
+							<strong>${shopdto.rank }</strong>
 						</div>
 					</div>
 				</div>
@@ -256,9 +258,7 @@ request.setAttribute("review_list", review_list);
 						</p>
 					</div>
 					<div class="w3-panel">
-						<p>
-							<%=shopdto.getShopEx()%>
-						</p>
+						<p>${shopdto.shopEx }</p>
 					</div>
 					<div class="w3-container w3-border-bottom w3-border-top w3-padding"
 						style="background-color: #EAEAEA;">
@@ -267,11 +267,7 @@ request.setAttribute("review_list", review_list);
 						</p>
 					</div>
 					<div class="w3-panel">
-						<p>
-							<%=shopdto.getShopAddr()%>
-							&nbsp;
-							<%=shopdto.getShopAddr2()%>
-						</p>
+						<p>${shopdto.shopAddr }&nbsp;${shopdto.shopAddr2 }</p>
 					</div>
 					<div class="w3-container w3-border-bottom w3-border-top w3-padding"
 						style="background-color: #EAEAEA;">
@@ -345,8 +341,8 @@ request.setAttribute("review_list", review_list);
 									<textarea rows="3" style="width: 100%; resize: none"
 										onkeydown="whenInputReview()" name="content" id="content"></textarea>
 								</div>
-								<input type="text" id="bbb" name="rank" />
-								<input type="text" name="shop_No" value="<%=no %>" />
+								<input type="text" id="bbb" name="rank" /> <input type="text"
+									name="shop_No" value="<%=no%>" />
 							</form>
 						</div>
 					</div>
@@ -357,7 +353,7 @@ request.setAttribute("review_list", review_list);
 							console.log("leng=" + leng);
 							var star = document.getElementById("bbb").value;
 							console.log("star=" + star);
-							
+
 							if (leng > 5) {
 								document.getElementById("reviewWriteBtn").disabled = false;
 							} else {
