@@ -60,10 +60,8 @@ List<ShopDTO> list = dao.getListAll();
     background-color: #45c1bf;
     color: white;
   }
-
-
+  
 </style>
-
 
 <script>
 	// 스크립트
@@ -106,11 +104,6 @@ List<ShopDTO> list = dao.getListAll();
 	<!-- 내용 -->
 	<h2>ShopListAll.jsp</h2>
 	<br>
-	<%
-		
-	%>
-
-
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -181,13 +174,14 @@ List<ShopDTO> list = dao.getListAll();
 				<!-- Modal -->
 				<div id="id01" class="w3-modal">
 					<div class="w3-modal-content">
-						<div class="w3-container">
+						<header class="w3-container w3-light-gray"> 
 							<span
 								onclick="document.getElementById('id01').style.display='none'"
 								class="w3-button w3-display-topright">&times;</span>
-
+						    <h4 align="center">매장정보</h4>
+						</header>
+                        <div class="w3-container" id="con">
 							<div id="swsw"></div>
-
 						</div>
 					</div>
 				</div>
