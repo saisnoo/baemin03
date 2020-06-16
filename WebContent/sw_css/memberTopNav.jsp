@@ -12,7 +12,7 @@
 <!-- head가 맨 나중?나중에 나온 요소가 레이어 맨위로... ---------------------------------------->
 <div class="w3-card w3-center w3-baemint" id="topnav">
 	<div class="w3-baemint">
-		<h3 style="font-family: baemin_font;">배달의 인종</h3>
+		<h3 style="font-family: baemin_font;">배달의 종족</h3>
 	</div>
 </div>
 <script>
