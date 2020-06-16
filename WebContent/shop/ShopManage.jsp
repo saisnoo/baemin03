@@ -46,7 +46,7 @@ if(<%=shopdto.getShopStatus()==1%>){
 });
 </script>   
    
-<div id="tabtab2" class="w3-cyan tabcontent2">
+<div id="tabtab2" class="w3-sand tabcontent2">
 
        
                        <div class="container">
@@ -69,16 +69,17 @@ if(<%=shopdto.getShopStatus()==1%>){
                        </button>
                         
                     </div> --%>
-<div class="w3-container searchmenu" style="width:100%;height:70%;float:right;">
-<select style="width:25%;height:38px;float:left" id="selectval">
+<!-- <div class="w3-container searchmenu" style="width:100%;height:90%;float:right;"> -->
+<select style="width:25%;height:40px;float:left;" class="w3-margin-left" id="selectval">
 <option value="0">메뉴이름</option>
 <option value="1">메뉴카테고리</option>
 <option value="2">메뉴가격</option>
 </select>				
 
-  <input class="w3-input w3-border w3-padding" type="text" placeholder="검색상품" id="myInput" onkeyup="myFunction()" style="width:75%;float:right;">
-
-  <table class="w3-table-all w3-margin-top" id="myTable">
+  <input class="w3-input w3-border w3-padding" type="text" placeholder="검색상품" id="myInput" onkeyup="myFunction()" style="width:73.6%;float:right;">
+<!-- 목록 -->
+<div class="w3-container searchmenu" style="width:100%;height:80%;float:right;overflow-y:auto;">
+  <table class="w3-table-all" id="myTable">
     <tr>
       <th style="width:40%;">메뉴이름</th>
       <th style="width:30%;">메뉴카테고리</th>
@@ -104,7 +105,8 @@ if(<%=shopdto.getShopStatus()==1%>){
     }
   %> 
   </table>
-
+  </div>
+<!-- 목록 -->
 </div>
 
 
