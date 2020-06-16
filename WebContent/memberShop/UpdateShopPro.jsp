@@ -1,3 +1,4 @@
+<%@page import="com.baemin.shop.ShopDTO"%>
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,13 +7,21 @@
 
 <%
 ShopDAO dao = ShopDAO.getInstance();
+ShopDTO dto = new ShopDTO();
 
-String pw = request.getParameter("pw");
-String pwc = request.getParameter("pwc");
+int no = Integer.parseInt(session.getAttribute("no")+"");
+String shopTel = request.getParameter("shopTel");
+String pw = request.getParameter("password");
 
-int no = Integer.parseInt(request.getParameter("no"));
+System.out.println("no :" + no);
+System.out.println("shopTel :" + shopTel);
+System.out.println("pw :" + pw);
 
-int c = dao.changePw(pw, no);
+dto.setNo(no);
+dto.setShopTel(shopTel);
+dto.setPw(pw);
+
+int c = dao.changeShopInfo(dto);
 
 if(c == 1){
 	%>
