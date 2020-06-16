@@ -5,7 +5,9 @@
 <%@page import="com.baemin.orderlist.cart.CartMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="java.util.*"%>
 
 <%
 	//자바 구문
@@ -19,12 +21,14 @@
 
 	List<Order_MenuDTO> list = Ht2List.ht2List(cartmgr.getCartList());
 
+	String comment = request.getParameter("comment");
+
 	System.out.println("list.size()");
 	System.out.println(list.size());
 
 	int memberNo = Integer.parseInt(session.getAttribute("no") + "");
 	int shopNo = Integer.parseInt(session.getAttribute("cart_shop_no")
-			+ "");
+	+ "");
 
 	MemberDAO memberdao = MemberDAO.getInstance();
 	MemberDTO memberdto = memberdao.getDTO(memberNo);
@@ -46,7 +50,7 @@
 	dto.setName(memberdto.getName());
 	dto.setAddr(memberdto.getAddr());
 	dto.setAddr2(memberdto.getAddr2());
-	dto.setComment("");
+	dto.setComment(comment);
 	dto.setMember_No(memberdto.getNo());
 	dto.setShop_NO(shopNo);
 
@@ -60,8 +64,24 @@
 	System.out.println();
 	System.out.println("result=" + result);
 	System.out.println();
-	
-	cartmgr.emptyCart();
 
-	response.sendRedirect("OrderDone.jsp");
+	cartmgr.emptyCart();
 %>
+
+<div id="result" style="display: none"><%=result%></div>
+
+
+<script>
+	window.onload = function() {
+		var result = document.getElementById("result").innerText;
+
+		if (result == 1) {
+			alert("주문이 성공적으로 접수되었습니다.");
+		} else if (result == -1) {
+			alert("매장과 연결이 불안정하거나, 영업이 종료되었습니다.");
+		}
+
+		location.href = "Main.jsp";
+	}
+</script>
+

@@ -75,22 +75,22 @@ System.out.println("------ NoticeInputForm.jsp --- ");
   <form class="w3-container" action="NoticeInputPro.jsp" name="noticeForm">
     
     <p>      
-      <label class="w3-text-cyan"><b>공지글제목</b></label>
+      <label class="w3-text"><b>공지글제목</b></label>
       <input class="w3-input w3-border w3-sand" name="title" id="title" type="text" required>
     </p>
     
     <p>        
-      <label class="w3-text-cyan"><b>공지글내용</b></label>
+      <label class="w3-text"><b>공지글내용</b></label>
       <textarea class="form-control w3-sand" rows="5" id="content" name="content"></textarea>    
     </p>
     
     <p>
-      <label class="w3-text-cyan"><b>공지시작일</b></label>
+      <label class="w3-text"><b>공지시작일</b></label>
       <input class="w3-input w3-border w3-sand" name="startDate" id="startDate" type="date" required>
     </p>
     
      <p>
-      <label class="w3-text-cyan"><b>공지시작일</b></label>
+      <label class="w3-text"><b>공지시작일</b></label>
       <input class="w3-input w3-border w3-sand" name="endDate" id="endDate" type="date" required>
     </p>
     &nbsp;

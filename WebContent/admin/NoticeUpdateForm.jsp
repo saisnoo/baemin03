@@ -40,7 +40,10 @@ NoticeDTO dto = dao.viewNotice(no);
   font-size: 16px;
   resize: none;
 }
- 
+   .btn {
+    background-color: #45c1bf;
+    color: white;
+  }
 </style>
 <script>
 // 스크립트
@@ -105,8 +108,8 @@ NoticeDTO dto = dao.viewNotice(no);
     &nbsp;
     
     <p>
-      <input type="submit" class="w3-button w3-cyan" value="확인">
-      <input type="button" class="w3-button w3-cyan" value="취소" onclick="history.back()">
+      <input type="submit" class="w3-button btn" value="확인">
+      <input type="button" class="w3-button btn" value="취소" onclick="history.back()">
     </p>
     
   </form>
@@ -123,7 +126,7 @@ NoticeDTO dto = dao.viewNotice(no);
 
 <!-- 모든페이지 공통 -->
 <!-- modal창을 제외한 모든  컴포턴트보다 하단에 위치하여야 한다. -->
-<jsp:include page="../sw_css/topnav.jsp" />  
+<jsp:include page="../sw_css/admintopnav.jsp" />    
  
 </body>
 </html>
