@@ -53,12 +53,13 @@
 					<p>
 						<!-- 변경창을 이용할때는 모달을 이용하자 -->
 
-						<button onClick="modalOn()" class="w3-button w3-black">개인정보
+						<button onClick="modalOn()" class="w3-button w3-baemint">개인정보
 							수정</button>
 						<!-- ------------------------------------------------------------------------------------------------ -->
 						<button onClick="location = '../util/logout.jsp'"
-							class="w3-button w3-black">로그아웃</button>
+							class="w3-button w3-baemint">로그아웃</button>
 					</p>
+					<br>
 				</div>
 
 
