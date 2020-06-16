@@ -402,10 +402,16 @@ public class OrderListDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "select orderlist.no no, shop_No, name, member_No, DATE_FORMAT(orderDate, '%H:%i' ) orderDate, "
-					+ " status,  completeTime, whyCancel, addr, addr2, comment "
-					+ " from orderlist LEFT JOIN order_cancel ON  orderlist.no = order_cancel.orderlist_no WHERE "
-					+ " member_No = ? order by status asc, orderdate desc ";
+			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, member_no, completeTime, Group_concat( aaa SEPARATOR  ' / ') menuString"
+					+ " FROM(" + " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ("
+					+ "  SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
+					+ " orderlist.addr addr, orderlist.addr2 addr2, orderlist.comment COMMENT, orderlist.shop_no shop_no, orderlist.member_no member_No,"
+					+ " orderlist.completeTime completeTime , member.tel , "
+					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, menu.menuPrice menuPrice"
+					+ " FROM orderlist, order_menu, menu , member" + " WHERE member.no = 2"
+					+ " AND orderlist.no  = order_menu.orderlist_No" + " AND order_menu.menu_No = menu.no"
+					+ " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
+					+ " ) CNT )CNT GROUP BY NO;";
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
@@ -417,16 +423,28 @@ public class OrderListDAO {
 				while (rs.next()) {
 					OrderListDTO dto = new OrderListDTO();
 					dto.setNo(rs.getInt("no"));
-					dto.setShop_NO(rs.getInt("shop_no"));
 					dto.setName(rs.getString("name"));
-					dto.setMember_No(rs.getInt("member_no"));
 					dto.setOrderDate(rs.getString("orderdate"));
+					dto.setTel(rs.getString("tel"));
 					dto.setStatus(rs.getInt("status"));
-					dto.setCompleteTime(rs.getString("completeTime"));
-					dto.setWhyCancel(rs.getString("whyCancel"));
 					dto.setAddr(rs.getString("addr"));
 					dto.setAddr2(rs.getString("addr2"));
 					dto.setComment(rs.getString("comment"));
+					dto.setShop_NO(rs.getInt("shop_no"));
+					dto.setMember_No(rs.getInt("member_no"));
+					dto.setCompleteTime(rs.getString("completeTime"));
+					dto.setMenu_String(rs.getString("menuString"));
+
+					int count = 1;
+					StringTokenizer str = new StringTokenizer(dto.getMenu_String(), "/", true);
+					while (str.hasMoreTokens()) {
+						String data = str.nextToken();
+						if (data.equals("/")) {
+							count++;
+						}
+					}
+					dto.setCount(count);
+
 					list.add(dto);
 				}
 			}
