@@ -62,27 +62,27 @@
 
  <p>      
     <label class="w3-text-blue"><b>글번호</b></label>
-    <input class="w3-input w3-border" name="no" id="no" type="text" value="<%=dto.getNo() %>" readonly>
+    <input class="w3-input w3-border" name="no" id="no" type="text" value="${dto.getNo()}" readonly>
   </p>
   
   <p>      
     <label class="w3-text-blue"><b>글제목</b></label>
-    <input class="w3-input w3-border" name="title" name="title" type="text" value="<%=dto.getTitle() %>" readonly>
+    <input class="w3-input w3-border" name="title" name="title" type="text" value="${dto.getTitle()}" readonly>
   </p>
   
   <p>      
     <label class="w3-text-blue"><b>글내용</b></label>
-    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly><%=dto.getContent() %></textarea>
+    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly>${dto.getContent()}</textarea>
   </p>
   
    <p>      
     <label class="w3-text-blue"><b>작성일</b></label>
-    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="<%=dto.getStartDate() %>" readonly>
+    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="${dto.getStartDate()}" readonly>
   </p>
   
    <p>      
     <label class="w3-text-blue"><b>종료일</b></label>
-    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="<%=dto.getEndDate() %>" readonly>
+    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="${dto.getEndDate()}" readonly>
   </p>  
   &nbsp;
     

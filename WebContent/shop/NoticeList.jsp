@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
 System.out.println("------ Notice.jsp --- ");
@@ -102,11 +102,13 @@ List<NoticeDTO> list = dao.getList();
 						<%
 							for (int i = 0; i < list.size(); i++) {
 						%>
+						<c:forEach var="list" items="${list}">
 						<tr class="contentLine" onclick="click(this)">
-							<td class="noticeNo"><%=list.get(i).getNo()%></td>
-							<td><%=list.get(i).getTitle()%></td>
-							<td><%=list.get(i).getStartDate()%>~<br><%=list.get(i).getEndDate()%></td>							
+							<td class="noticeNo">${list.getNo()}</td>
+							<td>${list.getTitle()}</td>
+							<td>${list.getStartDate()}~<br>${list.getEndDate()}</td>							
 						</tr>
+						</c:forEach>
 						<%
 							}
 						%>
