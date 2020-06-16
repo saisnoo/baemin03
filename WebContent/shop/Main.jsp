@@ -200,7 +200,7 @@ var max_no= 0;
 	}
 	
 	function reviewLoad(){
-		$("#reviewList").load("reviewList.jsp");
+		$("#reviewList").load("ReviewList.jsp");
 		setTimeout(countSum,1000);
 	}
 		
