@@ -5,7 +5,9 @@
 <%@page import="com.baemin.orderlist.cart.CartMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="java.util.*"%>
 
 <%
 	//자바 구문
@@ -26,7 +28,7 @@
 
 	int memberNo = Integer.parseInt(session.getAttribute("no") + "");
 	int shopNo = Integer.parseInt(session.getAttribute("cart_shop_no")
-			+ "");
+	+ "");
 
 	MemberDAO memberdao = MemberDAO.getInstance();
 	MemberDTO memberdto = memberdao.getDTO(memberNo);
@@ -64,6 +66,22 @@
 	System.out.println();
 
 	cartmgr.emptyCart();
-
-	response.sendRedirect("Main.jsp");
 %>
+
+<div id="result" style="display: none"><%=result%></div>
+
+
+<script>
+	window.onload = function() {
+		var result = document.getElementById("result").innerText;
+
+		if (result == 1) {
+			alert("주문이 성공적으로 접수되었습니다.");
+		} else if (result == -1) {
+			alert("매장과 연결이 불안정하거나, 영업이 종료되었습니다.");
+		}
+
+		location.href = "Main.jsp";
+	}
+</script>
+
