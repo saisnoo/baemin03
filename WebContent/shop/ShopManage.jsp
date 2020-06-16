@@ -4,8 +4,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.baemin.menu.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-  <%
+	pageEncoding="UTF-8"%>
+<%
 //자바 구문
 request.setCharacterEncoding("UTF-8");
 System.out.println("------ShopManage.jsp");
@@ -26,8 +26,9 @@ ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 
 
 
-%> 
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(function(){
 if(<%=shopdto.getShopStatus()==0%>){
@@ -44,70 +45,63 @@ if(<%=shopdto.getShopStatus()==1%>){
 
 
 });
-</script>   
-   
+</script>
+
+<!-- 탭목록 -->
 <div id="tabtab2" class="w3-sand tabcontent2">
-
-       
-                       <div class="container">
-  <button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
-  <button type="button" class="btn btn-success" id="magam">영업종료</button>
-  <button type="button" class="btn btn-success" id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
-  <input type="hidden" name="addmenu_no" value="<%=shopNo %>">
-</div>     
-
-
-                    <%-- <div class="w3-border" style="width:30%;float:left">
-                    
-                        
-                       <button id="addmenu" onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가
-<<<<<<< HEAD
-  <input type="hidden" name="addmenu_no" value="<%=shop_No %>">                     
-=======
-  <input type="hidden" name="addmenu_no" value="<%=shopNo %>">                     
->>>>>>> master
-                       </button>
-                        
-                    </div> --%>
-<!-- <div class="w3-container searchmenu" style="width:100%;height:90%;float:right;"> -->
-<select style="width:25%;height:40px;float:left;" class="w3-margin-left" id="selectval">
-<option value="0">메뉴이름</option>
-<option value="1">메뉴카테고리</option>
-<option value="2">메뉴가격</option>
-</select>				
-
-  <input class="w3-input w3-border w3-padding" type="text" placeholder="검색상품" id="myInput" onkeyup="myFunction()" style="width:73.6%;float:right;">
-<!-- 목록 -->
-<div class="w3-container searchmenu" style="width:100%;height:80%;float:right;overflow-y:auto;">
-  <table class="w3-table-all" id="myTable">
-    <tr>
-      <th style="width:40%;">메뉴이름</th>
-      <th style="width:30%;">메뉴카테고리</th>
-      <th style="width:30%;">메뉴가격</th>
-    </tr>
- <%
+	<div class="w3-container searchmenu" style="overflow-y: auto;">
+			<div class="w3-right">
+				<button type="button" class="btn btn-primary" id="shopOpen">영업시작</button>
+				<button type="button" class="btn btn-success" id="magam">영업종료</button>
+				<button type="button" class="btn btn-success" id="addmenu"
+					onclick="addmenu(this)" data-toggle="modal" data-target="#add_menu">메뉴추가</button>
+				<input type="hidden" name="addmenu_no" value="<%=shopNo %>">
+			</div>
+			<select class="w3-margin-right w3-quart" id="selectval"
+				style="height: 33px;">
+					<option value="0">메뉴이름</option>
+					<option value="1">메뉴카테고리</option>
+					<option value="2">메뉴가격</option>
+			</select>
+			<input class="w3-input w3-border " type="text"
+				placeholder="검색상품" id="myInput" onkeyup="myFunction()">
+		<table class="w3-table-all">
+	<!-- 검색창 리스트 -->
+			<tr class="w3-baemint">
+				<th style="width:32%">메뉴이름</th>
+				<th style="width:33%">메뉴카테고리</th>
+				<th style="width:34%">메뉴가격</th>
+			</tr>
+		</table>
+		<div class="scroll-box" style="height:380px;">
+		<table class="w3-table-all" id="myTable">
+			<%
       for(int i=0;i<list.size();i++){
 		MenuDTO menudto=list.get(i);     	
     if(shopdto.getShopStatus()==0){
     %>
-    <tr class="check_view" data-toggle="modal" data-target="#check_viewmenu">
-     <%}else{ %>
-    <tr class="check_view" ><%} %> 
-      <td> <%=menudto.getMenuName() %>
-      <input type="hidden" value="<%=menudto.getNo() %>" id="menu_no" >
-      <input type="hidden" value="<%=menudto.getMenuStatus() %>" id="menu_status">
-      
-      </td>
-      <td><%=menudto.getMenuCategory() %></td>
-      <td><%=menudto.getMenuPrice() %></td>
-    </tr>
-  <%
+			<tr class="w3-hover-black check_view " data-toggle="modal"
+				data-target="#check_viewmenu" style="cursor:pointer;">
+				<%}else{ %>
+			
+			<tr class="scroll-box check_view">
+				<%} %>
+				<td style="width:33%"><%=menudto.getMenuName() %> <input type="hidden"
+					value="<%=menudto.getNo() %>" id="menu_no"> <input
+					type="hidden" value="<%=menudto.getMenuStatus() %>"
+					id="menu_status"></td>
+				<td style="width:33%"><%=menudto.getMenuCategory() %></td>
+				<td style="width:33%"><%=menudto.getMenuPrice() %></td>
+			</tr>
+			<%
     }
-  %> 
-  </table>
-  </div>
-<!-- 목록 -->
+  %>
+  <!-- 검색 리스트 끝 -->
+		</table>
+		</div>
+	</div>
 </div>
+<!-- 탭목록 -->
 
 
 <script>

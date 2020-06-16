@@ -26,7 +26,7 @@
 		<table class="w3-table">
 			<tr>
 				<td colspan="2">
-					<div class="w3-panel w3-xlarge w3-baemint" style="margin-top:0px;"
+					<div class="w3-panel w3-xlarge w3-baemint" style="margin-top:0px; padding: 5px 0px 5px 5px;"
 						>평균별점</div>
 				</td>
 			</tr>

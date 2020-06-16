@@ -78,7 +78,7 @@ if(session.getAttribute("id")==null){	//id가 없을때
 }
 
 #tabtab3 {
-	height: 500px;
+	/* height: 500px; */
 }
 
 #menucell {
@@ -299,27 +299,27 @@ var max_no= 0;
 				<div class="w3-row w3-gray">
 					<div class="w3-quarter tablink2">
 						<button onclick="openTab2(event, 'tabtab1')" id="defaultOpen"
-							class="w3-button w3-block w3-baemint w3-border">
+							class="w3-button w3-block w3-border tablink2">
 							<h4>주문접수</h4>
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
 						<button onclick="openTab2(event, 'tabtab2')"id="defaultOpen2"
 
-							class="w3-button w3-block w3-black w3-border">
+							class="w3-button w3-block w3-border tablink2">
 							<h4>메뉴관리</h4>
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
 						<button onclick="openTab2(event, 'tabtab3');reviewLoad();"
-							class="w3-button w3-block w3-black w3-border">
+							class="w3-button w3-block w3-border tablink2">
 							<h4>리뷰</h4>
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
 						<button onclick="openTab2(event, 'tabtab4');"
 
-							class="w3-button w3-block w3-black w3-border">
+							class="w3-button w3-block w3-border tablink2">
 							<h4>공지사항</h4>
 						</button>
 					</div>
@@ -395,7 +395,7 @@ var max_no= 0;
 				</div>
 				<!-- 매장관리탭 끝 -->
 				<!-- 리뷰탭 -->
-				<div id="tabtab3" class="w3-border tabcontent2">
+				<div id="tabtab3" class="tabcontent2">
 					<div id="reviewList">
 					
 					</div>
