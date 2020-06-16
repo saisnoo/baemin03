@@ -132,7 +132,8 @@ public class OrderListDAO {
 			// 여러개 입력 문 만들기
 			for (int i = 0; i < menuList.size(); i++) {
 				Order_MenuDTO o = menuList.get(i);
-				sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
+				sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , "
+						+ o.getCount() + " ) ,";
 				System.out.println(sql);
 			}
 			sql += ",,,";
@@ -164,6 +165,8 @@ public class OrderListDAO {
 		int result2 = -1;
 		System.out.println("---OrderListDAO insertOrder");
 		int orderList_No = -1; // 추가된 orderList 의 no
+		boolean isShopOpen = false;
+
 		try {
 			// TODO: 트랜잭션 트랜잭션 트랜잭션 트랜잭션 트랜잭션 트랜잭션
 			// 1+2
@@ -171,49 +174,76 @@ public class OrderListDAO {
 			con.setAutoCommit(false);
 			// ---------------------------------------------------------------------------------------
 			// 3. sql
-			System.out.println("-- 1 -- ");
-			String sql = "insert into orderlist(name, orderDate, addr, addr2, comment, shop_No, member_No )"
-					+ " values(?, now(), ?, ?, ?, ?, ? )";
-			System.out.println(sql);
+			String sql = "select shopstatus from shop WHERE no ="
+					+ dto.getShop_NO();
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dto.getName());
-			pstmt.setString(2, dto.getAddr());
-			pstmt.setString(3, dto.getAddr2());
-			pstmt.setString(4, dto.getComment());
-			pstmt.setInt(5, dto.getShop_NO());
-			pstmt.setInt(6, dto.getMember_No());
-			// 5. 실행
-			result1 = pstmt.executeUpdate();
-			// ---------------------------------------------------------------------------------------
-			// 3. sql // 4. 실행객체
-			pstmt = con.prepareStatement("select LAST_INSERT_ID()");
+			System.out.println(sql);
 			// 5. 실행
 			rs = pstmt.executeQuery();
 			// 6. 결과값
 			while (rs.next()) {
-				orderList_No = rs.getInt(1);
+				int temp01 = rs.getInt(1);
+				System.out.println("영업상태" + temp01);
+				if (temp01 == 1) {
+					isShopOpen = true;
+				}
 			}
-			System.out.println("마지막으로 추가된 주문번호=" + orderList_No);
-			// ---------------------------------------------------------------------------------------
-			// 3. sql
-			sql = "insert into order_Menu (orderlist_No, menu_No, count) VALUES ";
-			List<Order_MenuDTO> menuList = dto.getMenuList();
-			// 여러개 입력 문 만들기
-			for (int i = 0; i < menuList.size(); i++) {
-				Order_MenuDTO o = menuList.get(i);
-				sql += " ( " + orderList_No + " , " + o.getMenu_No() + " , " + o.getCount() + " ) ,";
+			System.out.println("매장 영업중인가요?=" + isShopOpen);
+
+			if (isShopOpen) {
+				System.out.println("--영업중이다 주문은 계속된다");
+				// ---------------------------------------------------------------------------------------
+				// 3. sql
+				System.out.println("-- 1 -- ");
+				sql = "insert into orderlist(name, orderDate, addr, addr2, comment, shop_No, member_No )"
+						+ " values(?, now(), ?, ?, ?, ?, ? )";
 				System.out.println(sql);
+				// 4. 실행객체
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, dto.getName());
+				pstmt.setString(2, dto.getAddr());
+				pstmt.setString(3, dto.getAddr2());
+				pstmt.setString(4, dto.getComment());
+				pstmt.setInt(5, dto.getShop_NO());
+				pstmt.setInt(6, dto.getMember_No());
+				// 5. 실행
+				result1 = pstmt.executeUpdate();
+				// ---------------------------------------------------------------------------------------
+				// 3. sql // 4. 실행객체
+				pstmt = con.prepareStatement("select LAST_INSERT_ID()");
+				// 5. 실행
+				rs = pstmt.executeQuery();
+				// 6. 결과값
+				while (rs.next()) {
+					orderList_No = rs.getInt(1);
+				}
+				System.out.println("마지막으로 추가된 주문번호=" + orderList_No);
+
+				// ---------------------------------------------------------------------------------------
+				// 3. sql
+				sql = "insert into order_Menu (orderlist_No, menu_No, count) VALUES ";
+				List<Order_MenuDTO> menuList = dto.getMenuList();
+				// 여러개 입력 문 만들기
+				for (int i = 0; i < menuList.size(); i++) {
+					Order_MenuDTO o = menuList.get(i);
+					sql += " ( " + orderList_No + " , " + o.getMenu_No()
+							+ " , " + o.getCount() + " ) ,";
+					System.out.println(sql);
+				}
+				sql += ",,,";
+				sql = sql.replace(",,,,", "");
+				System.out.println(sql);
+				// 4. 실행객체
+				stmt = con.createStatement();
+				// 5. 실행
+				result2 = stmt.executeUpdate(sql);
+				// ---------------------------------------------------------------------------------------
+				con.commit();
+			} else {
+				System.out.println("--영업끝났다 손님 꺼져라");
+				con.rollback();
 			}
-			sql += ",,,";
-			sql = sql.replace(",,,,", "");
-			System.out.println(sql);
-			// 4. 실행객체
-			stmt = con.createStatement();
-			// 5. 실행
-			result2 = stmt.executeUpdate(sql);
-			// ---------------------------------------------------------------------------------------
-			con.commit();
 		} catch (Exception e) {
 			e.getStackTrace();
 			throw new Exception(" insertOrder() 예외  ");
@@ -234,8 +264,8 @@ public class OrderListDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update orderlist set  status = 1 , completeTime = DATE_ADD( NOW() , Interval " + minute
-					+ " minute) where no = ? ";
+			String sql = "update orderlist set  status = 1 , completeTime = DATE_ADD( NOW() , Interval "
+					+ minute + " minute) where no = ? ";
 			System.out.println(sql);
 			// 4. 실행객체
 			pstmt = con.prepareStatement(sql);
@@ -423,7 +453,8 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no,"
-					+ "  member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString" + " FROM("
+					+ "  member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString"
+					+ " FROM("
 					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ("
 					+ "SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT("
 					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS,"
@@ -431,10 +462,14 @@ public class OrderListDAO {
 					+ " orderlist.shop_no shop_no, orderlist.member_no member_No,"
 					+ " orderlist.completeTime completeTime , member.tel ,"
 					+ "  order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName,"
-					+ " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member"
-					+ "  WHERE orderlist.shop_no = ?" + " AND orderlist.no = order_menu.orderlist_No"
-					+ " AND order_menu.menu_No = menu.no" + " AND orderlist.STATUS BETWEEN 0 AND 1"
-					+ " AND member.no = orderlist.member_no" + "   ORDER BY orderlist.orderdate ASC , orderlist.no asc"
+					+ " menu.menuPrice menuPrice"
+					+ " FROM orderlist, order_menu, menu , member"
+					+ "  WHERE orderlist.shop_no = ?"
+					+ " AND orderlist.no = order_menu.orderlist_No"
+					+ " AND order_menu.menu_No = menu.no"
+					+ " AND orderlist.STATUS BETWEEN 0 AND 1"
+					+ " AND member.no = orderlist.member_no"
+					+ "   ORDER BY orderlist.orderdate ASC , orderlist.no asc"
 					+ "   ) CNT" + " )CNT" + " GROUP BY NO";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
@@ -507,7 +542,8 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = "SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, "
-					+ "member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + "FROM( "
+					+ "member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString "
+					+ "FROM( "
 					+ "SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
 					+ "SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
 					+ "orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
@@ -515,11 +551,16 @@ public class OrderListDAO {
 					+ "  orderlist.shop_no shop_no, orderlist.member_no member_No, "
 					+ "  orderlist.completeTime completeTime , member.tel , "
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice " + "FROM orderlist, order_menu, menu , member "
-					+ " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
-					+ "AND order_menu.menu_No = menu.no " + "  AND orderlist.STATUS = 2 "
-					+ " AND orderlist.completeTime > NOW() " + " AND member.no = orderlist.member_no "
-					+ "ORDER BY orderlist.orderdate ASC , orderlist.no asc " + " ) CNT " + ")CNT " + " GROUP BY no; ";
+					+ " menu.menuPrice menuPrice "
+					+ "FROM orderlist, order_menu, menu , member "
+					+ " WHERE orderlist.shop_no = ? "
+					+ " AND orderlist.no = order_menu.orderlist_No "
+					+ "AND order_menu.menu_No = menu.no "
+					+ "  AND orderlist.STATUS = 2 "
+					+ " AND orderlist.completeTime > NOW() "
+					+ " AND member.no = orderlist.member_no "
+					+ "ORDER BY orderlist.orderdate ASC , orderlist.no asc "
+					+ " ) CNT " + ")CNT " + " GROUP BY no; ";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
 			// shop_no,
@@ -597,7 +638,8 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no,"
-					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + "  FROM("
+					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString "
+					+ "  FROM("
 					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
 					+ "  SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
 					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
@@ -605,11 +647,16 @@ public class OrderListDAO {
 					+ "  orderlist.shop_no shop_no, orderlist.member_no member_No, "
 					+ " orderlist.completeTime completeTime , member.tel , "
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice" + " FROM orderlist, order_menu, menu , member "
-					+ "  WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
-					+ " AND order_menu.menu_No = menu.no" + " AND status = 2" + " AND orderlist.completeTime < NOW() "
+					+ " menu.menuPrice menuPrice"
+					+ " FROM orderlist, order_menu, menu , member "
+					+ "  WHERE orderlist.shop_no = ? "
+					+ " AND orderlist.no = order_menu.orderlist_No "
+					+ " AND order_menu.menu_No = menu.no"
+					+ " AND status = 2"
+					+ " AND orderlist.completeTime < NOW() "
 					+ " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and now() "
-					+ " AND member.no = orderlist.member_no" + " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
+					+ " AND member.no = orderlist.member_no"
+					+ " ORDER BY orderlist.orderdate ASC , orderlist.no asc"
 					+ " ) CNT" + " )CNT" + " GROUP BY no;";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
@@ -685,7 +732,8 @@ public class OrderListDAO {
 			con = getConnection();
 			// 3. sql
 			String sql = " SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT, shop_no, "
-					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString " + " FROM( "
+					+ " member_no, completeTime, Group_concat( aaa SEPARATOR ' / ') menuString "
+					+ " FROM( "
 					+ " SELECT *,concat(menuName, ' X ' ,COUNT) AS aaa FROM ( "
 					+ " SELECT orderlist.no NO, orderlist.name NAME, DATE_FORMAT( "
 					+ " orderlist.orderDate, '%H:%i') orderDate, orderlist.status STATUS, "
@@ -693,11 +741,15 @@ public class OrderListDAO {
 					+ " orderlist.shop_no shop_no, orderlist.member_no member_No, "
 					+ " orderlist.completeTime completeTime , member.tel , "
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName menuName, "
-					+ " menu.menuPrice menuPrice " + " FROM orderlist, order_menu, menu , member "
-					+ " WHERE orderlist.shop_no = ? " + " AND orderlist.no = order_menu.orderlist_No "
-					+ " AND order_menu.menu_No = menu.no " + " AND STATUS = -1 "
+					+ " menu.menuPrice menuPrice "
+					+ " FROM orderlist, order_menu, menu , member "
+					+ " WHERE orderlist.shop_no = ? "
+					+ " AND orderlist.no = order_menu.orderlist_No "
+					+ " AND order_menu.menu_No = menu.no "
+					+ " AND STATUS = -1 "
 					+ " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24 HOUR)) and now() "
-					+ " AND member.no = orderlist.member_no " + " ORDER BY orderlist.orderdate ASC , orderlist.no asc "
+					+ " AND member.no = orderlist.member_no "
+					+ " ORDER BY orderlist.orderdate ASC , orderlist.no asc "
 					+ " ) CNT  )CNT GROUP BY no; ";
 
 			// SELECT NO, NAME, orderDate, tel, STATUS, addr, addr2, COMMENT,
@@ -784,7 +836,8 @@ public class OrderListDAO {
 	}
 
 	// close 1
-	static final void close(Connection con, PreparedStatement pstmt, ResultSet rs) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt,
+			ResultSet rs) throws Exception {
 		close(con, pstmt);
 		if (rs != null) {
 			rs.close();
@@ -792,7 +845,8 @@ public class OrderListDAO {
 	} // close () end
 
 	// close 2
-	static final void close(Connection con, PreparedStatement pstmt) throws Exception {
+	static final void close(Connection con, PreparedStatement pstmt)
+			throws Exception {
 		if (con != null) {
 			con.close();
 		}
