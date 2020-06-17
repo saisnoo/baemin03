@@ -16,7 +16,7 @@ public class LogoutAction implements CommandAction {
         session.invalidate();
 
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return "/index.html";
+        return "/util/Logout.jsp";
     }
 
 }
