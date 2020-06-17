@@ -42,6 +42,12 @@
 		
 		<!-- 하단 컨테이너 -->
 		<div>
+			<div class="w3-row w3-padding">${dto.whyCancel}</div>
+		</div>
+		<!-- 하단 컨테이너 끝-->
+		
+		<!-- 하단 컨테이너 -->
+		<div>
 			<div class="w3-row w3-padding">${dto.menu_String}</div>
 		</div>
 		<!-- 하단 컨테이너 끝-->

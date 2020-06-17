@@ -1,5 +1,8 @@
+<%@page import="com.baemin.orderlist.OrderListDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%--  태그를 이용해서 제어문 처리하도록 하는 설정  --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,6 +28,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<%-- request객체에 담기 --%>
+	<%
+		String no_ = session.getAttribute("no") + "";
+		int memberNo = Integer.parseInt(no_.trim());
+
+		OrderListDAO dao = OrderListDAO.getInstance();
+		request.setAttribute("list", dao.getListByMember_No(memberNo));
+	%>
+
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin">&nbsp;</div>
@@ -46,50 +59,29 @@
 							</a>
 							<h2 style="display: inline; margin: 0px">주문내역</h2>
 						</div>
-						<div class="w3-container w3-section w3-border-bottom">
-							<div class="w3-row">
-								<label style="color: gray; margin-top: 10px">2020-06-06</label>
-								<label class="w3-right">취소완료</label><br> <label
-									class="w3-right" style="color: red">( 재료소진 )</label>
-							</div>
-							<h4>교촌치킨 고척1호점</h4>
-							<label>교촌레드 콤보 1개 20000원</label>
 
-							<div class="w3-section w3-center">
-								<input type="button" class="w3-button w3-block w3-border"
-									onClick="#" value="가게보기">
-							</div>
-						</div>
+						<!-- 반복의 시작 -->
+						<c:forEach items="${ list }" var="dto">
 
-						<div class="w3-container w3-section w3-border-bottom">
-							<div class="w3-row">
-								<label style="color: gray; margin-top: 10px">2020-04-15</label>
-								<label class="w3-right">취소완료</label><br> <label
-									class="w3-right" style="color: red">( 배달불가능지역 )</label>
-							</div>
-							<h4>지코바 오류점</h4>
-							<label>순살양념치킨 1개 22500원</label>
+							<div class="w3-container w3-section w3-border-bottom">
+								<div class="w3-row">
+									<label style="color: gray; margin-top: 10px;">
+										${dto.orderDate }</label>
+									<!-- --------------------------------------------------------------------- -->
+									<label class="w3-right">${dto.whyCancel }</label><br>
+									<!-- --------------------------------------------------------------------- -->
+									<label class="w3-right" style="color: red">( 재료소진 )</label>
+								</div>
+								<h4>${dto.shop_No }</h4>
+								<label>${dto.menuString }</label>
 
-							<div class="w3-section w3-center">
-								<input type="button" class="w3-button w3-block w3-border"
-									onClick="#" value="가게보기">
+								<div class="w3-section w3-center">
+									<input type="button" class="w3-button w3-block w3-border"
+										onClick="#" value="가게보기">
+								</div>
 							</div>
-						</div>
-
-						<div class="w3-container w3-section w3-border-bottom">
-							<div class="w3-row">
-								<label style="color: gray; margin-top: 10px">2020-04-15</label>
-								<label class="w3-right">취소완료</label><br> <label
-									class="w3-right" style="color: red">( 단순변심 )</label>
-							</div>
-							<h4>카페인중독 개봉점</h4>
-							<label>아메리카노 외 2개 16500원</label>
-
-							<div class="w3-section w3-center">
-								<input type="button" class="w3-button w3-block w3-border"
-									onClick="#" value="가게보기">
-							</div>
-						</div>
+						</c:forEach>
+						<!-- 반복의 끝 -->
 
 					</div>
 					<!-- main content end----------------------------------------------------------------------- -->

@@ -23,7 +23,7 @@ public class CheckOrderProAction implements CommandAction {
         
         request.setAttribute("result",new Integer(result));
          ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-          return "/shop/CheckOrderPro.jsp ";
+          return "/shop/CheckOrderPro.jsp";
     }
 
 }
