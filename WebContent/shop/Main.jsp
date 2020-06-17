@@ -2,9 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
- 
-<%@ taglib	prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="java.sql.*"%>
+<%@ include file="../util/ContextPath.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,16 +130,16 @@
 	}
 
 	function refresh() {
-		$("#tab1").load("NewOrderList.jsp");
-		$("#tab2").load("BaesongList.jsp");
-		$("#tab3").load("EndList.jsp");
-		$("#tab4").load("CancelList.jsp");
-		$("#SM").load("ShopManage.jsp");
+		$("#tab1").load("/baemin03${ctxpath}/shop//NewOrderList.do");
+		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
+		$("#tab3").load("${ctxpath}/shop/EndList.do");
+		$("#tab4").load("${ctxpath}/shop/CancelList.do");
+		$("#SM").load("${ctxpath}/shop/ShopManage.do");
 		setTimeout(countcount, 1000);
 	}
 
 	function tabtab2load() {
-		$("#SM").load("ShopManage.jsp");
+		$("#SM").load("${ctxpath}/shop/ShopManage.do");
 		openTab2(event, 'tabtab2');
 		setTimeout(function() {
 			document.getElementById("defaultOpen2").click();
@@ -148,25 +147,25 @@
 	}
 
 	function noticeload(no) {
-		$("#noticeList").load("NoticeView.jsp?no=" + no);
+		$("#noticeList").load("${ctxpath}/shop/NoticeView.do?no=" + no);
 	}
 	function noticeload2() {
-		$("#noticeList").load("NoticeList.jsp");
+		$("#noticeList").load("${ctxpath}/shop/NoticeList.do");
 	}
 
 	// 스크립트
 
 	function tab2Refresh() {
 		console.log("배달중 새로고침");
-		$("#tab2").load("BaesongList.jsp");
+		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
 	}
 	function tab3Refresh() {
 		console.log("완료 새로고침");
-		$("#tab3").load("EndList.jsp");
+		$("#tab3").load("${ctxpath}/shop/EndList.do");
 	}
 	function tab4Refresh() {
 		console.log("취소 새로고침");
-		$("#tab4").load("CancelList.jsp");
+		$("#tab4").load("${ctxpath}/shop/CancelList.do");
 	}
 
 	function countcount() {
@@ -183,7 +182,7 @@
 	}
 
 	function reviewLoad() {
-		$("#reviewList").load("ReviewList.jsp");
+		$("#reviewList").load("${ctxpath}/shop/ReviewList.do");
 		setTimeout(countSum, 1000);
 	}
 
@@ -206,7 +205,7 @@
 			//document.getElementById("jumoontab").click(); 
 		}
 		function load() {
-			$("#tab1").load("NewOrderList.jsp");
+			$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 		}
 
 		setInterval(reload, 1000);
@@ -227,7 +226,7 @@
 		}
 		$.ajax({
 			type : "post",
-			url : "Reload.jsp",
+			url : "${ctxpath}/shop/Reload.do",
 			//data : JSON.stringify(reply),
 			data : data,
 			async : false,
@@ -240,7 +239,7 @@
 				if (max_no != max_no2) {
 					max_no = max_no2;
 
-					$("#tab1").load("NewOrderList.jsp");
+					$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 					if (audio_start != 0) {
 						audio.play();
 					}
@@ -368,7 +367,7 @@
 				<!-- 매장관리탭 -->
 
 				<div id="SM">
-					<jsp:include page="ShopManage.jsp" />
+					<%-- <jsp:include page="ShopManage.jsp" /> --%>
 				</div>
 				<!-- 매장관리탭 끝 -->
 				<!-- 리뷰탭 -->
@@ -377,7 +376,7 @@
 				</div>
 				<div id="tabtab4" class="w3-border tabcontent2">
 					<div id="noticeList">
-						<jsp:include page="NoticeList.jsp" />
+					<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
 					</div>
 				</div>
 
@@ -437,7 +436,7 @@
 		window.onresize = responsiveMenuClose;
 		function responsiveMenuPopUp() {
 			var x = document.getElementById("topNav");
-			if (x.className === "topnav w3-card-4") {
+			if (x.className == "topnav w3-card-4") {
 				x.className += " responsive";
 			} else {
 				x.className = "topnav w3-card-4";
@@ -538,7 +537,7 @@
 			$
 					.ajax({
 						type : "post",
-						url : "CheckOrderPro.jsp",
+						url : "${ctxpath}/shop/CheckOrderPro.do",
 						data : {
 							"no" : no,
 							"minute" : minute
@@ -632,7 +631,7 @@
 			$
 					.ajax({
 						type : "post",
-						url : "CancelOrderPro.jsp",
+						url : "${ctxpath}/shop/CancelOrderPro.do",
 						data : {
 							"no" : no,
 							"whyCancel" : whyCancel
@@ -657,7 +656,7 @@
 			document.getElementById("jumunNo").innerText = jumunNo;
 			$.ajax({
 				type : "post",
-				url : "BaesongSelect.jsp",
+				url : "${ctxpath}/shop/BaesongSelect.do",
 				data : {
 					"no" : jumunNo
 				},
@@ -777,7 +776,7 @@
 							$
 									.ajax({
 										type : "post",
-										url : "AddMenuPro.jsp",
+										url : "${ctxpath}/shop/AddMenuPro.do",
 										//data : JSON.stringify(reply),
 										data : data,
 										async : false,
@@ -817,7 +816,7 @@
 							$
 									.ajax({
 										type : "post",
-										url : "MenuStatusPro.jsp",
+										url : "${ctxpath}/shop/MenuStatusPro.do",
 										//data : JSON.stringify(reply),
 										data : data,
 										//리턴 되어 돌려 받는 데이터의 타입
