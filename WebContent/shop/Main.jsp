@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctxpath" value="<%=request.getContextPath()%>" />
+<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -305,7 +305,7 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab1" class="w3-row tabcontent2">
+				<div id="tabtab1" class="w3-row tabcontent2" >
 					<div class="w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="jumoontab">
@@ -371,6 +371,7 @@
 				<div id="SM">
 					<%-- <jsp:include page="ShopManage.jsp" /> --%>
 				</div>
+				</div>
 				<!-- 매장관리탭 끝 -->
 				<!-- 리뷰탭 -->
 				<div id="tabtab3" class="tabcontent2">
@@ -378,7 +379,7 @@
 				</div>
 				<div id="tabtab4" class="w3-border tabcontent2">
 					<div id="noticeList">
-						<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
+					<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
 					</div>
 				</div>
 
@@ -432,7 +433,6 @@
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
 		</div>
-	</div>
 	<!-- main content end----------------------------------------------------------------------- -->
 	<script>
 		window.onresize = responsiveMenuClose;
@@ -546,11 +546,12 @@
 						},
 						success : function(result) {
 							console.log("조리시작한다");
-
-							document.getElementById("jumunReady").style.display = "none";
-
-						},
-						error : function(xhr, status, error) {
+							
+						
+							
+								document.getElementById("jumunReady").style.display = "none";
+							
+						},error : function(xhr, status, error) {
 							console.log(" 실패");
 						}//error의 끝
 					});//ajax
@@ -674,8 +675,7 @@
 	</script>
 
 	<!-- 두번째 메뉴관리 -->
-	<div class="modal fade check_viewmenu" id="check_viewmenu"
-		role="dialog">
+	<div class="modal fade check_viewmenu" id="check_viewmenu" role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content 시작-->
@@ -688,9 +688,9 @@
 					<div class="form-group">
 						<!-- 글번호입력 -->
 						<label for="writer">주문 메뉴 표시 유무</label><br> <input
-							type="hidden" id="no5" name="no5" value=""> <input
-							type="hidden" id="status5" name="status5" value=""> <span
-							id="status_check">123</span>
+							type="hidden" id="no5" name="no5" value=""> 
+							<input type="hidden" id="status5" name="status5" value=""> 
+							<span id="status_check">123</span>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -802,8 +802,7 @@
 									});//ajax의 끝*/
 						});
 
-		$("#check_viewmenu_btn")
-				.click(
+		$("#check_viewmenu_btn").click(
 						function() {
 							var menu_no = $(":input:hidden[name=no5]").val();
 							var menu_status = $(":input:hidden[name=status5]")
@@ -814,8 +813,7 @@
 								menuno : menu_no,
 								menustatus : menu_status
 							}
-							$
-									.ajax({
+							$.ajax({
 										type : "post",
 										url : "${ctxpath}/shop/MenuStatusPro.do",
 										//data : JSON.stringify(reply),

@@ -6,26 +6,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctxpath" value="<%=request.getContextPath()%>" />
+<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+		 
 	$(function() {
-
+		
 		if ("<c:out value='${shopdto.shopStatus}'/>" == 0) {
 			$("#magam").hide();
 			$("#addmenu").show();
 			$("#shopOpen").show();
 
 		}
-		if ("<c:out value='${shopdto.shopStatus}'/>" == 1) {
+		if ("<c:out value='${shopdto.shopStatus}'/>"== 1) {
 			$("#magam").show();
 			$("#addmenu").hide();
 			$("#shopOpen").hide();
 		}
 
 	});
+
 </script>
 
 <!-- 탭목록 -->
@@ -63,8 +65,8 @@
 			</div>
 
 			<div class="w3-rest">
-				<input class="w3-input w3-border" type="text" placeholder="검색상품"
-					id="myInput" onkeyup="myFunction()">
+				<input class="w3-input w3-border" type="text"
+					placeholder="검색상품" id="myInput" onkeyup="myFunction()">
 			</div>
 
 		</div>
@@ -72,7 +74,7 @@
 
 		<table class="w3-table-all">
 			<!-- 검색창 리스트 -->
-			<tr class="w3-baemint">
+			<tr class="w3-baemint" >
 				<th style="width: 30%">이름</th>
 				<th style="width: 30%">카테고리</th>
 				<th style="width: 25%">가격</th>
@@ -83,28 +85,27 @@
 			<table class="w3-table" id="myTable">
 				<c:forEach var="menudto" items="${list}">
 				<c:if test="${shopdto.shopStatus==0 }">
-				<tr class="w3-hover-black check_view" data-toggle="modal"
-					data-target="#check_viewmenu" style="cursor: pointer;">
+				<tr class="w3-hover-black check_view" data-toggle="modal" data-target="#check_viewmenu"  style="cursor: pointer;">
 					</c:if>
-
-					<c:if test="${shopdto.shopStatus==1 }">
-
-						<tr class="scroll-box check_view">
-					</c:if>
-					<td style="width: 30%">${menudto.menuName}<input type="hidden"
-						value="${menudto.no}" id="menu_no"> <input type="hidden"
-						value="${menudto.menuStatus}" id="menu_status"></td>
+				
+				<c:if test="${shopdto.shopStatus==1 }">
+				
+				<tr class="scroll-box check_view">
+				</c:if>
+					<td style="width: 30%">${menudto.menuName}
+					<input type="hidden" value="${menudto.no}" id="menu_no">
+					<input type="hidden" value="${menudto.menuStatus}" id="menu_status"></td>
 					<td style="width: 30%">${menudto.menuCategory}</td>
 					<td style="width: 25%">${menudto.menuPrice}</td>
-					<c:if test="${menudto.menuStatus==1 }">
-						<td style="text-align: center; width: 15%">O</td>
-					</c:if>
-					<c:if test="${menudto.menuStatus==0 }">
-						<td style="text-align: center; color: red; width: 15%">X</td>
-					</c:if>
-					</tr>
-
-				</c:forEach>
+				<c:if test="${menudto.menuStatus==1 }">
+					<td	style="text-align:center; width: 15%">O</td>
+				</c:if>
+				<c:if test="${menudto.menuStatus==0 }">
+					<td	style="text-align:center; color:red; width: 15%">X</td>
+				</c:if>
+				</tr>
+				
+					</c:forEach>
 				<!-- 검색 리스트 끝 -->
 			</table>
 		</div>
@@ -114,29 +115,24 @@
 
 
 <script>
-	if ("<c:out value='${shopdto.shopStatus}'/>" == 0) {
+	if ("<c:out value='${shopdto.shopStatus}'/>"==0) {
 		$(function() {
-			$(".check_view")
-					.click(
-							function() {
-
+			$(".check_view").click(function() {
 								var menu_no = $(this).find("#menu_no").val();
-								var menu_status = $(this).find("#menu_status")
-										.val();
+								var menu_status = $(this).find("#menu_status").val();
 								//document.getElementById("status").value = menu_status;
 								document.getElementById("no5").value = menu_no;
 								document.getElementById("status5").value = menu_status;
 								console.log("check_view = " + menu_no);
 
-								if (menu_status == 1) {
+								if (menu_status== 1) {
 									document.getElementById("status_check").innerText = "메뉴표시중";
-
-								} else if (menu_status == 0) {
+									
+								} else if (menu_status== 0) {
 									document.getElementById("status_check").innerText = "메뉴표시 안하는중";
 								}
 
 							});
-
 		});
 	}
 </script>
@@ -164,16 +160,8 @@
 
 	$("#shopOpen").click(function() {
 		console.log("shopopen이 눌러졌다");
-		var shopNo = $
-		{
-			shopdto.no
-		}
-		;
-		var shopstatus = $
-		{
-			shopdto.shopStatus
-		}
-		;
+		var shopNo =${shopdto.no};
+		var shopstatus =${shopdto.shopStatus};
 		$.ajax({
 			type : "post",
 			url : "${ctxpath}/shop/ShopOpenPro.do",
@@ -201,16 +189,10 @@
 	});
 	$("#magam").click(function() {
 		console.log("shopmagam이 눌러졌다");
-		var shopNo = $
-		{
-			shopdto.no
-		}
-		;
-		var shopstatus = $
-		{
-			shopdto.shopStatus
-		}
-		;
+		var shopNo =${shopdto.no}
+	;
+		var shopstatus =${shopdto.shopStatus}
+	;
 		$.ajax({
 			type : "post",
 			url : "${ctxpath}/shop/ShopOpenPro.do",
