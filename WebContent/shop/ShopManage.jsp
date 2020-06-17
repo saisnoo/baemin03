@@ -5,20 +5,20 @@
 <%@page import="com.baemin.menu.MenuDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ include file="../util/ContextPath.jsp"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+		 
 	$(function() {
-		alert(${shopdto.ShopStatus});
-		if (${shopdto.ShopStatus} == 0) {
+		
+		if ("<c:out value='${shopdto.shopStatus}'/>" == 0) {
 			$("#magam").hide();
 			$("#addmenu").show();
 			$("#shopOpen").show();
 
 		}
-		if (${shopdto.ShopStatus} == 1) {
+		if ("<c:out value='${shopdto.shopStatus}'/>"== 1) {
 			$("#magam").show();
 			$("#addmenu").hide();
 			$("#shopOpen").hide();
@@ -82,24 +82,24 @@
 		<div class="scroll-box" style="height: 380px;">
 			<table class="w3-table" id="myTable">
 				<c:forEach var="menudto" items="${list}">
-				<c:if test="${shopdto.ShopStatus==0 }">
+				<c:if test="${shopdto.shopStatus==0 }">
 				<tr class="w3-hover-black check_view" data-toggle="modal"
 					data-tar="#check_viewmenu" style="cursor: pointer;">
 					</c:if>
 				
-				<c:if test="${shopdto.ShopStatus==1 }">
+				<c:if test="${shopdto.shopStatus==1 }">
 				
 				<tr class="scroll-box check_view">
 				</c:if>
-					<td style="width: 30%">${menudto.MenuName}
-					<input type="hidden" value="${menudto.No}" id="menu_no">
-					<input type="hidden" value="${menudto.MenuStatus}" id="menu_status"></td>
-					<td style="width: 30%">${menudto.MenuCategory}</td>
-					<td style="width: 25%">${menudto.MenuPrice}</td>
-				<c:if test="${menudto.MenuStatus==1 }">
+					<td style="width: 30%">${menudto.menuName}
+					<input type="hidden" value="${menudto.no}" id="menu_no">
+					<input type="hidden" value="${menudto.menuStatus}" id="menu_status"></td>
+					<td style="width: 30%">${menudto.menuCategory}</td>
+					<td style="width: 25%">${menudto.menuPrice}</td>
+				<c:if test="${menudto.menuStatus==1 }">
 					<td	style="text-align:center; width: 15%">O</td>
 				</c:if>
-				<c:if test="${menudto.MenuStatus==0 }">
+				<c:if test="${menudto.menuStatus==0 }">
 					<td	style="text-align:center; color:red; width: 15%">X</td>
 				</c:if>
 				</tr>
@@ -114,7 +114,7 @@
 
 
 <script>
-	if (${shopdto.ShopStatus}==0) {
+	if ("<c:out value='${shopdto.shopStatus}'/>"==0) {
 		$(function() {
 			$(".check_view")
 					.click(
@@ -163,11 +163,11 @@
 
 	$("#shopOpen").click(function() {
 		console.log("shopopen이 눌러졌다");
-		var shopNo =${shopdto.No};
-		var shopstatus =${shopdto.ShopStatus};
+		var shopNo =${shopdto.no};
+		var shopstatus =${shopdto.shopStatus};
 		$.ajax({
 			type : "post",
-			url : "ShopOpenPro.jsp",
+			url : "${ctxpath}/shop/ShopOpenPro.do",
 			//data : JSON.stringify(reply),
 			data : {
 				shopNo : shopNo,
@@ -192,13 +192,13 @@
 	});
 	$("#magam").click(function() {
 		console.log("shopmagam이 눌러졌다");
-		var shopNo =${shopdto.No}
+		var shopNo =${shopdto.no}
 	;
-		var shopstatus =${shopdto.ShopStatus}
+		var shopstatus =${shopdto.shopStatus}
 	;
 		$.ajax({
 			type : "post",
-			url : "ShopOpenPro.jsp",
+			url : "${ctxpath}/shop/ShopOpenPro.jsp",
 			//data : JSON.stringify(reply),
 			data : {
 				shopNo : shopNo,

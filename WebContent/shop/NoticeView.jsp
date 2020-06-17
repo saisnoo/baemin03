@@ -4,8 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
  
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ include file="../util/ContextPath.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,27 +53,27 @@
 
  <p>      
     <label class="w3-text-blue"><b>글번호</b></label>
-    <input class="w3-input w3-border" name="no" id="no" type="text" value="${dto.No}" readonly>
+    <input class="w3-input w3-border" name="no" id="no" type="text" value="${dto.no}" readonly>
   </p>
   
   <p>      
     <label class="w3-text-blue"><b>글제목</b></label>
-    <input class="w3-input w3-border" name="title" name="title" type="text" value="${dto.Title}" readonly>
+    <input class="w3-input w3-border" name="title" name="title" type="text" value="${dto.title}" readonly>
   </p>
   
   <p>      
     <label class="w3-text-blue"><b>글내용</b></label>
-    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly>${dto.Content}</textarea>
+    <textarea class="w3-input w3-border" rows="5" cols="50" name="content" id="content" style="resize:none;" readonly>${dto.content}</textarea>
   </p>
   
    <p>      
     <label class="w3-text-blue"><b>작성일</b></label>
-    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="${dto.StartDate}" readonly>
+    <input class="w3-input w3-border" name="startdate" name="startdate" type="text" value="${dto.startDate}" readonly>
   </p>
   
    <p>      
     <label class="w3-text-blue"><b>종료일</b></label>
-    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="${dto.EndDate}" readonly>
+    <input class="w3-input w3-border" name="enddate" name="enddate" type="text" value="${dto.endDate}" readonly>
   </p>  
   &nbsp;
     
