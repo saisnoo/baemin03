@@ -7,7 +7,7 @@
 <c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
 
 
-<c:forEach var="dto" items="orderList">
+<c:forEach var="dto" items="${orderList}">
 
 <div class="w3-section">
 	<div class="w3-card w3-padding">

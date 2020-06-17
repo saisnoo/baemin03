@@ -648,7 +648,7 @@
 						}//success
 					});//ajax
 			setTimeout(refresh, 1200); // 새로고침
-			setTimeout(refresh, 1200); // 새로고침
+			setTimeout(refresh, 800); // 새로고침
 		}
 	</script>
 	<script>
