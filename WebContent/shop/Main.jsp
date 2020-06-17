@@ -132,7 +132,7 @@
 	}
 
 	function refresh() {
-		$("#tab1").load("/baemin03${ctxpath}/shop//NewOrderList.do");
+		$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
 		$("#tab3").load("${ctxpath}/shop/EndList.do");
 		$("#tab4").load("${ctxpath}/shop/CancelList.do");
