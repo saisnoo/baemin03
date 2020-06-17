@@ -132,7 +132,7 @@
 	}
 
 	function refresh() {
-		$("#tab1").load("/baemin03${ctxpath}/shop//NewOrderList.do");
+		$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
 		$("#tab3").load("${ctxpath}/shop/EndList.do");
 		$("#tab4").load("${ctxpath}/shop/CancelList.do");
@@ -210,11 +210,9 @@
 			$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 		}
 
-		setInterval(reload, 1000);
+		setInterval(reload, 3000);
 		setTimeout(load, 1000);
 		setTimeout(load, 2000);
-		setTimeout(load, 3000);
-		setTimeout(load, 4000);
 	});
 
 	var audio = new Audio();
@@ -296,7 +294,7 @@
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab4');"
+						<button onclick="openTab2(event, 'tabtab4');noticeload2()"
 							class="w3-button w3-block w3-border tablink2">
 							<h4>공지사항</h4>
 						</button>
@@ -305,7 +303,7 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab1" class="w3-row tabcontent2" onClick="refresh()">
+				<div id="tabtab1" class="w3-row tabcontent2" >
 					<div class="w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="jumoontab">
@@ -545,15 +543,16 @@
 							"minute" : minute
 						},
 						success : function(result) {
-							console.log(result);
-							if (result == 1) {
+							console.log("조리시작한다");
+							
+						
+							
 								document.getElementById("jumunReady").style.display = "none";
-							} else {
-								alert("배달 실패X");
-							}//else
-						}//success
+							
+						},error : function(xhr, status, error) {
+							console.log(" 실패");
+						}//error의 끝
 					});//ajax
-			setTimeout(refresh, 1200); // 새로고침
 			setTimeout(refresh, 1200); // 새로고침
 		}//CookOk
 	</script>
@@ -647,7 +646,6 @@
 							}//else
 						}//success
 					});//ajax
-			setTimeout(refresh, 1200); // 새로고침
 			setTimeout(refresh, 1200); // 새로고침
 		}
 	</script>
