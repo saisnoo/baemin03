@@ -3,15 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
-<%
-request.setCharacterEncoding("utf-8");
-System.out.println("------ MemberListAll.jsp --- ");
-
-MemberDAO dao=MemberDAO.getInstance();
-List<MemberDTO> list = dao.getListAll();
-request.setAttribute("list", list);
-%>
+<%@ include file="../util/ContextPath.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +57,7 @@ request.setAttribute("list", list);
 			console.log(memberNo);
 			//location.href="ShopView.jsp?shopNo="+shopNo;	
 			document.getElementById("id01").style.display = "block";		
-			$("#swsw").load("MemberView.jsp?memberNo="+memberNo);
+			$("#swsw").load("MemberView.do?memberNo="+memberNo);
 
 		});
 	});

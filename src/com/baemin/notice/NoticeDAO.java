@@ -123,7 +123,7 @@ public class NoticeDAO {
 			// 1+2
 			con = getConnection();
 			// 3. sql
-			String sql = "update notice set title=?, content=?, startdate='" + startDate + "', enddate='" + endDate
+			String sql = "update notice set title=?, content=?, startDate='" + startDate + "', endDate='" + endDate
 					+ "' WHERE no = ?";
 			System.out.println("sql---" + sql);
 			// 4. 실행객체

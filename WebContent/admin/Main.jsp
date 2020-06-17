@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
- 
-<%
-request.setCharacterEncoding("UTF-8");
-System.out.println("------ Main.jsp --- ");
-%>
+<%@ include file="../util/ContextPath.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,15 +35,15 @@ System.out.println("------ Main.jsp --- ");
  
 %>
  <div class="w3-row sw-container-900" style="margin-top: 10%; height: 20px;">
-			<a href="NoticeList.jsp" class="w3-button w3-col s4 w3-center" style="padding: 0px;">
+			<a href="${ctxpath }/admin/NoticeList.do" class="w3-button w3-col s4 w3-center" style="padding: 0px;">
 				<i class="material-icons" style="font-size:200px;color:#45c1bf;">notifications</i><br>
 				<h3>공지사항</h3>
 			</a>
-			<a href="ShopList.jsp" class="w3-button w3-col s4 w3-center" style="padding: 0px;">
+			<a href="${ctxpath }/admin/ShopList.do" class="w3-button w3-col s4 w3-center" style="padding: 0px;">
 				<i class="material-icons" style="font-size:200px;color:#45c1bf;">restaurant_menu</i><br>
 				<h3>매장관리</h3>
 			</a>
-			<a href="MemberList.jsp" class="w3-button w3-col s4 w3-center" style="padding: 0px;">
+			<a href="${ctxpath }/admin/MemberList.do" class="w3-button w3-col s4 w3-center" style="padding: 0px;">
 				<i class="material-icons" style="font-size:200px;color:#45c1bf;">account_circle</i><br>
 				<h3>회원관리</h3>
 			</a>

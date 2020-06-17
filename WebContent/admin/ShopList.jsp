@@ -2,18 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
- 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	request.setCharacterEncoding("utf-8");
-System.out.println("------ ShopListAll.jsp --- ");
-
-
-
-ShopDAO dao=ShopDAO.getInstance();
-List<ShopDTO> list = dao.getListAll();
-request.setAttribute("list", list);
-%>
+<%@ include file="../util/ContextPath.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +56,7 @@ request.setAttribute("list", list);
 			console.log(shopNo);
 			//location.href="ShopView.jsp?shopNo="+shopNo;	
 			document.getElementById("id01").style.display = "block";		
-			$("#swsw").load("ShopView.jsp?shopNo="+shopNo);
+			$("#swsw").load("ShopView.do?shopNo="+shopNo);
 
 		});
 	});
