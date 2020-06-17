@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
+<c:set var="ctxpath" value="<%=request.getContextPath()%>" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -305,7 +305,7 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab1" class="w3-row tabcontent2" >
+				<div id="tabtab1" class="w3-row tabcontent2">
 					<div class="w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="jumoontab">
@@ -378,7 +378,7 @@
 				</div>
 				<div id="tabtab4" class="w3-border tabcontent2">
 					<div id="noticeList">
-					<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
+						<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
 					</div>
 				</div>
 
@@ -546,12 +546,11 @@
 						},
 						success : function(result) {
 							console.log("조리시작한다");
-							
-						
-							
-								document.getElementById("jumunReady").style.display = "none";
-							
-						},error : function(xhr, status, error) {
+
+							document.getElementById("jumunReady").style.display = "none";
+
+						},
+						error : function(xhr, status, error) {
 							console.log(" 실패");
 						}//error의 끝
 					});//ajax
