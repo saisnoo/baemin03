@@ -198,9 +198,9 @@
 					</div>
 					<!-- 버튼 .................. -->
 					<!-- ................................................................ -->
-					<input type="text" name="shopX" id="shopX">
+					<input type="hidden" name="shopX" id="shopX">
 					<!-- ................................................................ -->
-					<input type="text" name="shopY" id="shopY">
+					<input type="hidden" name="shopY" id="shopY">
 					<!-- ................................................................ -->
 				</form>
 				<!-- formformformformformformformformform -->
