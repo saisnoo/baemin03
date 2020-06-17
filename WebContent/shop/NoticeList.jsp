@@ -3,8 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
  
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ include file="../util/ContextPath.jsp"%>
 <!-- CDN - Font Awesome 4 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -94,9 +93,9 @@
 
 						<c:forEach var="list" items="${list}">
 						<tr class="contentLine" onclick="click(this)">
-							<td class="noticeNo">${list.No}</td>
-							<td>${list.Title}</td>
-							<td>${list.StartDate}~<br>${list.EndDate}</td>							
+							<td class="noticeNo">${list.no}</td>
+							<td>${list.title}</td>
+							<td>${list.startDate}~<br>${list.endDate}</td>							
 						</tr>
 						</c:forEach>
 
