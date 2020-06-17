@@ -2,11 +2,7 @@
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ UpdateShopForm.jsp --- ");
-%>
+<%@ include file="../util/ContextPath.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,44 +35,32 @@
 } */
 </style>
 <script>
-	function checkIt(){
-		  if($("#password").val()==''){
-			  alert("비밀번호를 입력하세요");
-			  $("#password").focus();
-			  return false;
-		  }
-		  if($("#password2").val()==""){
-		  	  alert("비밀번호 확인을 입력하세요.");
-			  $("#password2").focus();
-			  return false;
-		  }
-			
-		  if($("#password").val() != $("#password2").val()){
-			  alert("비밀번호 확인을 잘못입력하였습니다.");
-			  $("#password").val('').focus();
-			  $("#password2").val('');
-			  return false;
-		  }
-	}//checkIt() end
+window.onload = function(){
+	setInterval(function (){
+	console.log("setInterval()구동 중");
+		var pw = $("#password").val();
+		var pw2 = $("#password2").val();
+		
+		if(!pw || !pw2 || pw.length<4 || pw.length>12 || pw2.length<4 || pw2.length>12){
+			$(".pwtx").text("비밀번호가 틀립니다.");
+			document.getElementById("btn").disabled=true;
+		}else{
+			$(".pwtx").text("비밀번호가 같습니다.");
+			document.getElementById("btn").disabled=false;
+		}
+	}, 500);
+}
+	
 </script>
 </head>
 <body>
 	<!-- 내용 -->
-	<%
-		Object no_ob = session.getAttribute("no");
-		int no = Integer.parseInt(no_ob + "");
-		ShopDAO dao = ShopDAO.getInstance();
-		ShopDTO dto = dao.getShopInfo(no);
-		request.setAttribute("dto", dto);
-	%>
-
-
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
-	<form method="post" action="UpdateShopPro.jsp">
+	<form method="post" action="${ctxpath}/memberShop/UpdateShopPro.do">
 	<div class="sw-center" style="margin-top: 2%">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
@@ -121,9 +105,10 @@
 							  <input type="password" class="w3-input w3-border" size="10" id="password" name="password">
 							  <input type="password" class="w3-input w3-border" size="10" id="password2" name="password2">
 						  </p>
+							  <div class="pwtx"></div>
 					  
 					  <div class="w3-section w3-center">
-	   				  	<input class="w3-button w3-border w3-baemint" type="submit" value="회원정보수정">
+	   				  	<input class="w3-button w3-border w3-baemint" type="submit" value="회원정보수정" id="btn" disabled="disabled">
 	   				  	<input class="w3-button w3-border w3-baemint" type="reset" value="다시쓰기">
 					  	<input class="w3-button w3-border w3-baemint" type="button" value="취소" onclick="javascript:history.back()">
 					  </div>

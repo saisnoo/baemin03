@@ -4,7 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
+<c:set var="ctxpath" value="<%=request.getContextPath()%>" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,17 +127,16 @@
 	var max_no = 0;
 	window.onload = function() {
 		refresh();
-		countcount();
-
+	
 	}
 
 	function refresh() {
 		$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
-		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
-		$("#tab3").load("${ctxpath}/shop/EndList.do");
-		$("#tab4").load("${ctxpath}/shop/CancelList.do");
 		$("#SM").load("${ctxpath}/shop/ShopManage.do");
-		setTimeout(countcount, 1000);
+		setTimeout(tab2Refresh,1000);
+		setTimeout(tab3Refresh,1300);
+		setTimeout(tab4Refresh,1800);
+		setTimeout(countcount, 2000);
 	}
 
 	function tabtab2load() {
@@ -160,14 +159,17 @@
 	function tab2Refresh() {
 		console.log("배달중 새로고침");
 		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
+		setTimeout(countcount, 1000);
 	}
 	function tab3Refresh() {
 		console.log("완료 새로고침");
 		$("#tab3").load("${ctxpath}/shop/EndList.do");
+		setTimeout(countcount, 1000);
 	}
 	function tab4Refresh() {
 		console.log("취소 새로고침");
 		$("#tab4").load("${ctxpath}/shop/CancelList.do");
+		setTimeout(countcount, 1000);
 	}
 
 	function countcount() {
@@ -210,11 +212,9 @@
 			$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 		}
 
-		setInterval(reload, 1000);
+		setInterval(reload, 1500);
 		setTimeout(load, 1000);
 		setTimeout(load, 2000);
-		setTimeout(load, 3000);
-		setTimeout(load, 4000);
 	});
 
 	var audio = new Audio();
@@ -296,7 +296,7 @@
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab4');noticeload2();"
+						<button onclick="openTab2(event, 'tabtab4');noticeload2()"
 							class="w3-button w3-block w3-border tablink2">
 							<h4>공지사항</h4>
 						</button>
@@ -305,7 +305,7 @@
 
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 				<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-				<div id="tabtab1" class="w3-row tabcontent2" onClick="refresh()">
+				<div id="tabtab1" class="w3-row tabcontent2">
 					<div class="w3-col" style="width: 100px;">
 						<button class="w3-button w3-block w3-border tablinks"
 							onclick="openTab(event, 'tab1')" id="jumoontab">
@@ -378,7 +378,7 @@
 				</div>
 				<div id="tabtab4" class="w3-border tabcontent2">
 					<div id="noticeList">
-					<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
+						<%-- 	<jsp:include page="NoticeList.jsp" /> --%>
 					</div>
 				</div>
 
@@ -545,16 +545,16 @@
 							"minute" : minute
 						},
 						success : function(result) {
-							console.log(result);
-							if (result == 1) {
-								document.getElementById("jumunReady").style.display = "none";
-							} else {
-								alert("배달 실패X");
-							}//else
-						}//success
+							console.log("조리시작한다");
+
+							document.getElementById("jumunReady").style.display = "none";
+
+						},
+						error : function(xhr, status, error) {
+							console.log(" 실패");
+						}//error의 끝
 					});//ajax
 			setTimeout(refresh, 1200); // 새로고침
-			setTimeout(refresh, 800); // 새로고침
 		}//CookOk
 	</script>
 
@@ -648,7 +648,6 @@
 						}//success
 					});//ajax
 			setTimeout(refresh, 1200); // 새로고침
-			setTimeout(refresh, 800); // 새로고침
 		}
 	</script>
 	<script>

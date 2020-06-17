@@ -1,28 +1,30 @@
-package com.mvc.action.memberclient;
+package com.mvc.action.membershop;
 
 import javax.servlet.http.*;
 
-import com.baemin.member.MemberDAO;
-import com.baemin.member.MemberDTO;
+import com.baemin.shop.ShopDAO;
+import com.baemin.shop.ShopDTO;
 import com.mvc.action.CommandAction;
 
-public class UpdateClientFormAction implements CommandAction {
+public class UpdateShopFormAction implements CommandAction {
 
     @Override
     public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         request.setCharacterEncoding("UTF-8");
-        System.out.println("- - - - UpdateClientFormAction - - - - ");
+        System.out.println("- - - - UpdateShopProAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
         HttpSession session = request.getSession();
+        
 		Object no_ob = session.getAttribute("no");
 		int no = Integer.parseInt(no_ob + "");
-		MemberDAO dao = MemberDAO.getInstance();
-		MemberDTO dto = dao.getDTO(no);
+		ShopDAO dao = ShopDAO.getInstance();
+		ShopDTO dto = dao.getShopInfo(no);
         //
 		request.setAttribute("dto", dto);
+
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return "/memberClient/UpdateClientForm.jsp";
+        return "/memberShop/UpdateShopForm.jsp";
     }
 
 }
