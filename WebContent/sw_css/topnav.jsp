@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../util/ContextPath.jsp"%>
 
 
 <!-- HEAD ------------------------------------------------------------------------------------ -->
@@ -9,11 +10,11 @@
 	<!-- -------------------------------------------------------------------------- -->
 	<a> <strong>${sessionScope.id }</strong> </a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a href="../memberShop/MyPageShop.jsp">마이페이지</a>
+	<a href="${ctxpath}/memberShop/MyPageShop.do">마이페이지</a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="https://ceo.baemin.com/guide/detail/G73002">배민가이드</a>
 	<!-- -------------------------------------------------------------------------- -->
-	<a href="../util/Logout.jsp">로그아웃</a>
+	<a href="${ctxpath}/util/Logout.do">로그아웃</a>
 	<!-- -------------------------------------------------------------------------- -->
 	<a href="javascript:void(0);" class="icon"
 		onclick="responsiveMenuPopUp()"> <i class="fa fa-bars"></i>

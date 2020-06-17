@@ -1,14 +1,7 @@
-<%@page import="com.baemin.shop.ShopDTO"%>
-<%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
- 
+<%@ include file="../util/ContextPath.jsp" %>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ MyPageShop.jsp --- ");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,20 +29,6 @@
 </head>
 <body>
 	<!-- 내용 -->
-	<%
-		Object no_ob = session.getAttribute("no");
-		int no = Integer.parseInt(no_ob + "");
-		ShopDAO dao = ShopDAO.getInstance();
-		ShopDTO dto = dao.getShopInfo(no);
-		request.setAttribute("dto", dto);
-	%>
-
-
-
-
-
-
-
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin w3-section">&nbsp;</div>
@@ -106,7 +85,7 @@
 						<div class="w3-section w3-center">
 							<input type="submit" class="w3-button w3-baemint" value="회원정보수정">
 						    <input type="button" class="w3-button w3-baemint" value="뒤로가기" onclick="javascript:history.back()'">
-						    <input type="button" class="w3-button w3-baemint" value="로그아웃" onClick="location = '../util/Logout.jsp'">
+						    <input type="button" class="w3-button w3-baemint" value="로그아웃" onClick="location='${ctxpath}/util/Logout.do'">
 						</div>
 						<br>
 					</form>

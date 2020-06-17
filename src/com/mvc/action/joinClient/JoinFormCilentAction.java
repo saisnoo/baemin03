@@ -11,11 +11,11 @@ public class JoinFormCilentAction implements CommandAction {
         request.setCharacterEncoding("UTF-8");
         System.out.println("- - - - JoinFormCilentAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
-
+        
         //
 
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return "aaaa";
+        return "/joinClient/JoinFormClient.jsp";
     }
 
 }
