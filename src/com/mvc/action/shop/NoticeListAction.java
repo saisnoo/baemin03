@@ -25,7 +25,7 @@ public class NoticeListAction implements CommandAction {
         
         request.setAttribute("list", list);
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return "/shop/NoticeList.jsp ";
+        return "/shop/NoticeList.jsp";
     }
 
 }

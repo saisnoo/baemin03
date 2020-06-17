@@ -59,7 +59,7 @@
 					<td style="width: 15%">${dto.member_no}</td>
 					<td style="width: 25%">
 						<!-- 별점 이미지 --> <span width="100px"> <customtag:starRank
-								rank="${(double) dto.rank}" width="100" />
+								rank="${dto.rank+0.001}" width="100" />
 					</span>
 					</td>
 					<!-- 별점 이미지 -->

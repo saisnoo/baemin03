@@ -294,7 +294,7 @@
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab4');noticeload2()"
+						<button onclick="openTab2(event, 'tabtab4');noticeload2();"
 							class="w3-button w3-block w3-border tablink2">
 							<h4>공지사항</h4>
 						</button>

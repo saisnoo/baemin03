@@ -2,11 +2,8 @@
 <%@page import="com.baemin.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../util/ContextPath.jsp" %>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ MyPageClient.jsp --- ");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,15 +59,6 @@
 </script>
 </head>
 <body>
-	<!-- 내용 -->
-	<%
-		Object no_ob = session.getAttribute("no");
-		int no = Integer.parseInt(no_ob + "");
-		MemberDAO dao = MemberDAO.getInstance();
-		MemberDTO dto = dao.getDTO(no);
-		request.setAttribute("dto", dto);
-	%>
-
 
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
@@ -136,7 +124,7 @@
 						</div>
 						<div class="w3-col s6">
 							<input class="w3-button w3-baemint w3-block" type="button"
-								value="로그아웃" onClick="location = '../util/Logout.jsp'">
+								value="로그아웃" onClick="location='${ctxpath}/util/Logout.do'">
 						</div>
 					</div>
 
