@@ -10,7 +10,7 @@ public class LoginClientProAction implements CommandAction {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("- - - - loginClientProAction - - - - ");
+		System.out.println("- - - - LoginClientProAction - - - - ");
 		// /////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
 		String id = request.getParameter("id");
@@ -36,7 +36,7 @@ public class LoginClientProAction implements CommandAction {
 			session.setAttribute("grade", dto.getGrade());
 			session.setAttribute("memberX", dto.getMemberX());
 			session.setAttribute("memberY", dto.getMemberY());
-			request.setAttribute("result", 1);
+			request.setAttribute("result", 1111111111);
 		} else {
 			System.out.println(" !!! member null");
 			request.setAttribute("result", -1);

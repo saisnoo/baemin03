@@ -18,10 +18,9 @@ public class MainAction implements CommandAction {
         Object no = session.getAttribute("no");
         int shopNo = Integer.parseInt(no + "");
         request.setCharacterEncoding("UTF-8");
-        System.out.println("------ Main.jsp --- ");
         OrderListDAO orderlistdao = OrderListDAO.getInstance();
         int max_no = orderlistdao.getMaxNoOfShop_No(shopNo);
-        
+
         request.setAttribute("max_no", new Integer(max_no));
         request.setAttribute("shopNo", new Integer(shopNo));
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////

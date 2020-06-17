@@ -10,12 +10,12 @@ public class IdCheckAction implements CommandAction {
 
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("- - - - IdCheckAction - - - - ");
-		// /////////////// 이 아래에 내용 넣으세요 /////////////////////////
+		///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
 		//
 
-		// /////////////// 이 위에 내용 넣으세요 /////////////////////////
-		return "aaaa";
+		///////////////// 이 위에 내용 넣으세요 /////////////////////////
+		return " aaaaa ";
 	}
 
 }
