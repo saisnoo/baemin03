@@ -38,7 +38,7 @@
 			<i class="material-icons" style="font-size: 48px; color: #45c1bf;">local_grocery_store</i>
 		</a>
 		<!-- ----------------------------------------------------------------------------------------------------------- -->
-		<a href="../memberClient/MyPageClient.jsp"
+		<a href="${ctxpath}/memberClient/MyPageClient.do"
 			class="w3-button w3-col s3 w3-center" style="padding: 0px;"> <!-- ----------------------------------------------------------------------------------------------------------- -->
 			<i class="material-icons" style="font-size: 48px; color: #45c1bf;">account_circle</i>
 		</a>
