@@ -1,18 +1,7 @@
 <%@page import="com.baemin.notice.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
- 
-<%
-//자바 구문
-request.setCharacterEncoding("UTF-8");
-System.out.println("------NoticeDeletePro.jsp");
+<%@ include file="../util/ContextPath.jsp" %>
 
-int no=Integer.parseInt(request.getParameter("no"));
+<meta http-equiv="Refresh" content="0;url=${ctxpath }/admin/NoticeList.do">
 
-NoticeDAO dao=NoticeDAO.getInstance();
-
-int result = dao.deleteNotice(no);
-
-System.out.println(result);
-response.sendRedirect("NoticeList.jsp");
-%>

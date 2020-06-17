@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
  
-<%
-request.setCharacterEncoding("UTF-8");
-System.out.println("------ NoticeInputForm.jsp --- ");
-%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +49,7 @@ System.out.println("------ NoticeInputForm.jsp --- ");
   </div>
   
   <div class="w3-container w3-padding">
-  <form class="w3-container" action="NoticeInputPro.jsp" name="noticeForm">
+  <form class="w3-container" action="NoticeInputPro.do" name="noticeForm">
     
     <p>      
       <label class="w3-text"><b>공지글제목</b></label>

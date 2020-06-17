@@ -1,18 +1,6 @@
 <%@page import="com.baemin.notice.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.util.*"%>
- 
-<%
-//자바 구문
-request.setCharacterEncoding("utf-8");
-System.out.println("------NoticeInputPro.jsp");
-%>
-<jsp:useBean id="dto" class="com.baemin.notice.NoticeDTO">
-  <jsp:setProperty name="dto" property="*" />
-</jsp:useBean>
+<%@ page import = "java.util.*"%> 
+<%@ include file="../util/ContextPath.jsp" %>
 
-<%  
-NoticeDAO dao=NoticeDAO.getInstance();
-dao.writeNotice(dto);
-response.sendRedirect("NoticeList.jsp");
-%>
+<meta http-equiv="Refresh" content="0;url=${ctxpath }/admin/NoticeList.do">

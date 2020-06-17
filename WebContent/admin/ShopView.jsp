@@ -2,18 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
- 
+<%@ include file="../util/ContextPath.jsp" %>
 
-<%
-request.setCharacterEncoding("utf-8");
-
-int shopNo = Integer.parseInt(request.getParameter("shopNo"));
-
-ShopDAO dao=ShopDAO.getInstance();
-ShopDTO dto=dao.getShopInfo(shopNo);
-request.setAttribute("dto", dto);
-System.out.println(dto.toString());
-%>
 <div class="w3-card-4 w3-border" style="margin-bottom: 2%">
   <p>      
     <label class="w3-text" style="padding: 1%"><b>매장번호</b></label>
