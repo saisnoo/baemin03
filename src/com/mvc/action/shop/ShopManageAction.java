@@ -34,11 +34,11 @@ public class ShopManageAction implements CommandAction {
         ShopDTO shopdto=shopdao.getShopInfo(shopNo);
         List<MenuDTO> list=menudao.getListByShopNoStatusDesc(shopNo); 
 
-        ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
+//        ShopDTO shopdto2=shopdao.getShopInfo(shopNo);
 
         request.setAttribute("shopdto", shopdto);
         request.setAttribute("list", list);
-        request.setAttribute("shopdto2", shopdto2);
+  //      request.setAttribute("shopdto2", shopdto2);
         request.setAttribute("shopNo", new Integer(shopNo));
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
         return "/shop/ShopManage.jsp";
