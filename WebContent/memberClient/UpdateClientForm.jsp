@@ -2,11 +2,8 @@
 <%@page import="com.baemin.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ UpdateClientForm.jsp --- ");
-%>
+<%@ include file="../util/ContextPath.jsp" %>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,21 +59,12 @@
 </head>
 <body>
 	<!-- 내용 -->
-	<%
-		Object no_ob = session.getAttribute("no");
-		int no = Integer.parseInt(no_ob + "");
-		MemberDAO dao = MemberDAO.getInstance();
-		MemberDTO dto = dao.getDTO(no);
-		request.setAttribute("dto", dto);
-	%>
-
-
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
-	<form method="post" action="UpdateClientPro.jsp">
+	<form method="post" action="${ctxpath}/memberClient/UpdateClientPro.do">
 	<div class="sw-center" style="margin-top: 2%">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
