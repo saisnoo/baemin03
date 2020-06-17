@@ -2,11 +2,7 @@
 <%@page import="com.baemin.shop.ShopDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ UpdateShopForm.jsp --- ");
-%>
+<%@ include file="../util/ContextPath.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +72,7 @@
 	<div class="sw-topnav-margin">&nbsp;</div>
 
 	<!-- CONTENT ------------------------------------------------------------------------------------ -->
-	<form method="post" action="UpdateShopPro.jsp">
+	<form method="post" action="${ctxpath}/memberShop/UpdateShopPro.do">
 	<div class="sw-center" style="margin-top: 2%">
 		<!-- 가로복 제한 400~1200 ---------------------------------------------------------------------------------->
 		<!-- 400~1200 사이로 조절 가능 ---------------------------------------------------------------------------------->
