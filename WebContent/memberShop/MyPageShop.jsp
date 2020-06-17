@@ -84,7 +84,7 @@
 						<br>
 						<div class="w3-section w3-center">
 							<input type="submit" class="w3-button w3-baemint" value="회원정보수정">
-						    <input type="button" class="w3-button w3-baemint" value="뒤로가기" onclick="javascript:history.back()'">
+						    <input type="button" class="w3-button w3-baemint" value="뒤로가기" onclick="javascript:history.back()">
 						    <input type="button" class="w3-button w3-baemint" value="로그아웃" onClick="location='${ctxpath}/util/Logout.do'">
 						</div>
 						<br>

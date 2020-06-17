@@ -233,15 +233,16 @@
 					.ajax({
 						type : "get",
 						//dataType : "text",
-						url : "IdCheck.jsp",
+						url : "${ctxpath}/joinClient/IdCheck.do",
 						data : data1,
+						dataType : "text",
 						success : function(result) {
 							console.log("result=" + result);
 							var temp_response = result.trim() + "";
 							console.log("temp_response=" + temp_response);
 							console.log("temp_response.length="
 									+ temp_response.length);
-							if (temp_response.length > 3) {
+							if (temp_response == 0) {
 								whereShowPwCheckResult.innerHTML = '<div class="w3-green"> 사용가능 </div>';
 								isIdOK = 1;
 							} else {
