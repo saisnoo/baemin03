@@ -86,7 +86,7 @@
 				<c:forEach var="menudto" items="${list}">
 				<c:if test="${shopdto.shopStatus==0 }">
 				<tr class="w3-hover-black check_view" data-toggle="modal"
-					data-tar="#check_viewmenu" style="cursor: pointer;">
+					data-target="#check_viewmenu" style="cursor: pointer;">
 					</c:if>
 				
 				<c:if test="${shopdto.shopStatus==1 }">
@@ -200,7 +200,7 @@
 	;
 		$.ajax({
 			type : "post",
-			url : "${ctxpath}/shop/ShopOpenPro.jsp",
+			url : "${ctxpath}/shop/ShopOpenPro.do",
 			//data : JSON.stringify(reply),
 			data : {
 				shopNo : shopNo,

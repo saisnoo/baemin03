@@ -127,17 +127,16 @@
 	var max_no = 0;
 	window.onload = function() {
 		refresh();
-		countcount();
-
+	
 	}
 
 	function refresh() {
 		$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
-		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
-		$("#tab3").load("${ctxpath}/shop/EndList.do");
-		$("#tab4").load("${ctxpath}/shop/CancelList.do");
 		$("#SM").load("${ctxpath}/shop/ShopManage.do");
-		setTimeout(countcount, 1000);
+		setTimeout(tab2Refresh,1000);
+		setTimeout(tab3Refresh,1300);
+		setTimeout(tab4Refresh,1800);
+		setTimeout(countcount, 2000);
 	}
 
 	function tabtab2load() {
@@ -160,14 +159,17 @@
 	function tab2Refresh() {
 		console.log("배달중 새로고침");
 		$("#tab2").load("${ctxpath}/shop/BaesongList.do");
+		setTimeout(countcount, 1000);
 	}
 	function tab3Refresh() {
 		console.log("완료 새로고침");
 		$("#tab3").load("${ctxpath}/shop/EndList.do");
+		setTimeout(countcount, 1000);
 	}
 	function tab4Refresh() {
 		console.log("취소 새로고침");
 		$("#tab4").load("${ctxpath}/shop/CancelList.do");
+		setTimeout(countcount, 1000);
 	}
 
 	function countcount() {
@@ -210,7 +212,7 @@
 			$("#tab1").load("${ctxpath}/shop/NewOrderList.do");
 		}
 
-		setInterval(reload, 3000);
+		setInterval(reload, 1500);
 		setTimeout(load, 1000);
 		setTimeout(load, 2000);
 	});
@@ -294,7 +296,7 @@
 						</button>
 					</div>
 					<div class="w3-quarter tablink2">
-						<button onclick="openTab2(event, 'tabtab4');noticeload2();"
+						<button onclick="openTab2(event, 'tabtab4');noticeload2()"
 							class="w3-button w3-block w3-border tablink2">
 							<h4>공지사항</h4>
 						</button>

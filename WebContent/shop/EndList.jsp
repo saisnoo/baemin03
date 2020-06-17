@@ -34,7 +34,7 @@
 					<div class="w3-col">주문번호: ${dto.no}</div>
 					<div class="w3-col">전화번호: ${dto.tel}</div>
 				</div>
-				<div class="w3-row">${dto.addr} ${dto.addr2 }</div>
+				<div class="w3-row">${dto.addr} ${dto.addr2}</div>
 			</div>
 			<!-- 가운데 끝 -->
 		</div>

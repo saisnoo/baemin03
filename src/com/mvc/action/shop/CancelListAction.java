@@ -23,7 +23,6 @@ public class CancelListAction implements CommandAction {
 
       HttpSession session = ((HttpServletRequest) request).getSession();
       Object no=session.getAttribute("no");
-      System.out.println(no);
       int shopNo=Integer.parseInt(no+""); 
       System.out.println(request.getParameter("shopNo"));
       OrderListDAO dao= OrderListDAO.getInstance();
