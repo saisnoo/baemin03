@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ include file="../util/ContextPath.jsp" %>
  
-
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ JoinFormCilent.jsp --- ");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>JoinFormCilent.jsp</title>
+<title>JoinFormClient.jsp</title>
 
 
 
@@ -71,7 +67,7 @@
 				<!--  main content start here!!!----------------------------------------------------------- -->
 
 				<!-- formformformformformformformformform -->
-				<form class="w3-container" name="inputForm" action="joinClientPro.jsp" method="post">
+				<form class="w3-container" name="inputForm" action="${ctxpath}/joinClient/JoinClientPro.do" method="post">
 					<!-- 아이디 .................. -->
 					<div class="w3-row w3-section">
 						<div class="w3-col w3-center w3-right" style="width: 70px;">

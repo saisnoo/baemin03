@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
- 
+<%@ include file="../util/ContextPath.jsp" %>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ JoinFormShop.jsp --- ");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +68,7 @@
 				<!--  main content start here!!!----------------------------------------------------------- -->
 
 				<!-- formformformformformformformformform -->
-				<form class="w3-container" name="inputForm" action="joinShopPro.jsp"
+				<form class="w3-container" name="inputForm" action="${ctxpath}/joinShop/JoinShopPro.do"
 					method="post">
 					<!-- 아이디 .................. -->
 					<div class="w3-row w3-section">
