@@ -29,6 +29,10 @@ public class EndListAction implements CommandAction {
 
       List<OrderListDTO> orderList = dao.getListFinishToday(shopNo);
       System.out.println(shopNo);
+      System.out.println(orderList.size());
+      System.out.println(orderList.size());
+      System.out.println(orderList.size());
+      System.out.println(orderList.size());
       
       request.setAttribute("orderList",orderList);
       request.setAttribute("shopNo", new Integer(shopNo));

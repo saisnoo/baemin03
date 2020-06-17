@@ -3,9 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ include file="../util/ContextPath.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
 
-<c:forEach var="dto" items="orderList">
+
+<c:forEach var="dto" items="${orderList}">
 
 <div class="w3-section">
 	<div class="w3-card w3-padding">

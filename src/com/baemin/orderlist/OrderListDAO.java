@@ -793,7 +793,7 @@ public class OrderListDAO {
 					+ " orderlist.completeTime completeTime , member.tel ,"
 					+ " order_menu.menu_No menu_no, order_menu.count COUNT, menu.menuName"
 					+ " menuName, order_cancel.whycancel whycancel, menu.menuPrice menuPrice"
-					+ " FROM orderlist, order_menu, menu , member, order_cancel" + " WHERE orderlist.shop_no = 1"
+					+ " FROM orderlist, order_menu, menu , member, order_cancel" + " WHERE orderlist.shop_no = ?"
 					+ " AND orderlist.no = order_menu.orderlist_No" + " AND order_menu.menu_No = menu.no"
 					+ " AND STATUS = -1" + " AND orderlist.orderDate BETWEEN (DATE_ADD(NOW(), INTERVAL -24"
 					+ " HOUR)) and	now()" + " AND member.no = orderlist.member_no"
