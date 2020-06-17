@@ -45,7 +45,7 @@
 				<div class="w3-container w3-card">
 
 					<h2 align="center">회원정보</h2>
-					<form class="w3-container" method="post" action="UpdateShopForm.jsp"
+					<form class="w3-container" method="post" action="${ctxpath}/memberShop/UpdateShopForm.do"
 						name="clientMyPage">
 
 						<!--  -->

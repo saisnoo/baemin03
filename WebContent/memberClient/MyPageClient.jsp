@@ -73,6 +73,7 @@
 				<!--  main content start here!!!----------------------------------------------------------- -->
 
 				<!--사용자 마이 페이지-->
+				<form method="post" action="${ctxpath}/memberClient/UpdateClientForm.do" name="myPageForm">
 				<div class="w3-container w3-card">
 					<div class="w3-section w3-center">
 						<h2>회원정보수정</h2>
@@ -127,12 +128,8 @@
 								value="로그아웃" onClick="location='${ctxpath}/util/Logout.do'">
 						</div>
 					</div>
-
-
-
-
-
 				</div>
+				</form>
 				<!-- main content end----------------------------------------------------------------------- -->
 			</div>
 		</div>
