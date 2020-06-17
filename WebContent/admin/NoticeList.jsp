@@ -2,15 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%
-request.setCharacterEncoding("utf-8");
-System.out.println("------ Notice.jsp --- ");
-
-NoticeDAO dao=NoticeDAO.getInstance();
-List<NoticeDTO> list = dao.getList();
-request.setAttribute("list", list);
-%>
+<%@ include file="../util/ContextPath.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +48,7 @@ request.setAttribute("list", list);
 	  $(".contentLine").click(function(){
 		 var no=$(this).find(".noticeNo").text().trim();
 		 //console.log(no);
-		 location.href="NoticeView.jsp?no="+no;		  
+		 location.href="NoticeView.do?no="+no;		  
 	  });  
   });
   
@@ -122,7 +114,7 @@ request.setAttribute("list", list);
  <div class="w3-row">
               
         <div class="w3-bar w3-col m2">
-          <button class="w3-bar-item w3-button w3-baemint" onclick="location='NoticeInputForm.jsp'">공지쓰기</button>        
+          <button class="w3-bar-item w3-button w3-baemint" onclick="location='${ctxpath}/admin/NoticeInputForm.do'">공지쓰기</button>        
         </div>
         
         <div class="w3-col m8">
