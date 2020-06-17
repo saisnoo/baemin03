@@ -536,8 +536,7 @@
 			var minute = e.parentNode.parentNode.children[0].children[5].innerText;
 			console.log(no);
 			console.log(minute);
-			$
-					.ajax({
+			$.ajax({
 						type : "post",
 						url : "${ctxpath}/shop/CheckOrderPro.do",
 						data : {
@@ -631,8 +630,7 @@
 			var whyCancel = e.parentNode.parentNode.children[0].children[5].innerText;
 			console.log(no);
 			console.log(whyCancel);
-			$
-					.ajax({
+			$.ajax({
 						type : "post",
 						url : "${ctxpath}/shop/CancelOrderPro.do",
 						data : {

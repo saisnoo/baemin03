@@ -118,21 +118,22 @@
 	if ("<c:out value='${shopdto.shopStatus}'/>"==0) {
 		$(function() {
 			$(".check_view").click(function() {
-								var menu_no = $(this).find("#menu_no").val();
-								var menu_status = $(this).find("#menu_status").val();
-								//document.getElementById("status").value = menu_status;
-								document.getElementById("no5").value = menu_no;
-								document.getElementById("status5").value = menu_status;
+					var menu_no = $(this).find("#menu_no").val();
+					var menu_status = $(this).find("#menu_status").val();
+					//document.getElementById("status").value = menu_status;
+					document.getElementById("no5").value = menu_no;
+					document.getElementById("status5").value = menu_status;
 								console.log("check_view = " + menu_no);
 
-								if (menu_status== 1) {
-									document.getElementById("status_check").innerText = "메뉴표시중";
-									
-								} else if (menu_status== 0) {
-									document.getElementById("status_check").innerText = "메뉴표시 안하는중";
-								}
+					if (menu_status == 1) {
+						document.getElementById("status_check").innerText = "메뉴표시중";
 
-							});
+					} else if (menu_status == 0) {
+						document.getElementById("status_check").innerText = "메뉴표시 안하는중";
+					}
+
+				});
+
 		});
 	}
 </script>
@@ -160,8 +161,8 @@
 
 	$("#shopOpen").click(function() {
 		console.log("shopopen이 눌러졌다");
-		var shopNo =${shopdto.no};
-		var shopstatus =${shopdto.shopStatus};
+		var shopNo = ${shopdto.no};
+		var shopstatus = ${shopdto.shopStatus};
 		$.ajax({
 			type : "post",
 			url : "${ctxpath}/shop/ShopOpenPro.do",
@@ -189,10 +190,8 @@
 	});
 	$("#magam").click(function() {
 		console.log("shopmagam이 눌러졌다");
-		var shopNo =${shopdto.no}
-	;
-		var shopstatus =${shopdto.shopStatus}
-	;
+		var shopNo = ${shopdto.no};
+		var shopstatus = ${shopdto.shopStatus};
 		$.ajax({
 			type : "post",
 			url : "${ctxpath}/shop/ShopOpenPro.do",
