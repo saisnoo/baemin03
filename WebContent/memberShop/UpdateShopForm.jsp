@@ -35,38 +35,21 @@
 } */
 </style>
 <script>
-	function checkIt(){
-		  if($("#password").val()==''){
-			  alert("비밀번호를 입력하세요");
-			  $("#password").focus();
-			  return false;
-		  }
-		  if($("#password2").val()==""){
-		  	  alert("비밀번호 확인을 입력하세요.");
-			  $("#password2").focus();
-			  return false;
-		  }
-			
-		  if($("#password").val() != $("#password2").val()){
-			  alert("비밀번호 확인을 잘못입력하였습니다.");
-			  $("#password").val('').focus();
-			  $("#password2").val('');
-			  return false;
-		  }
-	}//checkIt() end
+	function pwCheck(){
+		var pw = $("#password").val();
+		var pw2 = $("#password2").val();
+		
+		if(!pw || !pw2 || pw.length<4 || pw.length>8 || pw2.length<4 || pw2.length>8){
+			$(".pwtx").text("비밀번호가 틀립니다.");
+		}else{
+			$(".pwtx").text("비밀번호가 같습니다.");
+		}
+	}
+	
 </script>
 </head>
 <body>
 	<!-- 내용 -->
-	<%
-		Object no_ob = session.getAttribute("no");
-		int no = Integer.parseInt(no_ob + "");
-		ShopDAO dao = ShopDAO.getInstance();
-		ShopDTO dto = dao.getShopInfo(no);
-		request.setAttribute("dto", dto);
-	%>
-
-
 	<!-- responsive template by SW ----------------------------------------------------------- -->
 	<!-- Need   W3CSS  +  FONT AS4  +  sw+topnav offline ------------------------------------- -->
 	<div class="sw-topnav-margin">&nbsp;</div>
@@ -114,9 +97,10 @@
 					  
 						  <p>
 						  	<label><b>비밀번호</b></label>
-							  <input type="password" class="w3-input w3-border" size="10" id="password" name="password">
-							  <input type="password" class="w3-input w3-border" size="10" id="password2" name="password2">
+							  <input type="password" class="w3-input w3-border" size="10" id="password" name="password" onChange="pwCheck()">
+							  <input type="password" class="w3-input w3-border" size="10" id="password2" name="password2" onChange="pwCheck()">
 						  </p>
+							  <div class="pwtx"></div>
 					  
 					  <div class="w3-section w3-center">
 	   				  	<input class="w3-button w3-border w3-baemint" type="submit" value="회원정보수정">
