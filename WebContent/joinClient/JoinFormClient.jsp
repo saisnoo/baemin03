@@ -150,7 +150,7 @@
 						<input class="w3-button w3-baemint" type="reset" value="리셋">
 					</div>
 					<!-- 버튼 .................. -->
-					<input type="text" name="memberX" id="memberX"> <input type="text"
+					<input type="hidden" name="memberX" id="memberX"> <input type="hidden"
 						name="memberY" id="memberY">
 				</form>
 				<!-- formformformformformformformformform -->

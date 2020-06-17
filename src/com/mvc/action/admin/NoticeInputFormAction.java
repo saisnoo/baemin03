@@ -12,10 +12,13 @@ public class NoticeInputFormAction implements CommandAction {
         System.out.println("- - - - NoticeInputFormAction - - - - ");
         ///////////////// 이 아래에 내용 넣으세요 /////////////////////////
 
-        //
+        
+        request.setCharacterEncoding("UTF-8");
+        System.out.println("------ NoticeInputForm.jsp --- ");
+        
 
         ///////////////// 이 위에 내용 넣으세요 /////////////////////////
-        return "aaaa";
+        return "/admin/NoticeInputForm.jsp";
     }
 
 }

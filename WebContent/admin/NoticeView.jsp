@@ -3,18 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
- 
+<%@ include file="../util/ContextPath.jsp" %>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-	System.out.println("------ NoticeView.jsp --- ");
-
-	int no = Integer.parseInt(request.getParameter("no"));
-	NoticeDAO dao = NoticeDAO.getInstance();
-	NoticeDTO dto = dao.viewNotice(no);
-	request.setAttribute("dto", dto);
-	System.out.println(dto.toString());
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,9 +74,9 @@
   &nbsp;
     
   <p align="center">          
-    <button class="w3-button w3-baemint" onclick="location='NoticeList.jsp'">글목록</button>
-    <button class="w3-button w3-baemint" onclick="location='NoticeUpdateForm.jsp?no=${dto.no}'">글수정</button>
-    <button class="w3-button w3-baemint" onclick="location='NoticeDeletePro.jsp?no=${dto.no}'">글삭제</button>    
+    <button class="w3-button w3-baemint" onclick="location='${ctxpath }/admin/NoticeList.do'">글목록</button>
+    <button class="w3-button w3-baemint" onclick="location='${ctxpath }/admin/NoticeUpdateForm.do?no=${dto.no}'">글수정</button>
+    <button class="w3-button w3-baemint" onclick="location='${ctxpath }/admin/NoticeDeletePro.do?no=${dto.no}'">글삭제</button>    
   </p>
   
 </div>

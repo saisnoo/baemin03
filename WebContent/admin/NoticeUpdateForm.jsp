@@ -2,18 +2,8 @@
 <%@page import="com.baemin.notice.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
- 
-<%
-request.setCharacterEncoding("UTF-8");
-System.out.println("------ NoticeUpdateForm.jsp --- ");
+<%@ include file="../util/ContextPath.jsp" %>
 
-int no = Integer.parseInt(request.getParameter("no"));
-
-NoticeDAO dao = NoticeDAO.getInstance();
-NoticeDTO dto = dao.viewNotice(no);
-request.setAttribute("dto", dto);
-
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +53,7 @@ request.setAttribute("dto", dto);
   
   <div class="w3-container w3-padding">
   
-    <form class="w3-container" action="NoticeUpdatePro.jsp?no=${dto.no }" name="noticeUpdateForm" method="post">
+    <form class="w3-container" action="${ctxpath }/admin/NoticeUpdatePro.do?no=${dto.no }" name="noticeUpdateForm" method="post">
     <p>      
       <label class="w3-text"><b>공지글제목</b></label>
       <input class="w3-input w3-border" name="title" id="title" type="text" value="${dto.title }" required>
