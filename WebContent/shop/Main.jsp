@@ -3,7 +3,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
-<%@ include file="../util/ContextPath.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

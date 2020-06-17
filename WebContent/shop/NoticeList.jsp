@@ -3,7 +3,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
  
-<%@ include file="../util/ContextPath.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctxpath" value="<%=request.getContextPath()%>"/>
+
 <!-- CDN - Font Awesome 4 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
